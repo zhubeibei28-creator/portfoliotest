@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDownRight, ArrowLeft, ArrowUpRight, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, X } from 'lucide-react';
 
 const projects = [
   { id: '01', title: 'Soft Machinery', type: 'Identity / Art Direction', year: '2026', crop: '0% 0%', text: 'A modular identity built from soft systems, hard edges, and fluorescent matter.' },
@@ -27,28 +27,37 @@ export default function Home() {
   const [active, setActive] = useState<number | null>(null);
   const [panel, setPanel] = useState<'about' | 'contact' | null>(null);
   const [offset, setOffset] = useState(-180);
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [cursor, setCursor] = useState({ x: 0, y: 0, visible: false });
   const dragging = useRef(false);
   const lastX = useRef(0);
+  const velocity = useRef(0);
+  const moved = useRef(false);
 
   useEffect(() => {
-    const onUp = () => { dragging.current = false; };
+    const onUp = () => {
+      if (!dragging.current) return;
+      dragging.current = false;
+      setOffset((v) => Math.max(-1620, Math.min(50, v + velocity.current * 18)));
+    };
     window.addEventListener('pointerup', onUp);
     return () => window.removeEventListener('pointerup', onUp);
   }, []);
 
   const move = (e: React.PointerEvent) => {
+    setCursor({ x: e.clientX, y: e.clientY, visible: true });
     if (dragging.current) {
       const delta = e.clientX - lastX.current;
+      if (Math.abs(delta) > 2) moved.current = true;
       setOffset((v) => Math.max(-1620, Math.min(50, v + delta)));
+      velocity.current = delta;
       lastX.current = e.clientX;
-      return;
     }
-    setOffset(40 - (e.clientX / window.innerWidth) * 1500);
   };
   const close = () => { setActive(null); setPanel(null); };
 
   return (
-    <main className="site-shell" onPointerMove={move}>
+    <main className="site-shell" onPointerMove={move} onPointerLeave={() => setCursor((v) => ({ ...v, visible: false }))}>
       <header className="topbar">
         <a className="wordmark" href="#work" aria-label="Return to work">MING ZHOU<span>®</span></a>
         <nav aria-label="Main navigation">
@@ -62,13 +71,13 @@ export default function Home() {
       <section id="work" className="stage" aria-label="Selected work">
         <div className="stage-copy">
           <p>Independent graphic designer<br />working across identity, image & print.</p>
-          <span>Drag or move your cursor to explore <ArrowDownRight size={16} /></span>
+          <span className="drag-note"><ArrowLeft size={15} /> Swipe / drag to explore <ArrowRight size={15} /></span>
         </div>
-        <div className="track" style={{ transform: `translate3d(${offset}px, 0, 0)` }} onPointerDown={(e) => { dragging.current = true; lastX.current = e.clientX; }}>
+        <div className="track" style={{ transform: `translate3d(${offset}px, 0, 0)` }} onPointerDown={(e) => { dragging.current = true; moved.current = false; velocity.current = 0; lastX.current = e.clientX; }}>
           {pieces.map((piece, index) => {
             if (piece.kind === 'project') {
               const project = projects[piece.project];
-              return <button className="project-card" key={project.id} onClick={() => setActive(piece.project)} aria-label={`Open project ${project.title}`}>
+              return <button className="project-card" key={project.id} onPointerEnter={() => setHovered(piece.project)} onPointerLeave={() => setHovered(null)} onFocus={() => setHovered(piece.project)} onBlur={() => setHovered(null)} onClick={() => { if (!moved.current) setActive(piece.project); moved.current = false; }} aria-label={`Open project ${project.title}`}>
                 <span className="cover" style={{ backgroundPosition: project.crop }} />
                 <span className="card-caption"><b>{project.title}</b><small>{project.type}</small></span>
                 <span className="card-number">{project.id}</span>
@@ -81,6 +90,10 @@ export default function Home() {
       </section>
 
       <footer><span>Selected work 2024—26</span><span>New York / Shanghai</span><span>© 2026</span></footer>
+
+      <div className={`cursor-label ${cursor.visible ? 'is-visible' : ''} ${hovered !== null ? 'has-project' : ''}`} style={{ transform: `translate3d(${cursor.x + 18}px, ${cursor.y + 18}px, 0)` }} aria-hidden="true">
+        <i />{hovered !== null && <span>{projects[hovered].title}<small>View project</small></span>}
+      </div>
 
       {active !== null && <section className="detail" aria-modal="true" role="dialog" aria-label={projects[active].title}>
         <button className="close" onClick={close}><ArrowLeft size={18} /> Back to work</button>
