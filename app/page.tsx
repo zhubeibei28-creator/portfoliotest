@@ -30,29 +30,30 @@ export default function Home(){
   const [active,setActive]=useState<number|null>(null);
   const [hovered,setHovered]=useState<number|null>(null);
   const [cursor,setCursor]=useState({x:0,y:0});
-  const [progress,setProgress]=useState(0);
   const [portraitReveal,setPortraitReveal]=useState(0);
   const gallery=useRef<HTMLDivElement>(null);
-  const target=useRef(0);
-  const initialized=useRef(false);
-  const manualAt=useRef(0);
+  const galleryRow=useRef<HTMLDivElement>(null);
+  const progressBar=useRef<HTMLSpanElement>(null);
+  const position=useRef(0);
+  const velocity=useRef(0);
+  const hoverPaused=useRef(false);
 
   useEffect(()=>{
     if(view!=='home'||active!==null)return;
     let frame=0;
     let previous=performance.now();
     const tick=(now:number)=>{
-      const el=gallery.current;
-      if(el){
-        const segment=el.scrollWidth/3;
-        if(!initialized.current&&segment){target.current=segment;el.scrollLeft=segment;initialized.current=true}
+      const row=galleryRow.current;
+      if(row){
+        const segment=row.scrollWidth/3;
         const dt=Math.min(32,now-previous);previous=now;
-        const speed=now-manualAt.current<900?0.035:0.19;
-        target.current+=speed*dt;
-        el.scrollLeft+=(target.current-el.scrollLeft)*.075;
-        if(segment&&target.current>=segment*2){target.current-=segment;el.scrollLeft-=segment}
-        if(segment&&target.current<segment*.45){target.current+=segment;el.scrollLeft+=segment}
-        if(segment)setProgress(((el.scrollLeft%segment)+segment)%segment/segment);
+        if(!position.current&&segment)position.current=segment;
+        velocity.current*=Math.pow(.9,dt/16.67);
+        if(!hoverPaused.current)position.current+=.028*dt+velocity.current;
+        if(segment&&position.current>=segment*2)position.current-=segment;
+        if(segment&&position.current<segment*.45)position.current+=segment;
+        row.style.transform=`translate3d(${-position.current}px,0,0)`;
+        if(segment&&progressBar.current)progressBar.current.style.transform=`translateX(${(((position.current%segment)+segment)%segment/segment)*733}%)`;
       }
       frame=requestAnimationFrame(tick);
     };
@@ -60,19 +61,19 @@ export default function Home(){
     return()=>cancelAnimationFrame(frame);
   },[view,active]);
 
-  const navigate=(next:View)=>{setView(next);setActive(null);setHovered(null);initialized.current=false};
-  const onWheel=(e:React.WheelEvent)=>{e.preventDefault();const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;target.current+=delta*.24;manualAt.current=performance.now()};
+  const navigate=(next:View)=>{setView(next);setActive(null);setHovered(null);hoverPaused.current=false};
+  const onWheel=(e:React.WheelEvent)=>{e.preventDefault();const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;velocity.current=Math.max(-18,Math.min(18,velocity.current+delta*.12))};
 
   return <main className="portfolio-shell" onPointerMove={e=>setCursor({x:e.clientX,y:e.clientY})}>
     <header className="persistent-header"><button className="wordmark" onClick={()=>navigate('home')}>BEIBEI (ANNA) ZHU<span>®</span></button><nav>{(['home','lab','about','contact'] as View[]).map(item=><button key={item} className={view===item&&active===null?'active':''} onClick={()=>navigate(item)}>{item}</button>)}</nav><p><i/> Available for select projects</p></header>
 
-    {view==='home'&&active===null&&<section className="home-view"><div className="intro"><p>Independent graphic designer<br/>working across identity, image & print.</p><span>Scroll to explore →</span></div><div ref={gallery} className="gallery-viewport" onWheel={onWheel}><div className="gallery-row loop-row">{[0,1,2].flatMap(loop=>pieces.map((piece,index)=>piece.kind==='project'?<button className="gallery-project" key={`${loop}-p-${piece.project}`} style={{'--cover-position':projects[piece.project].crop} as React.CSSProperties} onPointerEnter={()=>setHovered(piece.project)} onPointerLeave={()=>setHovered(null)} onClick={()=>setActive(piece.project)}><span className="gallery-cover" style={{backgroundPosition:projects[piece.project].crop}}/><span className="gallery-index">{projects[piece.project].id}</span></button>:<div key={`${loop}-e-${index}`} className={`gallery-element ${piece.className}`}><span style={{backgroundPosition:`${piece.element*20}% 50%`}}/></div>))}</div></div><div className="scroll-rule"><span style={{transform:`translateX(${progress*733}%)`}}/></div><footer><span>Selected work 2024—26</span><span>New York / Shanghai</span><span>© 2026</span></footer></section>}
+    {view==='home'&&active===null&&<section className="home-view"><div className="intro"><p>Independent graphic designer<br/>working across identity, image & print.</p><span>Scroll to explore →</span></div><div ref={gallery} className="gallery-viewport" onWheel={onWheel}><div ref={galleryRow} className="gallery-row loop-row">{[0,1,2].flatMap(loop=>pieces.map((piece,index)=>piece.kind==='project'?<button className="gallery-project" key={`${loop}-p-${piece.project}`} style={{'--cover-position':projects[piece.project].crop} as React.CSSProperties} onPointerEnter={()=>{setHovered(piece.project);hoverPaused.current=true;velocity.current=0}} onPointerLeave={()=>{setHovered(null);hoverPaused.current=false}} onClick={()=>setActive(piece.project)}><span className="gallery-cover" style={{backgroundPosition:projects[piece.project].crop}}/><span className="gallery-index">{projects[piece.project].id}</span></button>:<div key={`${loop}-e-${index}`} className={`gallery-element ${piece.className}`}><span style={{backgroundPosition:`${piece.element*20}% 50%`}}/></div>))}</div></div><div className="scroll-rule"><span ref={progressBar}/></div><footer><span>Selected work 2024—26</span><span>New York / Shanghai</span><span>© 2026</span></footer></section>}
 
     {view==='home'&&active!==null&&<CaseStudy project={projects[active]} onBack={()=>setActive(null)} onNext={()=>setActive((active+1)%projects.length)}/>}
 
     {view==='lab'&&<section className="lab-view"><div className="lab-title"><p>LAB / ONGOING</p><h1>Small experiments,<br/>unfinished thoughts<br/>and useful accidents.</h1></div><div className="lab-list">{experiments.map(([id,title,text,element])=><article key={id}><div className="lab-meta"><span>{id}</span><h2>{title}</h2><p>{text}</p></div><div className="lab-visual"><span style={{backgroundPosition:`${element*20}% 50%`}}/></div></article>)}</div></section>}
 
-    {view==='about'&&<section className="about-view" onScroll={e=>setPortraitReveal(Math.max(0,Math.min(1,(e.currentTarget.scrollTop-80)/480)))}><div className="about-lead"><p>ABOUT / 2026</p><h1>Independent designer shaping identities, images and printed matter with clarity and curiosity.</h1></div><div className="portrait-block diffuse-portrait" style={{'--reveal':portraitReveal} as React.CSSProperties}><img style={{filter:`blur(${(1-portraitReveal)*18}px)`,opacity:.42+portraitReveal*.58,transform:`scale(${1.035-portraitReveal*.035})`}} src="/assets/beibei-portrait.jpg" alt="Portrait of Beibei Anna Zhu"/><div className="glass-diffuse" style={{opacity:1-portraitReveal}}/><p>Beibei (Anna) Zhu — Graphic Designer</p></div><div className="about-columns"><InfoColumn title="Experience" items={[["Independent Designer","Selected identity, editorial and campaign commissions, 2024—Present"],["Studio Practice","Brand systems and art direction for cultural and creative clients, 2022—24"],["Design Residency","Research-led visual experiments across image and typography, 2021"]]}/><InfoColumn title="Honors" items={[["Young Ones — Merit","Recognized for an experimental editorial identity, 2025"],["D&AD New Blood","Shortlisted in graphic design and image-making, 2024"],["Type Directors Club","Student showcase selection, 2023"]]}/><InfoColumn title="Skills" items={[["Art Direction","Visual concepts, campaign worlds and image systems"],["Identity Design","Flexible marks, typography and brand guidelines"],["Editorial & Digital","Publications, websites and motion-ready layouts"]]}/><InfoColumn title="Language" items={[["English","Professional working proficiency"],["Mandarin","Native proficiency"],["Design","Fluent in grids, type and strange little details"]]}/></div></section>}
+    {view==='about'&&<section className="about-view" onScroll={e=>setPortraitReveal(Math.max(0,Math.min(1,e.currentTarget.scrollTop/220)))}><div className="about-lead"><p>ABOUT / 2026</p><h1>Independent designer shaping identities, images and printed matter with clarity and curiosity.</h1></div><div className="portrait-block diffuse-portrait" style={{'--reveal':portraitReveal} as React.CSSProperties}><img style={{filter:`blur(${(1-portraitReveal)*18}px)`,opacity:.42+portraitReveal*.58,transform:`scale(${1.035-portraitReveal*.035})`}} src="/assets/beibei-portrait.jpg" alt="Portrait of Beibei Anna Zhu"/><div className="glass-diffuse" style={{opacity:1-portraitReveal}}/><p>Beibei (Anna) Zhu — Graphic Designer</p></div><div className="about-columns"><InfoColumn title="Experience" items={[["Independent Designer","Selected identity, editorial and campaign commissions, 2024—Present"],["Studio Practice","Brand systems and art direction for cultural and creative clients, 2022—24"],["Design Residency","Research-led visual experiments across image and typography, 2021"]]}/><InfoColumn title="Honors" items={[["Young Ones — Merit","Recognized for an experimental editorial identity, 2025"],["D&AD New Blood","Shortlisted in graphic design and image-making, 2024"],["Type Directors Club","Student showcase selection, 2023"]]}/><InfoColumn title="Skills" items={[["Art Direction","Visual concepts, campaign worlds and image systems"],["Identity Design","Flexible marks, typography and brand guidelines"],["Editorial & Digital","Publications, websites and motion-ready layouts"]]}/><InfoColumn title="Language" items={[["English","Professional working proficiency"],["Mandarin","Native proficiency"],["Design","Fluent in grids, type and strange little details"]]}/></div></section>}
 
     {view==='contact'&&<section className="contact-view"><p>CONTACT</p><h1>Have something<br/>interesting in mind?</h1><a href="mailto:hello@mingzhou.design">hello@mingzhou.design <ArrowUpRight/></a><div><span>Instagram</span><span>LinkedIn</span><span>New York / Shanghai</span></div></section>}
     {hovered!==null&&<div className="project-cursor" style={{transform:`translate3d(${cursor.x+18}px,${cursor.y+18}px,0)`}}><b>{projects[hovered].title}</b><span>View project</span></div>}

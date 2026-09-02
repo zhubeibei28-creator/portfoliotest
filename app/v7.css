@@ -1,0 +1,14 @@
+/* Continuous transform-driven home loop */
+.gallery-viewport{overflow:hidden!important}.loop-row{will-change:transform;transition:none!important}.loop-row>*{flex-shrink:0}.scroll-rule span{will-change:transform}
+
+/* Lab masonry wall */
+.lab-view{padding:26px 10px 90px}.lab-title{padding:0 14px 70px}.lab-list{columns:4;column-gap:16px;padding-top:16px}.lab-list article{display:flex;flex-direction:column;break-inside:avoid;min-height:0;margin:0 0 46px;padding:0;border:0}.lab-visual{order:1;min-height:0;height:34vw;background:#ededeb;border:0}.lab-list article:nth-child(2n) .lab-visual{height:27vw}.lab-list article:nth-child(3n) .lab-visual{height:40vw}.lab-list article:nth-child(4n) .lab-visual{height:31vw}.lab-meta{order:2;display:grid;grid-template-columns:30px 1fr;padding:10px 2px 0}.lab-meta>span{padding-top:3px}.lab-meta h2{font-size:14px;letter-spacing:-.025em}.lab-meta p{margin-top:5px;font-size:9px;line-height:1.35;color:#8b8b86}.lab-visual span{width:82%;height:82%;filter:saturate(.45) contrast(.94) drop-shadow(0 16px 18px rgba(0,0,0,.06))}
+
+/* Project pages: landscape image first, words below */
+.case-hero{display:flex;flex-direction:column;min-height:0;padding:0 24px 95px}.case-hero-image{order:1;width:100%;height:min(74vh,56.25vw);min-height:520px;border:0;background-size:200% 200%;background-color:#eee}.case-hero>div:last-child{order:2;display:grid;grid-template-columns:18% 62% 20%;align-items:end;padding:20px 0 0;border-bottom:1px solid var(--hair)}.case-hero p{align-self:start;padding-top:4px}.case-hero h1{margin:0 0 18px;font-size:clamp(72px,8.5vw,132px);line-height:.78}.case-hero span{align-self:end;padding:0 0 20px;border:0;text-align:right}.case-back{top:82px}
+
+/* Guarantee a fully clear portrait */
+.glass-diffuse{will-change:opacity}.diffuse-portrait img{will-change:filter,opacity,transform}
+
+@media(max-width:1000px){.lab-list{columns:3}}
+@media(max-width:720px){.lab-list{columns:2;column-gap:10px}.lab-list article{margin-bottom:30px}.lab-visual,.lab-list article:nth-child(2n) .lab-visual,.lab-list article:nth-child(3n) .lab-visual,.lab-list article:nth-child(4n) .lab-visual{height:54vw}.case-hero{padding:0 14px 65px}.case-hero-image{height:58vw;min-height:310px}.case-hero>div:last-child{grid-template-columns:1fr;padding-top:14px}.case-hero h1{font-size:56px;margin:30px 0 18px}.case-hero span{text-align:left;padding-bottom:14px}}
