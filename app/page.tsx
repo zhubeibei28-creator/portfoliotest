@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <main className="portfolio-shell" onPointerMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}>
       <header className="persistent-header">
-        <button className="wordmark" onClick={() => navigate('home')}>MING ZHOU<span>®</span></button>
+        <button className="wordmark" onClick={() => navigate('home')}>BEIBEI (ANNA) ZHU<span>®</span></button>
         <nav aria-label="Main navigation">
           {(['home', 'about', 'contact'] as View[]).map((item) => <button key={item} className={view === item && active === null ? 'active' : ''} onClick={() => navigate(item)}>{item}</button>)}
         </nav>
@@ -69,9 +69,9 @@ export default function Home() {
       {view === 'about' && <section className="about-view">
         <div className="about-lead"><p>ABOUT / 2026</p><h1>Independent designer shaping identities, images and printed matter with clarity and curiosity.</h1></div>
         <div className="portrait-block" onPointerMove={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPortraitCursor({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100, visible: true }); }} onPointerLeave={() => setPortraitCursor((v) => ({ ...v, visible: false }))}>
-          <img src="/assets/about-portrait.png" alt="Temporary portrait placeholder for Ming Zhou" />
+          <img src="/assets/beibei-portrait.jpg" alt="Portrait of Beibei Anna Zhu" />
           <div className={`portrait-icons ${portraitCursor.visible ? 'visible' : ''}`} style={{ left: `${portraitCursor.x}%`, top: `${portraitCursor.y}%` }}><Sparkles /><Heart /><Smile /></div>
-          <p>Portrait placeholder — replace with your own</p>
+          <p>Beibei (Anna) Zhu — Graphic Designer</p>
         </div>
         <div className="about-columns">
           <InfoColumn title="Experience" items={[['Independent Designer', 'Selected identity, editorial and campaign commissions, 2024—Present'], ['Studio Practice', 'Brand systems and art direction for cultural and creative clients, 2022—24'], ['Design Residency', 'Research-led visual experiments across image and typography, 2021']]}/>
