@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUpRight, X } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { ArrowLeft, ArrowUpRight, Heart, Smile, Sparkles } from 'lucide-react';
 
 const projects = [
   { id: '01', title: 'Soft Machinery', type: 'Identity / Art Direction', year: '2026', crop: '0% 0%', text: 'A modular identity built from soft systems, hard edges, and fluorescent matter.' },
@@ -11,106 +11,83 @@ const projects = [
 ];
 
 const pieces = [
-  { kind: 'element', element: 0, className: 'el el-tall', label: 'Field note 01' },
-  { kind: 'project', project: 0 },
-  { kind: 'element', element: 1, className: 'el el-chain', label: 'Lucky link' },
-  { kind: 'project', project: 1 },
-  { kind: 'element', element: 2, className: 'el el-face', label: 'Soft study' },
-  { kind: 'project', project: 2 },
-  { kind: 'element', element: 3, className: 'el el-tube', label: 'Loop test' },
-  { kind: 'project', project: 3 },
-  { kind: 'element', element: 4, className: 'el el-dice', label: 'Chance object' },
-  { kind: 'element', element: 5, className: 'el el-tool', label: 'Useful / useless' },
+  { kind: 'element', element: 0, className: 'el-tall' }, { kind: 'project', project: 0 },
+  { kind: 'element', element: 1, className: 'el-chain' }, { kind: 'project', project: 1 },
+  { kind: 'element', element: 2, className: 'el-face' }, { kind: 'project', project: 2 },
+  { kind: 'element', element: 3, className: 'el-tube' }, { kind: 'project', project: 3 },
+  { kind: 'element', element: 4, className: 'el-dice' }, { kind: 'element', element: 5, className: 'el-tool' },
 ] as const;
 
+type View = 'home' | 'about' | 'contact';
+
 export default function Home() {
+  const [view, setView] = useState<View>('home');
   const [active, setActive] = useState<number | null>(null);
-  const [panel, setPanel] = useState<'about' | 'contact' | null>(null);
-  const [offset, setOffset] = useState(-180);
   const [hovered, setHovered] = useState<number | null>(null);
-  const [cursor, setCursor] = useState({ x: 0, y: 0, visible: false });
-  const dragging = useRef(false);
-  const lastX = useRef(0);
-  const velocity = useRef(0);
-  const moved = useRef(false);
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [portraitCursor, setPortraitCursor] = useState({ x: 50, y: 50, visible: false });
+  const gallery = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const onUp = () => {
-      if (!dragging.current) return;
-      dragging.current = false;
-      setOffset((v) => Math.max(-1620, Math.min(50, v + velocity.current * 18)));
-    };
-    window.addEventListener('pointerup', onUp);
-    return () => window.removeEventListener('pointerup', onUp);
-  }, []);
-
-  const move = (e: React.PointerEvent) => {
-    setCursor({ x: e.clientX, y: e.clientY, visible: true });
-    if (dragging.current) {
-      const delta = e.clientX - lastX.current;
-      if (Math.abs(delta) > 2) moved.current = true;
-      setOffset((v) => Math.max(-1620, Math.min(50, v + delta)));
-      velocity.current = delta;
-      lastX.current = e.clientX;
-    }
+  const navigate = (next: View) => { setView(next); setActive(null); setHovered(null); };
+  const onGalleryWheel = (e: React.WheelEvent) => {
+    if (!gallery.current) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) gallery.current.scrollLeft += e.deltaY;
   };
-  const close = () => { setActive(null); setPanel(null); };
 
   return (
-    <main className="site-shell" onPointerMove={move} onPointerLeave={() => setCursor((v) => ({ ...v, visible: false }))}>
-      <header className="topbar">
-        <a className="wordmark" href="#work" aria-label="Return to work">MING ZHOU<span>®</span></a>
+    <main className="portfolio-shell" onPointerMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}>
+      <header className="persistent-header">
+        <button className="wordmark" onClick={() => navigate('home')}>MING ZHOU<span>®</span></button>
         <nav aria-label="Main navigation">
-          <button className={!panel ? 'is-active' : ''} onClick={close}>Work</button>
-          <button className={panel === 'about' ? 'is-active' : ''} onClick={() => { setPanel('about'); setActive(null); }}>About</button>
-          <button className={panel === 'contact' ? 'is-active' : ''} onClick={() => { setPanel('contact'); setActive(null); }}>Contact</button>
+          {(['home', 'about', 'contact'] as View[]).map((item) => <button key={item} className={view === item && active === null ? 'active' : ''} onClick={() => navigate(item)}>{item}</button>)}
         </nav>
-        <p className="availability"><i /> Available for select projects</p>
+        <p><i /> Available for select projects</p>
       </header>
 
-      <section id="work" className="stage" aria-label="Selected work">
-        <div className="stage-copy">
-          <p>Independent graphic designer<br />working across identity, image & print.</p>
-          <span className="drag-note"><ArrowLeft size={15} /> Swipe / drag to explore <ArrowRight size={15} /></span>
+      {view === 'home' && active === null && <section className="home-view">
+        <div className="intro"><p>Independent graphic designer<br />working across identity, image & print.</p><span>Two-finger scroll to explore →</span></div>
+        <div ref={gallery} className="gallery-viewport" onWheel={onGalleryWheel}>
+          <div className="gallery-row">
+            {pieces.map((piece, index) => piece.kind === 'project' ? (
+              <button className="gallery-project" key={projects[piece.project].id} onPointerEnter={() => setHovered(piece.project)} onPointerLeave={() => setHovered(null)} onClick={() => setActive(piece.project)}>
+                <span className="gallery-cover" style={{ backgroundPosition: projects[piece.project].crop }} />
+                <span className="gallery-index">{projects[piece.project].id}</span>
+              </button>
+            ) : <div key={index} className={`gallery-element ${piece.className}`}><span style={{ backgroundPosition: `${piece.element * 20}% 50%` }} /></div>)}
+          </div>
         </div>
-        <div className="track" style={{ transform: `translate3d(${offset}px, 0, 0)` }} onPointerDown={(e) => { dragging.current = true; moved.current = false; velocity.current = 0; lastX.current = e.clientX; }}>
-          {pieces.map((piece, index) => {
-            if (piece.kind === 'project') {
-              const project = projects[piece.project];
-              return <button className="project-card" key={project.id} onPointerEnter={() => setHovered(piece.project)} onPointerLeave={() => setHovered(null)} onFocus={() => setHovered(piece.project)} onBlur={() => setHovered(null)} onClick={() => { if (!moved.current) setActive(piece.project); moved.current = false; }} aria-label={`Open project ${project.title}`}>
-                <span className="cover" style={{ backgroundPosition: project.crop }} />
-                <span className="card-caption"><b>{project.title}</b><small>{project.type}</small></span>
-                <span className="card-number">{project.id}</span>
-              </button>;
-            }
-            return <div key={`${piece.label}-${index}`} className={`element-card ${piece.className}`} aria-label={piece.label}><span style={{ backgroundPosition: `${piece.element * 20}% 50%` }} /></div>;
-          })}
+        <div className="scroll-rule"><span /></div>
+        <footer><span>Selected work 2024—26</span><span>New York / Shanghai</span><span>© 2026</span></footer>
+      </section>}
+
+      {view === 'home' && active !== null && <section className="project-detail">
+        <button className="back-project" onClick={() => setActive(null)}><ArrowLeft size={15} /> Home</button>
+        <div className="project-image" style={{ backgroundPosition: projects[active].crop }} />
+        <div className="project-copy"><p>{projects[active].id} / {projects[active].year}</p><h1>{projects[active].title}</h1><div><span>{projects[active].type}</span><p>{projects[active].text}</p></div><button onClick={() => setActive((active + 1) % projects.length)}>Next project <ArrowUpRight size={16} /></button></div>
+      </section>}
+
+      {view === 'about' && <section className="about-view">
+        <div className="about-lead"><p>ABOUT / 2026</p><h1>Independent designer shaping identities, images and printed matter with clarity and curiosity.</h1></div>
+        <div className="portrait-block" onPointerMove={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPortraitCursor({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100, visible: true }); }} onPointerLeave={() => setPortraitCursor((v) => ({ ...v, visible: false }))}>
+          <img src="/assets/about-portrait.png" alt="Temporary portrait placeholder for Ming Zhou" />
+          <div className={`portrait-icons ${portraitCursor.visible ? 'visible' : ''}`} style={{ left: `${portraitCursor.x}%`, top: `${portraitCursor.y}%` }}><Sparkles /><Heart /><Smile /></div>
+          <p>Portrait placeholder — replace with your own</p>
         </div>
-        <div className="rail" aria-hidden="true"><span style={{ transform: `translateX(${Math.min(730, Math.max(0, (-offset / 1620) * 730))}%)` }} /></div>
-      </section>
-
-      <footer><span>Selected work 2024—26</span><span>New York / Shanghai</span><span>© 2026</span></footer>
-
-      <div className={`cursor-label ${cursor.visible ? 'is-visible' : ''} ${hovered !== null ? 'has-project' : ''}`} style={{ transform: `translate3d(${cursor.x + 18}px, ${cursor.y + 18}px, 0)` }} aria-hidden="true">
-        <i />{hovered !== null && <span>{projects[hovered].title}<small>View project</small></span>}
-      </div>
-
-      {active !== null && <section className="detail" aria-modal="true" role="dialog" aria-label={projects[active].title}>
-        <button className="close" onClick={close}><ArrowLeft size={18} /> Back to work</button>
-        <div className="detail-visual" style={{ backgroundPosition: projects[active].crop }} />
-        <div className="detail-info">
-          <p>{projects[active].id} / {projects[active].year}</p>
-          <h1>{projects[active].title}</h1>
-          <div><span>{projects[active].type}</span><p>{projects[active].text}</p></div>
-          <button className="next" onClick={() => setActive((active + 1) % projects.length)}>Next project <ArrowUpRight size={18} /></button>
+        <div className="about-columns">
+          <InfoColumn title="Experience" items={[['Independent Designer', 'Selected identity, editorial and campaign commissions, 2024—Present'], ['Studio Practice', 'Brand systems and art direction for cultural and creative clients, 2022—24'], ['Design Residency', 'Research-led visual experiments across image and typography, 2021']]}/>
+          <InfoColumn title="Honors" items={[['Young Ones — Merit', 'Recognized for an experimental editorial identity, 2025'], ['D&AD New Blood', 'Shortlisted in graphic design and image-making, 2024'], ['Type Directors Club', 'Student showcase selection, 2023']]}/>
+          <InfoColumn title="Skills" items={[['Art Direction', 'Visual concepts, campaign worlds and image systems'], ['Identity Design', 'Flexible marks, typography and brand guidelines'], ['Editorial & Digital', 'Publications, websites and motion-ready layouts']]}/>
+          <InfoColumn title="Language" items={[['English', 'Professional working proficiency'], ['Mandarin', 'Native proficiency'], ['Design', 'Fluent in grids, type and strange little details']]}/>
         </div>
       </section>}
 
-      {panel && <section className="info-panel" aria-modal="true" role="dialog" aria-label={panel}>
-        <button className="panel-close" onClick={close}><X size={22} /></button>
-        <p className="eyebrow">{panel === 'about' ? 'About the studio' : 'Start a conversation'}</p>
-        {panel === 'about' ? <><h2>Ideas first.<br />Decoration second.<br /><em>Play always.</em></h2><p className="panel-body">Ming is an independent graphic designer creating identities, campaigns, publications and images for cultural and forward-looking clients.</p></> : <><h2>Have something<br />interesting in mind?</h2><a className="email" href="mailto:hello@mingzhou.design">hello@mingzhou.design <ArrowUpRight /></a><p className="panel-body">Available for commissions, collaborations and the occasional beautifully strange brief.</p></>}
-      </section>}
+      {view === 'contact' && <section className="contact-view"><p>CONTACT</p><h1>Have something<br />interesting in mind?</h1><a href="mailto:hello@mingzhou.design">hello@mingzhou.design <ArrowUpRight /></a><div><span>Instagram</span><span>LinkedIn</span><span>New York / Shanghai</span></div></section>}
+
+      {hovered !== null && <div className="project-cursor" style={{ transform: `translate3d(${cursor.x + 18}px,${cursor.y + 18}px,0)` }}><b>{projects[hovered].title}</b><span>View project</span></div>}
     </main>
   );
+}
+
+function InfoColumn({ title, items }: { title: string; items: string[][] }) {
+  return <section className="info-column"><h2>{title}</h2>{items.map(([name, description]) => <article key={name}><h3>{name}</h3><p>{description}</p></article>)}</section>;
 }
