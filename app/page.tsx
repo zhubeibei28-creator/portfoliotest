@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { ArrowLeft, ArrowUpRight, Heart, Smile, Sparkles } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 
 const projects = [
   { id: '01', title: 'Soft Machinery', type: 'Identity / Art Direction', year: '2026', crop: '0% 0%', text: 'A modular identity built from soft systems, hard edges, and fluorescent matter.' },
@@ -25,13 +25,30 @@ export default function Home() {
   const [active, setActive] = useState<number | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
-  const [portraitCursor, setPortraitCursor] = useState({ x: 50, y: 50, visible: false });
+  const [scrollProgress, setScrollProgress] = useState(0);
   const gallery = useRef<HTMLDivElement>(null);
+  const targetScroll = useRef(0);
+  const animation = useRef<number | null>(null);
+
+  useEffect(() => () => { if (animation.current) cancelAnimationFrame(animation.current); }, []);
 
   const navigate = (next: View) => { setView(next); setActive(null); setHovered(null); };
   const onGalleryWheel = (e: React.WheelEvent) => {
     if (!gallery.current) return;
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) gallery.current.scrollLeft += e.deltaY;
+    e.preventDefault();
+    const el = gallery.current;
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    const max = Math.max(0, el.scrollWidth - el.clientWidth);
+    targetScroll.current = Math.max(0, Math.min(max, targetScroll.current + delta * 0.34));
+    if (animation.current) return;
+    const glide = () => {
+      const distance = targetScroll.current - el.scrollLeft;
+      el.scrollLeft += distance * 0.085;
+      setScrollProgress(max ? el.scrollLeft / max : 0);
+      if (Math.abs(distance) > 0.35) animation.current = requestAnimationFrame(glide);
+      else { el.scrollLeft = targetScroll.current; animation.current = null; }
+    };
+    animation.current = requestAnimationFrame(glide);
   };
 
   return (
@@ -45,18 +62,18 @@ export default function Home() {
       </header>
 
       {view === 'home' && active === null && <section className="home-view">
-        <div className="intro"><p>Independent graphic designer<br />working across identity, image & print.</p><span>Two-finger scroll to explore →</span></div>
+        <div className="intro"><p>Independent graphic designer<br />working across identity, image & print.</p><span>Scroll to explore →</span></div>
         <div ref={gallery} className="gallery-viewport" onWheel={onGalleryWheel}>
           <div className="gallery-row">
             {pieces.map((piece, index) => piece.kind === 'project' ? (
-              <button className="gallery-project" key={projects[piece.project].id} onPointerEnter={() => setHovered(piece.project)} onPointerLeave={() => setHovered(null)} onClick={() => setActive(piece.project)}>
+              <button className="gallery-project" key={projects[piece.project].id} style={{ '--cover-position': projects[piece.project].crop } as React.CSSProperties} onPointerEnter={() => setHovered(piece.project)} onPointerLeave={() => setHovered(null)} onClick={() => setActive(piece.project)}>
                 <span className="gallery-cover" style={{ backgroundPosition: projects[piece.project].crop }} />
                 <span className="gallery-index">{projects[piece.project].id}</span>
               </button>
             ) : <div key={index} className={`gallery-element ${piece.className}`}><span style={{ backgroundPosition: `${piece.element * 20}% 50%` }} /></div>)}
           </div>
         </div>
-        <div className="scroll-rule"><span /></div>
+        <div className="scroll-rule"><span style={{ transform: `translateX(${scrollProgress * 733}%)` }} /></div>
         <footer><span>Selected work 2024—26</span><span>New York / Shanghai</span><span>© 2026</span></footer>
       </section>}
 
@@ -68,9 +85,8 @@ export default function Home() {
 
       {view === 'about' && <section className="about-view">
         <div className="about-lead"><p>ABOUT / 2026</p><h1>Independent designer shaping identities, images and printed matter with clarity and curiosity.</h1></div>
-        <div className="portrait-block" onPointerMove={(e) => { const r = e.currentTarget.getBoundingClientRect(); setPortraitCursor({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100, visible: true }); }} onPointerLeave={() => setPortraitCursor((v) => ({ ...v, visible: false }))}>
+        <div className="portrait-block">
           <img src="/assets/beibei-portrait.jpg" alt="Portrait of Beibei Anna Zhu" />
-          <div className={`portrait-icons ${portraitCursor.visible ? 'visible' : ''}`} style={{ left: `${portraitCursor.x}%`, top: `${portraitCursor.y}%` }}><Sparkles /><Heart /><Smile /></div>
           <p>Beibei (Anna) Zhu — Graphic Designer</p>
         </div>
         <div className="about-columns">
