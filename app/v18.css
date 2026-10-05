@@ -239,3 +239,9 @@
 
 /* Shift POCKLET's crop slightly toward the left of the source to center the objects. */
 .pocklet-cover{object-position:43% center;}
+
+.project-cursor{transition:none;will-change:transform;pointer-events:none;}
+
+html,body{overscroll-behavior:none;}
+.home-scroll{overscroll-behavior:contain;}
+.home-view .gallery-viewport{overflow:hidden;overscroll-behavior:none;}

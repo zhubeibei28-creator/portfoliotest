@@ -71,7 +71,18 @@ export default function Home() {
   const [view, setView] = useState<View>('home');
   const [active, setActive] = useState<number | null>(null);
   const [hovered, setHovered] = useState<number | null>(null);
-  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const cursor = useRef({x:0,y:0});
+  const cursorLabel = useRef<HTMLDivElement>(null);
+  const cursorFrame = useRef<number | null>(null);
+  const moveCursor = (e: React.PointerEvent) => {
+    cursor.current = {x:e.clientX,y:e.clientY};
+    if(cursorFrame.current !== null) return;
+    cursorFrame.current = requestAnimationFrame(()=>{
+      cursorFrame.current = null;
+      if(cursorLabel.current) cursorLabel.current.style.transform = `translate3d(${cursor.current.x+18}px,${cursor.current.y+18}px,0)`;
+    });
+  };
+  useEffect(()=>()=>{if(cursorFrame.current !== null)cancelAnimationFrame(cursorFrame.current);},[]);
   const gallery = useRef<HTMLDivElement>(null);
   const galleryRow = useRef<HTMLDivElement>(null);
   const progressBar = useRef<HTMLSpanElement>(null);
@@ -113,19 +124,24 @@ export default function Home() {
     setHovered(null);
     hoverPaused.current = false;
   };
-  const onWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    velocity.current = Math.max(
-      -18,
-      Math.min(18, velocity.current + delta * 0.12),
-    );
-  };
+  useEffect(()=>{
+    const viewport=gallery.current;
+    if(view !== 'home' || active !== null || !viewport) return;
+    const wheel=(e:WheelEvent)=>{
+      if(e.ctrlKey) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const delta=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
+      velocity.current=Math.max(-18,Math.min(18,velocity.current+delta*.12));
+    };
+    viewport.addEventListener('wheel',wheel,{passive:false});
+    return ()=>viewport.removeEventListener('wheel',wheel);
+  },[view,active]);
 
   return (
     <main
       className="portfolio-shell"
-      onPointerMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+      onPointerMove={moveCursor}
     >
       <header className="persistent-header">
         <button className="wordmark" onClick={() => navigate('home')}>
@@ -158,7 +174,7 @@ export default function Home() {
             </p>
             <span>Scroll to explore →</span>
           </div>
-          <div ref={gallery} className="gallery-viewport" onWheel={onWheel}>
+          <div ref={gallery} className="gallery-viewport">
             <div ref={galleryRow} className="gallery-row loop-row">
               {[0, 1, 2].flatMap((loop) =>
                 projects.map((project, index) => (
@@ -357,8 +373,9 @@ export default function Home() {
       {hovered !== null && (
         <div
           className="project-cursor"
+          ref={cursorLabel}
           style={{
-            transform: `translate3d(${cursor.x + 18}px,${cursor.y + 18}px,0)`,
+            transform: `translate3d(${cursor.current.x + 18}px,${cursor.current.y + 18}px,0)`,
           }}
         >
           <b>{projects[hovered].title}</b>
