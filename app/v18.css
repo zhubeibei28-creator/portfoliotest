@@ -1,0 +1,241 @@
+.home-scroll{position:absolute;inset:64px 0 0;overflow-y:auto;overflow-x:hidden;scroll-behavior:smooth}.home-scroll .home-view{position:relative;inset:auto;height:calc(100svh - 64px);min-height:560px}.home-scroll .intro span{position:absolute;top:calc(100svh - 222px);bottom:auto;width:180px}.selected-grid{padding:70px 28px 30px;border-top:1px solid var(--hair)}.selected-grid>header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px}.selected-grid h2{font-size:clamp(32px,4vw,60px);font-weight:400;letter-spacing:-.05em;margin:0}.selected-grid>header>span{font-size:12px;color:#666}.work-grid{columns:2;column-gap:24px}.work-grid>button{display:block;width:100%;break-inside:avoid;margin-bottom:48px;padding:0;background:none;text-align:left;cursor:pointer}.work-grid-image{display:block;aspect-ratio:1;background:url('/assets/project-covers.png') no-repeat;background-size:200% 200%;transition:filter .25s}.work-grid>button:nth-child(2) .work-grid-image{aspect-ratio:4/5}.work-grid>button:nth-child(3) .work-grid-image{aspect-ratio:5/4}.work-grid>button:hover .work-grid-image{filter:brightness(.96)}.work-grid-caption{display:flex;justify-content:space-between;gap:12px;padding-top:12px;align-items:baseline}.work-grid-caption b{font-size:20px;font-weight:400;letter-spacing:-.03em}.work-grid-caption>span{font-size:12px;color:#666}.work-grid-end{display:flex;justify-content:space-between;padding-top:40px;font-size:12px;border-top:1px solid var(--hair)}
+.sphere-lab{position:absolute;inset:64px 0 0;overflow:hidden;background:#fff}.sphere-heading{position:absolute;top:34px;left:28px;z-index:45;pointer-events:none}.sphere-heading h1{margin:0;font-size:clamp(40px,5vw,72px);line-height:1;font-weight:400;letter-spacing:-.06em}.sphere-heading p{margin-top:12px;font-size:14px;color:#666}.sphere-stage{position:absolute;inset:100px 0 60px;display:grid;place-items:center;touch-action:none;cursor:grab}.sphere-stage:active{cursor:grabbing}.sphere-orbit{position:relative;width:min(65vw,65vh);height:min(65vw,65vh);--orbit-radius:min(27vw,27vh)}.sphere-piece{position:absolute;left:50%;top:50%;width:clamp(60px,7.5vw,105px);height:clamp(80px,10vw,140px);padding:0;background:#fafafa;transform:translate(-50%,-50%) translate(calc(var(--sx)*var(--orbit-radius)),calc(var(--sy)*var(--orbit-radius))) scale(var(--scale));cursor:pointer;animation:sphere-arrive 900ms cubic-bezier(.22,.7,.2,1) both}.sphere-piece>span:first-child,.lab-focus-visual>span{display:block;width:100%;height:100%;background:url('/assets/elements.png') no-repeat;background-size:600% 100%}.sphere-piece:hover,.sphere-piece:focus-visible{background:#f0f0f0}.sphere-piece-label{position:absolute;top:100%;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:12px;padding:6px 8px;background:white;opacity:0;pointer-events:none}.sphere-piece:hover .sphere-piece-label,.sphere-piece:focus-visible .sphere-piece-label{opacity:1}.sphere-footer{height:54px;border:0;display:flex;justify-content:space-between;padding:0 28px;font-size:12px;text-transform:none;letter-spacing:0;color:#666}.lab-focus{position:absolute;inset:0;z-index:60;background:#fff;display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);padding:70px 28px 40px;gap:24px}.lab-focus-close{position:absolute;top:30px;right:28px;font-size:14px;background:none;cursor:pointer}.lab-focus-visual{display:grid;place-items:center;background:#fafafa;min-height:0}.lab-focus-visual>span{width:70%;height:85%}.lab-focus-copy{align-self:end;padding-bottom:40px}.lab-focus-copy>span{font-size:12px;color:#666}.lab-focus-copy h2{font-size:clamp(30px,4vw,60px);font-weight:400;letter-spacing:-.05em;line-height:1.05;margin:20px 0}.lab-focus-copy p{font-size:16px;line-height:1.5;max-width:300px;color:#666}.lab-focus-copy button{margin-top:35px;background:none;padding:0 0 4px;border-bottom:1px solid;cursor:pointer;font-size:14px}@keyframes sphere-arrive{from{opacity:0;translate:calc(var(--sx)*var(--orbit-radius)*-1) calc(var(--sy)*var(--orbit-radius)*-1)}to{translate:0 0}}
+@media(max-width:620px){.home-scroll,.sphere-lab{top:88px}.home-scroll .home-view{height:calc(100svh - 88px);min-height:520px}.home-scroll .intro span{top:calc(100svh - 240px)}.selected-grid{padding:44px 18px 24px}.work-grid{columns:1}.work-grid-caption{flex-wrap:wrap}.sphere-heading{left:18px;top:28px}.sphere-heading p{font-size:13px}.sphere-stage{inset:120px 0 70px}.sphere-orbit{width:90vw;height:90vw;--orbit-radius:35vw}.sphere-piece{width:64px;height:86px}.sphere-footer{padding:0 18px;font-size:12px}.sphere-footer>span:last-child{display:none}.lab-focus{grid-template-columns:1fr;grid-template-rows:55% 45%;gap:10px;padding:60px 18px 20px;overflow-y:auto}.lab-focus-copy{padding-bottom:16px}.lab-focus-copy h2{margin:12px 0;font-size:32px}.lab-focus-copy p{font-size:14px}.lab-focus-copy button{margin-top:12px}.lab-focus-close{right:18px;top:24px}}
+@media(prefers-reduced-motion:reduce){.sphere-piece{animation:none}.home-scroll{scroll-behavior:auto}}
+
+/* Roomier Lab and aligned selected work rows. */
+.work-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; columns: auto; }
+.work-grid > button { margin: 0; }
+.work-grid .work-grid-image,
+.work-grid > button:nth-child(2) .work-grid-image,
+.work-grid > button:nth-child(3) .work-grid-image { aspect-ratio: 1; }
+.sphere-orbit { width: min(76vw, 76vh); height: min(76vw, 76vh); --orbit-radius: min(32vw, 32vh); }
+.sphere-piece { width: clamp(76px, 8.7vw, 122px); height: clamp(100px, 11.6vw, 162px); }
+@media (max-width: 620px) {
+  .work-grid { grid-template-columns: 1fr; gap: 36px; }
+  .sphere-orbit { width: 94vw; height: 94vw; --orbit-radius: 38vw; }
+  .sphere-piece { width: 72px; height: 96px; }
+}
+
+/* A compact volume with stronger foreground / background depth. */
+.sphere-orbit { width: min(65vw, 65vh); height: min(65vw, 65vh); --orbit-radius: min(24vw, 24vh); }
+.sphere-piece { width: clamp(80px, 9vw, 126px); height: clamp(106px, 12vw, 168px); }
+@media (max-width: 620px) {
+  .sphere-orbit { width: 86vw; height: 86vw; --orbit-radius: 29vw; }
+  .sphere-piece { width: 76px; height: 102px; }
+}
+
+/* Hover lifts a study out of the sphere, without changing its orbit position. */
+.sphere-piece { transition: scale 240ms ease, filter 240ms ease, opacity 240ms ease; }
+.sphere-piece:hover, .sphere-piece:focus-visible { scale: 1.32;    }
+.sphere-piece > video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.lab-focus-visual > video { width: 100%; height: 100%; max-height: 100%; object-fit: contain; }
+.lab-full-images { width: 100%; height: 100%; overflow-y: auto; }
+.lab-full-images img { display: block; width: 100%; height: auto; margin-bottom: 20px; }
+@media (prefers-reduced-motion: reduce) { .sphere-piece { transition: none; } }
+
+.sphere-piece { background: transparent; }
+.sphere-piece > img { display:block; width:100%; height:100%; object-fit:contain; pointer-events:none; }
+.sphere-piece:hover, .sphere-piece:focus-visible { background: transparent; }
+.lab-full-images { display: flex; flex-direction: column; align-items: center; }
+.lab-full-images img { height: 100%; object-fit: contain; margin: 0; }
+.lab-original-pdf { display: block; margin-top: 24px; font-size:14px; text-underline-offset:5px; }
+
+/* Real artwork uses its own proportions, with a visible foreground scale. */
+.sphere-piece { width: clamp(135px, 13vw, 184px); height: auto; aspect-ratio: var(--aspect, 1.4); transition: transform 260ms ease, opacity 180ms ease, filter 180ms ease; }
+.sphere-piece > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.sphere-piece:hover, .sphere-piece:focus-visible, .sphere-piece.is-hovered { scale: 1;    }
+
+.sphere-piece.is-hovered .sphere-piece-label { opacity: 1; }
+@media(max-width:620px) { .sphere-piece { width: 108px; height: auto; } }
+
+/* Stable hover: keep every hit area in place; enlarge in a separate preview. */
+.sphere-piece { width: clamp(112px, 11vw, 154px); transition: opacity 180ms ease, filter 180ms ease; }
+
+.sphere-piece.is-hovered .sphere-piece-label,
+.sphere-piece:hover .sphere-piece-label,
+.sphere-piece:focus-visible .sphere-piece-label { opacity: 0; }
+
+.lab-hover-preview { position: absolute; z-index: 75; right: 28px; top: 50%; transform: translateY(-45%); width: min(27vw, 360px); pointer-events: none; background: #fff; padding: 12px; }
+.lab-hover-preview img, .lab-hover-preview video { display: block; width: 100%; max-height: 42vh; object-fit: contain; }
+.lab-hover-preview p { font-size: 16px; letter-spacing: -.025em; line-height: 1.3; margin: 12px 0 0; }
+@media(max-width:900px) { .lab-hover-preview { right: 18px; width: 27vw; } }
+@media(max-width:620px) { .sphere-piece { width: 96px; } .lab-hover-preview { display:none; }  }
+
+/* Subtle in-place hover only. */
+.sphere-piece { transition: scale 200ms ease, opacity 180ms ease, filter 180ms ease; }
+.sphere-piece.is-hovered, .sphere-piece:hover, .sphere-piece:focus-visible { scale: 1.08; outline: none; box-shadow: none; }
+
+
+/* Hover preserves depth order and uses an independent, smooth scale. */
+.sphere-piece { transition: scale 360ms cubic-bezier(.22,1,.36,1); }
+.sphere-piece:hover, .sphere-piece:focus-visible, .sphere-piece.is-hovered { scale: 1.06; opacity: revert; filter: revert; z-index: auto; }
+
+.sphere-piece > video { position:absolute; inset:0; object-fit:contain; transition:opacity 180ms ease; }
+.lab-focus { grid-template-rows: minmax(0,1fr); }
+.lab-focus-visual > video { min-height:0; max-width:100%; }
+@media(max-width:620px) { .lab-focus { grid-template-rows: minmax(0,55%) minmax(0,45%); } }
+
+/* Square thumbnail, full uncropped video in the detail view. */
+.sphere-piece.square-video { aspect-ratio:1; overflow:hidden; }
+.sphere-piece.square-video > img, .sphere-piece.square-video > video { object-fit:cover; object-position:center; }
+.lab-focus-visual { position:relative; overflow:hidden; }
+.lab-focus-visual > video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+
+.sphere-piece > .lab-video-cover { z-index:0; }
+.sphere-piece > video { z-index:1; }
+
+.lab-photo-preview { position:absolute; inset:0; pointer-events:none; }
+.lab-photo-preview img, .lab-photo-gallery img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transition:opacity 360ms ease; }
+.lab-photo-gallery { position:absolute; inset:0 0 48px; }
+.lab-photo-controls { position:absolute; top:100%; left:0; right:0; height:48px; display:flex; justify-content:space-between; align-items:center; padding:0 14px; background:#fff; font-size:13px; }
+.lab-photo-controls button { background:none; padding:8px; cursor:pointer; }
+
+.lab-photo-preview img { transition: opacity 160ms ease; }
+
+.lab-photo-preview img, .lab-photo-gallery img { opacity: 1; transition: none; }
+/* Show the work name without changing its hit area or sphere position. */
+.sphere-piece.is-hovered .sphere-piece-label,
+.sphere-piece:hover .sphere-piece-label,
+.sphere-piece:focus-visible .sphere-piece-label { opacity:1; visibility:visible; z-index:3; background:#fff; color:#111; font-size:13px; line-height:1.3; padding:6px 9px; pointer-events:none; }
+.sphere-piece.square-video { overflow:visible; }
+.sphere-piece.square-video > img,
+.sphere-piece.square-video > video { clip-path:inset(0); }
+
+.sphere-piece .sphere-piece-label { display:none; }
+.lab-mouse-title { position:fixed; z-index:150; pointer-events:none; background:rgba(255,255,255,.96); padding:4px 7px; font-size:12px; line-height:1.35; color:#111; white-space:nowrap; }
+
+.sphere-piece.square-model { width:clamp(124px,12vw,168px); aspect-ratio:1; }
+.sphere-piece.square-model > img { object-fit:cover; object-position:center; }
+@media(max-width:620px) { .sphere-piece.square-model { width:106px; } }
+
+.sphere-piece.larger-paper { width:clamp(124px,12vw,168px); }
+@media(max-width:620px) { .sphere-piece.larger-paper { width:106px; } }
+.sphere-piece.square-model { width:clamp(114px,11vw,154px); }
+@media(max-width:620px) { .sphere-piece.square-model { width:98px; } }
+
+.sphere-piece.larger-orbit { width:clamp(152px,15vw,210px); }
+@media(max-width:620px) { .sphere-piece.larger-orbit { width:132px; } }
+
+/* Preserve the artwork's original color; depth comes from size and overlap. */
+.sphere-piece { opacity:1; filter:none; }
+.sphere-piece > img, .sphere-piece > video, .lab-photo-preview img { filter:none; }
+/* Size the sphere artwork against both viewport axes, avoiding wide-screen growth. */
+.sphere-lab { --lab-card-width:clamp(96px,min(11vw,15vh),154px); }
+.sphere-piece { width:var(--lab-card-width); }
+.sphere-piece.square-model { width:var(--lab-card-width); }
+.sphere-piece.larger-paper { width:calc(var(--lab-card-width)*1.09); }
+.sphere-piece.larger-orbit { width:calc(var(--lab-card-width)*1.36); }
+@media(max-width:620px) {
+  .sphere-lab { --lab-card-width:clamp(76px,min(23vw,13vh),106px); }
+  .sphere-piece.square-model { width:calc(var(--lab-card-width)*1.02); }
+}
+/* Preserve the earlier portrait sizing; constrain only wide landscape windows. */
+.sphere-lab { --lab-card-width:clamp(112px,11vw,154px); }
+@media(min-aspect-ratio:4/3) and (min-width:621px) {
+  .sphere-lab { --lab-card-width:clamp(96px,min(11vw,15vh),154px); }
+}
+@media(max-width:620px) {
+  .sphere-lab { --lab-card-width:96px; }
+  .sphere-piece.square-model { width:98px; }
+  .sphere-piece.larger-paper { width:106px; }
+  .sphere-piece.larger-orbit { width:132px; }
+}
+
+/* Artwork introductions remain readable within the detail viewport. */
+.lab-focus-copy{min-height:0;max-height:100%;overflow-y:auto;padding-right:12px;}
+.lab-focus-copy p{max-width:420px;font-size:15px;line-height:1.7;color:#777;}
+.lab-focus-copy .lab-study-meta{font-size:12px;line-height:1.6;color:#777;margin:0 0 20px;}
+@media(max-width:620px){.lab-focus-copy{align-self:stretch;padding:8px 0 20px;}.lab-focus-copy .lab-study-meta{margin-bottom:12px;}}
+
+/* A quiet alternate entrance beneath the Lab page title. */
+.lab-title-menu{position:relative;width:max-content;pointer-events:auto;}
+.lab-title-trigger{font:inherit;letter-spacing:inherit;line-height:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;}
+.lab-work-list{position:absolute;top:100%;left:0;width:240px;padding:16px 0 14px;background:#fff;z-index:100;display:flex;flex-direction:column;align-items:stretch;}
+.lab-title-menu .lab-work-list button{display:block;text-align:left;font-size:12px;font-weight:400;line-height:1.5;letter-spacing:0;text-transform:none;color:#777;padding:5px 0;margin:0;border:0;background:none;cursor:pointer;}
+.lab-title-menu .lab-work-list button:hover,.lab-title-menu .lab-work-list button:focus-visible{color:#111;}
+@media(max-width:620px){.lab-work-list{width:230px;max-height:65svh;overflow-y:auto;}}
+
+/* About: introduction and portrait share a row, with credentials below. */
+@media(min-width:621px){
+  .about-view{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);grid-template-rows:max-content max-content;align-content:start;gap:64px clamp(40px,7vw,110px);padding:48px clamp(28px,4vw,68px) 64px;}
+  .about-view .about-lead{display:block;grid-column:1;grid-row:1;width:100%;align-self:center;}
+  .about-lead>p{margin:0 0 24px;}
+  .about-lead h1{margin:0;max-width:540px;font-size:clamp(19px,1.65vw,24px);line-height:1.5;text-align:left;text-wrap:pretty;}
+  .about-view .portrait-block{position:relative;inset:auto;transform:none;grid-column:2;grid-row:1;align-self:start;justify-self:end;width:100%;max-width:390px;margin:0;}
+  .about-view .about-columns{grid-column:1 / -1;grid-row:2;width:100%;margin:0;padding:0;border:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;}
+  .about-columns .info-column{display:block;}
+  .about-columns .info-column h2{margin:0 0 24px;font-size:13px;font-weight:400;text-transform:none;}
+  .about-columns .info-column article{padding:0 0 18px;border:0;}
+  .about-columns .info-column h3{font-size:13px;line-height:1.45;margin:0 0 5px;}
+  .about-columns .info-column p{font-size:12px;line-height:1.5;}
+}
+@media(min-width:621px) and (max-width:900px){
+  .about-view{gap:48px 32px;}
+  .about-view .about-columns{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;}
+}
+
+@media(min-width:621px){
+  .about-view .about-lead{align-self:stretch;display:flex;flex-direction:column;position:relative;}
+  .about-view .about-lead>p{position:absolute;top:0;left:0;margin:0;}
+  .about-view .about-lead h1{margin:auto 0;}
+}
+
+/* Equal gutters between the actual widths of the four information columns. */
+@media(min-width:901px){
+  .about-view .about-columns{grid-template-columns:repeat(4,fit-content(calc((100% - 96px)/4)));justify-content:space-between;column-gap:32px;row-gap:32px;}
+  .about-columns .info-column{min-width:0;}
+  .about-columns .info-column h2{margin-bottom:24px;}
+  .about-columns .info-column article{padding-bottom:18px;}
+  .about-columns .info-column article:last-child{padding-bottom:0;}
+}
+
+/* Lantern Recall: a frameless, automatically looping coding artwork. */
+.lantern-preview{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;background:white;}
+.lab-focus-visual>.lantern-animation{position:absolute;inset:0;width:100%;height:100%;border:0;background:white;}
+
+.sphere-piece.compact-lantern{width:calc(var(--lab-card-width)*.94);}
+
+.lab-focus-copy .lab-study-description{text-wrap:pretty;overflow-wrap:normal;word-break:normal;}
+
+/* Balance all detail text, including titles and category lines. */
+.lab-focus-copy h2,.lab-focus-copy p,.lab-focus-copy .lab-study-description{text-wrap:balance;word-break:normal;overflow-wrap:normal;}
+
+.lab-focus-copy .lab-title-ending{display:inline-block;white-space:nowrap;}
+.lab-focus-copy h2{font-size:clamp(30px,3vw,48px);}
+@media(max-width:620px){.lab-focus-copy h2{font-size:30px;}}
+
+/* Home gallery contains artwork cards only. */
+.home-view .gallery-element{display:none!important;}
+
+/* Home: simple, aligned artwork cards in a horizontal gallery. */
+.home-view .gallery-row{gap:clamp(20px,2.2vw,36px);align-items:center;perspective:none;}
+.home-view .gallery-project{flex:0 0 clamp(220px,26vw,380px);width:clamp(220px,26vw,380px);height:clamp(220px,26vw,380px);transform:none;transform-style:flat;}
+.home-view .gallery-cover{width:100%;height:100%;box-shadow:none;opacity:1;filter:none;}
+.home-view .gallery-project:after{display:none;}
+.home-view .gallery-project:hover,.home-view .gallery-project:focus-visible{transform:none;}
+.home-view .gallery-project:hover .gallery-cover,.home-view .gallery-project:focus-visible .gallery-cover{box-shadow:none;}
+.home-view .gallery-row:has(.gallery-project:hover)>.gallery-project:not(:hover){opacity:1;filter:none;}
+.home-view .gallery-index{display:block;}
+@media(max-width:620px){.home-view .gallery-project{flex-basis:220px;width:220px;height:220px;}.home-view .gallery-row{gap:20px;}}
+
+.icepact-cover{display:block;object-fit:cover;background:#fff;pointer-events:none;}
+
+.shuxia-cover{display:block;object-fit:cover;object-position:center;pointer-events:none;}
+
+.pocklet-cover{display:block;object-fit:cover;object-position:center;pointer-events:none;}
+
+/* Real media must never reveal the legacy placeholder beneath it. */
+.home-scroll img.gallery-cover,.home-scroll video.gallery-cover,
+.home-scroll img.work-grid-image,.home-scroll video.work-grid-image{
+  background-image:none;
+  background-color:#fff;
+}
+
+/* Quiet artwork labels, matching the Lab title scale. */
+.project-cursor b{font-size:12px;font-weight:400;letter-spacing:0;line-height:1.4;}
+.project-cursor span{font-size:11px;font-weight:400;color:#777;}
+.work-grid-caption b{font-size:14px;font-weight:400;letter-spacing:0;}
+
+/* Shift POCKLET's crop slightly toward the left of the source to center the objects. */
+.pocklet-cover{object-position:43% center;}

@@ -1,0 +1,89 @@
+/* Editorial visual study. Remove this import to restore the original design. */
+:root { --bg: #fff; --fg: #111; --hair: rgba(17,17,17,.14); --paper: #fff; --ink: #111; }
+.portfolio-shell { font-family: Arial, Helvetica, sans-serif; }
+.persistent-header { background: #fff; backdrop-filter: none; border-bottom: 0; letter-spacing: 0; text-transform: none; padding-inline: 28px; }
+.persistent-header .wordmark { font-size: 18px; font-weight: 500; letter-spacing: -.045em; }
+.persistent-header .wordmark span { font-size: 9px; }
+.persistent-header nav { gap: 28px; }
+.persistent-header nav button { font-size: 14px; text-transform: capitalize; padding-bottom: 4px; }
+.persistent-header > p { font-size: 12px; color: #626262; }
+.persistent-header > p i { background: #111; width: 4px; height: 4px; }
+.intro { left: 28px; top: 36px; }
+.intro p { font-size: clamp(25px, 3.1vw, 46px); line-height: 1.08; font-weight: 400; letter-spacing: -.045em; color: #111; }
+.intro span { left: 28px; bottom: 81px; padding: 0; background: none; border: 0; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: #626262; }
+.gallery-viewport { top: 152px; bottom: 112px; }
+.home-view:before, .home-view:after { top: 152px; bottom: 112px; width: 4vw; }
+.gallery-project:after { opacity: .16; box-shadow: none; border: 0; }
+.gallery-project:hover:after { opacity: .22; }
+.gallery-cover { opacity: 1; border: 0; box-shadow: 0 8px 20px rgba(0,0,0,.06); filter: none; }
+.gallery-project:hover, .gallery-project:focus-visible { transform: translate3d(0,-24px,0) scale(1.025); }
+.gallery-project:hover .gallery-cover, .gallery-project:focus-visible .gallery-cover { filter: none; box-shadow: 0 14px 28px rgba(0,0,0,.09); }
+.gallery-row:has(.gallery-project:hover) > .gallery-project:not(:hover), .gallery-row:has(.gallery-project:hover) > .gallery-element { opacity: .68; filter: none; }
+.gallery-element span { filter: saturate(.8) contrast(.98); }
+.gallery-index { background: #fff; border: 0; font-size: 12px; padding: 4px 5px; }
+.project-cursor { background: #fff; padding: 10px 14px; border: 0; box-shadow: none; backdrop-filter: none; }
+.project-cursor:before { display: none; }
+.project-cursor b { font-size: 22px; font-weight: 400; letter-spacing: -.04em; }
+.project-cursor span { font-size: 12px; letter-spacing: 0; text-transform: none; }
+.scroll-rule { left: 28px; right: 28px; bottom: 55px; }
+.home-view footer { height: 48px; padding-inline: 28px; border: 0; font-size: 12px; letter-spacing: 0; text-transform: none; }
+.lab-title h1 { font-weight: 400; line-height: .98; letter-spacing: -.055em; }
+.lab-title p, .lab-meta > span { font-size: 12px; letter-spacing: 0; }
+.lab-meta h2 { font-size: 18px; font-weight: 400; }
+.lab-meta p { font-size: 14px; line-height: 1.45; color: #626262; }
+.lab-visual { background: #f5f5f5; }
+.lab-visual:after { opacity: .16; }
+.lab-visual span { filter: saturate(.8); }
+.about-lead > p, .info-column h2 { font-size: 14px; font-weight: 400; letter-spacing: 0; }
+.about-lead h1 { font-weight: 400; letter-spacing: -.025em; line-height: 1.4; }
+.info-column h3 { font-size: 14px; font-weight: 400; line-height: 1.35; }
+.info-column p { font-size: 12px; color: #626262; line-height: 1.5; }
+.portrait-block > p { font-size: 12px; letter-spacing: 0; text-transform: none; color: #626262; line-height: 1.4; }
+.contact-view { padding: 40px 28px; }
+.contact-view > p { font-size: 14px; letter-spacing: 0; }
+.contact-view h1 { font-weight: 400; line-height: .98; letter-spacing: -.06em; font-size: clamp(58px, 8.6vw, 132px); margin-top: 13vh; }
+.contact-view > a { font-size: clamp(18px, 2.2vw, 30px); gap: 14px; }
+.contact-view > div { right: 28px; bottom: 40px; gap: 26px; font-size: 14px; letter-spacing: 0; text-transform: none; }
+.resume-download > small { font-size: 12px; color: #707070; letter-spacing: 0; }
+.resume-download > svg { width: 14px; height: 14px; }
+.case-back { font-size: 12px; background: #fff; backdrop-filter: none; border: 0; }
+.case-hero h1 { font-weight: 400; line-height: .98; letter-spacing: -.06em; }
+.case-hero p, .case-hero span { font-size: 14px; }
+.case-overview > h2, .case-process h2, .case-system h2, .case-outcome h2 { font-weight: 400; line-height: 1.04; letter-spacing: -.045em; }
+.case-overview > p, .case-process header > p, .case-system > div > p, .case-outcome > div:last-child > p, .case-overview article span, .process-note span { font-size: 12px; letter-spacing: 0; }
+.case-overview article p, .process-note p { font-size: 16px; line-height: 1.5; }
+.case-process { background: #f5f5f5; }
+button:focus-visible, a:focus-visible { outline: 1px solid #111; outline-offset: 5px; }
+@media (max-width: 900px) {
+  .persistent-header { grid-template-columns: 1fr auto; }
+  .persistent-header > p { display: none; }
+  .contact-view > div { left: 28px; right: 28px; flex-wrap: wrap; }
+  .about-lead { width: 62%; }
+  .about-columns { width: 62%; }
+}
+@media (max-width: 620px) {
+  .persistent-header { height: 88px; padding: 16px 18px; grid-template-columns: 1fr; gap: 8px; align-content: center; }
+  .persistent-header .wordmark { font-size: 17px; }
+  .persistent-header nav { gap: 24px; }
+  .persistent-header nav button { font-size: 14px; }
+  .home-view, .about-view, .lab-view, .contact-view, .case-study { top: 88px; }
+  .intro { left: 18px; top: 28px; }
+  .intro p { font-size: 26px; }
+  .intro span { left: 18px; bottom: 75px; }
+  .gallery-viewport, .home-view:before, .home-view:after { top: 126px; bottom: 110px; }
+  .home-view footer { padding-inline: 18px; }
+  .scroll-rule { left: 18px; right: 18px; }
+  .about-view { padding: 30px 18px 56px; }
+  .about-lead, .about-columns { width: 100%; }
+  .about-lead { display: block; }
+  .about-lead > p { margin-bottom: 18px; }
+  .about-lead h1 { font-size: 21px; }
+  .portrait-block { position: relative; top: auto; right: auto; transform: none; }
+  .info-column { grid-template-columns: 90px minmax(0,1fr); }
+  .contact-view { padding: 30px 18px; overflow-y: auto; }
+  .contact-view h1 { font-size: 14vw; margin-top: 14vh; }
+  .contact-view > div { position: static; margin-top: 60px; gap: 20px; }
+  .contact-view > div > span { flex-basis: 100%; }
+  .case-back { top: 100px; }
+  .lab-title h1 { font-size: 44px; }
+}

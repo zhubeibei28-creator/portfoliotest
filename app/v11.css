@@ -1,0 +1,117 @@
+.diffuse-portrait .portrait-base {
+  filter: saturate(0.82) contrast(0.98);
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  .about-view {
+    display: block;
+    padding: 38px 28px 64px;
+    overflow-y: auto;
+  }
+
+  .about-lead {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 24px;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .about-lead > p {
+    margin-top: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .about-lead h1 {
+    max-width: 620px;
+    font-size: clamp(23px, 3.8vw, 32px);
+    line-height: 1.23;
+    letter-spacing: -0.04em;
+  }
+
+  .portrait-block {
+    width: min(68vw, 520px);
+    max-width: none;
+    margin: 56px auto 70px;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .about-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 52px 34px;
+    padding: 0;
+    border: 0;
+  }
+
+  .info-column {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    align-content: start;
+  }
+
+  .info-column h2 {
+    grid-column: 1;
+    grid-row: 1 / span 8;
+    margin: 1px 0 0;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .info-column article {
+    grid-column: 2;
+    padding: 0 0 14px;
+    border: 0;
+  }
+
+  .info-column h3 {
+    margin: 0 0 4px;
+    font-size: 13px;
+  }
+
+  .info-column p {
+    font-size: 9px;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 620px) {
+  .about-view {
+    padding: 28px 16px 56px;
+  }
+
+  .about-lead {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .about-lead h1 {
+    font-size: 27px;
+  }
+
+  .portrait-block {
+    width: 100%;
+    margin: 42px 0 58px;
+  }
+
+  .portrait-block img {
+    aspect-ratio: 4 / 3;
+    object-position: center 38%;
+  }
+
+  .about-columns {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .info-column {
+    grid-template-columns: 92px minmax(0, 1fr);
+  }
+}

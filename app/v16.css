@@ -1,0 +1,32 @@
+.resume-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0 0 2px;
+  color: inherit;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid rgba(29, 29, 27, 0.28);
+  font: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  cursor: default;
+}
+
+.resume-download > span {
+  white-space: nowrap;
+}
+
+.resume-download > small {
+  color: #aaa;
+  font-size: 7px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.resume-download > svg {
+  width: 10px;
+  height: 10px;
+  color: #888;
+}

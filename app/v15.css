@@ -1,0 +1,11 @@
+.contact-view > div a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 160ms ease;
+}
+
+.contact-view > div a:hover,
+.contact-view > div a:focus-visible {
+  border-color: currentColor;
+}
