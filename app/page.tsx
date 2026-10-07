@@ -194,9 +194,9 @@ export default function Home() {
                         setHovered(null);
                         hoverPaused.current = false;
                       }}
-                      onClick={() => setActive(index)}
+                      aria-disabled="true"
                     >
-                      {index === 0 ? <video className="gallery-cover icepact-cover" src="/assets/icepact.mp4" autoPlay muted loop playsInline preload="auto" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <span
+                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <span
                         className="gallery-cover"
                         style={{backgroundPosition: projects[index].crop}}
                       />}
@@ -221,8 +221,8 @@ export default function Home() {
         <section className="selected-grid">
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{projects.map((project, index) => (
-            <button key={project.id} onClick={() => setActive(index)}>
-              {index === 0 ? <video className="work-grid-image icepact-cover" src="/assets/icepact.mp4" autoPlay muted loop playsInline preload="auto" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <span className="work-grid-image" style={{backgroundPosition: project.crop}} />}
+            <button key={project.id} aria-disabled="true">
+              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <span className="work-grid-image" style={{backgroundPosition: project.crop}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
           ))}</div>
@@ -350,7 +350,7 @@ export default function Home() {
               Instagram
             </a>
             <a
-              href="https://www.linkedin.com/in/anna-zhu-98a9943aa"
+              href="https://www.linkedin.com/in/beibei-anna-zhu-98a9943aa"
               target="_blank"
               rel="noreferrer"
             >
@@ -379,7 +379,7 @@ export default function Home() {
           }}
         >
           <b>{projects[hovered].title}</b>
-          <span>View project</span>
+          <span>{projects[hovered].type}</span>
         </div>
       )}
     </main>
@@ -502,18 +502,18 @@ function InfoColumn({ title, items }: { title: string; items: string[][] }) {
 
 // Add real video and full-resolution assets here as each study is supplied.
 const labMedia: Record<string, {video?: string; images?: string[]; pdf?: string; hoverImages?: string[]; cover?: string; detailInterval?: number; animation?: string}> = {
-  '12': {images: ['/assets/lab/lantern-recall/cover.png'], video: '/assets/lab/lantern-recall/lantern-recall.mp4'},
-  '01': {images: ['/assets/lab/reverie-animation.png'], video: '/assets/lab/reverie-animation.mp4'},
-  '02': {images: ['/assets/lab/reverie-model.png'], video: '/assets/lab/reverie-model.mp4'},
-  '03': {images: ['/assets/lab/connect-poster-1.png'], pdf: '/assets/lab/connect-poster.pdf'},
-  '04': {images: Array.from({length:6}, (_,i) => `/assets/lab/paper-pattern-${i+1}.jpg`)},
-  '05': {cover: '/assets/lab/windows-of-perception.png', images: Array.from({length:8},(_,i)=>`/assets/lab/windows-zine/page-${i+1}.jpg`)},
-  '11': {images: ['/assets/lab/the-orbit.jpg']},
-  '10': {cover: '/assets/lab/ambers-pulses/cover.png', hoverImages: Array.from({length:9},(_,i)=>`/assets/lab/ambers-pulses/hover-${i+1}.jpg`), images: Array.from({length:9},(_,i)=>`/assets/lab/ambers-pulses/detail-${i+1}.jpg`), detailInterval:3000},
-  '09': {cover: '/assets/lab/food-on-record/cover-1.jpg', hoverImages: Array.from({length:26},(_,i)=>`/assets/lab/food-on-record/hover-${i+1}.jpg`), images: Array.from({length:15},(_,i)=>`/assets/lab/food-on-record/detail-${i+1}.jpg`), detailInterval:3000},
-  '08': {images: ['/assets/lab/make-her-visible-model-1.jpg', '/assets/lab/make-her-visible-model-2.jpg']},
-  '07': {images: ['/assets/lab/objects-display-cover.png', '/assets/lab/objects-display-poster.png', '/assets/lab/objects-display-tickets.png']},
-  '06': {images: ['/assets/lab/make-her-visible.png'], video: '/assets/lab/make-her-visible-final.mp4'},
+  '12': {images: ['/assets/lab/lantern-recall/cover.webp'], video: '/assets/lab/lantern-recall/lantern-recall.mp4'},
+  '01': {images: ['/assets/lab/reverie-animation.webp'], video: '/assets/lab/reverie-animation.mp4'},
+  '02': {images: ['/assets/lab/reverie-model.webp'], video: '/assets/lab/reverie-model.mp4'},
+  '03': {images: ['/assets/lab/connect-poster-1.webp'], pdf: '/assets/lab/connect-poster.pdf'},
+  '04': {images: Array.from({length:6}, (_,i) => `/assets/lab/paper-pattern-${i+1}.webp`)},
+  '05': {cover: '/assets/lab/windows-of-perception.webp', images: Array.from({length:8},(_,i)=>`/assets/lab/windows-zine/page-${i+1}.webp`)},
+  '11': {images: ['/assets/lab/the-orbit.webp']},
+  '10': {cover: '/assets/lab/ambers-pulses/cover.webp', hoverImages: Array.from({length:9},(_,i)=>`/assets/lab/ambers-pulses/hover-${i+1}.webp`), images: Array.from({length:9},(_,i)=>`/assets/lab/ambers-pulses/detail-${i+1}.webp`), detailInterval:3000},
+  '09': {cover: '/assets/lab/food-on-record/cover-1.webp', hoverImages: Array.from({length:26},(_,i)=>`/assets/lab/food-on-record/hover-${i+1}.webp`), images: Array.from({length:15},(_,i)=>`/assets/lab/food-on-record/detail-${i+1}.webp`), detailInterval:3000},
+  '08': {images: ['/assets/lab/make-her-visible-model-1.webp', '/assets/lab/make-her-visible-model-2.webp']},
+  '07': {images: ['/assets/lab/objects-display-cover.webp', '/assets/lab/objects-display-poster.webp', '/assets/lab/objects-display-tickets.webp']},
+  '06': {images: ['/assets/lab/make-her-visible.webp'], video: '/assets/lab/make-her-visible-final.mp4'},
 };
 
 const labDescriptions: Record<string, {meta: string; description: string}> = {
@@ -600,7 +600,7 @@ function LabPreviewVideo({src, playing, poster}: {src: string; playing: boolean;
     }
     return () => { cancelled = true; clip.removeEventListener('loadeddata', start); clip.removeEventListener('canplay', start); };
   }, [playing, src]);
-  return <><img className="lab-video-cover" src={poster} alt="" draggable={false} /><video ref={video} src={src} poster={poster} style={{opacity: playing ? 1 : 0}} muted loop playsInline preload="auto" /></>;
+  return <><img className="lab-video-cover" src={poster} alt="" draggable={false} /><video ref={video} src={playing ? src : undefined} poster={poster} style={{opacity: playing ? 1 : 0}} muted loop playsInline preload="none" /></>;
 }
 
 function LabSlideshow({images, playing = false, title, controls = false, interval = 700, cover}: {images: string[]; playing?: boolean; title: string; controls?: boolean; interval?: number; cover?: string}) {
@@ -612,7 +612,7 @@ function LabSlideshow({images, playing = false, title, controls = false, interva
     return () => { window.clearTimeout(first); window.clearInterval(timer); };
   }, [playing, images, interval, controls]);
   return <div className={controls ? 'lab-photo-gallery' : 'lab-photo-preview'}>
-    {images.map((src,i) => <img key={src} src={!playing && cover && i===0 ? cover : src} alt={`${title} — ${i+1}`} draggable={false} style={{visibility:slide===i ? 'visible' : 'hidden'}} />)}
+    {images.map((src,i) => (i===slide || i===(slide+1)%images.length) ? <img key={src} src={!playing && cover && i===0 ? cover : src} alt={`${title} — ${i+1}`} draggable={false} style={{visibility:slide===i ? 'visible' : 'hidden'}} /> : null)}
     {controls && <div className="lab-photo-controls"><button aria-label="Previous photo" onClick={()=>setSlide(i=>(i+images.length-1)%images.length)}>Previous</button><span>{slide+1} / {images.length}</span><button aria-label="Next photo" onClick={()=>setSlide(i=>(i+1)%images.length)}>Next</button></div>}
   </div>;
 }
@@ -660,7 +660,7 @@ function SphereLab() {
         const ry=y*Math.cos(tilt)-z*Math.sin(tilt), rz=y*Math.sin(tilt)+z*Math.cos(tilt);
         const n=i%experiments.length; const depth=(rz+1)/2; const scale=.58+depth*.85; const perspective=1/(1-rz*.18);
         return <button key={i} className={`sphere-piece${hoveredPiece===i ? " is-hovered" : ""}${n===5 ? " square-video" : ""}${n===7 ? " square-model" : ""}${n===3 ? " larger-paper" : ""}${n===10 ? " larger-orbit" : ""}${n===11 ? " compact-lantern" : ""}`} aria-label={`Open ${experiments[n][1]}`} tabIndex={selected===null && rz > .12 ? 0 : -1}
-          style={{'--sx':x*perspective,'--sy':ry*perspective,'--scale':scale,'--aspect':n===2 ? '0.6925' : n===0 ? '1.313' : n===1 ? '1.479' : n===3 ? '1.333' : n===5 ? '1' : n===7 ? '1' : n===8 ? '1' : n===9 ? '0.773' : n===10 ? '2.686' : n===11 ? '0.64' : '1.5',pointerEvents:rz > .12 ? 'auto' : 'none',opacity:rz < 0 ? 1 + rz*.22 : 1,filter:rz < 0 ? `blur(${-rz*.4}px)` : 'none',zIndex:Math.round((rz+1)*20),animationDelay:`${i*22}ms`} as React.CSSProperties}
+          style={{'--sx':x*perspective,'--sy':ry*perspective,'--scale':scale,'--aspect':n===2 ? '0.6925' : n===0 ? '1.313' : n===1 ? '1.479' : n===3 ? '1.333' : n===5 ? '1' : n===7 ? '1' : n===8 ? '1' : n===9 ? '0.773' : n===10 ? '2.686' : n===11 ? '0.64' : '1.5',pointerEvents:rz > .12 ? 'auto' : 'none',opacity:rz < 0 ? 1 + rz*.22 : 1,filter:rz < -.35 ? 'blur(.3px)' : 'none',zIndex:Math.round((rz+1)*20),animationDelay:`${i*22}ms`} as React.CSSProperties}
           onMouseEnter={e => {
             if (rz <= .12) return;
             setHoveredPiece(i);
@@ -704,4 +704,18 @@ function SphereLab() {
       <div className="lab-focus-copy"><span>Study {experiments[selected][0]}</span><h2><LabWorkTitle title={experiments[selected][1]} /></h2><p className="lab-study-meta">{preventWidow(labDescriptions[experiments[selected][0]]?.meta)}</p><p className="lab-study-description">{preventWidow(labDescriptions[experiments[selected][0]]?.description)}</p>{labMedia[String(experiments[selected][0])]?.pdf && <a className="lab-original-pdf" href={labMedia[String(experiments[selected][0])].pdf} target="_blank" rel="noreferrer">View original PDF</a>}<button onClick={()=>setSelected((selected+1)%experiments.length)}>Next study</button></div>
     </div>}
   </section>;
+}
+
+function HomeLoopVideo({className}: {className:string}) {
+  const clip=useRef<HTMLVideoElement>(null);
+  const [visible,setVisible]=useState(false);
+  const [loaded,setLoaded]=useState(false);
+  useEffect(()=>{
+    if(!clip.current)return;
+    const observer=new IntersectionObserver(([entry])=>{setVisible(entry.isIntersecting);if(entry.isIntersecting)setLoaded(true);},{threshold:.05});
+    observer.observe(clip.current);
+    return ()=>observer.disconnect();
+  },[]);
+  useEffect(()=>{if(visible)clip.current?.play().catch(()=>{});else clip.current?.pause();},[visible,loaded]);
+  return <video ref={clip} className={className} src={loaded ? '/assets/icepact.mp4' : undefined} poster="/assets/icepact-poster.webp" muted loop playsInline preload="none" onLoadedData={()=>{if(visible)clip.current?.play().catch(()=>{});}} />;
 }
