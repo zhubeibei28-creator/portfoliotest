@@ -39,7 +39,7 @@ const projects = [
   },
   {
     id: '04',
-    title: 'Tender Objects',
+    title: "Amber's Pulses",
     type: 'Digital / Image-making',
     year: '2024',
     crop: '100% 100%',
@@ -196,10 +196,7 @@ export default function Home() {
                       }}
                       aria-disabled="true"
                     >
-                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <span
-                        className="gallery-cover"
-                        style={{backgroundPosition: projects[index].crop}}
-                      />}
+                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/home-04-cover.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
                       <span className="gallery-index">
                         {projects[index].id}
                       </span>
@@ -222,7 +219,7 @@ export default function Home() {
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{projects.map((project, index) => (
             <button key={project.id} aria-disabled="true">
-              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <span className="work-grid-image" style={{backgroundPosition: project.crop}} />}
+              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/home-04-cover.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
           ))}</div>
