@@ -28,17 +28,6 @@ const projects = [
   },
   {
     id: '03',
-    title: 'POCKLET',
-    type: 'Editorial / Print',
-    year: '2025',
-    crop: '0% 100%',
-    text: 'An editorial system about fragments, repetition, and the pleasure of misregistration.',
-    brief:
-      'Design a publication that makes research feel physical, urgent and open-ended.',
-    idea: 'Documents, photographs and annotations were assembled through one strict grid, then deliberately pushed out of registration.',
-  },
-  {
-    id: '04',
     title: 'GRÆFT',
     type: 'Digital / Image-making',
     year: '2024',
@@ -48,6 +37,18 @@ const projects = [
       'Create a flexible image world for a programme about care, technology and the near future.',
     idea: 'Familiar expressions were embedded in unfamiliar forms, making each object feel both synthetic and oddly intimate.',
   },
+  {
+    id: '04',
+    title: 'POCKLET',
+    type: 'Editorial / Print',
+    year: '2025',
+    crop: '0% 100%',
+    text: 'An editorial system about fragments, repetition, and the pleasure of misregistration.',
+    brief:
+      'Design a publication that makes research feel physical, urgent and open-ended.',
+    idea: 'Documents, photographs and annotations were assembled through one strict grid, then deliberately pushed out of registration.',
+  },
+
 ];
 
 const experiments = [
@@ -196,7 +197,7 @@ export default function Home() {
                       }}
                       aria-disabled="true"
                     >
-                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-cover.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
+                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 3 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-cover-centered.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
                       <span className="gallery-index">
                         {projects[index].id}
                       </span>
@@ -219,7 +220,7 @@ export default function Home() {
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{projects.map((project, index) => (
             <button key={project.id} aria-disabled="true">
-              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 2 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-cover.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
+              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 3 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-cover-centered.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
           ))}</div>
