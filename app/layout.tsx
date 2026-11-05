@@ -17,6 +17,7 @@ import './v15.css';
 import './v16.css';
 import './v17.css';
 import './v18.css';
+import './shuxia.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

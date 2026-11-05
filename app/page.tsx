@@ -1,54 +1,61 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import ShuxiaProject from './ShuxiaProject';
+
 import { ArrowDownToLine, ArrowLeft, ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
     id: '01',
     title: 'ICEPACT',
-    type: 'Identity / Art Direction',
+    type: "Brand Identity / Motion / Merchandise",
     year: '2026',
     crop: '0% 0%',
-    text: 'A modular identity built from soft systems, hard edges, and fluorescent matter.',
-    brief:
-      'Create a living identity for a cultural platform that moves between publishing, exhibitions and sound.',
-    idea: 'We treated softness as a system rather than a style—folding a small family of forms into an identity that can expand, contract and respond.',
+    text: "A nonprofit brand raising awareness of global warming through glacier protection, developed as a group project.",
+    brief: "Develop a nonprofit brand that makes glacier protection and the effects of global warming more visible.",
+    role: "My contributions included visual development, merchandise design, concept film editing and design, writing, and selected spatial design elements for a proposed pop-up.",
   },
   {
     id: '02',
-    title: '述夏SHUXIA',
-    type: 'Campaign / 3D',
+    title: '檐行记',
+    type: 'Book / Editorial Design',
     year: '2025',
-    crop: '100% 0%',
-    text: 'A campaign where chrome forms behave like an alphabet from another orbit.',
-    brief:
-      'Build a launch world for a digital product without relying on familiar interface imagery.',
-    idea: 'A library of reflective orbital objects became the campaign language, shifting scale and composition across every touchpoint.',
+    crop: 'center',
+    text: '',
+    brief: '',
+    idea: '',
   },
   {
     id: '03',
-    title: 'GRÆFT',
-    type: 'Digital / Image-making',
-    year: '2024',
-    crop: '100% 100%',
-    text: 'A series of strange, friendly objects made for screens, spaces, and small encounters.',
-    brief:
-      'Create a flexible image world for a programme about care, technology and the near future.',
-    idea: 'Familiar expressions were embedded in unfamiliar forms, making each object feel both synthetic and oddly intimate.',
+    title: '述夏SHUXIA',
+    type: "Brand Identity / Packaging / Web Design",
+    year: '2025',
+    crop: '100% 0%',
+    text: "An independently developed summer scent brand spanning identity, products, packaging, digital design, and a storefront concept.",
+    brief: "Build a cohesive summer scent brand across physical and digital touchpoints.",
+    role: "I developed the brand from its logo through product concepts, packaging, website, mascot, and storefront signage concept.",
   },
   {
     id: '04',
+    title: 'GRÆFT',
+    type: "Concept Development / Visual Identity / Spatial Design",
+    year: '2024',
+    crop: '100% 100%',
+    text: "A fictional music festival developed as a group project, bringing together visual identity, spatial design, and promotional materials.",
+    brief: "Build a cohesive concept and visual world for a fictional music festival.",
+    role: "I led the festival’s concept development and visual direction, designing the visual identity, spatial applications, and promotional materials.",
+  },
+  {
+    id: '05',
     title: 'POCKLET',
-    type: 'Editorial / Print',
+    type: "UX/UI / Experience Design",
     year: '2025',
     crop: '0% 100%',
-    text: 'An editorial system about fragments, repetition, and the pleasure of misregistration.',
-    brief:
-      'Design a publication that makes research feel physical, urgent and open-ended.',
-    idea: 'Documents, photographs and annotations were assembled through one strict grid, then deliberately pushed out of registration.',
+    text: "An experience design project connecting an app with a physical package.",
+    brief: "Design a connected experience across digital and physical touchpoints.",
+    role: "I designed the overall experience, including the app’s UX/UI and a complementary physical package.",
   },
-
 ];
 
 const experiments = [
@@ -195,9 +202,10 @@ export default function Home() {
                         setHovered(null);
                         hoverPaused.current = false;
                       }}
-                      aria-disabled="true"
+                      aria-disabled={project.title !== '述夏SHUXIA'}
+                      onClick={project.title === '述夏SHUXIA' ? () => {setActive(index);setHovered(null);} : undefined}
                     >
-                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : index === 1 ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 3 ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-cover.png" alt={project.title} style={{objectFit:'cover',objectPosition:'60% center',width:'100%',height:'100%'}} />}
+                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="gallery-cover roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'100%'}} /> : project.title === 'POCKLET' ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
                       <span className="gallery-index">
                         {projects[index].id}
                       </span>
@@ -219,8 +227,8 @@ export default function Home() {
         <section className="selected-grid">
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{projects.map((project, index) => (
-            <button key={project.id} aria-disabled="true">
-              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : index === 1 ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia-cover.jpg" alt="述夏SHUXIA" /> : index === 3 ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-cover.png" alt={project.title} style={{objectFit:'cover',objectPosition:'60% center',width:'100%',height:'100%'}} />}
+            <button key={project.id} aria-disabled={project.title !== '述夏SHUXIA'} onClick={project.title === '述夏SHUXIA' ? () => {setActive(index);setHovered(null);} : undefined}>
+              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
           ))}</div>
@@ -230,7 +238,7 @@ export default function Home() {
       )}
 
       {view === 'home' && active !== null && (
-        <CaseStudy
+        projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
           onNext={() => setActive((active + 1) % projects.length)}
@@ -420,8 +428,8 @@ function CaseStudy({
             <p>{project.brief}</p>
           </article>
           <article>
-            <span>THE IDEA</span>
-            <p>{project.idea}</p>
+            <span>{'role' in project ? 'MY ROLE' : 'THE IDEA'}</span>
+            <p>{'role' in project ? project.role : project.idea}</p>
           </article>
         </div>
       </section>

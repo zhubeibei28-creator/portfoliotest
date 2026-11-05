@@ -245,3 +245,18 @@
 html,body{overscroll-behavior:none;}
 .home-scroll{overscroll-behavior:contain;}
 .home-view .gallery-viewport{overflow:hidden;overscroll-behavior:none;}
+
+/* Keep every gallery artwork anchored to its square card, including new works. */
+.home-view .gallery-project > img.gallery-cover,
+.home-view .gallery-project > video.gallery-cover {
+  position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover;
+}
+.home-view .gallery-project { aspect-ratio:1; overflow:hidden; }
+
+/* Size grid media from its width, never from the card including its caption. */
+.work-grid { align-items:start; }
+.work-grid > button { min-width:0; align-self:start; }
+.work-grid > button > .work-grid-image {
+  width:100%; height:auto; aspect-ratio:1; object-fit:cover; display:block;
+}
+.work-grid-caption { line-height:1.4; min-height:32px; }
