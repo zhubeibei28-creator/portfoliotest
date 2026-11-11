@@ -11,7 +11,7 @@
   font: inherit;
   line-height: inherit;
   text-transform: inherit;
-  cursor: default;
+  cursor: pointer;
 }
 
 .resume-download > span {

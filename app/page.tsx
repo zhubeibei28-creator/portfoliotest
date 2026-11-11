@@ -366,16 +366,14 @@ export default function Home() {
             >
               LinkedIn
             </a>
-            <button
+            <a
               className="resume-download"
-              type="button"
-              aria-disabled="true"
-              title="Résumé PDF coming soon"
+              href="/assets/anna-zhu-resume.pdf"
+              download="Anna-Zhu-Resume.pdf"
             >
               <span>Download résumé</span>
-              <small>PDF soon</small>
-              <ArrowDownToLine />
-            </button>
+              <ArrowDownToLine aria-hidden="true" />
+            </a>
             <span>New York / Shanghai</span>
           </div>
         </section>
