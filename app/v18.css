@@ -266,7 +266,7 @@ html,body{overscroll-behavior:none;}
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.persistent-header[data-nav-hidden="true"]:not(:focus-within) nav {
+.persistent-header[data-nav-hidden="true"]:not(:has(:focus-visible)) nav {
   opacity: 0;
   transform: translateY(-6px);
   pointer-events: none;
