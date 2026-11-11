@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ShuxiaProject from './ShuxiaProject';
+import GraftProject from './GraftProject';
+import PockletProject from './PockletProject';
+import RoofbookProject from './RoofbookProject';
 
 import { ArrowDownToLine, ArrowLeft, ArrowUpRight } from 'lucide-react';
 
@@ -78,6 +81,7 @@ type View = 'home' | 'lab' | 'about' | 'contact';
 export default function Home() {
   const [view, setView] = useState<View>('home');
   const [active, setActive] = useState<number | null>(null);
+  useEffect(()=>{const preview=new URLSearchParams(window.location.search).get('preview');if(preview==='pocklet'||preview==='yan')setActive(projects.findIndex(p=>p.title===(preview==='yan'?'檐行记':'POCKLET')));},[]);
   const [hovered, setHovered] = useState<number | null>(null);
   const cursor = useRef({x:0,y:0});
   const cursorLabel = useRef<HTMLDivElement>(null);
@@ -202,8 +206,8 @@ export default function Home() {
                         setHovered(null);
                         hoverPaused.current = false;
                       }}
-                      aria-disabled={project.title !== '述夏SHUXIA'}
-                      onClick={project.title === '述夏SHUXIA' ? () => {setActive(index);setHovered(null);} : undefined}
+                      aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)}
+                      onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}
                     >
                       {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="gallery-cover roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'100%'}} /> : project.title === 'POCKLET' ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
                       <span className="gallery-index">
@@ -227,7 +231,7 @@ export default function Home() {
         <section className="selected-grid">
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{projects.map((project, index) => (
-            <button key={project.id} aria-disabled={project.title !== '述夏SHUXIA'} onClick={project.title === '述夏SHUXIA' ? () => {setActive(index);setHovered(null);} : undefined}>
+            <button key={project.id} aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}>
               {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
@@ -238,7 +242,7 @@ export default function Home() {
       )}
 
       {view === 'home' && active !== null && (
-        projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} /> : <CaseStudy
+        projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
           onNext={() => setActive((active + 1) % projects.length)}

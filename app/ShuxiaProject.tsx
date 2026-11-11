@@ -26,13 +26,13 @@ export default function ShuxiaProject({onBack}: {onBack: () => void}) {
 
       <section className="sx-overview" aria-label="Project overview">
         <div className="sx-overview-copy"><h2>OVERVIEW</h2><p>SHUXIA is a summer-inspired scent brand that remembers the season through atmosphere, texture, and small sensory moments: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool.</p><p>Rather than the bright, energetic image of summer, the identity explores its softer side. Scent, tactile materials, and illustration connect a collection of everyday objects with a calm, familiar world.</p></div>
-        <div><h2>YEAR</h2><p>2026</p></div>
+        <div className="sx-project-meta"><div><h2>YEAR</h2><p>2026</p></div>
         <div><h2>PROJECT</h2><p>Independent<br />Brand concept</p></div>
-        <div><h2>MY ROLE</h2><p>Concept development<br />Visual identity<br />Illustration & mascot<br />Product & packaging<br />Website design<br />Storefront concept</p></div>
+        <div><h2>MY ROLE</h2><p>Concept development<br />Visual identity<br />Illustration & mascot<br />Product & packaging<br />Website design<br />Storefront concept</p></div></div>
       </section>
 
       <section className="sx-section" aria-labelledby="sx-identity">
-        <div className="sx-section-heading"><h2 id="sx-identity">01 / VISUAL IDENTITY</h2><div className="sx-description"><p>The identity combines three elements: a flowing handwritten wordmark, illustrated summer characters, and a repeating pattern inspired by bamboo cooling mats. Together, they connect scent with familiar textures and everyday summer memories.</p><p>The wordmark and character outlines share an informal, hand-drawn quality. The pattern adds a more structured rhythm, appearing across the packaging, hanging panels, and storefront curtain.</p></div></div>
+        <div className="sx-section-heading"><h2 id="sx-identity">01 / VISUAL IDENTITY</h2><div className="sx-description"><p>The identity combines three elements: a flowing handwritten wordmark, illustrated summer characters, and a repeating pattern inspired by bamboo cooling mats. Together, they connect scent with familiar textures and everyday summer memories.</p><p>述夏 (Shùxià) means “telling stories of summer.” In 述, a tree topped with a raindrop reinterprets the original form as 木 (wood) + 水 (water). The same silhouette becomes one of the mascots.</p></div></div>
         <div className="sx-pair sx-identity-pair">{photo('wordmark','Hand-drawn Chinese SHUXIA wordmark')}{photo('mascots','SHUXIA’s two line-drawn summer mascots')}</div>
         <div className="sx-section-heading sx-subheading"><h3>WORDMARK / CLEAR SPACE</h3><p>The spacing diagram defines a consistent area around the wordmark, keeping its loose, organic silhouette legible when placed over photography.</p></div>
         {photo('logo-clearspace','SHUXIA white wordmark with size and clear-space guides on water photography','sx-logo-sizing')}
@@ -60,7 +60,7 @@ export default function ShuxiaProject({onBack}: {onBack: () => void}) {
         <div className="sx-section-heading"><h2 id="sx-packaging">02 / PRODUCTS & PACKAGING</h2><p>A cooling soap and scent pack turn summer memories into a small daily ritual. Botanical illustrations preview the ingredients before the package is opened.</p></div>
         <div className="sx-packaging-pair">{photo('soap-set','Cooling soap packaging set with wooden box and printed elements')}{photo('cooling-soap-packaging-design','Flat artwork for the cooling soap packaging, with summer photography and illustrated mascots')}</div>
         <div className="sx-packaging-copy"><p className="sx-small-note">Cooling soap / packaging application & flat design</p><div className="sx-description"><p>The wooden container holds the soap, a mesh pouch, and illustrated paper elements. The patterned sleeve repeats the visual language of the cooling mat, while the scent pack introduces the botanical ingredients before opening.</p><p>These pieces extend the identity beyond a logo: texture, pattern, and illustration shape how the product is discovered and handled.</p></div></div>
-        <div className="sx-pair">{photo('package-open','Opened wooden SHUXIA package with illustrated inserts')}{photo('scent-pack','Soap, mesh pouch and botanical scent cards inside the wooden package')}</div>
+        <div className="sx-pair sx-soap-views">{photo('package-open','Opened wooden SHUXIA package with illustrated inserts')}{photo('scent-pack','Soap, mesh pouch and botanical scent cards inside the wooden package')}</div>
         <div className="sx-crossword">{photo('crossword','Two promotional crossword slips introducing SHUXIA products and scent notes')}<div className="sx-description"><h4>TAKEAWAY / BRAND CROSSWORD</h4><p>A playful crossword introduces products, ingredients, and scent vocabulary. It acts as both a product guide and a small printed takeaway, translating the brand’s everyday summer mood into an interaction.</p></div></div>
       </section>
 

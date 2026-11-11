@@ -252,3 +252,32 @@
 @media(max-width:620px){.sx-website-pair{gap:24px}}
 
 .shuxia-project .sx-packaging-pair .sx-image{background:#fff}
+
+/* Section explanations use the full responsive column, matching the image edge. */
+.shuxia-project .sx-section-heading>.sx-description,
+.shuxia-project .sx-section-heading>p{width:100%;max-width:none;min-width:0;text-align:left}
+.shuxia-project .sx-section-heading>.sx-description p{max-width:none}
+
+/* Overview follows the same two-column axis as the project sections. */
+.shuxia-project .sx-overview{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:56px 0 72px;align-items:start}
+.shuxia-project .sx-overview-copy{grid-column:auto;width:100%;max-width:none}
+.sx-project-meta{display:grid;grid-template-columns:.65fr 1fr 1.55fr;gap:24px;min-width:0}
+.sx-project-meta>div{min-width:0}
+.shuxia-project .sx-overview h2{margin:0 0 16px}
+.shuxia-project .sx-overview p{margin:0 0 16px;text-wrap:pretty}
+@media(max-width:1000px){
+ .shuxia-project .sx-overview{grid-template-columns:1fr;gap:32px;padding:40px 0 56px}
+ .sx-project-meta{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+}
+@media(max-width:620px){
+ .shuxia-project .sx-overview{gap:28px;padding:32px 0 40px}
+ .sx-project-meta{grid-template-columns:.6fr 1fr 1.5fr;gap:16px}
+ .shuxia-project .sx-overview p{font-size:12px}
+}
+@media(max-width:380px){
+ .sx-project-meta{grid-template-columns:1fr 1fr}
+ .sx-project-meta>div:last-child{grid-column:1/-1}
+}
+
+/* Equal-height product views, preserving both complete photographs. */
+.shuxia-project .sx-soap-views{align-items:stretch;gap:24px}.shuxia-project .sx-soap-views .sx-image{display:flex;align-items:center;justify-content:center;aspect-ratio:3/2;min-width:0;background:#fff}.shuxia-project .sx-soap-views .sx-image img{display:block;width:auto;height:100%;max-width:100%;object-fit:contain}@media(max-width:620px){.shuxia-project .sx-soap-views{gap:22px}}
