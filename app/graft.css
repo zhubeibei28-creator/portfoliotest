@@ -175,9 +175,9 @@
 .gf-vending-demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;max-width:900px;margin:48px auto 64px}.gf-vending-demo figure{margin:0;min-width:0}.gf-vending-demo video{display:block;width:100%;height:auto;object-fit:contain}.gf-vending-demo h3{font-size:20px;font-weight:400;margin:0 0 16px}.gf-vending-demo p{font-size:14px;line-height:1.75;color:#aab1a2;margin:0}@media(max-width:620px){.gf-vending-demo{grid-template-columns:1fr;gap:24px;max-width:440px}}
 
 .gf-touchpoints{
-  --gf-touchpoint-height:clamp(300px,38vw,620px);
+  --gf-touchpoint-height:clamp(380px,55vw,880px);
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);
+  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
   gap:24px clamp(24px,4vw,64px);
 }
 .gf-touchpoints>section{display:grid;grid-row:span 3;grid-template-rows:subgrid;min-width:0}
@@ -199,7 +199,7 @@
   .gf-touchpoints{grid-template-columns:1fr;gap:48px}
   .gf-touchpoints>section{grid-row:auto;grid-template-rows:auto auto auto;gap:20px}
   .gf-touchpoint-main,.gf-touchpoint-main video,.gf-touchpoint-main img{height:auto}
-  .gf-touchpoint-main>.gf-video-player{max-width:320px}
+  .gf-touchpoint-main>.gf-video-player{max-width:400px}
   .gf-touchpoint-detail img{height:120px}
 }
 .gf-website-experience{margin:0 auto;width:min(100%,960px)}
