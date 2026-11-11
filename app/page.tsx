@@ -87,6 +87,7 @@ export default function Home() {
     setNavHidden(false);
     let lastTarget: EventTarget | null = null;
     let lastTop = 0;
+    let travel = 0;
 
     const onScroll = (event: Event) => {
       const target = event.target;
@@ -96,16 +97,20 @@ export default function Home() {
       if (target !== lastTarget) {
         lastTarget = target;
         lastTop = 0;
+        travel = 0;
       }
 
-      if (top <= 8) {
-        setNavHidden(false);
-      } else if (Math.abs(top - lastTop) < 8) {
-        return;
-      } else {
-        setNavHidden(top > lastTop);
-      }
+      const delta = top - lastTop;
       lastTop = top;
+      if (top <= 8) {
+        travel = 0;
+        setNavHidden(false);
+        return;
+      }
+      if (delta === 0) return;
+      travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
+      if (travel >= 44) setNavHidden(true);
+      if (travel <= -32) setNavHidden(false);
     };
 
     window.addEventListener('scroll', onScroll, { capture: true, passive: true });

@@ -263,19 +263,43 @@ html,body{overscroll-behavior:none;}
 
 
 .persistent-header {
-  transition: transform 180ms ease;
+  transition: transform 260ms ease;
 }
 
 .portfolio-shell[data-nav-hidden="true"] > .persistent-header:not(:has(:focus-visible)) {
   transform: translateY(-100%);
 }
 
-.portfolio-shell[data-nav-hidden="true"] > :is(
-  .home-scroll, .about-view, .contact-view, .case-study,
-  .sphere-lab, .graft-project, .yan-project, .pk-project, .shuxia-project
-),
-.portfolio-shell[data-nav-hidden="true"] :is(.gf-floating-index, .yan-lightbox) {
+.portfolio-shell {
+  --portfolio-header-height: 64px;
+}
+
+.portfolio-shell > :is(
+  .home-scroll, .case-study, .graft-project, .yan-project, .pk-project, .shuxia-project
+) {
   top: 0;
+  padding-top: var(--portfolio-header-height);
+}
+
+.portfolio-shell > .about-view {
+  top: 0;
+  padding-top: calc(var(--portfolio-header-height) + 48px);
+}
+
+.portfolio-shell .gf-index.gf-floating-index {
+  top: var(--portfolio-header-height);
+  transition: transform 260ms ease;
+}
+
+.portfolio-shell[data-nav-hidden="true"] .gf-index.gf-floating-index {
+  transform: translateY(calc(-1 * var(--portfolio-header-height)));
+}
+
+@media (max-width: 620px) {
+  .portfolio-shell { --portfolio-header-height: 88px; }
+  .portfolio-shell > .about-view {
+    padding-top: calc(var(--portfolio-header-height) + 24px);
+  }
 }
 
 @media (hover: hover) {
@@ -292,5 +316,5 @@ html,body{overscroll-behavior:none;}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .persistent-header { transition: none; }
+  .persistent-header, .portfolio-shell .gf-index.gf-floating-index { transition: none; }
 }
