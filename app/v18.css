@@ -260,3 +260,26 @@ html,body{overscroll-behavior:none;}
   width:100%; height:auto; aspect-ratio:1; object-fit:cover; display:block;
 }
 .work-grid-caption { line-height:1.4; min-height:32px; }
+
+
+.persistent-header nav {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.persistent-header[data-nav-hidden="true"]:not(:focus-within) nav {
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  .persistent-header[data-nav-hidden="true"]:hover nav {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .persistent-header nav { transition: none; }
+}

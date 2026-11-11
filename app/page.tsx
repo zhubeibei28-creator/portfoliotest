@@ -81,6 +81,36 @@ type View = 'home' | 'lab' | 'about' | 'contact';
 export default function Home() {
   const [view, setView] = useState<View>('home');
   const [active, setActive] = useState<number | null>(null);
+  const [navHidden, setNavHidden] = useState(false);
+
+  useEffect(() => {
+    setNavHidden(false);
+    let lastTarget: EventTarget | null = null;
+    let lastTop = 0;
+
+    const onScroll = (event: Event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement) && target !== document) return;
+      const top = Math.max(0, target instanceof HTMLElement ? target.scrollTop : window.scrollY);
+
+      if (target !== lastTarget) {
+        lastTarget = target;
+        lastTop = 0;
+      }
+
+      if (top <= 8) {
+        setNavHidden(false);
+      } else if (Math.abs(top - lastTop) < 8) {
+        return;
+      } else {
+        setNavHidden(top > lastTop);
+      }
+      lastTop = top;
+    };
+
+    window.addEventListener('scroll', onScroll, { capture: true, passive: true });
+    return () => window.removeEventListener('scroll', onScroll, true);
+  }, [view, active]);
   useEffect(()=>{const preview=new URLSearchParams(window.location.search).get('preview');if(preview==='pocklet'||preview==='yan')setActive(projects.findIndex(p=>p.title===(preview==='yan'?'檐行记':'POCKLET')));},[]);
   const [hovered, setHovered] = useState<number | null>(null);
   const cursor = useRef({x:0,y:0});
@@ -155,7 +185,7 @@ export default function Home() {
       className="portfolio-shell"
       onPointerMove={moveCursor}
     >
-      <header className="persistent-header">
+      <header className="persistent-header" data-nav-hidden={navHidden}>
         <button className="wordmark" onClick={() => navigate('home')}>
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>
