@@ -262,24 +262,35 @@ html,body{overscroll-behavior:none;}
 .work-grid-caption { line-height:1.4; min-height:32px; }
 
 
-.persistent-header nav {
-  transition: opacity 180ms ease, transform 180ms ease;
+.persistent-header {
+  transition: transform 180ms ease;
 }
 
-.persistent-header[data-nav-hidden="true"]:not(:has(:focus-visible)) nav {
-  opacity: 0;
-  transform: translateY(-6px);
-  pointer-events: none;
+.portfolio-shell[data-nav-hidden="true"] > .persistent-header:not(:has(:focus-visible)) {
+  transform: translateY(-100%);
+}
+
+.portfolio-shell[data-nav-hidden="true"] > :is(
+  .home-scroll, .about-view, .contact-view, .case-study,
+  .sphere-lab, .graft-project, .yan-project, .pk-project, .shuxia-project
+),
+.portfolio-shell[data-nav-hidden="true"] :is(.gf-floating-index, .yan-lightbox) {
+  top: 0;
 }
 
 @media (hover: hover) {
-  .persistent-header[data-nav-hidden="true"]:hover nav {
-    opacity: 1;
+  .portfolio-shell[data-nav-hidden="true"] > .persistent-header::after {
+    content: "";
+    position: absolute;
+    inset: 100% 0 auto;
+    height: 10px;
+  }
+
+  .portfolio-shell[data-nav-hidden="true"] > .persistent-header:hover {
     transform: none;
-    pointer-events: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .persistent-header nav { transition: none; }
+  .persistent-header { transition: none; }
 }

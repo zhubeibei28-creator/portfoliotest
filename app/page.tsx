@@ -183,9 +183,10 @@ export default function Home() {
   return (
     <main
       className="portfolio-shell"
+      data-nav-hidden={navHidden}
       onPointerMove={moveCursor}
     >
-      <header className="persistent-header" data-nav-hidden={navHidden}>
+      <header className="persistent-header">
         <button className="wordmark" onClick={() => navigate('home')}>
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>
