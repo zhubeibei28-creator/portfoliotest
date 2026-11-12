@@ -187,9 +187,8 @@
 }
 .gf-touchpoints h4{grid-column:1/-1;font-size:18px;font-weight:400;line-height:1.4;margin:0}
 .gf-touchpoint-main,.gf-touchpoint-detail{min-width:0}
-.gf-touchpoint-main>.gf-video-player{max-width:calc(var(--gf-touchpoint-height) * 980 / 1428)}
-.gf-touchpoint-main>.gf-image{display:block;width:min(100%, calc(var(--gf-touchpoint-height) * 2031 / 1302))}
-.gf-touchpoint-main img,.gf-touchpoint-main video,.gf-touchpoint-detail img{
+.gf-touchpoint-main>:is(.gf-video-player,.gf-image){display:block;width:min(100%, calc(var(--gf-touchpoint-height) * 2031 / 1302))}
+.gf-touchpoint-main img,.gf-touchpoint-detail img{
   display:block;
   width:100%;
   height:auto;
