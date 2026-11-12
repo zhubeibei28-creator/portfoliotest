@@ -275,10 +275,18 @@ html,body{overscroll-behavior:none;}
 }
 
 .portfolio-shell > :is(
-  .home-scroll, .case-study, .graft-project, .yan-project, .pk-project, .shuxia-project
+  .home-scroll, .case-study, .yan-project, .pk-project, .shuxia-project
 ) {
   top: 0;
   padding-top: var(--portfolio-header-height);
+}
+
+.portfolio-shell > .graft-project { top: 0; }
+
+.portfolio-shell > .graft-project::before {
+  content: "";
+  display: block;
+  height: var(--portfolio-header-height);
 }
 
 .portfolio-shell > .about-view {
