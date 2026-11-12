@@ -195,7 +195,7 @@
   max-height:var(--gf-touchpoint-height);
   object-fit:contain;
 }
-.gf-touchpoint-detail>.gf-image{width:min(100%, calc(var(--gf-touchpoint-height) * 4 / 5));display:block}
+.gf-touchpoint-detail>.gf-image{width:min(100%, calc(var(--gf-touchpoint-height) * .66));display:block}
 .gf-touchpoint-detail p{font-size:13px;line-height:1.75;color:#aab1a2;margin:12px 0 0}
 @media(max-width:700px){
   .gf-touchpoints{--gf-touchpoint-height:min(66svh,440px);gap:48px}
