@@ -142,17 +142,15 @@
 
 .gf-role-list{list-style:none;padding:0;margin:0;color:#aab1a2;font-size:12px;line-height:1.8}.gf-role-list li{margin:0 0 5px}.gf-role-list .gf-role-lead{color:#e9ece4;margin-bottom:12px}.gf-role-lead span{display:block;font-size:10px;color:#88ed4d;letter-spacing:.05em;text-transform:uppercase;margin-top:2px}.gf-final-credits{display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;border-top:1px solid #252a22;margin-top:24px;padding-top:40px}.gf-final-credits p{font-size:12px}@media(max-width:620px){.gf-final-credits{grid-template-columns:1fr;gap:28px}}
 
-.gf-index.gf-floating-index{position:fixed;top:64px;left:0;right:0;z-index:40;margin:0;padding:16px 28px;background:rgba(0,0,0,.96);border-top:0;border-bottom:1px solid #30382a;gap:12px;flex-wrap:nowrap;animation:gf-index-appear .18s ease-out}
-.gf-floating-index a{font-size:11px}.graft-project h2[id],.graft-project h3[id],.gf-stairs-exit{scroll-margin-top:88px}
-@keyframes gf-index-appear{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:700px){.gf-index.gf-floating-index{justify-content:space-between;padding:14px 18px;gap:24px;overflow-x:auto;scrollbar-width:none}.gf-floating-index::-webkit-scrollbar{display:none}.gf-floating-index a{font-size:10px}}
-@media(max-width:620px){.gf-index.gf-floating-index{top:88px}}
-@media(prefers-reduced-motion:reduce){.gf-index.gf-floating-index{animation:none}}
+.gf-index{position:sticky;top:0;z-index:40;background:#000}
+.graft-project h2[id],.graft-project h3[id],.gf-stairs-exit{scroll-margin-top:88px}
+@media(max-width:700px){.gf-index{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}}
+@media(min-width:701px){.gf-index{margin-inline:-28px;padding-inline:28px}}
 
 .gf-vest-copy{margin-top:20px}.gf-vest-copy h3{font-size:14px;font-weight:400;line-height:1.4;margin:0 0 12px;color:#e9ece4}.gf-vest-copy p{font-size:12px;line-height:1.75;color:#aab1a2;margin:0;text-wrap:pretty}@media(max-width:620px){.gf-merch-three{grid-template-columns:1fr!important}.gf-vest-copy{margin-bottom:16px}}
 @media(min-width:621px){.gf-merch-three>div:last-child{aspect-ratio:404/659;display:flex;flex-direction:column;justify-content:space-between}.gf-merch-three>div:last-child>.gf-image{flex:none}.gf-merch-three .gf-vest-copy{margin-top:12px}.gf-merch-three .gf-vest-copy p{font-size:11px;line-height:1.6}}
 
-.gf-floating-index a{transition:color .18s ease}.gf-index a[aria-current="location"]{color:var(--gf-acid)}
+.gf-index a{transition:color .18s ease}.gf-index a[aria-current="location"]{color:var(--gf-acid)}
 
 .gf-vip-design{margin:0 0 48px}.gf-vip-design .gf-ticket-art{width:min(100%,980px);margin:0 auto}.gf-vip-design figcaption{margin-top:40px;text-align:center;font-size:12px;letter-spacing:.06em;color:#aab1a2}@media(max-width:620px){.gf-vip-design figcaption{margin-top:28px}}
 

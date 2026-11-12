@@ -286,13 +286,13 @@ html,body{overscroll-behavior:none;}
   padding-top: calc(var(--portfolio-header-height) + 48px);
 }
 
-.portfolio-shell .gf-index.gf-floating-index {
+.portfolio-shell .gf-index {
   top: var(--portfolio-header-height);
-  transition: transform 260ms ease;
+  transition: top 260ms ease;
 }
 
-.portfolio-shell[data-nav-hidden="true"] .gf-index.gf-floating-index {
-  transform: translateY(calc(-1 * var(--portfolio-header-height)));
+.portfolio-shell[data-nav-hidden="true"] .gf-index {
+  top: 0;
 }
 
 @media (max-width: 620px) {
@@ -316,5 +316,5 @@ html,body{overscroll-behavior:none;}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .persistent-header, .portfolio-shell .gf-index.gf-floating-index { transition: none; }
+  .persistent-header, .portfolio-shell .gf-index { transition: none; }
 }

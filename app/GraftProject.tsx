@@ -5,7 +5,6 @@ import VisibilityVideo from './VisibilityVideo';
 
 export default function GraftProject({ onBack }: { onBack: () => void }) {
   const indexRef = useRef<HTMLElement>(null);
-  const [floatingIndex,setFloatingIndex] = useState(false);
   const [activeSection,setActiveSection] = useState('');
   useEffect(()=>{
     const root=indexRef.current?.closest('.graft-project');
@@ -14,8 +13,8 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
     let frame=0;
     const update=()=>{
       frame=0;
-      const bar=root.querySelector('.gf-floating-index');
-      const line=root.getBoundingClientRect().top+(bar?.getBoundingClientRect().height??48)+40;
+      const bar=indexRef.current?.getBoundingClientRect();
+      const line=Math.max(root.getBoundingClientRect().top,bar?.bottom??0)+40;
       let current='';
       for(const section of sections){
         if(section.getBoundingClientRect().top<=line)current=section.getAttribute('aria-labelledby')??'';
@@ -32,16 +31,6 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
     return()=>{root.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);resize.disconnect();cancelAnimationFrame(frame);};
   },[]);
 
-  useEffect(()=>{
-    const nav=indexRef.current;
-    const root=nav?.closest('.graft-project');
-    if(!nav||!root)return;
-    const observer=new IntersectionObserver(([entry])=>{
-      setFloatingIndex(!entry.isIntersecting&&entry.boundingClientRect.bottom<=(entry.rootBounds?.top??0));
-    },{root,threshold:0});
-    observer.observe(nav);
-    return()=>observer.disconnect();
-  },[]);
   const [zoom, setZoom] = useState<{src:string;alt:string}|null>(null);
   useEffect(() => {
     const close = (e:KeyboardEvent) => { if(e.key === 'Escape') setZoom(null); };
@@ -59,7 +48,6 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
     <div className="gf-hero"><img src="/assets/graft/hero.webp" alt="GRÆFT’s underground station environment" fetchPriority="high" /></div>
     <section className="gf-overview"><div><h2 className="gf-eyebrow">OVERVIEW</h2><p>A fictional music festival set inside an abandoned underground station. After a flood interrupts the routines of commuting and work, water and vegetation begin to reclaim the infrastructure. The station comes back to life after dark, through sound, light and collective experience.</p></div><div className="gf-metadata gf-credits"><div><h2 className="gf-eyebrow">YEAR</h2><p>2026</p></div><div><h2 className="gf-eyebrow">PROJECT</h2><p>Collaborative Project</p></div><div><h2 className="gf-eyebrow">MY ROLE</h2><ul className="gf-role-list"><li className="gf-role-lead">Lead Concept Development &amp; Art Direction</li><li>Visual Identity</li><li>Spatial &amp; Experiential Design</li><li>Motion, Promotion &amp; Merchandise</li></ul></div></div></section>
     <nav ref={indexRef} className="gf-index" aria-label="GRÆFT project sections"><a href="#gf-research" aria-current={activeSection==='gf-research'?'location':undefined}>01 Research</a><a href="#gf-identity" aria-current={activeSection==='gf-identity'?'location':undefined}>02 Identity</a><a href="#gf-world" aria-current={activeSection==='gf-world'?'location':undefined}>03 World-building</a><a href="#gf-space" aria-current={activeSection==='gf-space'?'location':undefined}>04 Spatial experience</a><a href="#gf-activation" aria-current={activeSection==='gf-activation'?'location':undefined}>05 Activation</a><a href="#gf-promotion" aria-current={activeSection==='gf-promotion'?'location':undefined}>06 Promotion</a><a href="#gf-objects" aria-current={activeSection==='gf-objects'?'location':undefined}>07 Objects</a></nav>
-    {floatingIndex&&<nav className="gf-index gf-floating-index" aria-label="Floating GRÆFT project sections"><a href="#gf-research" aria-current={activeSection==='gf-research'?'location':undefined}>01 Research</a><a href="#gf-identity" aria-current={activeSection==='gf-identity'?'location':undefined}>02 Identity</a><a href="#gf-world" aria-current={activeSection==='gf-world'?'location':undefined}>03 World-building</a><a href="#gf-space" aria-current={activeSection==='gf-space'?'location':undefined}>04 Spatial experience</a><a href="#gf-activation" aria-current={activeSection==='gf-activation'?'location':undefined}>05 Activation</a><a href="#gf-promotion" aria-current={activeSection==='gf-promotion'?'location':undefined}>06 Promotion</a><a href="#gf-objects" aria-current={activeSection==='gf-objects'?'location':undefined}>07 Objects</a></nav>}
 
     <section className="gf-section" aria-labelledby="gf-research">
       {heading('gf-research','01 / RESEARCH','From sound to a visual world.','Our research followed Jungle from its early breakbeat roots to its contemporary revival. Rather than reproducing one fixed aesthetic, we explored how rhythm, underground culture and visual experimentation could inform a new festival identity.')}
