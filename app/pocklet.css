@@ -45,7 +45,7 @@
 .pk-stress-cases{background-image:linear-gradient(#ffffff99,#ffffff99),url("/assets/pocklet/stress-shapes.webp")}
 
 /* Keep the original complete artwork visible; the text no longer clips a background. */
-.pk-stress-cases{position:relative;isolation:isolate;background:none;min-height:clamp(380px,49vw,760px);align-items:center;padding:50px 3%;}
+.pk-stress-cases{position:relative;isolation:isolate;background:none;min-height:clamp(380px,49vw,760px);align-items:start;align-content:center;padding:50px 3%;}
 .pk-stress-cases .pk-stress-art{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.42;z-index:-1;pointer-events:none}
 .pk-stress-cases>div{position:relative}
 .pk-codesign-detail{margin:36px 0 0}.pk-codesign-detail img{display:block;width:100%;max-height:620px;object-fit:contain}.pk-codesign-detail figcaption,.pk-print-designs figcaption{font-size:11px;color:#858b7d;margin-top:14px}
