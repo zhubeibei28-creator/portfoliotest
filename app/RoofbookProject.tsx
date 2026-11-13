@@ -58,7 +58,10 @@ export default function RoofbookProject({onBack}:{onBack:()=>void}) {
       <p className="yan-credit-note">The travelogue closes with an acknowledgement of its image sources.</p>
     </section>
     <section className="yan-film" aria-label="Reading the book">
-      <div className="yan-film-caption"><h2>The book in hand.</h2><p>Moving between the extended structure and individual pages.</p></div>
+      <div className="yan-film-caption"><h2>The book in hand.</h2><div className="yan-film-caption-row">
+        <p>Moving between the extended structure and individual pages.</p>
+        <a href="/assets/roofbook/the-eaves-of-heaven.pdf" target="_blank" rel="noopener">View book PDF ↗</a>
+      </div></div>
       <div className="yan-reading"><video ref={video} src="/assets/roofbook/reading.mp4" width={2416} height={1652} muted loop playsInline preload="metadata" aria-label="A moving view of 檐行记"/></div>
     </section>
     <footer className="yan-end"><span>檐行记 · 2025</span><button onClick={onBack}>Back to work ↗</button></footer>

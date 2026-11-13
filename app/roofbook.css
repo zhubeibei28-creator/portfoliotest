@@ -105,6 +105,8 @@
   max-width:none;
 }
 .yan-film-caption{width:var(--yan-film-width);margin:0 auto 20px}
+.yan-film-caption-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 24px}
+.yan-film-caption-row a{color:inherit;font-size:14px;text-underline-offset:3px;white-space:nowrap}
 .yan-film-caption h2{margin:0 0 4px;font-size:16px;font-weight:500;line-height:1.4}
 .yan-film .yan-reading{position:relative;background:#2e2f2e}
 .yan-film .yan-reading::before{content:"";position:absolute;inset:0 -28px;background:linear-gradient(#2e2f2e,#303130)}
