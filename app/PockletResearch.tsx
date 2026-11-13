@@ -10,16 +10,15 @@ export default function PockletResearch(){const videoRef=useRef<HTMLVideoElement
   <video ref={videoRef} className="pk-round-video" src="/assets/pocklet/round1-topic-exploration-hq.mp4" poster="/assets/pocklet/round1-poster.jpg" autoPlay muted loop playsInline preload="metadata"
    onDurationChange={({currentTarget})=>setDuration(Number.isFinite(currentTarget.duration)?currentTarget.duration:0)}
    onTimeUpdate={({currentTarget})=>setProgress(currentTarget.currentTime)} aria-label="Round one visual exploration of shadow experiences and the jar metaphor"/>
-  <label className="pk-video-scrub">
-   <span>Drag to scrub</span>
-   <input type="range" min={0} max={duration} step={0.1} value={Math.min(progress,duration)} disabled={!duration}
+  <div className="pk-video-scrub">
+   <input type="range" aria-label="Video progress" min={0} max={duration} step={0.1} value={Math.min(progress,duration)} disabled={!duration}
     onChange={({currentTarget})=>{
      const video=videoRef.current;
      if(!video)return;
      video.currentTime=currentTarget.valueAsNumber;
      setProgress(video.currentTime);
     }}/>
-  </label>
+  </div>
  </div><p className="pk-caption">Round 1 / Original visual narrative — topic exploration, before the ritual was defined</p></section>
 </>}
 export function RoundTwoResearch(){const [stage,setStage]=useState(0);const [playing,setPlaying]=useState(true);const storyRef=useRef<HTMLDivElement>(null);const [visible,setVisible]=useState(false);useEffect(()=>{const el=storyRef.current;if(!el)return;const o=new IntersectionObserver(([e])=>setVisible(e.isIntersecting),{root:el.closest('.pk-project'),threshold:.05});o.observe(el);return()=>o.disconnect()},[]);useEffect(()=>{if(!playing||!visible)return;const timer=setInterval(()=>setStage(i=>(i+1)%stages.length),6000);return()=>clearInterval(timer)},[playing,visible,stage]);return <section className="pk-section pk-round-two" id="pk-round-two"><div className="pk-section-head"><div><span className="pk-label">Trying, together · Round two</span><h2>From a metaphor<br/>to a ritual.</h2></div><div><p>Under the working title DROP NEST, the idea became an early ritual for young adults keeping pocket-sized objects tied to memory, routine, or difficult periods. It aimed to help people notice attachment, release with intention, and remember the act of letting go.</p><p>Storyboarding, early mobile screens, and participant feedback helped test how reflection could move into physical action. This was a developing proposal, before the final POCKLET system.</p></div></div>
