@@ -202,8 +202,8 @@
  .pk-project .pk-heading h1{margin-top:42px}
 }
 
-.pk-round-player{width:min(100%,1040px);margin-inline:auto}
-.pk-round-player .pk-round-video{width:100%;max-height:68svh;object-fit:contain}
+.pk-round-player{width:min(100%,1120px);margin-inline:auto}
+.pk-round-player .pk-round-video{width:100%;max-height:74svh;object-fit:contain}
 .pk-video-scrub input{
   appearance:none;
   display:block;
