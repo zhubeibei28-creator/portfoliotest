@@ -10,6 +10,26 @@ import { ArrowDownToLine, ArrowLeft, ArrowUpRight } from 'lucide-react';
 
 const projects = [
   {
+    id: '04',
+    title: 'ICEPACT',
+    type: "Brand Identity / Motion / Merchandise",
+    year: '2026',
+    crop: '0% 0%',
+    text: "A nonprofit brand raising awareness of global warming through glacier protection, developed as a group project.",
+    brief: "Develop a nonprofit brand that makes glacier protection and the effects of global warming more visible.",
+    role: "My contributions included visual development, merchandise design, concept film editing and design, writing, and selected spatial design elements for a proposed pop-up.",
+  },
+  {
+    id: '05',
+    title: '檐行记',
+    type: 'Book / Editorial Design',
+    year: '2025',
+    crop: 'center',
+    text: '',
+    brief: '',
+    idea: '',
+  },
+  {
     id: '01',
     title: '述夏SHUXIA',
     type: "Brand Identity / Packaging / Web Design",
@@ -21,26 +41,6 @@ const projects = [
   },
   {
     id: '02',
-    title: 'ICEPACT',
-    type: "Brand Identity / Motion / Merchandise",
-    year: '2026',
-    crop: '0% 0%',
-    text: "A nonprofit brand raising awareness of global warming through glacier protection, developed as a group project.",
-    brief: "Develop a nonprofit brand that makes glacier protection and the effects of global warming more visible.",
-    role: "My contributions included visual development, merchandise design, concept film editing and design, writing, and selected spatial design elements for a proposed pop-up.",
-  },
-  {
-    id: '03',
-    title: '檐行记',
-    type: 'Book / Editorial Design',
-    year: '2025',
-    crop: 'center',
-    text: '',
-    brief: '',
-    idea: '',
-  },
-  {
-    id: '04',
     title: 'GRÆFT',
     type: "Concept Development / Visual Identity / Spatial Design",
     year: '2024',
@@ -50,7 +50,7 @@ const projects = [
     role: "I led the festival’s concept development and visual direction, designing the visual identity, spatial applications, and promotional materials.",
   },
   {
-    id: '05',
+    id: '03',
     title: 'POCKLET',
     type: "UX/UI / Experience Design",
     year: '2025',

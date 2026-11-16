@@ -20,7 +20,7 @@ export default function RoofbookProject({onBack}:{onBack:()=>void}) {
   const photo=(name:string,alt:string,cls='')=><button className={`yan-photo ${cls}`} onClick={()=>setZoom({name,alt})} aria-label={`Enlarge: ${alt}`}><img src={`/assets/roofbook/${name}.jpg`} alt={alt} loading={name==='canal'||name==='cover'?'eager':'lazy'} decoding="async"/></button>;
   return <article className="yan-project" ref={article} aria-label="檐行记 book project">
     <header className="yan-heading">
-      <div className="yan-topline"><span>SELECTED PROJECT / 03</span><button onClick={onBack}>Back to work ↗</button></div>
+      <div className="yan-topline"><span>SELECTED PROJECT / 05</span><button onClick={onBack}>Back to work ↗</button></div>
       <h1 lang="zh">檐行记</h1>
       <p>The Eaves of Heaven · A travelogue in two directions</p>
       <p className="yan-scroll-hint">Scroll to explore <span aria-hidden="true">↓</span></p>
