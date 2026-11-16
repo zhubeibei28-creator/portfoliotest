@@ -61,6 +61,10 @@ const projects = [
   },
 ];
 
+const selectedWork = projects
+  .map((project, index) => ({ project, index }))
+  .sort((a, b) => a.project.id.localeCompare(b.project.id));
+
 const experiments = [
   ['01', 'Reverie Brand Animation', '', 0],
   ['02', 'Reverie Brand Image Model', '', 1],
@@ -266,7 +270,7 @@ export default function Home() {
         </section>
         <section className="selected-grid">
           <header><h2>Selected work</h2><span>2024—2026</span></header>
-          <div className="work-grid">{projects.map((project, index) => (
+          <div className="work-grid">{selectedWork.map(({ project, index }) => (
             <button key={project.id} aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}>
               {project.title === 'ICEPACT' ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
