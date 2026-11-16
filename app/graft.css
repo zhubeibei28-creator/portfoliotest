@@ -233,6 +233,10 @@
 }
 
 @media (min-width: 701px) and (orientation: landscape) {
+  .gf-research-images > :last-child img {
+    object-position: right center;
+  }
+
   .graft-project .gf-logo-pair {
     column-gap: clamp(96px, 13vw, 220px);
   }
