@@ -33,6 +33,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  icons: { icon: "/favicon.svg?v=apple" },
   title: 'Beibei (Anna) Zhu — Graphic Designer',
   description: 'Independent graphic designer working across identity, image and print.',
 };
