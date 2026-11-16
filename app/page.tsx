@@ -11,6 +11,16 @@ import { ArrowDownToLine, ArrowLeft, ArrowUpRight } from 'lucide-react';
 const projects = [
   {
     id: '01',
+    title: '述夏SHUXIA',
+    type: "Brand Identity / Packaging / Web Design",
+    year: '2025',
+    crop: '100% 0%',
+    text: "An independently developed summer scent brand spanning identity, products, packaging, digital design, and a storefront concept.",
+    brief: "Build a cohesive summer scent brand across physical and digital touchpoints.",
+    role: "I developed the brand from its logo through product concepts, packaging, website, mascot, and storefront signage concept.",
+  },
+  {
+    id: '02',
     title: 'ICEPACT',
     type: "Brand Identity / Motion / Merchandise",
     year: '2026',
@@ -20,7 +30,7 @@ const projects = [
     role: "My contributions included visual development, merchandise design, concept film editing and design, writing, and selected spatial design elements for a proposed pop-up.",
   },
   {
-    id: '02',
+    id: '03',
     title: '檐行记',
     type: 'Book / Editorial Design',
     year: '2025',
@@ -28,16 +38,6 @@ const projects = [
     text: '',
     brief: '',
     idea: '',
-  },
-  {
-    id: '03',
-    title: '述夏SHUXIA',
-    type: "Brand Identity / Packaging / Web Design",
-    year: '2025',
-    crop: '100% 0%',
-    text: "An independently developed summer scent brand spanning identity, products, packaging, digital design, and a storefront concept.",
-    brief: "Build a cohesive summer scent brand across physical and digital touchpoints.",
-    role: "I developed the brand from its logo through product concepts, packaging, website, mascot, and storefront signage concept.",
   },
   {
     id: '04',
@@ -245,7 +245,7 @@ export default function Home() {
                       aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)}
                       onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}
                     >
-                      {index === 0 ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="gallery-cover roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'100%'}} /> : project.title === 'POCKLET' ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
+                      {project.title === 'ICEPACT' ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="gallery-cover roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'100%'}} /> : project.title === 'POCKLET' ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
                       <span className="gallery-index">
                         {projects[index].id}
                       </span>
@@ -268,7 +268,7 @@ export default function Home() {
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{projects.map((project, index) => (
             <button key={project.id} aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}>
-              {index === 0 ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
+              {project.title === 'ICEPACT' ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
           ))}</div>

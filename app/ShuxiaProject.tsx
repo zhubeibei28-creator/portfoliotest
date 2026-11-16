@@ -17,7 +17,7 @@ export default function ShuxiaProject({onBack}: {onBack: () => void}) {
   return (
     <article className="shuxia-project">
       <header className="sx-heading">
-        <div className="sx-topline"><span>SELECTED PROJECT / 03</span><button onClick={onBack}>Back to work ↗</button></div>
+        <div className="sx-topline"><span>SELECTED PROJECT / 01</span><button onClick={onBack}>Back to work ↗</button></div>
         <h1><span lang="zh">述夏</span> SHUXIA</h1>
         <p>Memory and scent of summer.</p>
       </header>
