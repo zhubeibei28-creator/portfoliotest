@@ -233,6 +233,10 @@
 }
 
 @media (min-width: 701px) and (orientation: landscape) {
+  .gf-research-images {
+    padding-inline: clamp(12px, 2vw, 40px);
+  }
+
   .gf-research-images > :last-child img {
     object-position: right center;
   }
