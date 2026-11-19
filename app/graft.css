@@ -276,3 +276,5 @@
 @keyframes gf-logo-breathe{0%,100%{transform:scale(.995)}50%{transform:scale(1.005)}}
 @media(max-width:700px){.gf-logo-scene{width:94%;padding:20px 8px;margin:16px auto 32px;aspect-ratio:2.2}}
 @media(prefers-reduced-motion:reduce){.gf-logo-scene *{animation:none}.gf-logo-white{opacity:1}.gf-logo-playback{display:none}}
+
+.gf-wordmark-construction{width:min(88%,1120px);margin:12px auto 52px}.gf-wordmark-construction .gf-image{background:#fff;padding:clamp(12px,2vw,28px)}.gf-wordmark-construction svg{display:block;width:100%;height:auto}.gf-wordmark-construction .gf-caption{margin-top:12px}@media(max-width:700px){.gf-wordmark-construction{width:94%;margin-bottom:32px}}

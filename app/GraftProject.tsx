@@ -63,7 +63,7 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
       <button type="button" className={`gf-logo-scene${logoPaused ? ' is-paused' : ''}`} onClick={() => setLogoPaused(!logoPaused)} aria-label={logoPaused ? 'Play logo material transitions' : 'Pause logo material transitions'} aria-pressed={logoPaused}>
         <span className="gf-logo-stack" role="img" aria-label="GRÆFT wordmark transitioning between white, chrome, acid green, white dissolve, violet and white motion blur">
           <span className="gf-logo-layer gf-logo-white" />
-          <img className="gf-logo-layer gf-logo-chrome" src="/assets/graft/chrome-logo-display.webp" alt="" />
+          <svg className="gf-logo-layer gf-logo-chrome" viewBox="123 507 1254 490" aria-hidden="true"><image href="/assets/graft/chrome-logo-original.png" width="1500" height="1500" /></svg>
           <span className="gf-logo-layer gf-logo-green" />
           <svg className="gf-logo-layer gf-logo-dissolve" viewBox="70 495 1350 550" aria-hidden="true"><image href="/assets/graft/logo-dissolve.png" width="1500" height="1500" /></svg>
           <span className="gf-logo-layer gf-logo-violet" />
@@ -71,6 +71,12 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
         </span>
         <span className="gf-logo-playback" aria-hidden="true">{logoPaused ? '▶' : 'Ⅱ'}</span>
       </button>
+      <figure className="gf-wordmark-construction">
+        <button className="gf-image" onClick={() => setZoom({src:'/assets/graft/wordmark-construction.png',alt:'GRÆFT wordmark construction grid and proportion studies'})} aria-label="Enlarge: GRÆFT wordmark construction grid">
+          <svg viewBox="1100 975 5730 2500" role="img" aria-label="GRÆFT wordmark with construction grid, alignment guides and spacing"><image href="/assets/graft/wordmark-construction.png" width="8000" height="4500" /></svg>
+        </button>
+        <figcaption className="gf-caption">Wordmark construction / proportions, alignment & spacing</figcaption>
+      </figure>
       <figure className="gf-logo-motion"><VisibilityVideo src="/assets/graft/logo-animation.mp4" poster="/assets/graft/logo-animation-poster.webp" label="GRÆFT melting and glitching logo animation" /><figcaption className="gf-caption">Logo animation / melt & glitch. Sound available through the player controls.</figcaption></figure>
       <div className="gf-system"><div><span className="gf-eyebrow">TYPOGRAPHY</span><img className="gf-type-specimen" src="/assets/graft/type-specimen-complete.webp" alt="SD Gothic Neo Semibold alphabet and No Return Service typography specimen" loading="lazy" /><p>SD Gothic Neo / Semibold<br/>A direct typographic voice supports the softer, fluid wordmark.</p></div><div><span className="gf-eyebrow">COLOR & MATERIAL</span><div className="gf-colors">{[['#88ED4D','Acid green'],['#7F3AEF','Violet'],['#202226','Charcoal']].map(([hex,label])=><div key={hex} style={{background:hex,color:hex==='#202226'?'#ddd':'#10110f'}}><span>{label}</span><span>{hex}</span></div>)}</div><p>Translucent chrome adds a reflective material layer.</p></div></div>
     </section>
