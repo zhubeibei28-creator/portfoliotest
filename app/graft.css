@@ -234,11 +234,22 @@
 
 @media (min-width: 701px) and (orientation: landscape) {
   .gf-research-images {
-    padding-inline: clamp(12px, 2vw, 40px);
+    width: 88%;
+    max-width: 1120px;
+    margin-inline: auto;
+    gap: clamp(24px, 4vw, 64px);
+    align-items: start;
   }
 
-  .gf-research-images > :last-child img {
-    object-position: right center;
+  .gf-research-images img {
+    height: auto;
+    object-position: center;
+  }
+
+  .gf-research-images + .gf-caption {
+    width: 88%;
+    max-width: 1120px;
+    margin-inline: auto;
   }
 
   .graft-project .gf-logo-pair {
