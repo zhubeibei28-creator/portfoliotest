@@ -61,11 +61,13 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
     <section className="gf-section" aria-labelledby="gf-identity">
       {heading('gf-identity','02 / VISUAL IDENTITY','Joining. Growing. Merging.','GRAFT refers to joining and growing together. The ligature Æ brings two letters into one form; the identity connects synthetic surfaces with the possibility of organic growth.')}
       <button type="button" className={`gf-logo-scene${logoPaused ? ' is-paused' : ''}`} onClick={() => setLogoPaused(!logoPaused)} aria-label={logoPaused ? 'Play logo material transitions' : 'Pause logo material transitions'} aria-pressed={logoPaused}>
-        <span className="gf-logo-stack" role="img" aria-label="GRÆFT wordmark transitioning between white, chrome, acid green and violet">
+        <span className="gf-logo-stack" role="img" aria-label="GRÆFT wordmark transitioning between white, chrome, acid green, white dissolve, violet and white motion blur">
           <span className="gf-logo-layer gf-logo-white" />
           <img className="gf-logo-layer gf-logo-chrome" src="/assets/graft/chrome-logo-display.webp" alt="" />
           <span className="gf-logo-layer gf-logo-green" />
+          <svg className="gf-logo-layer gf-logo-dissolve" viewBox="70 495 1350 550" aria-hidden="true"><image href="/assets/graft/logo-dissolve.png" width="1500" height="1500" /></svg>
           <span className="gf-logo-layer gf-logo-violet" />
+          <svg className="gf-logo-layer gf-logo-blur" viewBox="70 495 1350 550" aria-hidden="true"><image href="/assets/graft/logo-motion-blur.png" width="1500" height="1500" /></svg>
         </span>
         <span className="gf-logo-playback" aria-hidden="true">{logoPaused ? '▶' : 'Ⅱ'}</span>
       </button>
