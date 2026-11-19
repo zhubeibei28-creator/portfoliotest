@@ -256,3 +256,22 @@
     column-gap: clamp(96px, 13vw, 220px);
   }
 }
+
+/* One stable stage for the wordmark's changing materials. */
+.gf-logo-scene{position:relative;display:flex;align-items:center;justify-content:center;width:min(88%,960px);aspect-ratio:2.35;margin:24px auto 44px;padding:32px;border:0;background:#000;color:#92998d;cursor:pointer}
+.gf-logo-stack{position:relative;display:block;width:100%;aspect-ratio:2.75;animation:gf-logo-breathe 20s ease-in-out infinite}
+.gf-logo-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;animation:gf-logo-material 20s ease-in-out infinite}
+.gf-logo-white,.gf-logo-green,.gf-logo-violet{mask:url('/assets/graft/wordmark-fixed.svg') center/contain no-repeat;-webkit-mask:url('/assets/graft/wordmark-fixed.svg') center/contain no-repeat;background:#fff}
+.gf-logo-white{opacity:1;animation-name:gf-logo-base}
+.gf-logo-chrome{animation-delay:0s}
+.gf-logo-green{background:#88ed4d;animation-delay:5s}
+.gf-logo-violet{background:#7f3aef;animation-delay:10s}
+.gf-logo-playback{position:absolute;right:8px;bottom:8px;font-size:13px;opacity:.55}
+.gf-logo-scene:hover .gf-logo-playback,.gf-logo-scene:focus-visible .gf-logo-playback{opacity:1}
+.gf-logo-scene:focus-visible{outline:1px solid var(--gf-acid);outline-offset:6px}
+.gf-logo-scene.is-paused *{animation-play-state:paused}
+@keyframes gf-logo-base{0%,15%,95%,100%{opacity:1}25%,85%{opacity:0}}
+@keyframes gf-logo-material{0%,15%,50%,100%{opacity:0}25%,40%{opacity:1}}
+@keyframes gf-logo-breathe{0%,100%{transform:scale(.985)}50%{transform:scale(1.015)}}
+@media(max-width:700px){.gf-logo-scene{width:94%;padding:20px 8px;margin:16px auto 32px;aspect-ratio:2.2}}
+@media(prefers-reduced-motion:reduce){.gf-logo-scene *{animation:none}.gf-logo-white{opacity:1}.gf-logo-playback{display:none}}

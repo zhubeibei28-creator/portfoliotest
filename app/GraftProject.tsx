@@ -6,6 +6,7 @@ import VisibilityVideo from './VisibilityVideo';
 export default function GraftProject({ onBack }: { onBack: () => void }) {
   const indexRef = useRef<HTMLElement>(null);
   const [activeSection,setActiveSection] = useState('');
+  const [logoPaused, setLogoPaused] = useState(false);
   useEffect(()=>{
     const root=indexRef.current?.closest('.graft-project');
     if(!root)return;
@@ -59,7 +60,15 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
 
     <section className="gf-section" aria-labelledby="gf-identity">
       {heading('gf-identity','02 / VISUAL IDENTITY','Joining. Growing. Merging.','GRAFT refers to joining and growing together. The ligature Æ brings two letters into one form; the identity connects synthetic surfaces with the possibility of organic growth.')}
-      <div className="gf-logo-pair">{photo('logo-display','GRÆFT wordmark','gf-inverted-logo')}{photo('chrome-logo-display','GRÆFT chrome wordmark','gf-inverted-logo')}</div>
+      <button type="button" className={`gf-logo-scene${logoPaused ? ' is-paused' : ''}`} onClick={() => setLogoPaused(!logoPaused)} aria-label={logoPaused ? 'Play logo material transitions' : 'Pause logo material transitions'} aria-pressed={logoPaused}>
+        <span className="gf-logo-stack" role="img" aria-label="GRÆFT wordmark transitioning between white, chrome, acid green and violet">
+          <span className="gf-logo-layer gf-logo-white" />
+          <img className="gf-logo-layer gf-logo-chrome" src="/assets/graft/chrome-logo-display.webp" alt="" />
+          <span className="gf-logo-layer gf-logo-green" />
+          <span className="gf-logo-layer gf-logo-violet" />
+        </span>
+        <span className="gf-logo-playback" aria-hidden="true">{logoPaused ? '▶' : 'Ⅱ'}</span>
+      </button>
       <figure className="gf-logo-motion"><VisibilityVideo src="/assets/graft/logo-animation.mp4" poster="/assets/graft/logo-animation-poster.webp" label="GRÆFT melting and glitching logo animation" /><figcaption className="gf-caption">Logo animation / melt & glitch. Sound available through the player controls.</figcaption></figure>
       <div className="gf-system"><div><span className="gf-eyebrow">TYPOGRAPHY</span><img className="gf-type-specimen" src="/assets/graft/type-specimen-complete.webp" alt="SD Gothic Neo Semibold alphabet and No Return Service typography specimen" loading="lazy" /><p>SD Gothic Neo / Semibold<br/>A direct typographic voice supports the softer, fluid wordmark.</p></div><div><span className="gf-eyebrow">COLOR & MATERIAL</span><div className="gf-colors">{[['#88ED4D','Acid green'],['#7F3AEF','Violet'],['#202226','Charcoal']].map(([hex,label])=><div key={hex} style={{background:hex,color:hex==='#202226'?'#ddd':'#10110f'}}><span>{label}</span><span>{hex}</span></div>)}</div><p>Translucent chrome adds a reflective material layer.</p></div></div>
     </section>
