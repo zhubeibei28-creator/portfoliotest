@@ -20,10 +20,12 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
  const root=useRef<HTMLElement>(null),cards=useRef<(HTMLDivElement|null)[]>([]);
  const touch=useRef<number|null>(null),exited=useRef(false),exit=useRef(onOriginal);exit.current=onOriginal;
  const [leaving,setLeaving]=useState(false);
+ const [started,setStarted]=useState(false);
+ const finishRef=useRef<()=>void>(()=>{});
  useEffect(()=>{
-  const node=root.current;if(!node)return;let disposed=false,booted=false,lastWidth=0,lastHeight=0;const animations:Animation[]=[];
+  const node=root.current;if(!node)return;let disposed=false,booted=false,lastWidth=0,lastHeight=0,generation=0;let autoTimer:number|undefined;const animations:Animation[]=[];
   const run=(animate=true)=>{
-   if(disposed||exited.current)return;animations.splice(0).forEach(a=>a.cancel());const w=window.innerWidth,h=window.innerHeight,cw=Math.min(w,h*1920/934,1180)*.92,ch=cw*934/1920,ox=(w-cw)/2,oy=(h-ch)/2-h*.04;
+   if(disposed||exited.current)return;const current=++generation;window.clearTimeout(autoTimer);setStarted(true);animations.splice(0).forEach(a=>a.cancel());const w=window.innerWidth,h=window.innerHeight,cw=Math.min(w,h*1920/934,1180)*.92,ch=cw*934/1920,ox=(w-cw)/2,oy=(h-ch)/2-h*.04;
    lastWidth=w;lastHeight=h;
    const transform=(r:number[])=>`translate(${ox+r[0]/960*cw}px,${oy+r[1]/540*ch}px) scale(${r[2]/960*cw/300},${r[3]/540*ch/300})`;
    cards.current.forEach((card,i)=>{if(!card)return;card.style.transform=transform(large[i]);card.style.opacity='1';
@@ -42,10 +44,11 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
     ];
     animations.push(card.animate(frames,{duration:total*1000,easing:'linear',fill:'both'}));
    });
+   void Promise.all(animations.map(a=>a.finished.catch(()=>{}))).then(()=>{if(disposed||exited.current||current!==generation)return;autoTimer=window.setTimeout(()=>finishRef.current(),1300);});
   };
   const observer=new ResizeObserver(()=>{if(booted&&(Math.abs(window.innerWidth-lastWidth)>2||Math.abs(window.innerHeight-lastHeight)>2))run(false);});observer.observe(node);
   Promise.all(cards.current.map(card=>card?.querySelector('img')?.decode().catch(()=>{}))).then(()=>{run();booted=true;});
-  return()=>{disposed=true;observer.disconnect();animations.forEach(a=>a.cancel());};
+  return()=>{disposed=true;window.clearTimeout(autoTimer);observer.disconnect();animations.forEach(a=>a.cancel());};
  },[]);
  const finish=()=>{
   if(exited.current)return;exited.current=true;
@@ -58,8 +61,9 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
   });
   setLeaving(true);setTimeout(()=>exit.current(),1750);
  };
+ finishRef.current=finish;
  useEffect(()=>{const node=root.current;if(!node)return;const wheel=(e:WheelEvent)=>{if(e.ctrlKey)return;e.preventDefault();if(Math.abs(e.deltaY)>15)finish();};node.addEventListener('wheel',wheel,{passive:false});return()=>node.removeEventListener('wheel',wheel);},[]);
- return <section ref={root} className={`trail-intro pure-intro personal-opening cover-opening${leaving?' is-entering-home':''}`} onClick={finish} onTouchStart={e=>touch.current=e.touches[0].clientY} onTouchEnd={e=>{if(touch.current!==null&&touch.current-e.changedTouches[0].clientY>35)finish();}}>
+ return <section ref={root} className={`trail-intro pure-intro personal-opening cover-opening${leaving?' is-entering-home':''}`} data-started={started} onClick={finish} onTouchStart={e=>touch.current=e.touches[0].clientY} onTouchEnd={e=>{if(touch.current!==null&&touch.current-e.changedTouches[0].clientY>35)finish();}}>
   <div className="cover-stack" aria-label="Selected project covers">{art.map((a,i)=><div key={a.src} ref={el=>{cards.current[i]=el;}} className="cover-stack-card" style={{zIndex:i+1}}><img src={a.src} alt="" draggable={false} style={a.id==='05'?{objectPosition:'50% 54%'}:undefined}/></div>)}</div>
   <div className="bottom-opening-name" aria-label="BEIBEI ZHU">{Array.from('BEIBEI ZHU').map((c,i)=><span key={i} style={{'--i':i} as React.CSSProperties}>{c===' '?'\u00a0':c}</span>)}</div>
  </section>;
