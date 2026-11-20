@@ -10,9 +10,9 @@ const art=[
  {src:'/assets/roofbook/binding.jpg',id:null},
  {src:'/assets/icepact-poster.webp',id:'04'},
  {src:'/assets/roofbook-cover-two-spreads-v7.png',id:'05'},
- {src:'/assets/shuxia/home-postcards-cover.webp',id:'01'},
- {src:'/assets/graeft-subway-cover-v1.png',id:'02'},
  {src:'/assets/pocklet-cover.png',id:'03'},
+ {src:'/assets/graeft-subway-cover-v1.png',id:'02'},
+ {src:'/assets/shuxia/home-postcards-cover.webp',id:'01'},
 ];
 const small=[[349,201,87,101],[375,208,87,101],[396,231,87,101],[418,257,87,101],[440,231,87,101],[460,208,87,101],[478,184,87,101],[500,208,87,101],[515,218,87,101],[520,232,87,101]];
 const large=[[492,167,227,262],[456,157,227,262],[426,123,227,262],[397,89,227,262],[367,123,227,262],[337,157,227,262],[308,191,227,262],[279,157,227,262],[258,123,227,262],[237,108,252,291]];
@@ -27,11 +27,19 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
    const transform=(r:number[])=>`translate(${ox+r[0]/960*cw}px,${oy+r[1]/540*ch}px) scale(${r[2]/960*cw/300},${r[3]/540*ch/300})`;
    cards.current.forEach((card,i)=>{if(!card)return;card.style.transform=transform(large[i]);card.style.opacity='1';
     if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-    const end=large[i],begin=[end[0],end[1]+20,end[2]*.94,end[3]*.94];const delay=i*.16/.835,assemblyEnd=(6.15-3.36)/.835,expandEnd=(7.45-3.36)/.835,total=5.2;
-    const frames=[{offset:0,opacity:0,transform:transform(begin)},{offset:(delay+.36/.835)/total,opacity:1,transform:transform(begin)},{offset:Math.min(assemblyEnd-.01,delay+1.2/.835)/total,opacity:1,transform:transform(small[i])},{offset:assemblyEnd/total,opacity:1,transform:transform(small[i])},{offset:expandEnd/total,opacity:1,transform:transform(end)},{offset:1,opacity:1,transform:transform(end)}];
-    // Keep each layer's own arrival distinct while retaining the original small-to-large composition.
-    frames[0].offset=delay/total;
-    animations.push(card.animate(frames,{duration:total*1000,easing:'cubic-bezier(.4,0,.2,1)',fill:'both'}));
+    const end=large[i],begin=[end[0]+end[2]*.08,end[1]+end[3]*.08,end[2]*.84,end[3]*.84];
+    const delay=.12+i*.185,assemblyEnd=3.34,expandEnd=4.90,total=5.2;
+    const frames=[
+     {offset:0,opacity:0,transform:transform(begin)},
+     {offset:delay/total,opacity:0,transform:transform(begin),easing:'cubic-bezier(.16,1,.3,1)'},
+     {offset:(delay+.15)/total,opacity:1,transform:transform(end)},
+     {offset:(delay+.27)/total,opacity:1,transform:transform(end),easing:'cubic-bezier(.4,0,.2,1)'},
+     {offset:(delay+1.05)/total,opacity:1,transform:transform(small[i])},
+     {offset:assemblyEnd/total,opacity:1,transform:transform(small[i]),easing:'cubic-bezier(.4,0,.2,1)'},
+     {offset:expandEnd/total,opacity:1,transform:transform(end)},
+     {offset:1,opacity:1,transform:transform(end)}
+    ];
+    animations.push(card.animate(frames,{duration:total*1000,easing:'linear',fill:'both'}));
    });
   };
   Promise.all(cards.current.map(card=>card?.querySelector('img')?.decode().catch(()=>{}))).then(run);
