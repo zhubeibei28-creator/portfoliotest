@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import VisibilityVideo from './VisibilityVideo';
 
-export default function ShuxiaProject({onBack}: {onBack: () => void}) {
+export default function ShuxiaProject({onBack,onNext,nextTitle}: {onBack: () => void;onNext?:()=>void;nextTitle?:string}) {
   const [zoom, setZoom] = useState<{src:string; alt:string} | null>(null);
   useEffect(() => {
     const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setZoom(null); };
@@ -92,7 +92,7 @@ export default function ShuxiaProject({onBack}: {onBack: () => void}) {
 
 
 
-      <footer className="sx-end"><span>述夏 SHUXIA / Memory and scent of summer</span><button onClick={onBack}>Back to selected work ↗</button></footer>
+      <footer className="sx-end"><span>述夏 SHUXIA / Memory and scent of summer</span><button onClick={onNext??onBack}>{onNext?`Next / ${nextTitle} ↗`:'Back to selected work ↗'}</button></footer>
       {zoom && <div className="sx-lightbox" role="dialog" aria-modal="true" aria-label={zoom.alt} onClick={() => setZoom(null)}><button autoFocus className="sx-lightbox-close" onClick={() => setZoom(null)}>Close ×</button><img src={zoom.src} alt={zoom.alt} /></div>}
     </article>
   );

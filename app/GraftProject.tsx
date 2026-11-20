@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import VisibilityVideo from './VisibilityVideo';
 
-export default function GraftProject({ onBack }: { onBack: () => void }) {
+export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () => void;onNext?:()=>void;nextTitle?:string }) {
   const indexRef = useRef<HTMLElement>(null);
   const [activeSection,setActiveSection] = useState('');
   const [logoPaused, setLogoPaused] = useState(false);
@@ -190,7 +190,7 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
       <p className="gf-caption">Group project outputs / selected merchandise mockups use AI-assisted rendering.</p>
     </section>
     <div className="gf-showcased-credit gf-final-credits"><div><h2 className="gf-eyebrow">INDEPENDENT CONTRIBUTIONS</h2><ul className="gf-role-list"><li>Logo &amp; Wordmark Design</li><li>Spatial Design &amp; Visualization</li><li>Environmental Collages</li><li>Promotional Video</li></ul></div><div><h2 className="gf-eyebrow">COLLABORATIVE CONTRIBUTIONS</h2><ul className="gf-role-list"><li>Promotional Campaign</li><li>Merchandise Design</li><li>Floor Plan Development</li></ul></div><div><h2 className="gf-eyebrow">SHOWCASED WORK</h2><p>Individual &amp; Collaborative Work<br/>with Yelin Kim</p></div></div>
-    <footer className="gf-end"><span>GRÆFT / No Return Service.</span><button onClick={onBack}>Back to selected work ↗</button></footer>
+    <footer className="gf-end"><span>GRÆFT / No Return Service.</span><button onClick={onNext??onBack}>{onNext?`Next / ${nextTitle} ↗`:'Back to selected work ↗'}</button></footer>
     {zoom&&<div className="gf-lightbox" role="dialog" aria-modal="true" aria-label={zoom.alt} onClick={()=>setZoom(null)}><button autoFocus onClick={()=>setZoom(null)}>Close ×</button><img src={zoom.src} alt={zoom.alt}/></div>}
   </article>;
 }

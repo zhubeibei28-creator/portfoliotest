@@ -91,6 +91,9 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   const [trailPreview,setTrailPreview]=useState(initialPreview);
   useEffect(()=>{setTrailPreview(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail');},[initialPreview]);
   const [active, setActive] = useState<number | null>(null);
+  const detailOrder=[2,3,4,1];
+  const nextDetail=detailOrder[(detailOrder.indexOf(active??2)+1)%detailOrder.length];
+  const openNextDetail=()=>{setNavHidden(false);setHovered(null);setActive(nextDetail);};
   const [navHidden, setNavHidden] = useState(false);
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
@@ -300,7 +303,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
 
       {view === 'home' && active !== null && (
         <SplitProjectGate enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
-        {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} /> : <CaseStudy
+        {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
           onNext={() => setActive((active + 1) % projects.length)}

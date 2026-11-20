@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-export default function RoofbookProject({onBack}:{onBack:()=>void}) {
+export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>void;onNext?:()=>void;nextTitle?:string}) {
   const article=useRef<HTMLElement>(null);
   const video=useRef<HTMLVideoElement>(null);
   const [zoom,setZoom]=useState<{name:string;alt:string}|null>(null);
@@ -64,7 +64,7 @@ export default function RoofbookProject({onBack}:{onBack:()=>void}) {
       </div></div>
       <div className="yan-reading"><video ref={video} src="/assets/roofbook/reading.mp4" width={2416} height={1652} muted loop playsInline preload="metadata" aria-label="A moving view of 檐行记"/></div>
     </section>
-    <footer className="yan-end"><span>檐行记 · 2025</span><button onClick={onBack}>Back to work ↗</button></footer>
+    <footer className="yan-end"><span>檐行记 · 2025</span><button onClick={onNext??onBack}>{onNext?`Next / ${nextTitle} ↗`:'Back to work ↗'}</button></footer>
     {zoom&&<div className="yan-lightbox" role="dialog" aria-modal="true" aria-label={zoom.alt} onClick={()=>setZoom(null)}><button className="yan-close" autoFocus onClick={()=>setZoom(null)}>Close ×</button><img src={`/assets/roofbook/${zoom.name}.jpg`} alt={zoom.alt}/></div>}
   </article>;
 }

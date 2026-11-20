@@ -137,3 +137,5 @@
 @media(max-width:1040px){.cover-opening .bottom-opening-name{font-size:16.48vw}}
 .cover-opening[data-started=false] .bottom-opening-name span{animation:none;transform:translate3d(0,110%,0)}
 .cover-opening[data-started=true]:not(.is-entering-home) .bottom-opening-name span{animation:cover-name-flow-in .9s cubic-bezier(.22,1,.36,1) calc(.1s + var(--i)*.115s) both}
+.cover-opening[data-started=true]:not(.is-entering-home) .bottom-opening-name span{animation-duration:calc(.9s / 1.04);animation-delay:calc((.1s + var(--i)*.115s) / 1.04)}
+.cover-opening.is-entering-home .bottom-opening-name span{animation-duration:calc(.65s / 1.04);animation-delay:calc(var(--i)*.055s / 1.04)}
