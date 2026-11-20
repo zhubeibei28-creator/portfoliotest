@@ -71,3 +71,4 @@
 .pure-intro .orbit-card:hover .orbit-art,.pure-intro .orbit-card:focus-visible .orbit-art{transform:none;box-shadow:none}
 .pure-intro .orbit-card:hover,.pure-intro .orbit-card:focus-visible{z-index:auto!important}
 @media(max-width:620px){.pure-intro .orbit-card{width:48vw}.pure-intro .orbit-field{inset:15% 10% 20%}.pure-intro .orbit-name{bottom:8vh}}
+.clean-opening-film{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
