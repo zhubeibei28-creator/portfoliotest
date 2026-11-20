@@ -229,7 +229,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
         {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);setPreviewSelection(null);}}/>}
-        {!trailPreview && <section className="home-view">
+        {<section className="home-view">
           <div className="intro">
             <p>
               Independent graphic designer
