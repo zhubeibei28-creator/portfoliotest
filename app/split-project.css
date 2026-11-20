@@ -61,3 +61,19 @@
 /* Extend the sticky chapter bar across the media's full bleed width. */
 .split-detail .split-detail-content .gf-index{margin-inline:-28px;padding-inline:28px}
 @media(max-width:760px){.split-detail .split-detail-content .gf-index{margin-inline:-18px;padding-inline:18px}}
+@media(min-width:761px){
+ .split-detail-sidebar{overflow:clip;padding-bottom:0}
+ .split-detail-sidebar h1{margin:26px 0 24px}
+ .split-summary{font-size:13px;line-height:1.5;margin-bottom:24px}
+ .split-detail-sidebar dl{padding-top:20px;gap:18px}
+ .split-detail-sidebar dd{font-size:12px;line-height:1.5}
+ .split-detail-sidebar .split-role-list{gap:4px;line-height:1.45}
+}
+@media(min-width:761px) and (max-height:720px){
+ .split-detail-sidebar h1{font-size:34px;margin:20px 0}
+ .split-summary{font-size:12px;line-height:1.45;margin-bottom:18px}
+ .split-detail-sidebar dl{gap:13px;padding-top:16px}
+ .split-detail-sidebar dd{font-size:11px;line-height:1.45}
+ .split-detail-sidebar dt{margin-bottom:5px}
+ .split-detail-sidebar .split-role-list{gap:3px}
+}
