@@ -270,7 +270,7 @@
 .gf-logo-white{animation-delay:0s}
 .gf-logo-chrome{animation-delay:-8s}
 .gf-logo-green{background:#88ed4d;animation-delay:-6s}
-.gf-logo-dissolve{filter:brightness(0) invert(1);animation-delay:-4s}
+.gf-logo-dissolve{overflow:visible;filter:brightness(0) invert(1);animation-delay:-4s}
 .gf-logo-violet{background:#7f3aef;animation-delay:-2s}
 .gf-logo-playback{position:absolute;right:4px;bottom:4px;font-size:13px;opacity:.55}
 .gf-logo-scene:hover .gf-logo-playback,.gf-logo-scene:focus-visible .gf-logo-playback{opacity:1}
