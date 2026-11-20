@@ -26,15 +26,15 @@ export default function TrailIntro({onOriginal,onBrowse,skipOpening=false,onRead
     if(!card)return;
     card.style.display=i<count?'':'none';if(i>=count)return;
     const angle=(-90+i*360/count)*Math.PI/180;
-    const x=Math.cos(angle)*radiusX,y=Math.sin(angle)*radiusY;
+    const x=(i-(count-1)/2)*Math.min(17,box.width*.014),y=(i-(count-1)/2)*-10;
     const final=`translate3d(calc(-50% + ${x}px),calc(-50% + ${y}px),0)`;
     card.style.transform=final;card.style.opacity='1';card.style.zIndex=String(300+Math.round(y));
     if(!animate)return;
     const frames=Array.from({length:33},(_,n)=>{
-     const u=n/32,r=.30+.70*u,a=angle-(1-u)*110*Math.PI/180;
-     return {offset:u,opacity:Math.min(1,u/.12),transform:`translate3d(calc(-50% + ${Math.cos(a)*radiusX*r}px),calc(-50% + ${Math.sin(a)*radiusY*r}px),0) scale(${.88+.12*u})`};
+     const u=n/32,around=Math.min(1,u/.72),collapse=Math.max(0,(u-.72)/.28),r=.35+.65*Math.sin(around*Math.PI/2),a=angle+around*2*Math.PI; const px=Math.cos(a)*radiusX*r,py=Math.sin(a)*radiusY*r; const blend=collapse*collapse*(3-2*collapse);
+     return {offset:u,opacity:Math.min(1,u/.12),transform:`translate3d(calc(-50% + ${px*(1-blend)+x*blend}px),calc(-50% + ${py*(1-blend)+y*blend}px),0) scale(${.88+.12*u})`};
     });
-    const animation=card.animate(frames,{duration:2150,delay:Math.max(0,2350+i*65-(performance.now()-start)),easing:'cubic-bezier(.4,0,.2,1)',fill:'both'});
+    const animation=card.animate(frames,{duration:3300,delay:Math.max(0,2350+i*65-(performance.now()-start)),easing:'cubic-bezier(.4,0,.2,1)',fill:'both'});
     animations.push(animation);
    });
    if(animate){
@@ -58,7 +58,7 @@ export default function TrailIntro({onOriginal,onBrowse,skipOpening=false,onRead
  return <section className="trail-intro" data-settled={settled}>
   <h1 className="trail-headline"><span>Independent graphic designer.</span><span>Identity, image &amp; print.</span></h1>
   {(!skipOpening||replay>0)&&<div key={replay} className="orbit-name" aria-hidden="true">{Array.from('Beibei Zhu').map((c,i)=><span key={i} style={{'--letter':i} as React.CSSProperties}>{c===' '?'\u00a0':c}</span>)}</div>}
-  <div ref={field} className="orbit-field" aria-label="Explore projects">{previewArt.map((art,i)=><button key={art.src} ref={el=>{cards.current[i]=el;}} className="orbit-card" aria-label={`Open ${previewProjects[art.project].title} / ${art.label}`} onClick={()=>onBrowse(art.project,art)}>
+  <div ref={field} className="orbit-field" aria-label="Explore projects">{previewArt.map((art,i)=><button key={art.src} ref={el=>{cards.current[i]=el;}} className="orbit-card" aria-label={`Open ${previewProjects[art.project].title} / ${art.label}`} onClick={()=>onBrowse(0)}>
    <img className="orbit-art" src={art.thumb} alt={art.label} draggable={false} decoding="async" />
    <span className="orbit-caption"><b>{previewProjects[art.project].title}</b><span>{art.label}</span></span>
   </button>)}</div>
