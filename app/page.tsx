@@ -157,7 +157,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
     const tick = (now: number) => {
       const row = galleryRow.current;
       if (row) {
-        const segment = row.scrollWidth / 3;
+        const segment = row.children.length>5 ? (row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft : row.scrollWidth/3;
         const dt = Math.min(32, now - previous);
         previous = now;
         if (!position.current && segment) position.current = segment;
@@ -177,6 +177,8 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [view, active, trailPreview]);
+
+  useEffect(()=>{if(!trailPreview)return;const row=galleryRow.current;if(!row||row.children.length<6)return;const segment=(row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft;position.current=segment;row.style.transform=`translate3d(${-segment}px,0,0)`;},[trailPreview]);
 
   const navigate = (next: View) => {
     setView(next);

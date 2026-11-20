@@ -116,3 +116,16 @@
 .morph-work-card{position:fixed;transform-origin:top left;pointer-events:none;overflow:hidden}
 .morph-work-card img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;max-width:none}
 .portfolio-shell:has(.morph-opening) .project-cursor{display:none}
+.cover-opening{transition:background .8s ease .65s;touch-action:none}
+.cover-stack-card{position:fixed;left:0;top:0;width:1px;height:1px;transform-origin:top left;opacity:0;pointer-events:none}
+.cover-stack-card img{display:block;width:100%;height:100%;object-fit:cover;max-width:none}
+.cover-opening .bottom-opening-name span{animation:distinct-name-in .55s cubic-bezier(.22,1,.36,1) calc(var(--i)*.085s) both}
+.cover-opening.is-entering-home{transform:none;background:transparent;pointer-events:none}
+.cover-opening.is-entering-home .bottom-opening-name span{animation:cover-name-out .65s cubic-bezier(.55,0,.7,1) calc(var(--i)*.055s) both}
+@keyframes cover-name-out{to{transform:translateY(125%);opacity:1}}
+.portfolio-shell:has(.cover-opening) .home-view{transform:none;opacity:0;transition:opacity .55s ease 1.05s}
+.portfolio-shell:has(.cover-opening.is-entering-home) .home-view{opacity:1;transform:none}
+.portfolio-shell:has(.cover-opening.is-entering-home) .persistent-header{visibility:visible;animation:morph-header-in 1.7s ease both}
+.portfolio-shell:has(.cover-opening) .project-cursor{display:none}
+.cover-stack-card{width:300px;height:300px}
+.portfolio-shell:has(.cover-opening) .home-scroll{overflow:hidden}
