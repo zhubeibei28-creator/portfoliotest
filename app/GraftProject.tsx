@@ -71,9 +71,9 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
           <button type="button" className={`gf-logo-scene${logoPaused ? ' is-paused' : ''}`} onClick={() => setLogoPaused(!logoPaused)} aria-label={logoPaused ? 'Play logo material transitions' : 'Pause logo material transitions'} aria-pressed={logoPaused}>
             <span className="gf-logo-stack" role="img" aria-label="GRÆFT wordmark transitioning between white, chrome, acid green, white grain dissolve and violet">
               <span className="gf-logo-layer gf-logo-white" />
-              <svg className="gf-logo-layer gf-logo-chrome" viewBox="144 529 1213 446" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/chrome-logo-original.png" width="1500" height="1500" /></svg>
+              <svg className="gf-logo-layer gf-logo-chrome" viewBox="144 539 1213 439" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/chrome-logo-original.png" width="1500" height="1500" /></svg>
               <span className="gf-logo-layer gf-logo-green" />
-              <svg className="gf-logo-layer gf-logo-dissolve" viewBox="135 553 1216 438" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/logo-dissolve.png" width="1500" height="1500" /></svg>
+              <svg className="gf-logo-layer gf-logo-dissolve" viewBox="115 546 1256 452" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/logo-dissolve.png" width="1500" height="1500" /></svg>
               <span className="gf-logo-layer gf-logo-violet" />
             </span>
             <span className="gf-logo-playback" aria-hidden="true">{logoPaused ? '▶' : 'Ⅱ'}</span>
