@@ -58,3 +58,6 @@
 @media(max-width:760px){.split-detail .split-detail-content .gf-index{grid-template-columns:repeat(4,minmax(0,1fr));margin-inline:0;padding-inline:0}}
 @media(prefers-reduced-motion:reduce){.split-detail{transition:none}}
 .split-detail-sidebar .split-role-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;line-height:1.6}
+/* Extend the sticky chapter bar across the media's full bleed width. */
+.split-detail .split-detail-content .gf-index{margin-inline:-28px;padding-inline:28px}
+@media(max-width:760px){.split-detail .split-detail-content .gf-index{margin-inline:-18px;padding-inline:18px}}
