@@ -1,11 +1,27 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import {previewArt,previewProjects,type PreviewArt} from './preview-work';
+import {type PreviewArt} from './preview-work';
+const introArt=[
+ {src:'/assets/intro/orbit-0-thumb.webp',label:'SHUXIA postcards'},
+ {src:'/assets/lab/reverie-model.webp',label:'Reverie'},
+ {src:'/assets/lab/connect-poster-1.webp',label:'Connect poster'},
+ {src:'/assets/intro/orbit-5-thumb.webp',label:'SHUXIA courtyard'},
+ {src:'/assets/lab/paper-in-pattern.webp',label:'Paper in Pattern'},
+ {src:'/assets/intro/orbit-6-thumb.webp',label:'GRAFT botanical tile'},
+ {src:'/assets/lab/windows-of-perception.webp',label:'Windows of Perception'},
+ {src:'/assets/intro/orbit-7-thumb.webp',label:'Hand-bound book'},
+];
 import './trail-intro.css';
 
 export default function TrailIntro({onOriginal,onBrowse,skipOpening=false,onReady}:{onOriginal:()=>void;onBrowse:(project:number,art?:PreviewArt)=>void;skipOpening?:boolean;onReady:()=>void}) {
- const [replay,setReplay]=useState(0);
+ const [replay]=useState(0);
+ const [leaving,setLeaving]=useState(false);
+ const exit=useRef(onOriginal);exit.current=onOriginal;
+ const exited=useRef(false);
+ const finish=()=>{if(exited.current)return;exited.current=true;setLeaving(true);setTimeout(()=>exit.current(),650);};
+
  const [settled,setSettled]=useState(skipOpening);
+ useEffect(()=>{if(!settled)return;const timer=setTimeout(finish,1100);return()=>clearTimeout(timer);},[settled]);
  const field=useRef<HTMLDivElement>(null);
  const cards=useRef<(HTMLButtonElement|null)[]>([]);
  useEffect(()=>{
@@ -18,7 +34,7 @@ export default function TrailIntro({onOriginal,onBrowse,skipOpening=false,onRead
   const layout=(animate:boolean)=>{
    animations.forEach(a=>a.cancel());animations=[];
    const box=node.getBoundingClientRect();lastWidth=box.width;lastHeight=box.height;
-   const count=window.matchMedia('(max-width:620px)').matches?5:previewArt.length;
+   const count=window.matchMedia('(max-width:620px)').matches?5:introArt.length;
    const first=cards.current[0];if(!first)return;
    const radiusX=(box.width-first.offsetWidth)*.48;
    const radiusY=Math.max(40,(box.height-first.offsetHeight)*.44);
@@ -55,14 +71,10 @@ export default function TrailIntro({onOriginal,onBrowse,skipOpening=false,onRead
   void Promise.all(decoded).then(()=>{if(disposed)return;layout(!reduced&&(!skipOpening||replay>0));booted=true;});
   return()=>{disposed=true;observer.disconnect();animations.forEach(a=>a.cancel());};
  },[replay]);
- return <section className="trail-intro" data-settled={settled}>
-  <h1 className="trail-headline"><span>Independent graphic designer.</span><span>Identity, image &amp; print.</span></h1>
-  {(!skipOpening||replay>0)&&<div key={replay} className="orbit-name" aria-hidden="true">{Array.from('Beibei Zhu').map((c,i)=><span key={i} style={{'--letter':i} as React.CSSProperties}>{c===' '?'\u00a0':c}</span>)}</div>}
-  <div ref={field} className="orbit-field" aria-label="Explore projects">{previewArt.map((art,i)=><button key={art.src} ref={el=>{cards.current[i]=el;}} className="orbit-card" aria-label={`Open ${previewProjects[art.project].title} / ${art.label}`} onClick={()=>onBrowse(0)}>
-   <img className="orbit-art" src={art.thumb} alt={art.label} draggable={false} decoding="async" />
-   <span className="orbit-caption"><b>{previewProjects[art.project].title}</b><span>{art.label}</span></span>
+ return <section className={`trail-intro pure-intro${leaving?' is-leaving':''}`} data-settled={settled} onWheel={e=>{if(Math.abs(e.deltaY)>15)finish();}} onClick={finish}>
+  {(!skipOpening||replay>0)&&<div key={replay} className="orbit-name" aria-hidden="true">{Array.from('BEIBEI ZHU').map((c,i)=><span key={i} style={{'--letter':i} as React.CSSProperties}>{c===' '?'\u00a0':c}</span>)}</div>}
+  <div ref={field} className="orbit-field" aria-label="Explore projects">{introArt.map((art,i)=><button key={art.src} ref={el=>{cards.current[i]=el;}} className="orbit-card" aria-label="Enter portfolio" onClick={finish}>
+   <img className="orbit-art" src={art.src} alt={art.label} draggable={false} decoding="async" />
   </button>)}</div>
-  <div className="trail-side"><p>New York / Shanghai.</p><span>2024—2026</span></div>
-  <div className="trail-bottom"><div><button onClick={onOriginal}>View original homepage</button><button onClick={()=>{setSettled(false);setReplay(v=>v+1);}}>Replay opening</button></div><button onClick={()=>onBrowse(0)}>View projects</button></div>
  </section>;
 }

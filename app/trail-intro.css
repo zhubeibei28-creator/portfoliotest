@@ -61,3 +61,13 @@
 @media(max-width:620px){.orbit-card{width:clamp(165px,48vw,240px)}.orbit-name{bottom:120px}.waterfall-top{padding:18px}.waterfall-project{display:flex;flex-direction:column;gap:24px;padding:28px 18px 48px;min-height:auto}.waterfall-heading{padding-top:0}.waterfall-heading h2{font-size:34px}.waterfall-image{height:54svh;min-height:260px;width:100%}.waterfall-description{flex-direction:column;gap:16px}}
 .waterfall-stage{inset:0;z-index:110}
 .waterfall-stage .waterfall-end{position:static;inset:auto;display:block;height:auto;width:auto;background:#fff;border:0}
+.portfolio-shell:has(.pure-intro) .persistent-header{visibility:hidden;pointer-events:none}
+.pure-intro{position:fixed;inset:0;z-index:120;height:100svh;min-height:0;padding:0;cursor:pointer;transition:opacity .65s ease;touch-action:pan-y}
+.pure-intro.is-leaving{opacity:0;pointer-events:none}
+.pure-intro .orbit-field{inset:15% 8% 16%}
+.pure-intro .orbit-name{left:3vw;right:3vw;bottom:4vh;font-size:16.4vw;letter-spacing:-.065em}
+.pure-intro .orbit-card{width:clamp(210px,25vw,360px)}
+.pure-intro .orbit-art{object-fit:contain;box-shadow:none}
+.pure-intro .orbit-card:hover .orbit-art,.pure-intro .orbit-card:focus-visible .orbit-art{transform:none;box-shadow:none}
+.pure-intro .orbit-card:hover,.pure-intro .orbit-card:focus-visible{z-index:auto!important}
+@media(max-width:620px){.pure-intro .orbit-card{width:48vw}.pure-intro .orbit-field{inset:15% 10% 20%}.pure-intro .orbit-name{bottom:8vh}}

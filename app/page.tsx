@@ -228,7 +228,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
 
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
-        {trailPreview && <TrailIntro skipOpening={previewVisited} onReady={()=>setPreviewVisited(true)} onBrowse={browsePreview} onOriginal={()=>{setTrailPreview(false);setPreviewSelection(null);window.history.replaceState(null,'','/');}}/>}
+        {trailPreview && <TrailIntro skipOpening={previewVisited} onReady={()=>setPreviewVisited(true)} onBrowse={browsePreview} onOriginal={()=>{setTrailPreview(false);setPreviewSelection(null);}}/>}
         {!trailPreview && <section className="home-view">
           <div className="intro">
             <p>
