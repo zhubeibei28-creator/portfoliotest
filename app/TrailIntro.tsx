@@ -58,7 +58,6 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
    const target=targets.find(el=>el.querySelector('.gallery-index')?.textContent?.trim()===art[i].id);
    if(!target){card.animate([{opacity:1},{opacity:0}],{duration:650,fill:'forwards'});return;}
    const b=target.getBoundingClientRect();
-   if(b.right<=0||b.left>=window.innerWidth){card.animate([{opacity:1},{opacity:0}],{duration:850,easing:'ease-out',fill:'forwards'});return;}
    card.animate([{transform:`translate(${a.left}px,${a.top}px) scale(1)`},{transform:`translate(${b.left}px,${b.top}px) scale(${b.width/a.width},${b.height/a.height})`}],{duration:1650/1.04,easing:'cubic-bezier(.45,0,.2,1)',fill:'forwards'});
   });
   setLeaving(true);setTimeout(()=>exit.current(),1750/1.04);
