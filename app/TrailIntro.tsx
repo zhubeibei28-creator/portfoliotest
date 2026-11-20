@@ -21,12 +21,13 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
  const touch=useRef<number|null>(null),exited=useRef(false),exit=useRef(onOriginal);exit.current=onOriginal;
  const [leaving,setLeaving]=useState(false);
  useEffect(()=>{
-  const node=root.current;if(!node)return;let disposed=false;const animations:Animation[]=[];
-  const run=()=>{
-   if(disposed)return;const w=window.innerWidth,h=window.innerHeight,cw=Math.min(w,h*1920/934)*.92,ch=cw*934/1920,ox=(w-cw)/2,oy=(h-ch)/2-h*.04;
+  const node=root.current;if(!node)return;let disposed=false,booted=false,lastWidth=0,lastHeight=0;const animations:Animation[]=[];
+  const run=(animate=true)=>{
+   if(disposed||exited.current)return;animations.splice(0).forEach(a=>a.cancel());const w=window.innerWidth,h=window.innerHeight,cw=Math.min(w,h*1920/934,1180)*.92,ch=cw*934/1920,ox=(w-cw)/2,oy=(h-ch)/2-h*.04;
+   lastWidth=w;lastHeight=h;
    const transform=(r:number[])=>`translate(${ox+r[0]/960*cw}px,${oy+r[1]/540*ch}px) scale(${r[2]/960*cw/300},${r[3]/540*ch/300})`;
    cards.current.forEach((card,i)=>{if(!card)return;card.style.transform=transform(large[i]);card.style.opacity='1';
-    if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    if(!animate||window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
     const end=large[i],begin=[end[0]+end[2]*.08,end[1]+end[3]*.08,end[2]*.84,end[3]*.84];
     const delay=.12+i*.185,assemblyEnd=3.34,expandEnd=4.90,total=5.2;
     const frames=[
@@ -42,8 +43,9 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
     animations.push(card.animate(frames,{duration:total*1000,easing:'linear',fill:'both'}));
    });
   };
-  Promise.all(cards.current.map(card=>card?.querySelector('img')?.decode().catch(()=>{}))).then(run);
-  return()=>{disposed=true;animations.forEach(a=>a.cancel());};
+  const observer=new ResizeObserver(()=>{if(booted&&(Math.abs(window.innerWidth-lastWidth)>2||Math.abs(window.innerHeight-lastHeight)>2))run(false);});observer.observe(node);
+  Promise.all(cards.current.map(card=>card?.querySelector('img')?.decode().catch(()=>{}))).then(()=>{run();booted=true;});
+  return()=>{disposed=true;observer.disconnect();animations.forEach(a=>a.cancel());};
  },[]);
  const finish=()=>{
   if(exited.current)return;exited.current=true;
