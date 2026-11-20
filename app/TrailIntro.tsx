@@ -23,7 +23,7 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
  useEffect(()=>{
   const node=root.current;if(!node)return;let disposed=false;const animations:Animation[]=[];
   const run=()=>{
-   if(disposed)return;const w=window.innerWidth,h=window.innerHeight,cw=Math.min(w,h*1920/934),ch=cw*934/1920,ox=(w-cw)/2,oy=(h-ch)/2-h*.04;
+   if(disposed)return;const w=window.innerWidth,h=window.innerHeight,cw=Math.min(w,h*1920/934)*.92,ch=cw*934/1920,ox=(w-cw)/2,oy=(h-ch)/2-h*.04;
    const transform=(r:number[])=>`translate(${ox+r[0]/960*cw}px,${oy+r[1]/540*ch}px) scale(${r[2]/960*cw/300},${r[3]/540*ch/300})`;
    cards.current.forEach((card,i)=>{if(!card)return;card.style.transform=transform(large[i]);card.style.opacity='1';
     if(window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
