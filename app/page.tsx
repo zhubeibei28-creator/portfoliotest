@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ShuxiaProject from './ShuxiaProject';
 import TrailIntro from './TrailIntro';
+import SplitProject from './SplitProject';
 import ProjectStage from './ProjectStage';
 import type {PreviewArt,PreviewSelection} from './preview-work';
 import GraftProject from './GraftProject';
@@ -93,6 +94,8 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   const [navHidden, setNavHidden] = useState(false);
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
+  const [splitPreview,setSplitPreview]=useState(initialPreview);
+  useEffect(()=>{if(new URLSearchParams(window.location.search).get('intro')==='trail')setSplitPreview(true);},[]);
   const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
 
@@ -296,11 +299,13 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
       )}
 
       {view === 'home' && active !== null && (
-        projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} /> : <CaseStudy
+        <SplitProjectGate enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
+        {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
           onNext={() => setActive((active + 1) % projects.length)}
-        />
+        />}
+        </SplitProjectGate>
       )}
 
       {trailPreview && view==='home' && active===null && previewSelection && <ProjectStage initialProject={previewSelection.project} initialArt={previewSelection.art} onClose={()=>setPreviewSelection(null)} onDetails={index=>{setPreviewSelection(null);setActive(index);setHovered(null);}}/>}
@@ -783,3 +788,5 @@ function HomeLoopVideo({className}: {className:string}) {
   useEffect(()=>{if(visible)clip.current?.play().catch(()=>{});else clip.current?.pause();},[visible,loaded]);
   return <video ref={clip} className={className} src={loaded ? '/assets/icepact.mp4' : undefined} poster="/assets/icepact-poster.webp" muted loop playsInline preload="none" onLoadedData={()=>{if(visible)clip.current?.play().catch(()=>{});}} />;
 }
+
+function SplitProjectGate({enabled,children,...props}:{enabled:boolean;children:React.ReactNode;title:string;type:string;onBack:()=>void}){return enabled?<SplitProject {...props}>{children}</SplitProject>:children;}
