@@ -145,7 +145,7 @@ export default function Home() {
   const hoverPaused = useRef(false);
 
   useEffect(() => {
-    if (view !== 'home' || active !== null) return;
+    if (view !== 'home' || active !== null || trailPreview) return;
     let frame = 0;
     let previous = performance.now();
     const tick = (now: number) => {
@@ -170,7 +170,7 @@ export default function Home() {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [view, active]);
+  }, [view, active, trailPreview]);
 
   const navigate = (next: View) => {
     setView(next);
@@ -180,7 +180,7 @@ export default function Home() {
   };
   useEffect(()=>{
     const viewport=gallery.current;
-    if(view !== 'home' || active !== null || !viewport) return;
+    if(view !== 'home' || active !== null || trailPreview || !viewport) return;
     const wheel=(e:WheelEvent)=>{
       if(e.ctrlKey) return;
       e.preventDefault();
@@ -190,12 +190,13 @@ export default function Home() {
     };
     viewport.addEventListener('wheel',wheel,{passive:false});
     return ()=>viewport.removeEventListener('wheel',wheel);
-  },[view,active]);
+  },[view,active,trailPreview]);
 
   return (
     <main
       className="portfolio-shell"
       data-nav-hidden={navHidden}
+      data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}
     >
       <header className="persistent-header">
@@ -221,7 +222,7 @@ export default function Home() {
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
         {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);window.history.replaceState(null,'',window.location.pathname);}}/>}
-        <section className="home-view">
+        {!trailPreview && <section className="home-view">
           <div className="intro">
             <p>
               Independent graphic designer
@@ -271,7 +272,7 @@ export default function Home() {
             <span>New York / Shanghai</span>
             <span>© 2026</span>
           </footer>
-        </section>
+        </section>}
         <section className="selected-grid">
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{selectedWork.map(({ project, index }) => (

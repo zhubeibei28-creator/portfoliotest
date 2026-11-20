@@ -1,10 +1,18 @@
 .home-scroll[data-trail=true]>.home-view{display:none}
-.trail-intro{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;min-height:calc(100svh - 64px);padding:34px 28px 28px;overflow:hidden;background:#f7f7f2;color:#292c27;cursor:crosshair}
-.trail-top,.trail-bottom{position:relative;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:13px}
-.trail-top button,.trail-bottom button{font:inherit;color:inherit;padding:4px 0;background:none;border:0;border-bottom:1px solid #a5a79c;cursor:pointer}
-.trail-intro h1{position:relative;z-index:1;font-size:clamp(60px,8.5vw,140px);font-weight:400;line-height:1.03;letter-spacing:-.055em;margin:48px 0 64px;pointer-events:none}
-.trail-images{position:absolute;inset:0;z-index:5;pointer-events:none}
-.trail-images img{position:absolute;width:clamp(150px,17vw,255px);height:clamp(185px,21vw,315px);object-fit:cover;opacity:0;background:#000;pointer-events:none;box-shadow:0 5px 20px #0000000e;will-change:transform,opacity}
-.trail-mobile{display:none}
-@media(pointer:coarse),(prefers-reduced-motion:reduce){.trail-hint{visibility:hidden}.trail-mobile{display:flex;justify-content:center;gap:20px;margin:0 0 40px;order:0}.trail-mobile img{width:35%;height:180px;object-fit:cover}.trail-mobile img:first-child{transform:rotate(-6deg)}.trail-mobile img:last-child{transform:rotate(5deg)}.trail-bottom{order:1}.trail-images{display:none}}
-@media(max-width:620px){.trail-intro{min-height:calc(100svh - 88px);padding:24px 18px}.trail-top{font-size:11px;align-items:start}.trail-top button{max-width:100px;text-align:right}.trail-intro h1{font-size:clamp(52px,12vw,76px);margin:62px 0}.trail-bottom{font-size:11px;flex-wrap:wrap}.trail-mobile img{height:145px}.trail-images img{width:145px;height:180px}}
+.portfolio-shell[data-trail-preview=true] .persistent-header{background:#000;color:#f5f5ef;border-color:#000}
+.portfolio-shell[data-trail-preview=true] .persistent-header button,.portfolio-shell[data-trail-preview=true] .persistent-header p{color:#f5f5ef}
+.portfolio-shell[data-trail-preview=true] .persistent-header nav button.active{border-color:#777}
+.trail-intro{position:relative;isolation:isolate;height:calc(100svh - 64px);min-height:580px;overflow:hidden;background:#000;color:#f5f5ef;padding:24px 28px 28px}
+.trail-headline{position:relative;z-index:30;display:flex;align-items:start;justify-content:space-between;gap:32px;margin:0;font-size:clamp(21px,2.5vw,40px);font-weight:400;line-height:1.2;letter-spacing:-.035em;pointer-events:none}
+.trail-headline span:last-child{text-align:right}
+.trail-stack{position:absolute;left:50%;top:53%;width:0;height:0;transition:transform .65s cubic-bezier(.2,.75,.25,1);will-change:transform;pointer-events:none}
+.trail-stack img{position:absolute;left:0;top:0;width:min(28vw,390px,48svh);aspect-ratio:1;object-fit:cover;background:#181818;transition:transform .55s cubic-bezier(.2,.7,.3,1),opacity .3s ease;will-change:transform,opacity;user-select:none}
+.trail-signature{position:absolute;left:0;top:40px;z-index:25;transform:translate(-50%,-50%);font-size:clamp(26px,3vw,42px);letter-spacing:-.06em;white-space:nowrap;text-shadow:0 1px 9px #0005}
+.trail-side{position:absolute;left:28px;right:28px;top:51%;display:flex;align-items:start;justify-content:space-between;gap:24px;font-size:13px;line-height:1.5;pointer-events:none}
+.trail-side p{margin:0}
+.trail-hint{font-size:11px;color:#aaa}
+.trail-bottom{position:absolute;left:28px;right:28px;bottom:26px;z-index:30;display:flex;justify-content:space-between;gap:20px;font-size:12px}
+.trail-bottom button{font:inherit;color:inherit;background:none;border:0;border-bottom:1px solid #666;padding:5px 0;cursor:pointer}
+@media(max-width:620px){.trail-intro{height:calc(100svh - 88px);min-height:550px;padding:24px 18px}.trail-headline{font-size:20px;gap:20px}.trail-headline span{max-width:48%}.trail-stack{top:49%;left:44%}.trail-stack img{width:min(57vw,300px)}.trail-signature{font-size:29px}.trail-side{top:auto;bottom:90px;left:18px;right:18px;font-size:11px}.trail-bottom{left:18px;right:18px;font-size:11px}}
+@media(pointer:coarse){.trail-hint{display:none}}
+@media(prefers-reduced-motion:reduce){.trail-stack,.trail-stack img{transition:none;will-change:auto}.trail-hint{display:none}}
