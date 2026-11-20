@@ -1,39 +1,31 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import './trail-intro.css';
 
-const images=Array.from({length:6},(_,i)=>`/assets/intro/work-${i}.webp`);
-const offsets=[[-48,10,18,-22],[18,-32,30,18],[-17,29,-24,10],[46,8,-15,-24],[4,-13,35,24],[31,37,-28,20]];
 export default function TrailIntro({onOriginal}:{onOriginal:()=>void}) {
- const [replay,setReplay]=useState(0);
- const stage=useRef<HTMLDivElement>(null);
- const frame=useRef(0);
- const pointer=useRef({x:0,y:0});
- const reduced=useRef(false);
- useEffect(()=>{
-  reduced.current=window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches;
-  return()=>cancelAnimationFrame(frame.current);
- },[]);
- const move=(e:React.PointerEvent<HTMLElement>)=>{
-  if(e.pointerType!=='mouse'||reduced.current)return;
-  const box=e.currentTarget.getBoundingClientRect();
-  pointer.current={x:((e.clientX-box.left)/box.width-.5)*38,y:((e.clientY-box.top)/box.height-.5)*24};
-  if(!frame.current)frame.current=requestAnimationFrame(()=>{
-   frame.current=0;
-   if(stage.current)stage.current.style.transform=`translate3d(${pointer.current.x}px,${pointer.current.y}px,0)`;
-  });
+ const root=useRef<HTMLElement>(null);
+ const film=useRef<HTMLVideoElement>(null);
+ const syncPhase=()=>{
+  if(!root.current||!film.current)return;
+  const phase=film.current.currentTime<2.85?'true':'false';
+  if(root.current.dataset.namePhase!==phase)root.current.dataset.namePhase=phase;
  };
- return <section className="trail-intro" onPointerMove={move} onPointerLeave={()=>{
-  if(stage.current)stage.current.style.transform='translate3d(0,0,0)';
- }}>
+ useEffect(()=>{
+  const video=film.current;if(!video)return;
+  const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ready=()=>{
+   if(reduced){video.pause();video.currentTime=7.;}
+   else void video.play().catch(()=>{if(root.current)root.current.dataset.namePhase='false';});
+  };
+  if(video.readyState>=2)ready();else video.addEventListener('canplay',ready,{once:true});
+  return()=>{video.removeEventListener('canplay',ready);video.pause();};
+ },[]);
+ return <section ref={root} className="trail-intro" data-name-phase="true">
   <h1 className="trail-headline"><span>Independent graphic designer.</span><span>Identity, image &amp; print.</span></h1>
-  <div ref={stage} className="opening-stage" aria-hidden="true">
-   <div key={replay} className="opening-sequence">
-    {images.map((src,i)=><img key={src} className="opening-card" src={src} alt="" draggable={false} decoding="async" style={{zIndex:12-i,animationDelay:`${i*.13}s`,'--card-x':`${offsets[i][0]}px`,'--card-y':`${offsets[i][1]}px`,'--exit-x':`${offsets[i][2]}px`,'--exit-y':`${offsets[i][3]}px`} as React.CSSProperties}/>)}
-    <span className="opening-name">Beibei Zhu</span>
-   </div>
-  </div>
-  <div className="trail-side"><p>Selected work, 2024—2026.<br/>New York / Shanghai.</p><span className="trail-hint">Identity. Objects. Spaces.</span></div>
-  <div className="trail-bottom"><div><button onClick={onOriginal}>View original homepage</button><button onClick={()=>setReplay(v=>v+1)}>Replay opening</button></div><button onClick={()=>document.querySelector('.selected-grid')?.scrollIntoView({behavior:'smooth'})}>Explore selected work ↓</button></div>
+  <video ref={film} className="opening-film" autoPlay loop muted playsInline preload="auto" poster="/assets/intro/opening-v2-start.webp" aria-label="Beibei Zhu opening: a letter-by-letter name reveal, followed by an expanding montage of selected projects" onTimeUpdate={syncPhase} onError={()=>{if(root.current)root.current.dataset.namePhase='false';}}>
+   <source src="/assets/intro/opening-v2.mp4" type="video/mp4" />
+  </video>
+  <div className="trail-side"><p>Selected work, 2024—2026.<br/>New York / Shanghai.</p><span>Identity. Objects. Spaces.</span></div>
+  <div className="trail-bottom"><div><button onClick={onOriginal}>View original homepage</button><button onClick={()=>{const v=film.current;if(v){v.currentTime=0;syncPhase();void v.play();}}}>Replay opening</button></div><button onClick={()=>document.querySelector('.selected-grid')?.scrollIntoView({behavior:'smooth'})}>Explore selected work ↓</button></div>
  </section>;
 }

@@ -83,10 +83,10 @@ const experiments = [
 
 type View = 'home' | 'lab' | 'about' | 'contact';
 
-export default function Home() {
+export default function Home({initialPreview=false}:{initialPreview?:boolean}={}) {
   const [view, setView] = useState<View>('home');
-  const [trailPreview,setTrailPreview]=useState(false);
-  useEffect(()=>{setTrailPreview(new URLSearchParams(window.location.search).get('intro')==='trail');},[]);
+  const [trailPreview,setTrailPreview]=useState(initialPreview);
+  useEffect(()=>{setTrailPreview(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail');},[initialPreview]);
   const [active, setActive] = useState<number | null>(null);
   const [navHidden, setNavHidden] = useState(false);
 
@@ -221,7 +221,7 @@ export default function Home() {
 
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
-        {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);window.history.replaceState(null,'',window.location.pathname);}}/>}
+        {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);window.history.replaceState(null,'','/');}}/>}
         {!trailPreview && <section className="home-view">
           <div className="intro">
             <p>
