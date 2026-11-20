@@ -86,3 +86,7 @@
 .portfolio-shell:has(.short-opening.is-joining) .persistent-header{visibility:visible}
 @media(prefers-reduced-motion:reduce){.bottom-opening-name{display:none}}
 .bottom-opening-name{bottom:-.085em}
+.ordered-opening{transition:opacity 1.3s cubic-bezier(.4,0,.2,1)}
+.ordered-opening .bottom-opening-name span{animation:sequence-name-in .72s cubic-bezier(.22,1,.36,1) calc(var(--i)*.105s) both,sequence-name-out .62s cubic-bezier(.55,0,.7,1) calc(2.8s + (8 - var(--i))*.07s) forwards}
+@keyframes sequence-name-in{from{transform:translateY(115%) rotateX(65deg);opacity:0}to{transform:translateY(0) rotateX(0);opacity:1}}
+@keyframes sequence-name-out{to{transform:translateY(115%);opacity:1}}
