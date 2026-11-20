@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import ShuxiaProject from './ShuxiaProject';
 import TrailIntro from './TrailIntro';
+import ProjectStage from './ProjectStage';
+import type {PreviewArt,PreviewSelection} from './preview-work';
 import GraftProject from './GraftProject';
 import PockletProject from './PockletProject';
 import RoofbookProject from './RoofbookProject';
@@ -89,6 +91,9 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   useEffect(()=>{setTrailPreview(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail');},[initialPreview]);
   const [active, setActive] = useState<number | null>(null);
   const [navHidden, setNavHidden] = useState(false);
+  const [previewVisited,setPreviewVisited]=useState(false);
+  const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
+  const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
 
   useEffect(() => {
     setNavHidden(false);
@@ -176,6 +181,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
     setView(next);
     setActive(null);
     setHovered(null);
+    setPreviewSelection(null);
     hoverPaused.current = false;
   };
   useEffect(()=>{
@@ -221,7 +227,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
 
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
-        {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);window.history.replaceState(null,'','/');}}/>}
+        {trailPreview && <TrailIntro skipOpening={previewVisited} onReady={()=>setPreviewVisited(true)} onBrowse={browsePreview} onOriginal={()=>{setTrailPreview(false);setPreviewSelection(null);window.history.replaceState(null,'','/');}}/>}
         {!trailPreview && <section className="home-view">
           <div className="intro">
             <p>
@@ -276,7 +282,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
         <section className="selected-grid">
           <header><h2>Selected work</h2><span>2024—2026</span></header>
           <div className="work-grid">{selectedWork.map(({ project, index }) => (
-            <button key={project.id} aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}>
+            <button key={project.id} aria-disabled={!trailPreview&&!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={()=>{if(trailPreview){browsePreview(Number(project.id)-1);}else if(['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)){setActive(index);setHovered(null);}}}>
               {project.title === 'ICEPACT' ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
             </button>
@@ -293,6 +299,8 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
           onNext={() => setActive((active + 1) % projects.length)}
         />
       )}
+
+      {trailPreview && view==='home' && active===null && previewSelection && <ProjectStage initialProject={previewSelection.project} initialArt={previewSelection.art} onClose={()=>setPreviewSelection(null)} onDetails={index=>{setPreviewSelection(null);setActive(index);setHovered(null);}}/>}
 
       {view === 'lab' && <SphereLab />}
 
