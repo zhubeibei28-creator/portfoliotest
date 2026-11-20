@@ -91,3 +91,12 @@
 @keyframes sequence-name-in{from{transform:translateY(115%) rotateX(65deg);opacity:0}to{transform:translateY(0) rotateX(0);opacity:1}}
 @keyframes sequence-name-out{to{transform:translateY(115%);opacity:1}}
 .portfolio-shell:has(.ordered-opening.is-leaving) .persistent-header{visibility:visible;pointer-events:none}
+.personal-opening .bottom-opening-name span{animation:distinct-name-in .34s cubic-bezier(.2,.8,.25,1) calc(var(--i)*.19s) both}
+@keyframes distinct-name-in{from{transform:translateY(115%);opacity:0}to{transform:translateY(0);opacity:1}}
+.personal-opening{transition:transform 1.2s cubic-bezier(.65,0,.25,1);touch-action:none}
+.personal-opening.is-entering-home{transform:translateY(-100svh);pointer-events:none}
+.portfolio-shell:has(.personal-opening) .home-view{transform:translateY(100svh);transition:transform 1.2s cubic-bezier(.65,0,.25,1)}
+.portfolio-shell:has(.personal-opening.is-entering-home) .home-view{transform:translateY(0)}
+.portfolio-shell:has(.personal-opening.is-entering-home) .persistent-header{visibility:visible;animation:homepage-header-in 1.2s cubic-bezier(.65,0,.25,1) both}
+@keyframes homepage-header-in{from{transform:translateY(100svh)}to{transform:translateY(0)}}
+.personal-opening .clean-opening-film{top:-4vh;bottom:auto}

@@ -1,0 +1,32 @@
+{
+  "duration": 5.2,
+  "fps": 48,
+  "size": [
+    1920,
+    934
+  ],
+  "nameEnter": [
+    0,
+    1.9
+  ],
+  "nameExit": [
+    2.0,
+    2.8
+  ],
+  "smallName": [
+    2.37,
+    3.2
+  ],
+  "imageAssembly": [
+    3.36,
+    6.125
+  ],
+  "camera": [
+    6.15,
+    7.45
+  ],
+  "imageExit": [
+    7.8,
+    10.62
+  ]
+}
