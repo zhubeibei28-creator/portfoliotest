@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ShuxiaProject from './ShuxiaProject';
+import TrailIntro from './TrailIntro';
 import GraftProject from './GraftProject';
 import PockletProject from './PockletProject';
 import RoofbookProject from './RoofbookProject';
@@ -84,6 +85,8 @@ type View = 'home' | 'lab' | 'about' | 'contact';
 
 export default function Home() {
   const [view, setView] = useState<View>('home');
+  const [trailPreview,setTrailPreview]=useState(false);
+  useEffect(()=>{setTrailPreview(new URLSearchParams(window.location.search).get('intro')==='trail');},[]);
   const [active, setActive] = useState<number | null>(null);
   const [navHidden, setNavHidden] = useState(false);
 
@@ -216,7 +219,8 @@ export default function Home() {
       </header>
 
       {view === 'home' && active === null && (
-        <div className="home-scroll">
+        <div className="home-scroll" data-trail={trailPreview}>
+        {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);window.history.replaceState(null,'',window.location.pathname);}}/>}
         <section className="home-view">
           <div className="intro">
             <p>
