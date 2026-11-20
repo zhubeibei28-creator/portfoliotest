@@ -73,7 +73,7 @@ export default function GraftProject({ onBack }: { onBack: () => void }) {
               <span className="gf-logo-layer gf-logo-white" />
               <svg className="gf-logo-layer gf-logo-chrome" viewBox="144 539 1213 439" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/chrome-logo-original.png" width="1500" height="1500" /></svg>
               <span className="gf-logo-layer gf-logo-green" />
-              <svg className="gf-logo-layer gf-logo-dissolve" viewBox="115 546 1256 452" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/logo-dissolve.png" width="1500" height="1500" /></svg>
+              <svg className="gf-logo-layer gf-logo-dissolve" viewBox="125 549.5 1236 445" preserveAspectRatio="none" aria-hidden="true"><image href="/assets/graft/logo-dissolve.png" width="1500" height="1500" /></svg>
               <span className="gf-logo-layer gf-logo-violet" />
             </span>
             <span className="gf-logo-playback" aria-hidden="true">{logoPaused ? '▶' : 'Ⅱ'}</span>

@@ -270,12 +270,20 @@
 .gf-logo-white{animation-delay:0s}
 .gf-logo-chrome{animation-delay:-8s}
 .gf-logo-green{background:#88ed4d;animation-delay:-6s}
-.gf-logo-dissolve{overflow:visible;filter:brightness(0) invert(1);animation-delay:-4s}
+.gf-logo-dissolve{overflow:visible;--gf-material-filter:brightness(0) invert(1);animation-delay:-4s}
 .gf-logo-violet{background:#7f3aef;animation-delay:-2s}
 .gf-logo-playback{position:absolute;right:4px;bottom:4px;font-size:13px;opacity:.55}
 .gf-logo-scene:hover .gf-logo-playback,.gf-logo-scene:focus-visible .gf-logo-playback{opacity:1}
 .gf-logo-scene:focus-visible{outline:1px solid var(--gf-acid);outline-offset:6px}
 .gf-logo-scene.is-paused *{animation-play-state:paused}
-@keyframes gf-logo-material{0%,14%,100%{opacity:1}20%,94%{opacity:0}}
+@keyframes gf-logo-material{0%,12%,100%{opacity:1;filter:var(--gf-material-filter,brightness(1)) blur(0)}22%,92%{opacity:0;filter:var(--gf-material-filter,brightness(1)) blur(1.4px)}}
 @media(max-width:700px){.gf-logo-comparison{grid-template-columns:1fr;gap:28px;width:94%;margin:20px auto 36px}}
 @media(prefers-reduced-motion:reduce){.gf-logo-scene *{animation:none}.gf-logo-white{opacity:1}.gf-logo-playback{display:none}}
+
+/* Edge-to-edge motion strip, with the caption on the content grid. */
+.graft-project .gf-logo-motion{width:calc(100% + 56px);max-width:none;margin:40px -28px}
+.gf-logo-motion .gf-video-player{aspect-ratio:2.5;overflow:hidden}
+.graft-project .gf-logo-motion video{width:100%;height:100%;object-fit:cover;object-position:center}
+.gf-logo-motion>.gf-caption{padding-inline:28px}
+@media(max-width:620px){.graft-project .gf-logo-motion{width:calc(100% + 36px);margin:28px -18px}.gf-logo-motion .gf-video-player{aspect-ratio:2}.gf-logo-motion>.gf-caption{padding-inline:18px}}
+@media(prefers-reduced-motion:reduce){.gf-logo-dissolve{filter:brightness(0) invert(1)}}
