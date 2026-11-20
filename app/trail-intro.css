@@ -6,7 +6,7 @@
 .trail-headline{position:relative;z-index:30;display:flex;align-items:start;justify-content:space-between;gap:32px;margin:0;font-size:clamp(21px,2.5vw,40px);font-weight:400;line-height:1.2;letter-spacing:-.035em;pointer-events:none}
 .trail-headline span:last-child{text-align:right}
 .trail-stack{position:absolute;left:50%;top:53%;width:0;height:0;transition:transform .65s cubic-bezier(.2,.75,.25,1);will-change:transform;pointer-events:none}
-.trail-stack img{position:absolute;left:0;top:0;width:min(28vw,390px,48svh);aspect-ratio:1;object-fit:cover;background:#181818;transition:transform .55s cubic-bezier(.2,.7,.3,1),opacity .3s ease;will-change:transform,opacity;user-select:none}
+.trail-stack img{max-width:none;position:absolute;left:0;top:0;width:min(28vw,390px,48svh);aspect-ratio:1;object-fit:cover;background:#181818;transition:transform .55s cubic-bezier(.2,.7,.3,1),opacity .3s ease;will-change:transform,opacity;user-select:none}
 .trail-signature{position:absolute;left:0;top:40px;z-index:25;transform:translate(-50%,-50%);font-size:clamp(26px,3vw,42px);letter-spacing:-.06em;white-space:nowrap;text-shadow:0 1px 9px #0005}
 .trail-side{position:absolute;left:28px;right:28px;top:51%;display:flex;align-items:start;justify-content:space-between;gap:24px;font-size:13px;line-height:1.5;pointer-events:none}
 .trail-side p{margin:0}
