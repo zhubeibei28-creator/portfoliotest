@@ -12,7 +12,9 @@ from functools import lru_cache
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'public/assets/intro'
 OUT.mkdir(parents=True,exist_ok=True)
-W,H,FPS,DURATION=1920,934,48,11.7708333333
+SMOOTH='--smooth' in sys.argv
+PREFIX='opening-v3' if SMOOTH else 'opening-v2'
+W,H,FPS,DURATION=1920,934,48,(12.5 if SMOOTH else 11.7708333333)
 FFMPEG=os.environ.get('OPENING_FFMPEG') or shutil.which('ffmpeg')
 if not FFMPEG:raise RuntimeError('Set OPENING_FFMPEG to an ffmpeg executable')
 FONT='/System/Library/Fonts/Supplemental/Arial.ttf'
@@ -38,6 +40,7 @@ CAMERA=[(6.125,0),(6.25,.07),(6.375,.21),(6.5,.758),(6.625,.883),(6.75,.96),(7.,
 
 def clamp(x):return max(0.,min(1.,x))
 def ease_out(x):return 1-(1-clamp(x))**3
+def smooth(x):x=clamp(x);return x*x*(3-2*x)
 
 def curve(points,t):
  if t<=points[0][0]:return points[0][1]
@@ -111,7 +114,7 @@ def folded_glyph(glyph,y,angle,font_size):
 
 def big_name_mask(t):
  mask=Image.new('L',(W,H))
- angle=curve([(0,89.5),(.06,58),(.125,50),(.25,48),(.375,41),(.5,29),(.625,14),(.75,7),(.875,0)],t)
+ angle=curve(([(0,89.5),(.125,76),(.25,58),(.45,30),(.70,7),(.95,0)] if SMOOTH else [(0,89.5),(.06,58),(.125,50),(.25,48),(.375,41),(.5,29),(.625,14),(.75,7),(.875,0)]),t)
  base=H*curve([(0,1.015),(.65,1.015),(1.,.995),(1.5,.981)],t)
  for i,(glyph,x,y) in enumerate(BIG):
   local=t-.02-i*.075
@@ -135,7 +138,7 @@ def small_name_mask(t):
   local=t-(2.37+i*.047)
   if local<0:continue
   u=ease_out(local/.42);offset=(1-u)*H*.06
-  leave=10.36+(len(NAME)-1-i)*.065
+  leave=(11.0 if SMOOTH else 10.36)+(len(NAME)-1-i)*.065
   if t>leave:offset+=clamp((t-leave)/.35)**2*H*.08
   layer=Image.new('L',(W,H));layer.paste(glyph,(round((W-small_width)/2+x),round(base+y+offset)),glyph)
   # A fixed reveal line gives each letter a real below-baseline entrance/exit.
@@ -149,27 +152,35 @@ def render(t):
  for i in range(len(ART)):
   start=3.36+i*.16
   if t<start:continue
-  if t<6.125:
-   # Each photograph first arrives large at its expanded position, then joins
-   # the small assembly. This is separate from the later camera move.
-   arrival=clamp((t-start)/.11)
-   if arrival<1:
-    x,y,w,h=LARGE[i];rect=(x+w*(1-arrival)/2,y+h*(1-arrival)/2,w*arrival,h*arrival)
-   else:rect=mix(LARGE[i],SMALL[i],ease_out((t-start-.11)/.70))
-  else:rect=mix(SMALL[i],LARGE[i],curve(CAMERA,t))
-  leave=7.12+(9-i)*.275
   opacity=1
+  if t<6.15:
+   if SMOOTH:
+    appear=smooth((t-start)/.36)
+    travel=smooth((t-start-.30)/.90)
+    x,y,w,h=mix(LARGE[i],SMALL[i],travel)
+    scale=.94+.06*appear
+    rect=(x+w*(1-scale)/2,y+h*(1-scale)/2+20*(1-appear),w*scale,h*scale)
+    opacity=appear
+   else:
+    arrival=clamp((t-start)/.11)
+    if arrival<1:
+     x,y,w,h=LARGE[i];rect=(x+w*(1-arrival)/2,y+h*(1-arrival)/2,w*arrival,h*arrival)
+    else:rect=mix(LARGE[i],SMALL[i],ease_out((t-start-.11)/.70))
+  else:
+   progress=smooth((t-6.15)/1.30) if SMOOTH else curve(CAMERA,t)
+   rect=mix(SMALL[i],LARGE[i],progress)
+  leave=(7.80 if SMOOTH else 7.12)+(9-i)*.275
   if t>leave:
-   u=ease_out((t-leave)/.24)
+   u=smooth((t-leave)/.34) if SMOOTH else ease_out((t-leave)/.24)
    x,y,w,h=rect
-   # Sequential retraction, rather than fading the whole pile together.
-   rect=(x+w*.08*u,y+h*.04*u,w*(1-.16*u),h*(1-.16*u))
-   opacity=1-u
+   shrink=.05 if SMOOTH else .16
+   rect=(x+w*shrink*.5*u,y+h*shrink*.25*u,w*(1-shrink*u),h*(1-shrink*u))
+   opacity*=1-u
   if opacity>.001:add_card(frame,i,rect,opacity)
  if t<2.85:
   mask=big_name_mask(t)
   frame.paste(INK,(0,0),mask)
- if 2.32<t<11.6:
+ if 2.32<t<(12.3 if SMOOTH else 11.6):
   mask=small_name_mask(t)
   frame=Image.composite(ImageChops.invert(frame),frame,mask)
  return frame
@@ -182,14 +193,15 @@ if '--storyboard' in sys.argv:
  sheet.save('/tmp/beibei-opening-measured-storyboard.jpg')
 else:
  cmd=[FFMPEG,'-y','-loglevel','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-',
-      '-an','-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(OUT/'opening-v2.mp4')]
+      '-an','-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(OUT/(PREFIX+'.rendering.mp4'))]
  proc=subprocess.Popen(cmd,stdin=subprocess.PIPE)
  for i in range(round(DURATION*FPS)):
   proc.stdin.write(render(i/FPS).tobytes())
   if i%90==0:print(f'Rendered {i}/{round(DURATION*FPS)} frames',flush=True)
  proc.stdin.close()
  if proc.wait()!=0:raise RuntimeError('Video encoding failed')
- render(0.).save(OUT/'opening-v2-start.webp',quality=88)
- render(7.).save(OUT/'opening-v2-poster.webp',quality=88)
- (OUT/'opening-v2-timing.json').write_text(json.dumps({'duration':round(DURATION,4),'fps':FPS,'size':[W,H],'nameEnter':[0,1.9],'nameExit':[2.,2.8],'smallName':[2.37,3.2],'imageAssembly':[3.36,6.125],'camera':CAMERA,'imageExit':[7.12,9.84]},indent=2))
- print('Written',OUT/'opening-v2.mp4',flush=True)
+ (OUT/(PREFIX+'.rendering.mp4')).replace(OUT/(PREFIX+'.mp4'))
+ render(0.).save(OUT/(PREFIX+'-start.webp'),quality=88)
+ render(7.7 if SMOOTH else 7.).save(OUT/(PREFIX+'-poster.webp'),quality=88)
+ (OUT/(PREFIX+'-timing.json')).write_text(json.dumps({'duration':round(DURATION,4),'fps':FPS,'size':[W,H],'nameEnter':[0,1.9],'nameExit':[2.,2.8],'smallName':[2.37,3.2],'imageAssembly':[3.36,6.125],'camera':([6.15,7.45] if SMOOTH else CAMERA),'imageExit':([7.8,10.62] if SMOOTH else [7.12,9.84])},indent=2))
+ print('Written',OUT/(PREFIX+'.mp4'),flush=True)
