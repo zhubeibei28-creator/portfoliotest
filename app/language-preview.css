@@ -32,3 +32,10 @@
 @font-face{font-family:'Beibei Marker';src:url('/assets/fonts/marker-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 .portfolio-shell[lang=zh-CN][data-chinese-type=xiaolai]{font-family:Arial,Helvetica,'Beibei Xiaolai',serif}
 .portfolio-shell[lang=zh-CN][data-chinese-type=marker]{font-family:Arial,Helvetica,'Beibei Marker',serif}
+
+@font-face{font-family:'Beibei Glow';src:url('/assets/fonts/glow-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.portfolio-shell[lang=zh-CN][data-chinese-type=glow]{font-family:Arial,Helvetica,'Beibei Glow',sans-serif}
+@font-face{font-family:'Beibei Round';src:url('/assets/fonts/round-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.portfolio-shell[lang=zh-CN][data-chinese-type=round]{font-family:Arial,Helvetica,'Beibei Round',sans-serif}
+@font-face{font-family:'Beibei Smiley';src:url('/assets/fonts/smiley-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.portfolio-shell[lang=zh-CN][data-chinese-type=smiley]{font-family:Arial,Helvetica,'Beibei Smiley',sans-serif}

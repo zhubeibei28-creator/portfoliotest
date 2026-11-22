@@ -92,7 +92,7 @@ type View = 'home' | 'lab' | 'about' | 'contact';
 export default function Home({initialPreview=false,bilingualPreview=false}:{initialPreview?:boolean;bilingualPreview?:boolean}={}) {
   const [language,setLanguage]=useState<PreviewLanguage>(bilingualPreview?'zh':'en');
   const [typePreview,setTypePreview]=useState('song');
-  useEffect(()=>{if(!bilingualPreview)return;const type=new URLSearchParams(window.location.search).get('type');if(type==='xiaolai'||type==='marker')setTypePreview(type);},[bilingualPreview]);
+  useEffect(()=>{if(!bilingualPreview)return;const type=new URLSearchParams(window.location.search).get('type');if(type&&['xiaolai','marker','glow','round','smiley'].includes(type))setTypePreview(type);},[bilingualPreview]);
   const t=(text:string)=>previewText(text,language);
   const [view, setView] = useState<View>('home');
   const [trailPreview,setTrailPreview]=useState(initialPreview);
