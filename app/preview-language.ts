@@ -1,10 +1,10 @@
 export type PreviewLanguage = 'en' | 'zh';
 export const chineseCopy:Record<string,string>={
-'home':'首页','lab':'实验室','about':'关于','contact':'联系',
-'Available for select projects':'开放部分项目合作',
-'Independent graphic designer':'独立平面设计师',
-'working across identity, image & print.':'在品牌、图像与印刷之间探索。',
-'Scroll to explore →':'滑动探索 →','Selected work':'精选作品','Selected work 2024—26':'精选作品 2024—26','New York / Shanghai':'纽约 / 上海',
+'home':'作品','lab':'小玩意','about':'关于我','contact':'打个招呼',
+'Available for select projects':'有好玩的项目，来聊聊',
+'Independent graphic designer':'你好呀，我是贝贝。',
+'working across identity, image & print.':'做设计，也收集一些奇思妙想。',
+'Scroll to explore →':'往旁边逛逛 →','Selected work':'精选作品','Selected work 2024—26':'精选作品 2024—26','New York / Shanghai':'纽约 / 上海',
 'Brand Identity / Packaging / Web Design':'品牌识别 / 包装 / 网页设计',
 'Concept Development / Visual Identity / Spatial Design':'概念开发 / 视觉识别 / 空间设计',
 'UX/UI / Experience Design':'用户体验 / 界面与体验设计','Book / Editorial Design':'书籍 / 编辑设计','Brand Identity / Motion / Merchandise':'品牌识别 / 动态设计 / 衍生品',
