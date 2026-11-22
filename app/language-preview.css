@@ -24,3 +24,7 @@
 .portfolio-shell[data-language-preview=true] .persistent-header>p{grid-column:3;margin-right:104px}
 }
 @media(min-width:901px) and (max-width:1200px){.portfolio-shell[data-language-preview=true] .persistent-header>p{display:none}}
+
+/* Match the visual density of the English opening rather than its font size. */
+.portfolio-shell[lang=zh-CN] .intro p{font-size:clamp(23px,2.35vw,34px);line-height:1.5;letter-spacing:0}
+@media(max-width:620px){.portfolio-shell[lang=zh-CN] .intro p{font-size:23px;line-height:1.5}}
