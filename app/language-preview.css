@@ -1,0 +1,15 @@
+@font-face{font-family:'Beibei Source Han';src:url('/assets/fonts/source-han-sans-cn-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.portfolio-shell[data-language-preview=true] .persistent-header{padding-right:132px}
+.preview-language-switch{position:absolute;right:28px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:8px;font-size:12px;color:#999}
+.preview-language-switch button{padding:4px 0;background:none;color:#999;cursor:pointer;font-size:12px!important;letter-spacing:0!important}
+.preview-language-switch button[aria-pressed=true]{color:var(--fg,#242622);border-bottom:1px solid currentColor}
+.portfolio-shell[lang=zh-CN]{font-family:Arial,Helvetica,'Beibei Source Han',sans-serif}
+.portfolio-shell[lang=zh-CN] .intro p{font-size:clamp(25px,3vw,44px);line-height:1.55;letter-spacing:0;font-weight:400}
+.portfolio-shell[lang=zh-CN] .persistent-header nav button{letter-spacing:.035em}
+.portfolio-shell[lang=zh-CN] .split-summary{line-height:1.7;letter-spacing:0;font-size:clamp(15px,1.1vw,18px)}
+.portfolio-shell[lang=zh-CN] .split-detail-sidebar dd{line-height:1.65;letter-spacing:0}
+.portfolio-shell[lang=zh-CN] .split-detail-sidebar dt{letter-spacing:.06em}
+.portfolio-shell[lang=zh-CN] .shuxia-project p{letter-spacing:0;line-height:1.8}
+.portfolio-shell[lang=zh-CN] .shuxia-project h2,.portfolio-shell[lang=zh-CN] .shuxia-project h3,.portfolio-shell[lang=zh-CN] .shuxia-project h4{letter-spacing:.035em;font-weight:400}
+.portfolio-shell[lang=zh-CN] .sx-section-heading>p,.portfolio-shell[lang=zh-CN] .sx-description p,.portfolio-shell[lang=zh-CN] .sx-overview-copy>p{font-size:clamp(16px,1.35vw,22px);line-height:1.85}
+@media(max-width:760px){.portfolio-shell[data-language-preview=true] .persistent-header{padding-right:98px}.preview-language-switch{right:18px;gap:6px}.portfolio-shell[lang=zh-CN] .intro p{font-size:26px;line-height:1.6}.portfolio-shell[lang=zh-CN] .split-summary{font-size:16px}}

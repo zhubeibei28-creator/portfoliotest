@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import ShuxiaProject from './ShuxiaProject';
+import {previewText,type PreviewLanguage} from './preview-language';
+import './language-preview.css';
 import TrailIntro from './TrailIntro';
 import SplitProject from './SplitProject';
 import ProjectStage from './ProjectStage';
@@ -87,7 +89,9 @@ const experiments = [
 
 type View = 'home' | 'lab' | 'about' | 'contact';
 
-export default function Home({initialPreview=false}:{initialPreview?:boolean}={}) {
+export default function Home({initialPreview=false,bilingualPreview=false}:{initialPreview?:boolean;bilingualPreview?:boolean}={}) {
+  const [language,setLanguage]=useState<PreviewLanguage>(bilingualPreview?'zh':'en');
+  const t=(text:string)=>previewText(text,language);
   const [view, setView] = useState<View>('home');
   const [trailPreview,setTrailPreview]=useState(initialPreview);
   useEffect(()=>{setTrailPreview(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail');},[initialPreview]);
@@ -217,6 +221,8 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   return (
     <main
       className="portfolio-shell"
+      lang={language==='zh'?'zh-CN':'en'}
+      data-language-preview={bilingualPreview}
       data-nav-hidden={splitPreview&&view==='home'&&active!==null?!detailHeaderVisible:navHidden}
       data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}
@@ -232,13 +238,14 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
               className={view === item && active === null ? 'active' : ''}
               onClick={() => navigate(item)}
             >
-              {item}
+              {t(item)}
             </button>
           ))}
         </nav>
         <p>
-          <i /> Available for select projects
+          <i /> {t('Available for select projects')}
         </p>
+        {bilingualPreview && <div className="preview-language-switch" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>setLanguage('zh')}>中文</button></div>}
       </header>
 
       {view === 'home' && active === null && (
@@ -247,11 +254,11 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
         {<section className="home-view">
           <div className="intro">
             <p>
-              Independent graphic designer
+              {t('Independent graphic designer')}
               <br />
-              working across identity, image & print.
+              {t('working across identity, image & print.')}
             </p>
-            <span>Scroll to explore →</span>
+            <span>{t('Scroll to explore →')}</span>
           </div>
           <div ref={gallery} className="gallery-viewport">
             <div ref={galleryRow} className="gallery-row loop-row">
@@ -290,27 +297,27 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
             <span ref={progressBar} />
           </div>
           <footer>
-            <span>Selected work 2024—26</span>
-            <span>New York / Shanghai</span>
+            <span>{t('Selected work 2024—26')}</span>
+            <span>{t('New York / Shanghai')}</span>
             <span>© 2026</span>
           </footer>
         </section>}
         <section className="selected-grid">
-          <header><h2>Selected work</h2><span>2024—2026</span></header>
+          <header><h2>{t('Selected work')}</h2><span>2024—2026</span></header>
           <div className="work-grid">{selectedWork.map(({ project, index }) => (
             <button key={project.id} aria-disabled={!trailPreview&&!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={()=>{if(trailPreview){browsePreview(Number(project.id)-1);}else if(['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)){setActive(index);setHovered(null);}}}>
               {project.title === 'ICEPACT' ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
-              <span className="work-grid-caption"><b>{project.title}</b><span>{project.type}</span></span>
+              <span className="work-grid-caption"><b>{project.title}</b><span>{t(project.type)}</span></span>
             </button>
           ))}</div>
-          <div className="work-grid-end"><span>Beibei (Anna) Zhu</span><span>New York / Shanghai</span></div>
+          <div className="work-grid-end"><span>Beibei (Anna) Zhu</span><span>{t('New York / Shanghai')}</span></div>
         </section>
         </div>
       )}
 
       {view === 'home' && active !== null && (
-        <SplitProjectGate enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
-        {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
+        <SplitProjectGate language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
+        {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject language={language} onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
           onNext={() => setActive((active + 1) % projects.length)}
@@ -445,7 +452,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
               <span>Download résumé</span>
               <ArrowDownToLine aria-hidden="true" />
             </a>
-            <span>New York / Shanghai</span>
+            <span>{t('New York / Shanghai')}</span>
           </div>
         </section>
       )}
@@ -458,7 +465,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
           }}
         >
           <b>{projects[hovered].title}</b>
-          <span>{projects[hovered].type}</span>
+          <span>{t(projects[hovered].type)}</span>
         </div>
       )}
     </main>
@@ -801,4 +808,4 @@ function HomeLoopVideo({className}: {className:string}) {
   return <video ref={clip} className={className} src={loaded ? '/assets/icepact.mp4' : undefined} poster="/assets/icepact-poster.webp" muted loop playsInline preload="none" onLoadedData={()=>{if(visible)clip.current?.play().catch(()=>{});}} />;
 }
 
-function SplitProjectGate({enabled,children,...props}:{enabled:boolean;children:React.ReactNode;title:string;type:string;onBack:()=>void}){return enabled?<SplitProject {...props}>{children}</SplitProject>:children;}
+function SplitProjectGate({enabled,children,...props}:{enabled:boolean;language?:PreviewLanguage;children:React.ReactNode;title:string;type:string;onBack:()=>void}){return enabled?<SplitProject {...props}>{children}</SplitProject>:children;}
