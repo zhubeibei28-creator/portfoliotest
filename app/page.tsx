@@ -102,7 +102,6 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const nextDetail=detailOrder[(detailOrder.indexOf(active??2)+1)%detailOrder.length];
   const openNextDetail=()=>{setNavHidden(false);setHovered(null);setActive(nextDetail);};
   const [navHidden, setNavHidden] = useState(false);
-  const [detailHeaderVisible,setDetailHeaderVisible]=useState(false);
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
   const [splitPreview,setSplitPreview]=useState(initialPreview);
@@ -112,8 +111,9 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
 
   useEffect(() => {
     const isDetail=splitPreview&&view==='home'&&active!==null;
-    setNavHidden(isDetail);setDetailHeaderVisible(false);
-    const changeHeader=(hidden:boolean)=>{setNavHidden(hidden);if(isDetail)setDetailHeaderVisible(!hidden);};
+    setNavHidden(isDetail);
+    if(isDetail)return;
+    const changeHeader=(hidden:boolean)=>setNavHidden(hidden);
     let lastTarget: EventTarget | null = null;
     let lastTop = 0;
     let travel = 0;
@@ -226,11 +226,11 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       lang={language==='zh'?'zh-CN':'en'}
       data-language-preview={bilingualPreview}
       data-chinese-type={typePreview}
-      data-nav-hidden={splitPreview&&view==='home'&&active!==null?!detailHeaderVisible:navHidden}
+      data-nav-hidden={splitPreview&&view==='home'&&active!==null?true:navHidden}
       data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}
     >
-      <header className="persistent-header">
+      {!(splitPreview&&view==='home'&&active!==null)&&<header className="persistent-header">
         <button className="wordmark" onClick={() => navigate('home')}>
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>
@@ -249,7 +249,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           <i /> {t('Available for select projects')}
         </p>
         {bilingualPreview && <div className="preview-language-switch" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>setLanguage('zh')}>中文</button></div>}
-      </header>
+      </header>}
 
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
