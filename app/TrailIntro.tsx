@@ -56,14 +56,17 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
  const finish=()=>{
   if(exited.current)return;exited.current=true;
   const targets=Array.from(document.querySelectorAll<HTMLElement>('.gallery-project')).slice(5,10);
+  const duration=1650/1.04/1.04;
+  const transfers:Animation[]=[];
   cards.current.forEach((card,i)=>{if(!card)return;const a=card.getBoundingClientRect();card.getAnimations().forEach(animation=>animation.cancel());
    Object.assign(card.style,{width:`${a.width}px`,height:`${a.height}px`,transform:`translate(${a.left}px,${a.top}px)`});
    const target=targets.find(el=>el.querySelector('.gallery-index')?.textContent?.trim()===art[i].id);
    if(!target){card.animate([{opacity:1},{opacity:0}],{duration:650,fill:'forwards'});return;}
    const b=target.getBoundingClientRect();
-   card.animate([{transform:`translate(${a.left}px,${a.top}px) scale(1)`},{transform:`translate(${b.left}px,${b.top}px) scale(${b.width/a.width},${b.height/a.height})`}],{duration:1650/1.04/1.04,easing:'cubic-bezier(.45,0,.2,1)',fill:'forwards'});
+   transfers.push(card.animate([{transform:`translate(${a.left}px,${a.top}px) scale(1)`},{transform:`translate(${b.left}px,${b.top}px) scale(${b.width/a.width},${b.height/a.height})`}],{duration,easing:'cubic-bezier(.32,0,.16,1)',fill:'forwards'}));
+   card.animate([{opacity:1,offset:0},{opacity:1,offset:.82},{opacity:0,offset:1}],{duration,easing:'linear',fill:'forwards'});
   });
-  setLeaving(true);setTimeout(()=>exit.current(),1750/1.04/1.04);
+  setLeaving(true);void Promise.all(transfers.map(animation=>animation.finished.catch(()=>{}))).then(()=>exit.current());
  };
  finishRef.current=finish;
  useEffect(()=>{const node=root.current;if(!node)return;const wheel=(e:WheelEvent)=>{if(e.ctrlKey)return;e.preventDefault();if(Math.abs(e.deltaY)>15)finish();};node.addEventListener('wheel',wheel,{passive:false});return()=>node.removeEventListener('wheel',wheel);},[]);

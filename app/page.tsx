@@ -159,6 +159,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   const position = useRef(0);
   const velocity = useRef(0);
   const hoverPaused = useRef(false);
+  const introRollingStart = useRef<number|null>(null);
 
   useEffect(() => {
     if (view !== 'home' || active !== null || trailPreview) return;
@@ -173,7 +174,9 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
         if (!position.current && segment) position.current = segment;
         velocity.current *= Math.pow(0.9, dt / 16.67);
         position.current += velocity.current;
-        if (!hoverPaused.current) position.current += 0.028 * dt;
+        const rollingProgress=introRollingStart.current===null?1:Math.min(1,(now-introRollingStart.current)/700);
+        const rollingEase=rollingProgress*rollingProgress*(3-2*rollingProgress);
+        if (!hoverPaused.current) position.current += 0.028 * dt * rollingEase;
         if (segment && position.current >= segment * 2)
           position.current -= segment;
         if (segment && position.current < segment * 0.45)
@@ -240,7 +243,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
 
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
-        {trailPreview && <TrailIntro onOriginal={()=>{setTrailPreview(false);setPreviewSelection(null);}}/>}
+        {trailPreview && <TrailIntro onOriginal={()=>{introRollingStart.current=performance.now();setTrailPreview(false);setPreviewSelection(null);}}/>}
         {<section className="home-view">
           <div className="intro">
             <p>

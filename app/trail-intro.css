@@ -139,3 +139,7 @@
 .cover-opening[data-started=true]:not(.is-entering-home) .bottom-opening-name span{animation:cover-name-flow-in .9s cubic-bezier(.22,1,.36,1) calc(.1s + var(--i)*.115s) both}
 .cover-opening[data-started=true]:not(.is-entering-home) .bottom-opening-name span{animation-duration:calc(.9s / 1.04);animation-delay:calc((.1s + var(--i)*.115s) / 1.04)}
 .cover-opening.is-entering-home .bottom-opening-name span{animation-duration:calc(.65s / 1.04);animation-delay:calc(var(--i)*.055s / 1.04)}
+
+/* Reveal the real gallery before the moving covers dissolve into it. */
+.portfolio-shell:has(.cover-opening) .home-view{transition:opacity .4s ease .85s}
+.portfolio-shell:has(.cover-opening.is-entering-home) .persistent-header{animation-duration:1.45s}
