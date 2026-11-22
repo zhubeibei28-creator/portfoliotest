@@ -39,3 +39,6 @@
 .portfolio-shell[lang=zh-CN][data-chinese-type=round]{font-family:Arial,Helvetica,'Beibei Round',sans-serif}
 @font-face{font-family:'Beibei Smiley';src:url('/assets/fonts/smiley-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 .portfolio-shell[lang=zh-CN][data-chinese-type=smiley]{font-family:Arial,Helvetica,'Beibei Smiley',sans-serif}
+/* Chinese preview uses MiSans by Xiaomi. Official webfont, embedded unmodified. */
+@font-face{font-family:'Beibei MiSans';src:url('/assets/fonts/MiSans-Normal.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.portfolio-shell[lang=zh-CN][data-chinese-type=mi]{font-family:Arial,Helvetica,'Beibei MiSans',sans-serif}
