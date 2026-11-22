@@ -87,3 +87,9 @@
 .portfolio-shell:has(.split-detail[data-theme=dark]){background:#000}
 .portfolio-shell:has(.split-detail[data-theme=dark]) .persistent-header{background:#000;border-color:#000;box-shadow:none;backdrop-filter:none}
 .portfolio-shell:has(.split-detail[data-theme=dark]) .persistent-header::after{background:#000}
+/* Project navigation overlays content; it no longer reserves a top strip. */
+.split-detail{inset:0;padding-top:0;transition:none}
+.split-detail-sidebar{padding-top:24px}
+.portfolio-shell:has(.split-detail)[data-nav-hidden=false] .gf-index{top:var(--portfolio-header-height)}
+@media(hover:hover){.portfolio-shell:has(.split-detail):has(.persistent-header:hover) .gf-index{top:var(--portfolio-header-height)}}
+@media(max-width:760px){.split-detail{inset:0}.split-detail-sidebar{padding-top:24px}}

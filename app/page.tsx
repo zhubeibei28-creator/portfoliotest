@@ -95,6 +95,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   const nextDetail=detailOrder[(detailOrder.indexOf(active??2)+1)%detailOrder.length];
   const openNextDetail=()=>{setNavHidden(false);setHovered(null);setActive(nextDetail);};
   const [navHidden, setNavHidden] = useState(false);
+  const [detailHeaderVisible,setDetailHeaderVisible]=useState(false);
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
   const [splitPreview,setSplitPreview]=useState(initialPreview);
@@ -103,7 +104,9 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
 
   useEffect(() => {
-    setNavHidden(false);
+    const isDetail=splitPreview&&view==='home'&&active!==null;
+    setNavHidden(isDetail);setDetailHeaderVisible(false);
+    const changeHeader=(hidden:boolean)=>{setNavHidden(hidden);if(isDetail)setDetailHeaderVisible(!hidden);};
     let lastTarget: EventTarget | null = null;
     let lastTop = 0;
     let travel = 0;
@@ -123,18 +126,18 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
       lastTop = top;
       if (top <= 8) {
         travel = 0;
-        setNavHidden(false);
+        if(!isDetail||delta<0)changeHeader(false);
         return;
       }
       if (delta === 0) return;
       travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
-      if (travel >= 44) setNavHidden(true);
-      if (travel <= -32) setNavHidden(false);
+      if (travel >= 44) changeHeader(true);
+      if (travel <= -32) changeHeader(false);
     };
 
     window.addEventListener('scroll', onScroll, { capture: true, passive: true });
     return () => window.removeEventListener('scroll', onScroll, true);
-  }, [view, active]);
+  }, [view, active, splitPreview]);
   useEffect(()=>{const preview=new URLSearchParams(window.location.search).get('preview');if(preview==='pocklet'||preview==='yan')setActive(projects.findIndex(p=>p.title===(preview==='yan'?'檐行记':'POCKLET')));},[]);
   const [hovered, setHovered] = useState<number | null>(null);
   const cursor = useRef({x:0,y:0});
@@ -210,7 +213,7 @@ export default function Home({initialPreview=false}:{initialPreview?:boolean}={}
   return (
     <main
       className="portfolio-shell"
-      data-nav-hidden={navHidden}
+      data-nav-hidden={splitPreview&&view==='home'&&active!==null?!detailHeaderVisible:navHidden}
       data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}
     >

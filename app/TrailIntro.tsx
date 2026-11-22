@@ -44,7 +44,7 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
     ];
     animations.push(card.animate(frames,{duration:total*1000/1.04,easing:'linear',fill:'both'}));
    });
-   void Promise.all(animations.map(a=>a.finished.catch(()=>{}))).then(()=>{if(disposed||exited.current||current!==generation)return;autoTimer=window.setTimeout(()=>finishRef.current(),1300);});
+   void Promise.all(animations.map(a=>a.finished.catch(()=>{}))).then(()=>{if(disposed||exited.current||current!==generation)return;autoTimer=window.setTimeout(()=>finishRef.current(),650);});
   };
   const observer=new ResizeObserver(()=>{if(booted&&(Math.abs(window.innerWidth-lastWidth)>2||Math.abs(window.innerHeight-lastHeight)>2))run(false);});observer.observe(node);
   Promise.all(cards.current.map(card=>card?.querySelector('img')?.decode().catch(()=>{}))).then(()=>{run();booted=true;});
