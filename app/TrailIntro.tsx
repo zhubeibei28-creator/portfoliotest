@@ -7,7 +7,7 @@ const art=[
  {src:'/assets/lab/ambers-pulses/cover.webp',id:null},
  {src:'/assets/shuxia/courtyard-poster.webp',id:null},
  {src:'/assets/graft/tile-logo-wall.webp',id:null},
- {src:'/assets/roofbook/binding.jpg',id:null},
+ {src:'/assets/lab/self-checkout/cover.webp',id:null},
  {src:'/assets/icepact-poster.webp',id:'04'},
  {src:'/assets/roofbook-cover-two-spreads-v7.png',id:'05'},
  {src:'/assets/pocklet-cover.png',id:'03'},
@@ -29,6 +29,8 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
    lastWidth=w;lastHeight=h;
    const transform=(r:number[])=>`translate(${ox+r[0]/960*cw}px,${oy+r[1]/540*ch}px) scale(${r[2]/960*cw/300},${r[3]/540*ch/300})`;
    cards.current.forEach((card,i)=>{if(!card)return;card.style.transform=transform(large[i]);card.style.opacity='1';
+    const poster=art[i].src.includes('self-checkout')?card.querySelector('img'):null;
+    if(poster){card.style.background='#fff';poster.style.objectFit='contain';poster.style.transform=`scaleX(${large[i][3]/large[i][2]})`;}
     if(!animate||window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
     const end=large[i],begin=[end[0]+end[2]*.08,end[1]+end[3]*.08,end[2]*.84,end[3]*.84];
     const delay=.12+i*.185,assemblyEnd=3.34,expandEnd=4.90,total=5.2;
@@ -43,6 +45,7 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
      {offset:1,opacity:1,transform:transform(end)}
     ];
     animations.push(card.animate(frames,{duration:total*1000/1.04,easing:'linear',fill:'both'}));
+    if(poster){const rectangles=[begin,begin,end,end,small[i],small[i],end,end];animations.push(poster.animate(frames.map((frame,n)=>({offset:frame.offset,easing:frame.easing,transform:`scaleX(${rectangles[n][3]/rectangles[n][2]})`})),{duration:total*1000/1.04,easing:'linear',fill:'both'}));}
    });
    void Promise.all(animations.map(a=>a.finished.catch(()=>{}))).then(()=>{if(disposed||exited.current||current!==generation)return;autoTimer=window.setTimeout(()=>finishRef.current(),650);});
   };
@@ -58,9 +61,9 @@ export default function TrailIntro({onOriginal}:{onOriginal:()=>void}){
    const target=targets.find(el=>el.querySelector('.gallery-index')?.textContent?.trim()===art[i].id);
    if(!target){card.animate([{opacity:1},{opacity:0}],{duration:650,fill:'forwards'});return;}
    const b=target.getBoundingClientRect();
-   card.animate([{transform:`translate(${a.left}px,${a.top}px) scale(1)`},{transform:`translate(${b.left}px,${b.top}px) scale(${b.width/a.width},${b.height/a.height})`}],{duration:1650/1.04,easing:'cubic-bezier(.45,0,.2,1)',fill:'forwards'});
+   card.animate([{transform:`translate(${a.left}px,${a.top}px) scale(1)`},{transform:`translate(${b.left}px,${b.top}px) scale(${b.width/a.width},${b.height/a.height})`}],{duration:1650/1.04/1.04,easing:'cubic-bezier(.45,0,.2,1)',fill:'forwards'});
   });
-  setLeaving(true);setTimeout(()=>exit.current(),1750/1.04);
+  setLeaving(true);setTimeout(()=>exit.current(),1750/1.04/1.04);
  };
  finishRef.current=finish;
  useEffect(()=>{const node=root.current;if(!node)return;const wheel=(e:WheelEvent)=>{if(e.ctrlKey)return;e.preventDefault();if(Math.abs(e.deltaY)>15)finish();};node.addEventListener('wheel',wheel,{passive:false});return()=>node.removeEventListener('wheel',wheel);},[]);

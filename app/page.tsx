@@ -82,6 +82,7 @@ const experiments = [
   ['10', 'Amber’s Pulses Zine', '', 9],
   ['11', 'The Orbit', '', 10],
   ['12', 'Lantern Recall', '', 11],
+  ['13', 'Self Checkout', '', 12],
 ] as const;
 
 type View = 'home' | 'lab' | 'about' | 'contact';
@@ -577,6 +578,7 @@ function InfoColumn({ title, items }: { title: string; items: string[][] }) {
 
 // Add real video and full-resolution assets here as each study is supplied.
 const labMedia: Record<string, {video?: string; images?: string[]; pdf?: string; hoverImages?: string[]; cover?: string; detailInterval?: number; animation?: string}> = {
+  '13': {cover:'/assets/lab/self-checkout/cover.webp',images:['/assets/lab/self-checkout/poster.webp'],pdf:'/assets/lab/self-checkout/self-checkout.pdf'},
   '12': {images: ['/assets/lab/lantern-recall/cover.webp'], video: '/assets/lab/lantern-recall/lantern-recall.mp4'},
   '01': {images: ['/assets/lab/reverie-animation.webp'], video: '/assets/lab/reverie-animation.mp4'},
   '02': {images: ['/assets/lab/reverie-model.webp'], video: '/assets/lab/reverie-model.mp4'},
@@ -592,6 +594,7 @@ const labMedia: Record<string, {video?: string; images?: string[]; pdf?: string;
 };
 
 const labDescriptions: Record<string, {meta: string; description: string}> = {
+  "13": {meta:"Poster Design / Image-making / Typography",description:"A poster combining layered pink and red shopping-cart imagery, oversized floral forms, and repeated self-checkout typography."},
   "12": {meta: "2026 · Creative Coding / Animation", description: "A pixel-based animation of two children hanging lanterns"},
   "01": {
     "meta": "2025 · 2D Motion / Illustration / Editorial",
@@ -729,13 +732,13 @@ function SphereLab() {
       onPointerUp={e => { setDragging(false); if(e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId); }}
       onPointerCancel={() => setDragging(false)}>
       <div className={`sphere-orbit${hoveredPiece !== null ? " has-preview" : ""}`}>
-      {Array.from({length:12},(_,i)=>{
-        const y=1-2*(i+.5)/12, radius=Math.sqrt(1-y*y), phi=i*2.399963229728653+angle;
+      {Array.from({length:experiments.length},(_,i)=>{
+        const y=1-2*(i+.5)/experiments.length, radius=Math.sqrt(1-y*y), phi=i*2.399963229728653+angle;
         const x=Math.cos(phi)*radius, z=Math.sin(phi)*radius;
         const ry=y*Math.cos(tilt)-z*Math.sin(tilt), rz=y*Math.sin(tilt)+z*Math.cos(tilt);
         const n=i%experiments.length; const depth=(rz+1)/2; const scale=.58+depth*.85; const perspective=1/(1-rz*.18);
         return <button key={i} className={`sphere-piece${hoveredPiece===i ? " is-hovered" : ""}${n===5 ? " square-video" : ""}${n===7 ? " square-model" : ""}${n===3 ? " larger-paper" : ""}${n===10 ? " larger-orbit" : ""}${n===11 ? " compact-lantern" : ""}`} aria-label={`Open ${experiments[n][1]}`} tabIndex={selected===null && rz > .12 ? 0 : -1}
-          style={{'--sx':x*perspective,'--sy':ry*perspective,'--scale':scale,'--aspect':n===2 ? '0.6925' : n===0 ? '1.313' : n===1 ? '1.479' : n===3 ? '1.333' : n===5 ? '1' : n===7 ? '1' : n===8 ? '1' : n===9 ? '0.773' : n===10 ? '2.686' : n===11 ? '0.64' : '1.5',pointerEvents:rz > .12 ? 'auto' : 'none',opacity:rz < 0 ? 1 + rz*.22 : 1,filter:rz < -.35 ? 'blur(.3px)' : 'none',zIndex:Math.round((rz+1)*20),animationDelay:`${i*22}ms`} as React.CSSProperties}
+          style={{'--sx':x*perspective,'--sy':ry*perspective,'--scale':scale,'--aspect':n===2 ? '0.6925' : n===0 ? '1.313' : n===1 ? '1.479' : n===3 ? '1.333' : n===5 ? '1' : n===7 ? '1' : n===8 ? '1' : n===9 ? '0.773' : n===10 ? '2.686' : n===11 ? '0.64' : n===12 ? '0.75' : '1.5',pointerEvents:rz > .12 ? 'auto' : 'none',opacity:rz < 0 ? 1 + rz*.22 : 1,filter:rz < -.35 ? 'blur(.3px)' : 'none',zIndex:Math.round((rz+1)*20),animationDelay:`${i*22}ms`} as React.CSSProperties}
           onMouseEnter={e => {
             if (rz <= .12) return;
             setHoveredPiece(i);
@@ -757,7 +760,7 @@ function SphereLab() {
             : n===9 ? <LabSlideshow images={labMedia['10'].hoverImages!} cover={labMedia['10'].cover} playing={hoveredPiece===i} title="Amber’s Pulses Zine" />
             : n===8 ? <LabSlideshow images={labMedia['09'].hoverImages!} cover={labMedia['09'].cover} playing={hoveredPiece===i} title="磁带食记 Food on Record" />
             : n===3 ? <LabSlideshow images={labMedia['04'].images!} playing={hoveredPiece===i} title="Paper In Pattern" />
-            : <img src={labMedia[String(experiments[n][0])]?.images?.[0]} alt={experiments[n][1]} draggable={false} /> }
+            : <img src={labMedia[String(experiments[n][0])]?.cover??labMedia[String(experiments[n][0])]?.images?.[0]} alt={experiments[n][1]} draggable={false} /> }
           <span className="sphere-piece-label">{experiments[n][1]}</span>
         </button>;
       })}
