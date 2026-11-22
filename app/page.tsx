@@ -91,6 +91,8 @@ type View = 'home' | 'lab' | 'about' | 'contact';
 
 export default function Home({initialPreview=false,bilingualPreview=false}:{initialPreview?:boolean;bilingualPreview?:boolean}={}) {
   const [language,setLanguage]=useState<PreviewLanguage>(bilingualPreview?'zh':'en');
+  const [typePreview,setTypePreview]=useState('song');
+  useEffect(()=>{if(!bilingualPreview)return;const type=new URLSearchParams(window.location.search).get('type');if(type==='xiaolai'||type==='marker')setTypePreview(type);},[bilingualPreview]);
   const t=(text:string)=>previewText(text,language);
   const [view, setView] = useState<View>('home');
   const [trailPreview,setTrailPreview]=useState(initialPreview);
@@ -223,6 +225,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       className="portfolio-shell"
       lang={language==='zh'?'zh-CN':'en'}
       data-language-preview={bilingualPreview}
+      data-chinese-type={typePreview}
       data-nav-hidden={splitPreview&&view==='home'&&active!==null?!detailHeaderVisible:navHidden}
       data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}

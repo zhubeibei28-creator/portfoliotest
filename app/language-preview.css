@@ -28,3 +28,7 @@
 /* Match the visual density of the English opening rather than its font size. */
 .portfolio-shell[lang=zh-CN] .intro p{font-size:clamp(23px,2.35vw,34px);line-height:1.5;letter-spacing:0}
 @media(max-width:620px){.portfolio-shell[lang=zh-CN] .intro p{font-size:23px;line-height:1.5}}
+@font-face{font-family:'Beibei Xiaolai';src:url('/assets/fonts/xiaolai-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'Beibei Marker';src:url('/assets/fonts/marker-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+.portfolio-shell[lang=zh-CN][data-chinese-type=xiaolai]{font-family:Arial,Helvetica,'Beibei Xiaolai',serif}
+.portfolio-shell[lang=zh-CN][data-chinese-type=marker]{font-family:Arial,Helvetica,'Beibei Marker',serif}

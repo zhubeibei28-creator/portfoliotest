@@ -2,8 +2,8 @@ export type PreviewLanguage = 'en' | 'zh';
 export const chineseCopy:Record<string,string>={
 'home':'作品','lab':'小玩意','about':'关于我','contact':'打个招呼',
 'Available for select projects':'接受项目合作',
-'Independent graphic designer':'平面设计师',
-'working across identity, image & print.':'品牌、图像与印刷。',
+'Independent graphic designer':'独立平面设计师，喜欢从日常里找灵感。',
+'working across identity, image & print.':'做品牌、图像，也做能拿在手里的设计。',
 'Scroll to explore →':'往旁边逛逛 →','Selected work':'精选作品','Selected work 2024—26':'精选作品 2024—26','New York / Shanghai':'纽约 / 上海',
 'Brand Identity / Packaging / Web Design':'品牌识别 / 包装 / 网页设计',
 'Concept Development / Visual Identity / Spatial Design':'概念开发 / 视觉识别 / 空间设计',
