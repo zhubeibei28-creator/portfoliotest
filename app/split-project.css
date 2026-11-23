@@ -154,3 +154,12 @@
  .split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:38px}
 }
 @media(max-width:760px){.split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:26px}}
+
+/* One navigation row in full-width detail mode: no duplicate back/language tools. */
+@media(orientation:portrait),(max-width:1100px){
+ .split-detail{padding-top:64px}
+ .split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{display:none}
+ .split-detail :is(.sx-topline,.gf-topline,.pk-topline,.yan-topline){display:none}
+ .split-detail-content :is(.sx-heading,.gf-heading,.pk-heading,.yan-heading){padding-top:24px;padding-bottom:24px}
+ .split-detail-content :is(.sx-heading,.gf-heading,.pk-heading,.yan-heading)>h1{margin-top:0}
+}

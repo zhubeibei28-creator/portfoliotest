@@ -234,7 +234,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}
     >
-      {!(splitPreview&&view==='home'&&active!==null)&&<header className="persistent-header">
+      {(!(splitPreview&&view==='home'&&active!==null)||fullWidthDetail)&&<header className="persistent-header">
         <button className="wordmark" onClick={() => navigate('home')}>
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>
