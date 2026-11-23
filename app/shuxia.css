@@ -506,3 +506,5 @@
 .shuxia-project .sx-heading-bottom p{font-size:15px;line-height:1.6;margin:0;color:var(--sx-muted)}
 .sx-heading-bottom>span{font-size:12px;line-height:1.6;color:var(--sx-muted);text-align:right}
 @media(max-width:620px){.sx-heading-bottom{flex-direction:column;align-items:flex-start;gap:16px}.sx-heading-bottom>span{text-align:left}}
+/* The courtyard overview introduces the full outdoor concept before going upstairs. */
+.sx-space-garden>figure{grid-column:1/-1}
