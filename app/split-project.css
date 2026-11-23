@@ -93,3 +93,24 @@
 .portfolio-shell:has(.split-detail)[data-nav-hidden=false] .gf-index{top:var(--portfolio-header-height)}
 @media(hover:hover){.portfolio-shell:has(.split-detail):has(.persistent-header:hover) .gf-index{top:var(--portfolio-header-height)}}
 @media(max-width:760px){.split-detail{inset:0}.split-detail-sidebar{padding-top:24px}}
+
+/* Portrait reading uses each project's original title and banner opening. */
+@media(orientation:portrait),(max-width:760px){
+ .split-detail{display:block;inset:0;padding:0;overflow-y:auto;overflow-x:hidden}
+ .split-detail-sidebar{display:none}
+ .split-detail-content{position:static;container-type:normal}
+ .split-detail .split-detail-content>article{position:relative!important;inset:auto!important;width:100%;height:auto;min-height:100%;overflow:visible;padding:0 28px;overscroll-behavior:auto}
+ .split-detail-content :is(.sx-heading,.gf-heading,.pk-heading,.yan-heading){display:block}
+ .split-detail-content .sx-project-meta{display:grid}
+ .split-detail-content .gf-metadata{display:grid}
+ .split-detail-content .pk-overview>div:not(:first-child){display:block}
+ .split-detail-content .yan-opening-copy dl{display:grid}
+ .split-detail-content .pk-title-line{display:flex}
+ .split-detail-content .pk-hero-composition{max-height:none}
+ .split-detail .split-detail-content .gf-index{grid-template-columns:repeat(4,minmax(0,1fr));margin-inline:-28px;padding-inline:28px;top:0}
+}
+@media(max-width:760px){
+ .split-detail .split-detail-content>article{padding-inline:18px}
+ .split-detail .split-detail-content .gf-index{margin-inline:-18px;padding-inline:18px}
+}
+@media(max-width:620px){.split-detail-content .pk-title-line{display:block}}
