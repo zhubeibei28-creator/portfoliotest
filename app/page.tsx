@@ -106,7 +106,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const [navHidden, setNavHidden] = useState(false);
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
-  const [splitPreview,setSplitPreview]=useState(initialPreview);
+  const [splitPreview,setSplitPreview]=useState(true);
   const [fullWidthDetail,setFullWidthDetail]=useState(false);
   useEffect(()=>{const media=window.matchMedia('(max-width:1200px), (max-aspect-ratio:4/3)');const update=()=>setFullWidthDetail(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
   useEffect(()=>{if(new URLSearchParams(window.location.search).get('intro')==='trail')setSplitPreview(true);},[]);

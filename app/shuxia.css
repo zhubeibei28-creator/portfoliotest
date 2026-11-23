@@ -462,3 +462,16 @@
 .sx-space-map li:after{top:120px}
 .sx-space-map li strong{font-size:12px}
 @media(max-width:620px){.sx-space-map ol{min-width:1120px}.sx-space-map li:after{top:120px}}
+/* One continuous route across two rows; arrival and ground-floor stops are grouped. */
+.sx-route-board{position:relative;min-width:660px;height:420px}
+.sx-route-line{position:absolute;inset:0;width:100%;height:420px;pointer-events:none;overflow:visible}
+.sx-route-line path{fill:none;stroke:#c3c8be;stroke-width:1;vector-effect:non-scaling-stroke}
+.sx-space-map ol{min-width:0;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:190px 190px;row-gap:40px;position:relative}
+.sx-space-map li{height:190px;padding:0 20px}
+.sx-space-map li:after{display:none}
+.sx-space-map li:nth-child(4){grid-column:3;grid-row:2}
+.sx-space-map li:nth-child(5){grid-column:2;grid-row:2}
+.sx-space-map li:nth-child(6){grid-column:1;grid-row:2}
+.sx-space-map .sx-route-thumb{width:150px;height:84px;border-radius:14px}
+.sx-route-note{font-size:11px;line-height:1.5;color:var(--sx-muted);margin:10px 0 0}
+@media(max-width:620px){.sx-space-map ol{min-width:0}.sx-route-board{min-width:600px}.sx-space-map .sx-route-thumb{width:140px}}
