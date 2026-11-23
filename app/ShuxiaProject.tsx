@@ -102,7 +102,7 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
       <section className="sx-section" aria-labelledby="sx-website">
         <div className="sx-section-heading"><h2 id="sx-website">{t("05 / WEBSITE DESIGN")}</h2><p>{t("The brand’s quiet visual language continues online, from an atmospheric homepage to scent navigation and a product detail view.")}</p></div>
         <div className="sx-website-pair">{photo('website-grass','SHUXIA website displayed on a laptop in summer grass')}<div className="sx-web-main sx-laptop-video">
-          <div className="sx-laptop-screen"><video autoPlay muted loop playsInline preload="metadata" poster="/assets/shuxia/website-demo-poster.webp" aria-label="SHUXIA website demonstration"><source src="/assets/shuxia/website-demo.mp4" type="video/mp4" /></video></div>
+          <div className="sx-laptop-screen"><VisibilityVideo src="/assets/shuxia/website-demo.mp4" poster="/assets/shuxia/website-demo-poster.webp" label="SHUXIA website demonstration" controls={false} /></div>
           <img className="sx-laptop-frame" src="/assets/shuxia/laptop-frame-video.webp" alt="Laptop frame surrounding the SHUXIA website video" />
         </div></div><p className="sx-small-note">{language==='zh'?'品牌网站 / 页面与交互演示':'Brand website / page and interaction demonstration'}</p>
       </section>

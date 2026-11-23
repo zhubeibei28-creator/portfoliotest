@@ -436,3 +436,5 @@
 .shuxia-project .sx-postcards-studio{margin-top:28px}
 @media(min-width:621px){.shuxia-project .sx-postcard-story{grid-template-columns:minmax(0,calc((100% - 24px)*.571408 + 26.57px)) minmax(0,1fr)}}
 @media(max-width:620px){.shuxia-project .sx-packaging-copy>.sx-description{grid-column:1}}
+
+.sx-laptop-screen>.gf-video-player{width:100%;height:100%}

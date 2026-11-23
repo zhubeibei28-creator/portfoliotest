@@ -5,9 +5,9 @@ const stages=[{name:'Entice',title:'Noticing what has quietly stayed',copy:'Pack
 export default function PockletResearch(){const videoRef=useRef<HTMLVideoElement>(null);
  const [duration,setDuration]=useState(0);
  const [progress,setProgress]=useState(0);
- useEffect(()=>{const v=videoRef.current;if(!v)return;const o=new IntersectionObserver(([e])=>{if(e.isIntersecting)v.play().catch(()=>{});else v.pause()},{root:v.closest('.pk-project'),threshold:.2});o.observe(v);return()=>o.disconnect()},[]);return <>
+ useEffect(()=>{const v=videoRef.current;if(!v)return;const o=new IntersectionObserver(([e])=>{if(e.isIntersecting&&e.intersectionRatio>=.2&&!document.hidden)v.play().catch(()=>{});else v.pause()},{root:null,threshold:[0,.2]});o.observe(v);return()=>o.disconnect()},[]);return <>
 <section className="pk-section pk-round-one" id="pk-round-one"><div className="pk-section-head"><div><span className="pk-label">How it began · Round one</span><h2>What do our<br/>shadows leave behind?</h2></div><div><p>The starting brief was to identify a shadow experience, then respond to it through a solution or ritual. This visual exploration considers the small adjustments made during life transitions, and the artifacts those experiences leave behind.</p><p>Like things collected in a household jar, these objects accumulate and begin to shape how we see ourselves. The jar became a way to think about holding on, and a starting point for a ritual of release.</p></div></div><div className="pk-round-player">
-  <video ref={videoRef} className="pk-round-video" src="/assets/pocklet/round1-topic-exploration-hq.mp4" poster="/assets/pocklet/round1-poster.jpg" autoPlay muted loop playsInline preload="metadata"
+  <video ref={videoRef} className="pk-round-video" src="/assets/pocklet/round1-topic-exploration-hq.mp4" poster="/assets/pocklet/round1-poster.jpg" muted loop playsInline preload="metadata"
    onDurationChange={({currentTarget})=>setDuration(Number.isFinite(currentTarget.duration)?currentTarget.duration:0)}
    onTimeUpdate={({currentTarget})=>setProgress(currentTarget.currentTime)} aria-label="Round one visual exploration of shadow experiences and the jar metaphor"/>
   <div className="pk-video-scrub">

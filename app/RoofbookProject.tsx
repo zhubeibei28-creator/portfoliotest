@@ -14,8 +14,8 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
     const v=video.current;
     const observer=new IntersectionObserver(([entry])=>{
       if(!v)return;
-      if(entry.isIntersecting)void v.play().catch(()=>{});else v.pause();
-    },{root:article.current,threshold:.2});
+      if(entry.isIntersecting&&entry.intersectionRatio>=.2&&!document.hidden)void v.play().catch(()=>{});else v.pause();
+    },{root:null,threshold:[0,.2]});
     if(v)observer.observe(v);
     return()=>{window.removeEventListener('keydown',close);observer.disconnect();v?.pause();};
   },[]);
