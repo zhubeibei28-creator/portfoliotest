@@ -13,7 +13,7 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
   useEffect(()=>{
     const root=indexRef.current?.closest('.graft-project');
     if(!root)return;
-    const scroller=window.innerWidth<=760?(root.closest('.split-detail')||root):root;
+    const scroller=root.closest('.split-detail')||root;
     const sections=Array.from(root.querySelectorAll<HTMLElement>('.gf-section[aria-labelledby]'));
     let frame=0;
     const update=()=>{
@@ -28,12 +28,12 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
       setActiveSection(current);
     };
     const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
-    scroller.addEventListener('scroll',schedule,{passive:true});
+    scroller.addEventListener('scroll',schedule,{capture:true,passive:true});
     window.addEventListener('resize',schedule);
     const resize=new ResizeObserver(schedule);
     sections.forEach(section=>resize.observe(section));
     update();
-    return()=>{scroller.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);resize.disconnect();cancelAnimationFrame(frame);};
+    return()=>{scroller.removeEventListener('scroll',schedule,true);window.removeEventListener('resize',schedule);resize.disconnect();cancelAnimationFrame(frame);};
   },[]);
 
   const [zoom, setZoom] = useState<{src:string;alt:string}|null>(null);
