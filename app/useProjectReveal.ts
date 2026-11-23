@@ -11,7 +11,7 @@ export default function useProjectReveal(root:RefObject<HTMLElement|null>){
   if(motion.matches)return;
   const selector='.sx-section-heading h2,.sx-section-heading>p,.sx-overview-copy p,.sx-description>p,.sx-description>h3,.sx-description>h4,.gf-section-heading,.gf-subheading,.gf-overview>div:first-child,.pk-section-head,.pk-overview>div:first-child,.pk-bcam-intro,.pk-bcam-takeaway,.pk-process-intro,.pk-testing-heading,.yan-note,.yan-opening-copy,.yan-film-caption,[data-reveal-photo]';
   const candidates=Array.from(node.querySelectorAll<HTMLElement>(selector));
-  const images=Array.from(node.querySelectorAll<HTMLImageElement>('img')).filter(el=>!el.closest('[role="dialog"],.sx-lightbox,.gf-lightbox,.pk-lightbox,.yan-lightbox,[data-reveal-photo]'));
+  const images=Array.from(node.querySelectorAll<HTMLImageElement>('img')).filter(el=>!el.closest('[role="dialog"],.sx-lightbox,.gf-lightbox,.pk-lightbox,.yan-lightbox,[data-reveal-photo],.sx-space-map'));
   candidates.push(...images);
   const targets=candidates.filter(el=>!candidates.some(parent=>parent!==el&&parent.contains(el)));
   const observer=new IntersectionObserver(entries=>{
