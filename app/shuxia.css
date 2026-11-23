@@ -321,3 +321,16 @@
 .shuxia-project .sx-postcard-story{align-items:start}
 .shuxia-project .sx-postcard-story>div:first-child>.sx-image{position:static;height:auto}
 .shuxia-project .sx-postcard-story>div:first-child>.sx-image img{width:100%;height:auto;object-fit:contain;object-position:center}
+/* Match the full portrait photograph to the three uncropped 3:2 illustrations. */
+@media(min-width:621px){
+ .shuxia-project .sx-postcard-story,.shuxia-project .sx-postcard-captions{grid-template-columns:minmax(0,calc((100% - 24px)*.571408 + 11.428px)) minmax(0,1fr)}
+ .shuxia-project .sx-postcard-story{align-items:start}
+ .shuxia-project .sx-postcard-column{gap:20px}
+}
+.shuxia-project .sx-packaging-pair{grid-template-columns:1fr;gap:32px}
+.shuxia-project .sx-packaging-pair>.sx-image{padding:0}
+.shuxia-project .sx-packaging-pair>.sx-image:first-child{width:100%;max-width:1100px;justify-self:center}
+.shuxia-project .sx-packaging-pair>.sx-image:first-child img{width:100%;height:auto;max-height:none}
+.shuxia-project .sx-packaging-pair>.sx-image:last-child{width:78%;justify-self:center}
+.shuxia-project .sx-packaging-pair>.sx-image:last-child img{width:100%;height:auto;max-height:none}
+@media(max-width:620px){.shuxia-project .sx-packaging-pair>.sx-image:last-child{width:100%}}
