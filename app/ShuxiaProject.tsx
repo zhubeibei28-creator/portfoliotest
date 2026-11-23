@@ -5,6 +5,8 @@ import VisibilityVideo from './VisibilityVideo';
 import useProjectReveal from './useProjectReveal';
 import {previewText,type PreviewLanguage} from './preview-language';
 
+const SPATIAL=[{"name": "street", "zh": "街道入口", "en": "Street entrance", "width": 1456, "height": 816}, {"name": "sign", "zh": "门头灯箱", "en": "Entrance light-box signage", "width": 1456, "height": 816}, {"name": "front", "zh": "庭院建筑 / 正面", "en": "Courtyard building / front", "width": 1456, "height": 816}, {"name": "side", "zh": "庭院建筑 / 侧面与上楼动线", "en": "Courtyard building / side and stair access", "width": 1456, "height": 816}, {"name": "entry", "zh": "一楼 / 进入店铺", "en": "Ground floor / entering the shop", "width": 1456, "height": 816}, {"name": "counter", "zh": "一楼 / 产品陈列与前台", "en": "Ground floor / display and counter", "width": 1456, "height": 816}, {"name": "lounge", "zh": "一楼 / 休息区", "en": "Ground floor / lounge", "width": 1456, "height": 816}, {"name": "upper", "zh": "二楼 / 前台", "en": "Upper floor / reception", "width": 1456, "height": 816}];
+
 export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {language?:PreviewLanguage;onBack: () => void;onNext?:()=>void;nextTitle?:string}) {
   const article=useRef<HTMLElement>(null);
   useProjectReveal(article);
@@ -28,7 +30,7 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
         <p>{t("Memory and scent of summer.")}</p>
       </header>
 
-      <div className="sx-hero"><img src="/assets/shuxia/header-interior-lossless.webp" alt="SHUXIA white wordmark over a warm interior photograph" width={1456} height={728} fetchPriority="high" /></div>
+      <div className="sx-hero"><img src="/assets/shuxia/summer-banner.webp" alt="SHUXIA handwritten white wordmark over a green field and summer sky" width={1920} height={932} fetchPriority="high" /></div>
 
       <section className="sx-overview" aria-label="Project overview">
         <div className="sx-overview-copy"><h2>{t("OVERVIEW")}</h2><p>{t("SHUXIA is a summer-inspired scent brand that remembers the season through atmosphere, texture, and small sensory moments: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool.")}</p><p>{t("Rather than the bright, energetic image of summer, the identity explores its softer side. A courtyard space brings this atmosphere into an architectural setting; scent, tactile materials, and illustration extend it into everyday objects.")}</p></div>
@@ -76,9 +78,8 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
           <VisibilityVideo src="/assets/shuxia/courtyard-walkthrough.mp4" poster="/assets/shuxia/courtyard-poster.webp" label="SHUXIA spatial walkthrough, from the street through the courtyard and scent shop" />
           <figcaption className="sx-small-note">{t("Spatial walkthrough / street, courtyard & interior")}</figcaption>
         </figure>
-        <div className="sx-section-heading sx-subheading"><h3>{t("STOREFRONT & SIGNAGE STUDIES")}</h3><p>{t("Window illustrations, the patterned curtain, and illuminated signage explore how the graphic identity meets the architecture.")}</p></div>
-        <div className="sx-store-pair">{photo('storefront','SHUXIA storefront concept with illustrated windows and patterned curtain')}{photo('signage','Warm illuminated SHUXIA sign with botanical motifs')}</div>
-        <p className="sx-small-note">{t("Storefront & light-box signage / concept studies")}</p>
+        <div className="sx-section-heading sx-subheading"><h3>{language==='zh'?'从街道走进述夏':'FROM THE STREET INTO SHUXIA'}</h3><p>{language==='zh'?'沿街道入口进入庭院，穿过一楼的产品陈列与休息区，再经侧面楼梯抵达二楼。':'Enter from the street, move through the courtyard into the ground-floor displays and lounge, then follow the side staircase to the upper floor.'}</p></div>
+        <div className="sx-spatial-journey">{SPATIAL.map((image,i)=><figure key={image.name} className={i===0||i===7?'sx-spatial-wide':''}><button className="sx-image" onClick={()=>setZoom({src:`/assets/shuxia/spatial-${image.name}.webp`,alt:image.en})} aria-label={`${language==='zh'?'放大':'Enlarge'}: ${language==='zh'?image.zh:image.en}`}><img src={`/assets/shuxia/spatial-${image.name}.webp`} alt={language==='zh'?image.zh:image.en} width={image.width} height={image.height} loading="lazy" decoding="async" /></button><figcaption>{language==='zh'?image.zh:image.en}</figcaption></figure>)}</div>
       </section>
 
       <section className="sx-section" aria-labelledby="sx-packaging">
