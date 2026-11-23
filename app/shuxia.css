@@ -406,3 +406,14 @@
 
 .shuxia-project .sx-spatial .sx-section-heading h3{text-transform:uppercase;font-weight:400;letter-spacing:0;font-size:clamp(15px,1.4vw,20px)}
 .split-detail-content .shuxia-project .sx-spatial .sx-section-heading h3{font-size:clamp(15px,2cqw,20px)}
+.sx-captioned-image{position:relative;margin-bottom:28px;overflow:visible}
+.sx-captioned-image:after{content:attr(data-caption);display:block;position:absolute;left:0;right:0;top:100%;padding-top:10px;font-size:11px;line-height:1.5;font-weight:400;letter-spacing:0;color:var(--sx-muted);text-align:left;pointer-events:none}
+.sx-rain-captions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:-10px 0 32px;font-size:11px;line-height:1.5;color:var(--sx-muted)}
+.sx-mood-caption-row{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:11px;line-height:1.5;color:var(--sx-muted)}
+.sx-mood-caption-row span:before{counter-increment:mood-ref;content:counter(mood-ref,decimal-leading-zero) ' / '}
+.sx-moodboard{counter-reset:mood-ref}
+@media(min-width:621px){.shuxia-project .sx-postcard-story,.shuxia-project .sx-postcard-captions{grid-template-columns:minmax(0,calc((100% - 24px)*.571408 + 35.427px)) minmax(0,1fr)}}
+.sx-mood-item{grid-column:span 2;margin:0;min-width:0}
+.sx-mood-item-courtyard,.sx-mood-item-fan{grid-column:span 3}
+.sx-mood-item figcaption,.sx-rain-item figcaption{margin-top:10px;font-size:11px;line-height:1.5;color:var(--sx-muted)}
+.sx-rain-item{margin:0;min-width:0}
