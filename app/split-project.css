@@ -137,3 +137,4 @@
 @media(min-width:761px) and (orientation:landscape){
  .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.yan-note){grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
 }
+.split-detail-content .shuxia-project .sx-section-heading h3{font-size:clamp(20px,2.5cqw,28px)}

@@ -347,3 +347,8 @@
  .shuxia-project .sx-overview-copy>p{grid-column:2;width:100%;min-width:0}
  .shuxia-project .sx-overview{grid-template-columns:1fr}
 }
+/* Unnumbered headings sit below the numbered chapters in the hierarchy. */
+.shuxia-project .sx-section-heading>#sx-mood-title{font-size:clamp(17px,1.5vw,22px)}
+.shuxia-project .sx-section-heading h3{font-size:clamp(18px,1.7vw,25px)}
+.shuxia-project .sx-type-system>h3,.shuxia-project .sx-palette-copy>h3{font-size:14px}
+@media(max-width:620px){.shuxia-project .sx-section-heading>#sx-mood-title{font-size:18px}.shuxia-project .sx-section-heading h3{font-size:18px}}
