@@ -108,7 +108,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
   const [splitPreview,setSplitPreview]=useState(initialPreview);
   const [fullWidthDetail,setFullWidthDetail]=useState(false);
-  useEffect(()=>{const media=window.matchMedia('(max-width:1100px), (orientation:portrait)');const update=()=>setFullWidthDetail(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
+  useEffect(()=>{const media=window.matchMedia('(max-width:1500px), (max-aspect-ratio:3/2)');const update=()=>setFullWidthDetail(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
   useEffect(()=>{if(new URLSearchParams(window.location.search).get('intro')==='trail')setSplitPreview(true);},[]);
   const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
