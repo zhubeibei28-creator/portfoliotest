@@ -1,18 +1,7 @@
-.project-reveal{opacity:0;transform:translate3d(0,26px,0)}
-.project-reveal[data-revealed=true]{opacity:1;transform:none;transition:opacity 800ms ease,transform 850ms cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms)}
-.project-reveal[data-reveal-photo]{transform:translate3d(0,20px,0) scale(.975);transform-origin:center}
-.project-reveal[data-reveal-photo][data-revealed=true]{transform:none;transition-duration:500ms,600ms}
-@media(prefers-reduced-motion:reduce){.project-reveal{opacity:1;transform:none!important;transition:none!important}}
-
-/* Independent translate preserves transforms used by project artwork. */
-.project-reveal.project-reveal-image{transform:none;translate:0 24px}
-.project-reveal.project-reveal-image[data-revealed=true]{translate:0 0;transition:opacity 750ms ease,translate 850ms cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms)}
-@media(prefers-reduced-motion:reduce){.project-reveal.project-reveal-image{translate:none;transition:none!important}}
-
-/* Fade media in place so it cannot pass over captions during entry. */
-.project-reveal.project-reveal-image{translate:none}
-.project-reveal.project-reveal-image[data-revealed=true]{translate:none;transition:opacity 850ms ease;transition-delay:var(--reveal-delay,0ms)}
-.project-reveal[data-reveal-photo]{transform:none}
-/* Caption text always keeps its full intrinsic height, including when it wraps. */
+/* Reveal opacity only: animation never moves artwork across adjacent captions. */
+.project-reveal{opacity:0}
+.project-reveal[data-revealed=true]{opacity:1;transition:opacity 800ms ease;transition-delay:var(--reveal-delay,0ms)}
+.project-reveal[data-reveal-photo][data-revealed=true]{transition-duration:600ms}
 :is(.shuxia-project,.graft-project,.pk-project,.yan-project) :is(figcaption,.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){position:relative;height:auto;max-height:none;overflow:visible;white-space:normal;overflow-wrap:anywhere;flex-shrink:0}
-.project-reveal:is(figcaption,.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){transform:none;translate:none}
+@media(prefers-reduced-motion:reduce){.project-reveal{opacity:1;transition:none!important}}
+.graft-project .gf-image,.yan-project .yan-photo{overflow:clip}

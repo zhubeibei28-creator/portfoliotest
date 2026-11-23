@@ -170,9 +170,6 @@
  .split-detail .split-detail-content .gf-index{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 12px;overflow:visible}
  .split-detail .split-detail-content .gf-index a{flex:0 0 calc((100% - 36px)/4);min-width:0;white-space:normal;text-align:center;font-size:clamp(9px,2.3vw,11px);line-height:1.45}
 }
-.split-reading-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:150;pointer-events:none;background:transparent}
-.split-reading-progress>span{display:block;width:100%;height:100%;background:#7b8372;transform-origin:left center;will-change:transform}
-.split-detail[data-theme=dark] .split-reading-progress>span{background:#88ed4d}
 .split-detail .split-detail-content .gf-index{position:sticky;top:0;z-index:45;align-self:start;flex-shrink:0}
 @media(max-aspect-ratio:4/3),(max-width:1200px){
  .split-detail .split-detail-content,.split-detail .split-detail-content>.graft-project{overflow:visible}
@@ -182,3 +179,10 @@
  .split-detail{padding-top:0}
  .split-detail .split-detail-content>article{padding-top:64px}
 }
+/* A slim visible line with a larger keyboard-, mouse- and touch-operable hit area. */
+/* Use the same two-column grid in both detail presentation modes. */
+.split-detail .split-detail-content .shuxia-project .sx-overview{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.split-detail .split-detail-content .shuxia-project .sx-overview-copy{display:block;min-width:0}
+.split-detail .split-detail-content .shuxia-project .sx-project-meta{display:grid;grid-template-columns:1fr 1fr;gap:24px;min-width:0}
+.split-detail .split-detail-content .shuxia-project .sx-project-meta>div:last-child{grid-column:1/-1}
+@media(max-width:560px){.split-detail .split-detail-content .shuxia-project .sx-overview{grid-template-columns:1fr;gap:28px}}

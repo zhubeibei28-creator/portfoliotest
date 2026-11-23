@@ -1,0 +1,7 @@
+.split-detail .split-detail-content .project-section-nav{position:sticky;top:0;z-index:45;display:flex;justify-content:space-between;align-items:center;gap:12px 18px;padding:17px 0;margin:0 0 28px;background:#fff;border-bottom:1px solid #e7e8e3;flex-shrink:0}
+.project-section-nav a{font-size:11px;line-height:1.5;white-space:nowrap;color:#888d82;text-decoration:none;padding:5px 0;border-bottom:1px solid transparent}
+.project-section-nav a span{font-size:9px;margin-right:3px}
+.project-section-nav a[aria-current]{color:#292d25;border-bottom-color:currentColor}
+.project-section-nav a:focus-visible{outline:2px solid #7b8372;outline-offset:4px}
+.portfolio-shell[data-nav-hidden=false]:has(.persistent-header) .split-detail .split-detail-content .project-section-nav{top:var(--portfolio-header-height,64px)}
+@media(max-width:700px){.split-detail .split-detail-content .project-section-nav{justify-content:center;flex-wrap:wrap;gap:5px 18px;padding:10px 0}.project-section-nav a{font-size:10px}}
