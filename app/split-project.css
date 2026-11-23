@@ -166,3 +166,7 @@
 /* Keep all seven GRÆFT chapters on one line in every detail layout. */
 .split-detail .split-detail-content .gf-index{display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:24px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
 .split-detail .split-detail-content .gf-index a{flex:0 0 auto;white-space:nowrap;text-align:left}
+@media(max-width:700px){
+ .split-detail .split-detail-content .gf-index{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 12px;overflow:visible}
+ .split-detail .split-detail-content .gf-index a{flex:0 0 calc((100% - 36px)/4);min-width:0;white-space:normal;text-align:center;font-size:clamp(9px,2.3vw,11px);line-height:1.45}
+}
