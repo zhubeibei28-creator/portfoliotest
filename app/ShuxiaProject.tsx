@@ -25,7 +25,7 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
         <p>{t("Memory and scent of summer.")}</p>
       </header>
 
-      <div className="sx-hero"><img src="/assets/shuxia/header-interior.webp" alt="SHUXIA white wordmark over a warm interior photograph" fetchPriority="high" /></div>
+      <div className="sx-hero"><img src="/assets/shuxia/header-interior-lossless.webp" alt="SHUXIA white wordmark over a warm interior photograph" fetchPriority="high" /></div>
 
       <section className="sx-overview" aria-label="Project overview">
         <div className="sx-overview-copy"><h2>{t("OVERVIEW")}</h2><p>{t("SHUXIA is a summer-inspired scent brand that remembers the season through atmosphere, texture, and small sensory moments: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool.")}</p><p>{t("Rather than the bright, energetic image of summer, the identity explores its softer side. A courtyard space brings this atmosphere into an architectural setting; scent, tactile materials, and illustration extend it into everyday objects.")}</p></div>
