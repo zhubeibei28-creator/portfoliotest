@@ -426,3 +426,13 @@
 .sx-route-node{width:21px;height:21px;border-color:#b8beb1;color:#747d6c}
 .sx-space-map li strong{margin-top:16px;font-size:11px;font-weight:400}
 @media(max-width:620px){.sx-space-map{width:100%;margin:24px 0 32px}.sx-space-map ol{min-width:720px}.sx-space-map li{padding:0 10px}.sx-space-map li>img{width:74%;height:58px;margin-bottom:26px}.sx-space-map li:after{top:94px}}
+/* Captions are real text in normal flow, never positioned over the artwork. */
+.shuxia-project .sx-captioned-image{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-bottom:0;height:auto;overflow:visible}
+.shuxia-project .sx-captioned-image:after{content:none}
+.shuxia-project .sx-photo-caption{display:block;position:static;flex:none;width:100%;padding-top:10px;font-size:11px;font-weight:400;line-height:1.5;letter-spacing:0;color:var(--sx-muted);text-align:left;white-space:normal}
+.shuxia-project .sx-soap-views .sx-captioned-image{aspect-ratio:auto}
+.shuxia-project .sx-soap-views .sx-captioned-image img{width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+.shuxia-project .sx-packaging-copy>.sx-description{grid-column:2}
+.shuxia-project .sx-postcards-studio{margin-top:28px}
+@media(min-width:621px){.shuxia-project .sx-postcard-story{grid-template-columns:minmax(0,calc((100% - 24px)*.571408 + 26.57px)) minmax(0,1fr)}}
+@media(max-width:620px){.shuxia-project .sx-packaging-copy>.sx-description{grid-column:1}}
