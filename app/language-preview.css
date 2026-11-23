@@ -75,3 +75,5 @@
 .portfolio-shell[lang=zh-CN] :is(.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note) :is(h2,h3){letter-spacing:0;line-height:1.35;text-wrap:balance}
 .portfolio-shell[lang=zh-CN] :is(.gf-index,.project-section-nav) a{white-space:normal;text-wrap:balance;line-height:1.6}
 .portfolio-shell[lang=zh-CN] :is(.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){height:auto;max-height:none;overflow:visible}
+.about-lead h1 .about-intro-paragraph{display:block;font:inherit;letter-spacing:inherit}
+.about-lead h1 .about-intro-paragraph+.about-intro-paragraph{margin-top:1em}

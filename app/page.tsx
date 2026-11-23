@@ -339,14 +339,14 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         <section className="about-view">
           <div className="about-lead">
             <p>ABOUT / 2026</p>
-            <h1>
+            <h1>{language==='zh'?<><span className="about-intro-paragraph">哈咯，我是贝贝！</span><span className="about-intro-paragraph">一名专注于品牌设计、插画与创意技术的视觉传达设计师。熟悉中英双语的创作环境，喜欢从不同的文化视角和日常生活中寻找灵感。</span><span className="about-intro-paragraph">我热衷于观察、收集和尝试新鲜事物，希望通过设计讲述有趣的故事，让平凡的事物拥有更多被发现的可能。</span></>:<>
               I’m a Shanghai-raised, Brooklyn-based communication designer
               working across branding, illustration, and creative technology.
               I’m always collecting references and paying attention to details
               other people might pass by, often pulling from culture, travel,
               and everyday observations along the way. I want the things I make
               to feel thoughtful, memorable, and above all, human.
-            </h1>
+            </>}</h1>
           </div>
           <div className="portrait-block diffuse-portrait">
             <img
