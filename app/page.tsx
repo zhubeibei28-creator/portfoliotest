@@ -364,11 +364,11 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
               items={[
                 [
                   'China Mobile Migu — Design Intern',
-                  'Key visual for a documentary on the 2026 FIFA World Cup in the U.S., Canada & Mexico',
+                  'Key visual for a 2026 FIFA World Cup documentary; main and episode poster designs for a Dalian Yingbo documentary.',
                 ],
                 [
                   'M Moser Associates — Design Intern',
-                  'Concept and environmental graphics for L’Oréal, Boeing & HSBC',
+                  'Environmental graphics, spatial visualizations and mural concepts for Fortune Global 500 client projects. Original mural proposals selected for formal bids and post-award client presentations.',
                 ],
               ]}
             />
