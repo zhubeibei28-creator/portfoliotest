@@ -130,3 +130,7 @@
  .split-detail[data-has-language=true] :is(.sx-topline,.gf-topline,.pk-topline,.yan-topline){visibility:hidden}
 }
 @media(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{top:26px;left:18px}}
+/* Back and language controls align to opposite edges of their column. */
+.split-detail-tools{width:max(216px,calc(23% - 16.88px));justify-content:space-between;gap:12px}
+@media(orientation:portrait),(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{right:28px;width:auto}}
+@media(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{right:18px}}
