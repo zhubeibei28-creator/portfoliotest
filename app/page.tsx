@@ -363,7 +363,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
               title="EXPERIENCE"
               items={[
                 [
-                  'China Mobile Migu — Design Intern',
+                  'China Mobile Migu — Freelance Designer',
                   '2026 FIFA World Cup documentary visual.\nDalian Yingbo documentary promotion.',
                 ],
                 [
