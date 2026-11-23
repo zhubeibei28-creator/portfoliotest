@@ -364,11 +364,11 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
               items={[
                 [
                   'China Mobile Migu — Design Intern',
-                  'Key visual for a 2026 FIFA World Cup documentary; main and episode poster designs for a Dalian Yingbo documentary.',
+                  '2026 FIFA World Cup documentary visual.\nDalian Yingbo documentary promotion.',
                 ],
                 [
                   'M Moser Associates — Design Intern',
-                  'Environmental graphics, spatial visualizations and mural concepts for Fortune Global 500 client projects. Original mural proposals selected for formal bids and post-award client presentations.',
+                  'Environmental graphics & spatial concepts for Fortune Global 500 clients.\nMural proposals selected for bids & client presentations.',
                 ],
               ]}
             />
@@ -582,7 +582,7 @@ function InfoColumn({ title, items }: { title: string; items: string[][] }) {
       <h2>{title}</h2>
       {items.map(([name, description]) => (<Localized key={name}><article>
           <h3>{name}</h3>
-          <p>{description}</p>
+          <p>{description.split('\n').map((line,i)=><span className="experience-copy-line" key={i}>{line}</span>)}</p>
         </article>
       </Localized>))}
     </section>

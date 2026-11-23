@@ -332,3 +332,4 @@ html,body{overscroll-behavior:none;}
  .about-view .portrait-block .portrait-base{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center top;transform:none}
  .about-view .portrait-block>p{position:relative;inset:auto;height:auto;margin:0;padding-top:10px;line-height:1.6;white-space:normal}
 }
+.experience-copy-line{display:block}.experience-copy-line+.experience-copy-line{margin-top:6px}
