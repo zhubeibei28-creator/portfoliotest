@@ -95,8 +95,10 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   useEffect(()=>{if(!bilingualPreview)return;const type=new URLSearchParams(window.location.search).get('type');if(type&&['xiaolai','marker','glow','round','smiley','mi','song'].includes(type))setTypePreview(type);},[bilingualPreview]);
   const t=(text:string)=>previewText(text,language);
   const [view, setView] = useState<View>('home');
-  const [trailPreview,setTrailPreview]=useState(initialPreview);
-  useEffect(()=>{setTrailPreview(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail');},[initialPreview]);
+  // Temporarily paused; keep the opening available for restoration.
+  const openingEnabled=false;
+  const [trailPreview,setTrailPreview]=useState(openingEnabled&&initialPreview);
+  useEffect(()=>{setTrailPreview(openingEnabled&&(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail'));},[initialPreview]);
   const [active, setActive] = useState<number | null>(null);
   const detailOrder=[2,3,4,1];
   const nextDetail=detailOrder[(detailOrder.indexOf(active??2)+1)%detailOrder.length];

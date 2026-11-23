@@ -334,3 +334,16 @@
 .shuxia-project .sx-packaging-pair>.sx-image:last-child{width:78%;justify-self:center}
 .shuxia-project .sx-packaging-pair>.sx-image:last-child img{width:100%;height:auto;max-height:none}
 @media(max-width:620px){.shuxia-project .sx-packaging-pair>.sx-image:last-child{width:100%}}
+
+/* Give the main product presence without exceeding the visible screen. */
+.shuxia-project .sx-packaging-pair>.sx-image:first-child{width:min(100%,820px)}
+.shuxia-project .sx-packaging-pair>.sx-image:first-child img{width:100%;height:auto;max-height:72svh;object-fit:contain}
+.shuxia-project .sx-packaging-pair>.sx-image:last-child{width:min(78%,700px)}
+.shuxia-project .sx-identity-panel .sx-wordmark-guides img{width:100%;max-width:100%}
+@media(min-width:761px) and (orientation:landscape){
+ .shuxia-project .sx-section-heading{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+ .shuxia-project .sx-overview-copy{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:32px;row-gap:0}
+ .shuxia-project .sx-overview-copy>h2{grid-column:1;grid-row:1/3}
+ .shuxia-project .sx-overview-copy>p{grid-column:2;width:100%;min-width:0}
+ .shuxia-project .sx-overview{grid-template-columns:1fr}
+}

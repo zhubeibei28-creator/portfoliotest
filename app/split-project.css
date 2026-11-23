@@ -134,3 +134,6 @@
 .split-detail-tools{width:max(216px,calc(23% - 16.88px));justify-content:space-between;gap:12px}
 @media(orientation:portrait),(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{right:28px;width:auto}}
 @media(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{right:18px}}
+@media(min-width:761px) and (orientation:landscape){
+ .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.yan-note){grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+}
