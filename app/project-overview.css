@@ -1,0 +1,14 @@
+/* Shared project introduction: narrative half + three aligned metadata columns. */
+.split-detail .split-detail-content article .project-overview{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;padding:40px 0 48px;align-items:start;color:#5d6357}
+.split-detail .split-detail-content article .project-overview h2{font-size:10px;font-weight:400;letter-spacing:.07em;line-height:1.5;color:#858b7d;margin:0 0 20px}
+.split-detail .split-detail-content article .project-overview p,.split-detail .split-detail-content article .project-overview li{font-size:14px;font-weight:400;line-height:1.8;color:inherit;margin:0;max-width:none;text-wrap:pretty}
+.split-detail .split-detail-content article .project-overview-copy>p+p{margin-top:20px}
+.split-detail .split-detail-content article .project-overview-meta{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1fr) minmax(0,1.8fr);gap:24px;align-items:start;min-width:0}
+.project-overview-meta>div{min-width:0}.project-overview-meta ul{list-style:none;padding:0;margin:0}
+.split-detail .split-detail-content article.graft-project .project-overview{color:#aab1a2}
+@container(max-width:850px){.split-detail .split-detail-content article .project-overview-meta{grid-template-columns:.6fr 1fr}.project-overview-meta>div:last-child{grid-column:1/-1}}
+@media(max-width:600px){.split-detail .split-detail-content article .project-overview{grid-template-columns:1fr;gap:28px;padding:32px 0}.split-detail .split-detail-content article .project-overview-meta{grid-template-columns:.6fr 1fr}.project-overview-meta>div:last-child{grid-column:1/-1}}
+/* One shared centre axis for section descriptions. */
+.split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
+.split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note)>:is(p,div){min-width:0}
+@media(max-width:600px){.split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note){grid-template-columns:1fr;gap:18px}}

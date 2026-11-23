@@ -1,4 +1,5 @@
 'use client';
+import ProjectOverview from './ProjectOverview';
 
 import { useEffect, useRef, useState } from 'react';
 import ProjectSectionNav from './ProjectSectionNav';
@@ -39,13 +40,10 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
 
       <div className="sx-hero"><img src="/assets/shuxia/summer-banner.webp" alt="SHUXIA handwritten white wordmark over a green field and summer sky" width={1920} height={932} fetchPriority="high" /></div>
 
+
+      <ProjectOverview id="sx-overview" labels={[t('OVERVIEW'),t('YEAR'),t('PROJECT'),t('MY ROLE')]} year="2026" project={<>{t('Independent')}<br/>{t('Brand concept')}</>} roles={['Concept development','Visual identity','Illustration & mascot','Product & packaging','Website design','Spatial design & visualization'].map(t)} description={<><p>{t('SHUXIA is a summer-inspired scent brand that remembers the season through atmosphere, texture, and small sensory moments: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool.')}</p><p>{t('Rather than the bright, energetic image of summer, the identity explores its softer side. A courtyard space brings this atmosphere into an architectural setting; scent, tactile materials, and illustration extend it into everyday objects.')}</p></>} />
+
       <ProjectSectionNav root={article} items={[["sx-overview",language==='zh'?"概述":"Overview"],["sx-mood-title",language==='zh'?"夏日印象":"Summer"],["sx-identity",language==='zh'?"视觉识别":"Identity"],["sx-store",language==='zh'?"空间":"Space"],["sx-packaging",language==='zh'?"产品包装":"Products"],["sx-postcards",language==='zh'?"明信片":"Postcards"],["sx-website",language==='zh'?"网站":"Website"]]} />
-      <section id="sx-overview" className="sx-overview" aria-label="Project overview">
-        <div className="sx-overview-copy"><h2>{t("OVERVIEW")}</h2><p>{t("SHUXIA is a summer-inspired scent brand that remembers the season through atmosphere, texture, and small sensory moments: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool.")}</p><p>{t("Rather than the bright, energetic image of summer, the identity explores its softer side. A courtyard space brings this atmosphere into an architectural setting; scent, tactile materials, and illustration extend it into everyday objects.")}</p></div>
-        <div className="sx-project-meta"><div><h2>{t("YEAR")}</h2><p>2026</p></div>
-        <div><h2>{t("PROJECT")}</h2><p>{t("Independent")}<br />{t("Brand concept")}</p></div>
-        <div><h2>{t("MY ROLE")}</h2><p>{t("Concept development")}<br />{t("Visual identity")}<br />{t("Illustration & mascot")}<br />{t("Product & packaging")}<br />{t("Website design")}<br />{t("Spatial design & visualization")}</p></div></div>
-      </section>
 
       <section className="sx-section sx-mood-section" aria-labelledby="sx-mood-title">
         <div className="sx-section-heading"><h2 id="sx-mood-title">{t('MOODBOARD / SUMMER ATMOSPHERE')}</h2><p>{t('Courtyards, shade, moving air, and the small pauses of an ordinary summer.')}</p></div>

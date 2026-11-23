@@ -5,3 +5,7 @@
 .project-section-nav a:focus-visible{outline:2px solid #7b8372;outline-offset:4px}
 .portfolio-shell[data-nav-hidden=false]:has(.persistent-header) .split-detail .split-detail-content .project-section-nav{top:var(--portfolio-header-height,64px)}
 @media(max-width:700px){.split-detail .split-detail-content .project-section-nav{justify-content:center;flex-wrap:wrap;gap:5px 18px;padding:10px 0}.project-section-nav a{font-size:10px}}
+/* Match the header's motion instead of snapping between its two offsets. */
+.split-detail .split-detail-content :is(.project-section-nav,.gf-index){transition:top 260ms ease}
+@media(hover:hover){.portfolio-shell:has(.persistent-header:hover) .split-detail .split-detail-content :is(.project-section-nav,.gf-index){top:var(--portfolio-header-height,64px)}}
+@media(prefers-reduced-motion:reduce){.split-detail .split-detail-content :is(.project-section-nav,.gf-index){transition:none}}

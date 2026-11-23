@@ -1,4 +1,5 @@
 'use client';
+import ProjectOverview from './ProjectOverview';
 
 import { useEffect, useRef, useState } from 'react';
 import ProjectSectionNav from './ProjectSectionNav';
@@ -31,8 +32,9 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
     <div className="yan-header-photo">{photo('canal','My travel photograph: rooflines framing a canal')}</div>
     <div className="yan-opening">
       {photo('cover','檐行记: a fiber-textured cover wrapped in a cream paper band')}
-      <div className="yan-opening-copy"><p lang="zh" className="yan-chinese">屋檐与天空相接之处，<br/>即是故事的开端。</p><p>Developed over a semester, 檐行记 is a travelogue exploring rooflines, climate, and shelter. Following a journey from southern China to the north, Dunhuang, and Lhasa, it connects the experience of shelter with the hands and structures that make it possible.</p><dl><div><dt>YEAR</dt><dd>2025</dd></div><div><dt>FORMAT</dt><dd>Travelogue / Editorial design<br/>Semester-long project</dd></div></dl></div>
+
     </div>
+    <ProjectOverview year="2025" project={<>Travelogue / Editorial design<br/>Semester-long project</>} roles={['Editorial design','Typography','Photography','Paper selection','Hand binding']} description={<><p lang="zh">屋檐与天空相接之处，即是故事的开端。</p><p>Developed over a semester, 檐行记 is a travelogue exploring rooflines, climate, and shelter. Following a journey from southern China to the north, Dunhuang, and Lhasa, it connects the experience of shelter with the hands and structures that make it possible.</p></>} />
     <ProjectSectionNav root={article} items={[["yan-structure","Structure"],["yan-craft","Binding"],["yan-process","Process"],["yan-spreads","Spreads"],["yan-film","Film"]]} /><section id="yan-structure" className="yan-sequence" aria-label="Book structure">
       <div className="yan-note"><h2>One book, two entrances.</h2><p>A dos-à-dos–inspired structure brings two independent reading directions together. Turn the book to move from a vertical travelogue to a horizontal accordion: from experiencing a place to looking at how it is made.</p></div>
       {photo('accordion','The architectural sequence unfolding as a horizontal accordion','yan-wide')}

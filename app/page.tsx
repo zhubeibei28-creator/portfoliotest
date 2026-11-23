@@ -113,6 +113,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
 
+  useEffect(()=>{const header=document.querySelector<HTMLElement>('.persistent-header');const shell=header?.closest<HTMLElement>('.portfolio-shell');if(!header||!shell)return;const update=()=>shell.style.setProperty('--portfolio-header-height',`${header.getBoundingClientRect().height}px`);const observer=new ResizeObserver(update);observer.observe(header);update();return()=>observer.disconnect();},[view,active,fullWidthDetail,language]);
   useEffect(() => {
     const isDetail=splitPreview&&view==='home'&&active!==null;
     setNavHidden(isDetail&&!fullWidthDetail);
