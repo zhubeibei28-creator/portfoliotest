@@ -11,7 +11,7 @@ const art=[
  {src:'/assets/icepact-poster.webp',id:'04'},
  {src:'/assets/roofbook-cover-two-spreads-v7.png',id:'05'},
  {src:'/assets/pocklet-cover.png',id:'03'},
- {src:'/assets/graeft-subway-cover-v1.png',id:'02'},
+ {src:'/assets/graft/cover-promo-v2.webp',id:'02'},
  {src:'/assets/shuxia/home-postcards-cover.webp',id:'01'},
 ];
 const small=[[349,201,87,101],[375,208,87,101],[396,231,87,101],[418,257,87,101],[440,231,87,101],[460,208,87,101],[478,184,87,101],[500,208,87,101],[515,218,87,101],[520,232,87,101]];
