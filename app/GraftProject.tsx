@@ -1,4 +1,6 @@
 'use client';
+import Localized from './Localized';
+
 import ProjectOverview from './ProjectOverview';
 
 import { useEffect, useRef, useState } from 'react';
@@ -43,13 +45,13 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
     window.addEventListener('keydown',close);
     return () => window.removeEventListener('keydown',close);
   },[]);
-  const photo = (name:string,alt:string,extra='') => <button className={`gf-image ${extra}`} onClick={()=>setZoom({src:`/assets/graft/${name}.webp`,alt})} aria-label={`Enlarge: ${alt}`}><img src={`/assets/graft/${name}.webp`} alt={alt} loading="lazy" decoding="async" /></button>;
-  const heading = (id:string,n:string,title:string,copy:string) => <div className="gf-section-heading"><div><span className="gf-eyebrow">{n}</span><h2 id={id}>{id==='gf-world'?<>The station is working again.<br/><span className="gf-title-line">Just differently.</span></>:title}</h2></div><p>{copy}</p></div>;
+  const photo = (name:string,alt:string,extra='') => <Localized><button className={`gf-image ${extra}`} onClick={()=>setZoom({src:`/assets/graft/${name}.webp`,alt})} aria-label={`Enlarge: ${alt}`}><img src={`/assets/graft/${name}.webp`} alt={alt} loading="lazy" decoding="async" /></button></Localized>;
+  const heading = (id:string,n:string,title:string,copy:string) => <Localized><div className="gf-section-heading"><div><span className="gf-eyebrow">{n}</span><h2 id={id}>{id==='gf-world'?<>The station is working again.<br/><span className="gf-title-line">Just differently.</span></>:title}</h2></div><p>{copy}</p></div></Localized>;
   const collage = (page:number,main:number,reference:number,title:string,copy:string) => {
     const detail=page===43?'roots':page===45?'waterfall':'new-growth';
-    return <div className="gf-editorial-collage">{photo(`collage-${page}-${main}`,title)}<div className="gf-collage-context"><figure className="gf-detail-figure"><button className="gf-image" onClick={()=>setZoom({src:`/assets/graft/closeup-${detail}.png`,alt:`${title} / in-scene close-up`})} aria-label={`Enlarge: ${title} / in-scene close-up`}><img src={`/assets/graft/closeup-${detail}.png`} alt={`${title} / in-scene close-up`} loading="lazy"/></button><figcaption className="gf-caption">In-scene close-up</figcaption></figure><div className="gf-collage-copy"><h3>{title}</h3><p>{copy}</p></div></div></div>;
+    return <Localized><div className="gf-editorial-collage">{photo(`collage-${page}-${main}`,title)}<div className="gf-collage-context"><figure className="gf-detail-figure"><button className="gf-image" onClick={()=>setZoom({src:`/assets/graft/closeup-${detail}.png`,alt:`${title} / in-scene close-up`})} aria-label={`Enlarge: ${title} / in-scene close-up`}><img src={`/assets/graft/closeup-${detail}.png`} alt={`${title} / in-scene close-up`} loading="lazy"/></button><figcaption className="gf-caption">In-scene close-up</figcaption></figure><div className="gf-collage-copy"><h3>{title}</h3><p>{copy}</p></div></div></div></Localized>;
   };
-  return <article ref={article} className="graft-project">
+  return <Localized><article ref={article} className="graft-project">
     <header className="gf-heading"><div className="gf-topline"><span>SELECTED PROJECT / 02</span><button onClick={onBack}>Back to work ↗</button></div><h1>GRÆFT</h1><div className="gf-heading-bottom"><p>After the flood.<br/>New growth.</p><span>Music Festival Identity &amp; Experience</span></div></header>
     <div className="gf-hero"><img src="/assets/graft/hero.webp" alt="GRÆFT’s underground station environment" fetchPriority="high" /></div>
     <ProjectOverview year="2026" project="Collaborative Project" roles={['Lead Concept Development & Art Direction','Visual Identity','Spatial & Experiential Design','Motion, Promotion & Merchandise']} description={<p>A fictional music festival set inside an abandoned underground station. After a flood interrupts the routines of commuting and work, water and vegetation begin to reclaim the infrastructure. The station comes back to life after dark, through sound, light and collective experience.</p>} />
@@ -60,7 +62,7 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
       <div className="gf-research-principles"><div><span>01</span><h3>Rhythm & fragmentation</h3><p>Chopped rhythms became a starting point for fragmented surfaces, disrupted imagery and a sense of movement.</p></div><div><span>02</span><h3>Underground culture</h3><p>The station connects the festival to transit, nightlife and the transformation of everyday public space.</p></div><div><span>03</span><h3>Roots & new growth</h3><p>Early and contemporary Jungle informed two distinct levels, connected by a physical and sonic transition.</p></div></div>
       <div className="gf-research-images">{photo('research-rave-1','Research reference: early Jungle and rave culture')}{photo('research-rave-2','Research reference: underground music and collective experience')}</div><p className="gf-caption">Found reference imagery from the project research / not original GRÆFT artwork.</p>
       <div className="gf-subheading"><h3>Visual research</h3><p>Fluid lines, metallic textures, digital noise and organic growth informed the visual direction.</p></div>
-      <div className="gf-reference-strip">{[1,2,3,4,5].map(n=><div key={n}>{photo(`reference-${n}`,`Visual inspiration reference ${n}: texture, distortion and organic form`)}</div>)}</div><p className="gf-caption">Inspiration / reference imagery.</p>
+      <div className="gf-reference-strip">{[1,2,3,4,5].map(n=><Localized key={n}><div>{photo(`reference-${n}`,`Visual inspiration reference ${n}: texture, distortion and organic form`)}</div></Localized>)}</div><p className="gf-caption">Inspiration / reference imagery.</p>
     </section>
 
     <section className="gf-section" aria-labelledby="gf-identity">
@@ -87,7 +89,7 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
         </figure>
       </div>
       <figure className="gf-logo-motion"><VisibilityVideo src="/assets/graft/logo-animation.mp4" poster="/assets/graft/logo-animation-poster.webp" label="GRÆFT melting and glitching logo animation" /><figcaption className="gf-caption">Logo animation / melt & glitch. Sound available through the player controls.</figcaption></figure>
-      <div className="gf-system"><div><span className="gf-eyebrow">TYPOGRAPHY</span><img className="gf-type-specimen" src="/assets/graft/type-specimen-complete.webp" alt="SD Gothic Neo Semibold alphabet and No Return Service typography specimen" loading="lazy" /><p>SD Gothic Neo / Semibold<br/>A direct typographic voice supports the softer, fluid wordmark.</p></div><div><span className="gf-eyebrow">COLOR & MATERIAL</span><div className="gf-colors">{[['#88ED4D','Acid green'],['#7F3AEF','Violet'],['#202226','Charcoal']].map(([hex,label])=><div key={hex} style={{background:hex,color:hex==='#202226'?'#ddd':'#10110f'}}><span>{label}</span><span>{hex}</span></div>)}</div><p>Translucent chrome adds a reflective material layer.</p></div></div>
+      <div className="gf-system"><div><span className="gf-eyebrow">TYPOGRAPHY</span><img className="gf-type-specimen" src="/assets/graft/type-specimen-complete.webp" alt="SD Gothic Neo Semibold alphabet and No Return Service typography specimen" loading="lazy" /><p>SD Gothic Neo / Semibold<br/>A direct typographic voice supports the softer, fluid wordmark.</p></div><div><span className="gf-eyebrow">COLOR & MATERIAL</span><div className="gf-colors">{[['#88ED4D','Acid green'],['#7F3AEF','Violet'],['#202226','Charcoal']].map(([hex,label])=><Localized key={hex}><div style={{background:hex,color:hex==='#202226'?'#ddd':'#10110f'}}><span>{label}</span><span>{hex}</span></div></Localized>)}</div><p>Translucent chrome adds a reflective material layer.</p></div></div>
     </section>
 
     <section className="gf-section" aria-labelledby="gf-world">
@@ -109,19 +111,19 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
           ['transfer','Elevator','elevator-poster'],
           ['growth','NEW GROWTH','growth-panorama'],
           ['stairs','Stairs / Exit','exit-original'],
-        ].map(([id,title,image],i)=><a key={id} href={`#gf-space-${id}`}><div className={`gf-preview-image gf-preview-${id}`}><img src={`/assets/graft/${image}.webp`} alt="" loading="lazy"/></div><span><small>0{i+1}</small>{title}<b aria-hidden="true">↗</b></span></a>)}</div>
+        ].map(([id,title,image],i)=><Localized key={id}><a href={`#gf-space-${id}`}><div className={`gf-preview-image gf-preview-${id}`}><img src={`/assets/graft/${image}.webp`} alt="" loading="lazy"/></div><span><small>0{i+1}</small>{title}<b aria-hidden="true">↗</b></span></a></Localized>)}</div>
       </nav>
 
       <div className="gf-subheading"><h3>Venue plan</h3><p>Platforms become dance spaces, the train becomes a DJ setting, and pools and seating connect the event to the memory of the flood.</p></div>
-      <button className="gf-image gf-wide-plan" onClick={()=>setZoom({src:'/assets/graft/section-plan-updated.png',alt:'GRÆFT architectural section and spatial arrangement'})} aria-label="Enlarge: GRÆFT architectural section and spatial arrangement"><img src="/assets/graft/section-plan-updated.png" alt="GRÆFT architectural section and spatial arrangement" loading="lazy" decoding="async"/></button>
-      <div className="gf-pair gf-floor-plans"><figure><img src="/assets/graft/floor-roots.svg" alt="ROOTS floor plan with labeled pools, stage, seating, stairs and elevator"/><figcaption className="gf-caption">ROOTS / Lower level</figcaption></figure><figure><img src="/assets/graft/floor-new-growth.svg" alt="NEW GROWTH floor plan with labeled stage, pool, seating, stairs and elevator"/><figcaption className="gf-caption">NEW GROWTH / Upper level</figcaption></figure></div>
+      <figure className="gf-section-plan"><button data-no-reveal="true" className="gf-image gf-wide-plan" onClick={()=>setZoom({src:'/assets/graft/section-plan-updated.png',alt:'GRÆFT architectural section and spatial arrangement'})} aria-label="Enlarge: GRÆFT architectural section and spatial arrangement"><img width={6333} height={3600} src="/assets/graft/section-plan-updated.png" alt="GRÆFT architectural section and spatial arrangement" loading="eager" decoding="async"/></button><figcaption className="gf-caption">Overall architectural section / two floors, stairs &amp; elevator</figcaption></figure>
+
       <nav className="gf-visitor-journey" aria-label="Visitor journey"><div className="gf-preview-label"><span className="gf-eyebrow">VISITOR JOURNEY</span><p>A route through the two levels.</p></div><ol>{[
         ['arrival','Arrive','Street entrance & concourse'],
         ['roots','ROOTS','Lower level / early Jungle'],
         ['transfer','Transfer','Elevator / a shift in sound'],
         ['growth','NEW GROWTH','Upper level / contemporary Jungle'],
         ['stairs','Exit','Stairs / return to the city'],
-      ].map(([id,title,copy],i)=><li key={id}><a href={`#gf-space-${id}`}><span className="gf-route-number">0{i+1}</span><h3>{title}</h3><p>{copy}</p></a></li>)}</ol></nav>
+      ].map(([id,title,copy],i)=><Localized key={id}><li><a href={`#gf-space-${id}`}><span className="gf-route-number">0{i+1}</span><h3>{title}</h3><p>{copy}</p></a></li></Localized>)}</ol></nav>
       <div className="gf-subheading"><h3 id="gf-space-arrival">Arrival & descent</h3><p>Familiar station architecture gradually gives way to fragmented tiles, botanical growth and the festival identity.</p></div>
       <div className="gf-arrival-pair">{photo('arrival','Concept visualization: arrival at the underground canopy')}
       <figure className="gf-entry-motion"><VisibilityVideo src="/assets/graft/entry-promo.mp4" poster="/assets/graft/entry-poster.webp" label="GRÆFT promotional video displayed at the entrance" controls={false} /><figcaption className="gf-caption">Entry / promotional screen in context.</figcaption></figure></div>
@@ -136,14 +138,14 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
       <div className="gf-subheading"><h3>Switchback stairs</h3><p>Two switchback staircases flank the botanical tile logo wall, corresponding to the stair routes shown in the venue plans and architectural section. Tiled walls, metal railings and suspended screens carry the station’s visual language through these circulation spaces.</p></div>
       <div className="gf-switchback-pair">{photo('stair-descent-1','Switchback staircase beside the tile logo wall / suspended screens')}{photo('stair-descent-2','Switchback staircase beside the tile logo wall / central stairwell')}</div>
       <div className="gf-subheading"><h3 id="gf-space-roots">ROOTS / The underground</h3><p>Industrial structures remain exposed. Water and suspended light echo the flood, while the first signs of vegetation gather around the stage.</p></div>
-      {photo('roots-pdf-42','ROOTS / main environment with neon figures for scale','gf-collage')}
+      {photo('roots-no-plan','ROOTS / main environment with neon figures for scale','gf-collage')}
       {collage(43,0,1,'ROOTS / Stage collage','The stage design combines exposed industrial metal with the first signs of regrowth. Suspended rings and fluid light tubes echo the movement of water; vegetation gathers around the DJ booth while most of the framework remains exposed.')}
       <figure className="gf-roots-motion"><VisibilityVideo src="/assets/graft/roots-motion.mp4" poster="/assets/graft/roots-motion-poster.webp" label="ROOTS stage motion with original audio" preferSound /><figcaption className="gf-caption">ROOTS / Stage motion with original audio</figcaption></figure>
       {collage(45,1,0,'ROOTS / Waterfall installation','The waterfall installation sits within the ROOTS environment. Water spills from staggered metal channels, recalling the burst pipes that flooded the station. A trace of the destruction becomes an installation within ROOTS.')}
       <div className="gf-subheading"><h3 id="gf-space-transfer">ROOTS → NEW GROWTH</h3><p>The elevator is a transition between the two festival worlds. The moving sequence reveals the shift from the underground roots into new growth.</p></div>
       <figure className="gf-elevator-video"><VisibilityVideo src="/assets/graft/elevator-transition.mp4" poster="/assets/graft/elevator-poster.webp" label="Elevator transition from ROOTS to NEW GROWTH" controls={false} /><figcaption className="gf-caption">Elevator transition / moving spatial concept</figcaption></figure>
       <div className="gf-subheading"><h3 id="gf-space-growth">NEW GROWTH / The upper level</h3><p>Vegetation overtakes the metal framework. Light, water and projections turn the upper level into a more immersive environment.</p></div>
-      {photo('new-growth','NEW GROWTH / main environment with neon figures for scale','gf-full')}
+      {photo('new-growth-no-plan','NEW GROWTH / main environment with neon figures for scale','gf-full')}
       {collage(48,0,1,'NEW GROWTH / Stage collage','The stage retains a similar structure to ROOTS, but is more heavily overtaken by vegetation. Moss and climbing vines spread across the metal framework, while the hanging lights become integrated with the surrounding greenery.')}
       <div className="gf-subheading"><h3 id="gf-space-chambers">Specimen chambers</h3><p>Office-worker figures become remnants of the station’s former life, held within glass chambers and gradually overtaken by water and vegetation.</p></div>
       <div className="gf-chamber-composition">{photo('collage-50-0','Specimen chamber / office worker')}<div><button className="gf-image" onClick={()=>setZoom({src:'/assets/graft/chambers-closeup.png',alt:'Specimen chambers / in-scene close-up of the two figures'})} aria-label="Enlarge: Specimen chambers / two figures in context"><img src="/assets/graft/chambers-closeup.png" alt="Specimen chambers / two figures in context" loading="lazy"/></button><div className="gf-collage-copy"><h3>NEW GROWTH / Specimen chambers</h3><p>Faceless office workers and transit staff are held inside glass chambers. Partially submerged and overtaken by vegetation, they become remnants of the station’s everyday life.</p></div></div>{photo('collage-50-1','Specimen chamber / transit staff')}</div>
@@ -196,5 +198,5 @@ export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () =
     <div className="gf-showcased-credit gf-final-credits"><div><h2 className="gf-eyebrow">INDEPENDENT CONTRIBUTIONS</h2><ul className="gf-role-list"><li>Logo &amp; Wordmark Design</li><li>Spatial Design &amp; Visualization</li><li>Environmental Collages</li><li>Promotional Video</li></ul></div><div><h2 className="gf-eyebrow">COLLABORATIVE CONTRIBUTIONS</h2><ul className="gf-role-list"><li>Promotional Campaign</li><li>Merchandise Design</li><li>Floor Plan Development</li></ul></div><div><h2 className="gf-eyebrow">SHOWCASED WORK</h2><p>Individual &amp; Collaborative Work<br/>with Yelin Kim</p></div></div>
     <footer className="gf-end"><span>GRÆFT / No Return Service.</span><button onClick={onNext??onBack}>{onNext?`Next / ${nextTitle} ↗`:'Back to selected work ↗'}</button></footer>
     {zoom&&<div className="gf-lightbox" role="dialog" aria-modal="true" aria-label={zoom.alt} onClick={()=>setZoom(null)}><button autoFocus onClick={()=>setZoom(null)}>Close ×</button><img src={zoom.src} alt={zoom.alt}/></div>}
-  </article>;
+  </article></Localized>;
 }

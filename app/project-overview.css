@@ -12,3 +12,9 @@
 .split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
 .split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note)>:is(p,div){min-width:0}
 @media(max-width:600px){.split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note){grid-template-columns:1fr;gap:18px}}
+/* Earlier POCKLET layouts flattened the title wrapper and pinned copy to column 2.
+   Keep the wrapper intact so a narrow grid cannot create an implicit second column. */
+.split-detail .split-detail-content .pk-section-head>div:first-child{display:block;grid-column:auto}
+@media(max-width:600px){
+ .split-detail .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note)>*{grid-column:auto;grid-row:auto;min-width:0;width:auto}
+}

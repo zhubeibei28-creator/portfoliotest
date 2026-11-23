@@ -287,3 +287,7 @@
 .gf-logo-motion>.gf-caption{padding-inline:28px}
 @media(max-width:620px){.graft-project .gf-logo-motion{width:calc(100% + 36px);margin:28px -18px}.gf-logo-motion .gf-video-player{aspect-ratio:2}.gf-logo-motion>.gf-caption{padding-inline:18px}}
 @media(prefers-reduced-motion:reduce){.gf-logo-dissolve{filter:brightness(0) invert(1)}}
+/* The complete section drawing is an uncropped, stable orientation reference. */
+.split-detail .graft-project .gf-wide-plan{display:block;width:100%;height:auto;overflow:visible;opacity:1;transform:none;margin:24px 0 40px}
+.split-detail .graft-project .gf-wide-plan img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;margin:0;object-fit:contain;transform:none}
+.gf-section-plan{margin:0 0 40px;min-width:0}.graft-project .gf-section-plan .gf-wide-plan{margin-bottom:14px}

@@ -69,3 +69,9 @@
  .portfolio-shell[data-language-preview=true] .persistent-header .preview-language-switch{position:static;transform:none;grid-column:2;grid-row:1;justify-self:end;align-self:center;gap:6px}
  .portfolio-shell[data-language-preview=true] .persistent-header nav{position:static;transform:none;grid-column:1/-1;grid-row:2;justify-self:center;display:flex;justify-content:center;gap:clamp(20px,6vw,32px);width:100%}
 }
+/* Chinese shares the English grid, with natural wrapping and the same hierarchy. */
+.portfolio-shell[lang=zh-CN] :is(.graft-project,.pk-project,.yan-project,.project-overview){font-family:Arial,Helvetica,'Beibei MiSans',sans-serif}
+.portfolio-shell[lang=zh-CN] :is(.graft-project,.pk-project,.yan-project) :is(p,li,figcaption){line-height:1.8;overflow-wrap:anywhere;word-break:normal;letter-spacing:0}
+.portfolio-shell[lang=zh-CN] :is(.gf-section-heading,.gf-subheading,.pk-section-head,.yan-note) :is(h2,h3){letter-spacing:0;line-height:1.35;text-wrap:balance}
+.portfolio-shell[lang=zh-CN] :is(.gf-index,.project-section-nav) a{white-space:normal;text-wrap:balance;line-height:1.6}
+.portfolio-shell[lang=zh-CN] :is(.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){height:auto;max-height:none;overflow:visible}

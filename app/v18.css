@@ -326,3 +326,9 @@ html,body{overscroll-behavior:none;}
 @media (prefers-reduced-motion: reduce) {
   .persistent-header, .portfolio-shell .gf-index { transition: none; }
 }
+/* Keep the complete vertical portrait on portrait phones. */
+@media(max-width:620px) and (orientation:portrait){
+ .about-view .portrait-block{width:100%;max-width:100%;height:auto;aspect-ratio:auto;margin:32px 0 40px}
+ .about-view .portrait-block .portrait-base{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center top;transform:none}
+ .about-view .portrait-block>p{position:relative;inset:auto;height:auto;margin:0;padding-top:10px;line-height:1.6;white-space:normal}
+}

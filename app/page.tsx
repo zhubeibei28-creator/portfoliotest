@@ -1,4 +1,6 @@
 'use client';
+import Localized, {PortfolioLanguage} from './Localized';
+
 
 import { useEffect, useRef, useState } from 'react';
 import ShuxiaProject from './ShuxiaProject';
@@ -225,8 +227,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
     return ()=>viewport.removeEventListener('wheel',wheel);
   },[view,active,trailPreview]);
 
-  return (
-    <main
+  return (<PortfolioLanguage.Provider value={language}><Localized><main
       className="portfolio-shell"
       lang={language==='zh'?'zh-CN':'en'}
       data-language-preview={true}
@@ -240,15 +241,14 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>
         <nav>
-          {(['home', 'lab', 'about', 'contact'] as View[]).map((item) => (
-            <button
+          {(['home', 'lab', 'about', 'contact'] as View[]).map((item) => (<Localized><button
               key={item}
               className={view === item && active === null ? 'active' : ''}
               onClick={() => navigate(item)}
             >
               {t(item)}
             </button>
-          ))}
+          </Localized>))}
         </nav>
         <p>
           <i /> {t('Available for select projects')}
@@ -271,8 +271,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           <div ref={gallery} className="gallery-viewport">
             <div ref={galleryRow} className="gallery-row loop-row">
               {[0, 1, 2].flatMap((loop) =>
-                projects.map((project, index) => (
-                    <button
+                projects.map((project, index) => (<Localized><button
                       className={`gallery-project home-composition-${index}`}
                       key={`${loop}-p-${index}`}
                       style={
@@ -296,7 +295,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
                         {projects[index].id}
                       </span>
                     </button>
-                  ),
+                  </Localized>),
                 ),
               )}
             </div>
@@ -312,12 +311,11 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         </section>}
         <section className="selected-grid">
           <header><h2>{t('Selected work')}</h2><span>2024—2026</span></header>
-          <div className="work-grid">{selectedWork.map(({ project, index }) => (
-            <button key={project.id} aria-disabled={!trailPreview&&!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={()=>{if(trailPreview){browsePreview(Number(project.id)-1);}else if(['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)){setActive(index);setHovered(null);}}}>
+          <div className="work-grid">{selectedWork.map(({ project, index }) => (<Localized key={project.id}><button aria-disabled={!trailPreview&&!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={()=>{if(trailPreview){browsePreview(Number(project.id)-1);}else if(['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)){setActive(index);setHovered(null);}}}>
               {project.title === 'ICEPACT' ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-postcards-cover.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graeft-subway-cover-v1.png" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{t(project.type)}</span></span>
             </button>
-          ))}</div>
+          </Localized>))}</div>
           <div className="work-grid-end"><span>Beibei (Anna) Zhu</span><span>{t('New York / Shanghai')}</span></div>
         </section>
         </div>
@@ -353,6 +351,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           <div className="portrait-block diffuse-portrait">
             <img
               className="portrait-base"
+              width={1466} height={2200}
               src="/assets/beibei-portrait.jpg"
               alt="Portrait of Beibei Anna Zhu"
             />
@@ -477,7 +476,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         </div>
       )}
     </main>
-  );
+  </Localized></PortfolioLanguage.Provider>);
 }
 
 function CaseStudy({
@@ -489,8 +488,7 @@ function CaseStudy({
   onBack: () => void;
   onNext: () => void;
 }) {
-  return (
-    <section className="case-study">
+  return (<Localized><section className="case-study">
       <button className="case-back" onClick={onBack}>
         <ArrowLeft size={15} /> Home
       </button>
@@ -558,9 +556,8 @@ function CaseStudy({
           </h2>
         </div>
         <div className="system-strip">
-          {['0% 0%', '100% 0%', '0% 100%', '100% 100%'].map((crop) => (
-            <span key={crop} style={{ backgroundPosition: crop }} />
-          ))}
+          {['0% 0%', '100% 0%', '0% 100%', '100% 100%'].map((crop) => (<Localized key={crop}><span style={{ backgroundPosition: crop }} />
+          </Localized>))}
         </div>
       </section>
       <section className="case-outcome">
@@ -577,21 +574,19 @@ function CaseStudy({
         </div>
       </section>
     </section>
-  );
+  </Localized>);
 }
 
 function InfoColumn({ title, items }: { title: string; items: string[][] }) {
-  return (
-    <section className="info-column">
+  return (<Localized><section className="info-column">
       <h2>{title}</h2>
-      {items.map(([name, description]) => (
-        <article key={name}>
+      {items.map(([name, description]) => (<Localized key={name}><article>
           <h3>{name}</h3>
           <p>{description}</p>
         </article>
-      ))}
+      </Localized>))}
     </section>
-  );
+  </Localized>);
 }
 
 // Add real video and full-resolution assets here as each study is supplied.
@@ -671,8 +666,8 @@ function preventWidow(text: string = '') {
 
 function LabWorkTitle({title}: {title:string}) {
   const words = title.split(' ');
-  if(words.length < 3) return <>{title}</>;
-  return <>{words.slice(0,-2).join(' ')} <span className="lab-title-ending">{words.slice(-2).join(' ')}</span></>;
+  if(words.length < 3) return <Localized><>{title}</></Localized>;
+  return <Localized><>{words.slice(0,-2).join(' ')} <span className="lab-title-ending">{words.slice(-2).join(' ')}</span></></Localized>;
 }
 
 function LabPreviewVideo({src, playing, poster}: {src: string; playing: boolean; poster?: string}) {
@@ -696,7 +691,7 @@ function LabPreviewVideo({src, playing, poster}: {src: string; playing: boolean;
     }
     return () => { cancelled = true; clip.removeEventListener('loadeddata', start); clip.removeEventListener('canplay', start); };
   }, [playing, src]);
-  return <><img className="lab-video-cover" src={poster} alt="" draggable={false} /><video ref={video} src={playing ? src : undefined} poster={poster} style={{opacity: playing ? 1 : 0}} muted loop playsInline preload="none" /></>;
+  return <Localized><><img className="lab-video-cover" src={poster} alt="" draggable={false} /><video ref={video} src={playing ? src : undefined} poster={poster} style={{opacity: playing ? 1 : 0}} muted loop playsInline preload="none" /></></Localized>;
 }
 
 function LabSlideshow({images, playing = false, title, controls = false, interval = 700, cover}: {images: string[]; playing?: boolean; title: string; controls?: boolean; interval?: number; cover?: string}) {
@@ -707,10 +702,10 @@ function LabSlideshow({images, playing = false, title, controls = false, interva
     const timer = window.setInterval(() => setSlide(i => (i+1)%images.length), interval);
     return () => { window.clearTimeout(first); window.clearInterval(timer); };
   }, [playing, images, interval, controls]);
-  return <div className={controls ? 'lab-photo-gallery' : 'lab-photo-preview'}>
+  return <Localized><div className={controls ? 'lab-photo-gallery' : 'lab-photo-preview'}>
     {images.map((src,i) => (i===slide || i===(slide+1)%images.length) ? <img key={src} src={!playing && cover && i===0 ? cover : src} alt={`${title} — ${i+1}`} draggable={false} style={{visibility:slide===i ? 'visible' : 'hidden'}} /> : null)}
     {controls && <div className="lab-photo-controls"><button aria-label="Previous photo" onClick={()=>setSlide(i=>(i+images.length-1)%images.length)}>Previous</button><span>{slide+1} / {images.length}</span><button aria-label="Next photo" onClick={()=>setSlide(i=>(i+1)%images.length)}>Next</button></div>}
-  </div>;
+  </div></Localized>;
 }
 
 function SphereLab() {
@@ -735,11 +730,11 @@ function SphereLab() {
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
   }, [selected, dragging, hoveredPiece]);
-  return <section className="sphere-lab">
+  return <Localized><section className="sphere-lab">
     <header className="sphere-heading">
       <div className="lab-title-menu" onMouseEnter={()=>setLabMenuOpen(true)} onMouseLeave={()=>setLabMenuOpen(false)} onFocus={()=>setLabMenuOpen(true)} onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node))setLabMenuOpen(false);}} onKeyDown={e=>{if(e.key==='Escape')setLabMenuOpen(false);}}>
         <h1><button className="lab-title-trigger" aria-expanded={labMenuOpen} aria-controls="lab-work-list" onClick={()=>setLabMenuOpen(open=>!open)}>Lab</button></h1>
-        {labMenuOpen && <div id="lab-work-list" className="lab-work-list" aria-label="Lab works">{experiments.map((work,index)=><button key={work[0]} onClick={()=>{setSelected(index);setLabMenuOpen(false);setHoveredPiece(null);setLabelCursor(null);}}>{work[1]}</button>)}</div>}
+        {labMenuOpen && <div id="lab-work-list" className="lab-work-list" aria-label="Lab works">{experiments.map((work,index)=><Localized key={work[0]}><button onClick={()=>{setSelected(index);setLabMenuOpen(false);setHoveredPiece(null);setLabelCursor(null);}}>{work[1]}</button></Localized>)}</div>}
       </div>
       <p>Studies, fragments & playful ideas.</p>
     </header>
@@ -755,7 +750,7 @@ function SphereLab() {
         const x=Math.cos(phi)*radius, z=Math.sin(phi)*radius;
         const ry=y*Math.cos(tilt)-z*Math.sin(tilt), rz=y*Math.sin(tilt)+z*Math.cos(tilt);
         const n=i%experiments.length; const depth=(rz+1)/2; const scale=.58+depth*.85; const perspective=1/(1-rz*.18);
-        return <button key={i} className={`sphere-piece${hoveredPiece===i ? " is-hovered" : ""}${n===5 ? " square-video" : ""}${n===7 ? " square-model" : ""}${n===3 ? " larger-paper" : ""}${n===10 ? " larger-orbit" : ""}${n===11 ? " compact-lantern" : ""}`} aria-label={`Open ${experiments[n][1]}`} tabIndex={selected===null && rz > .12 ? 0 : -1}
+        return <Localized key={i}><button className={`sphere-piece${hoveredPiece===i ? " is-hovered" : ""}${n===5 ? " square-video" : ""}${n===7 ? " square-model" : ""}${n===3 ? " larger-paper" : ""}${n===10 ? " larger-orbit" : ""}${n===11 ? " compact-lantern" : ""}`} aria-label={`Open ${experiments[n][1]}`} tabIndex={selected===null && rz > .12 ? 0 : -1}
           style={{'--sx':x*perspective,'--sy':ry*perspective,'--scale':scale,'--aspect':n===2 ? '0.6925' : n===0 ? '1.313' : n===1 ? '1.479' : n===3 ? '1.333' : n===5 ? '1' : n===7 ? '1' : n===8 ? '1' : n===9 ? '0.773' : n===10 ? '2.686' : n===11 ? '0.64' : n===12 ? '0.75' : '1.5',pointerEvents:rz > .12 ? 'auto' : 'none',opacity:rz < 0 ? 1 + rz*.22 : 1,filter:rz < -.35 ? 'blur(.3px)' : 'none',zIndex:Math.round((rz+1)*20),animationDelay:`${i*22}ms`} as React.CSSProperties}
           onMouseEnter={e => {
             if (rz <= .12) return;
@@ -780,7 +775,7 @@ function SphereLab() {
             : n===3 ? <LabSlideshow images={labMedia['04'].images!} playing={hoveredPiece===i} title="Paper In Pattern" />
             : <img src={labMedia[String(experiments[n][0])]?.cover??labMedia[String(experiments[n][0])]?.images?.[0]} alt={experiments[n][1]} draggable={false} /> }
           <span className="sphere-piece-label">{experiments[n][1]}</span>
-        </button>;
+        </button></Localized>;
       })}
       </div>
     </div>
@@ -799,7 +794,7 @@ function SphereLab() {
       </div>
       <div className="lab-focus-copy"><span>Study {experiments[selected][0]}</span><h2><LabWorkTitle title={experiments[selected][1]} /></h2><p className="lab-study-meta">{preventWidow(labDescriptions[experiments[selected][0]]?.meta)}</p><p className="lab-study-description">{preventWidow(labDescriptions[experiments[selected][0]]?.description)}</p>{labMedia[String(experiments[selected][0])]?.pdf && <a className="lab-original-pdf" href={labMedia[String(experiments[selected][0])].pdf} target="_blank" rel="noreferrer">View original PDF</a>}<button onClick={()=>setSelected((selected+1)%experiments.length)}>Next study</button></div>
     </div>}
-  </section>;
+  </section></Localized>;
 }
 
 function HomeLoopVideo({className}: {className:string}) {
@@ -813,7 +808,7 @@ function HomeLoopVideo({className}: {className:string}) {
     return ()=>observer.disconnect();
   },[]);
   useEffect(()=>{if(visible)clip.current?.play().catch(()=>{});else clip.current?.pause();},[visible,loaded]);
-  return <video ref={clip} className={className} src={loaded ? '/assets/icepact.mp4' : undefined} poster="/assets/icepact-poster.webp" muted loop playsInline preload="none" onLoadedData={()=>{if(visible)clip.current?.play().catch(()=>{});}} />;
+  return <Localized><video ref={clip} className={className} src={loaded ? '/assets/icepact.mp4' : undefined} poster="/assets/icepact-poster.webp" muted loop playsInline preload="none" onLoadedData={()=>{if(visible)clip.current?.play().catch(()=>{});}} /></Localized>;
 }
 
 function SplitProjectGate({enabled,children,...props}:{enabled:boolean;onLanguageChange?:(language:PreviewLanguage)=>void;language?:PreviewLanguage;children:React.ReactNode;title:string;type:string;onBack:()=>void}){return enabled?<SplitProject {...props}>{children}</SplitProject>:children;}

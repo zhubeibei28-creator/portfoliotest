@@ -1,4 +1,6 @@
 'use client';
+import Localized from './Localized';
+
 import ProjectOverview from './ProjectOverview';
 
 import { useEffect, useRef, useState } from 'react';
@@ -21,8 +23,8 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
     if(v)observer.observe(v);
     return()=>{window.removeEventListener('keydown',close);observer.disconnect();v?.pause();};
   },[]);
-  const photo=(name:string,alt:string,cls='')=><button className={`yan-photo ${cls}`} onClick={()=>setZoom({name,alt})} aria-label={`Enlarge: ${alt}`}><img src={`/assets/roofbook/${name}.jpg`} alt={alt} loading={name==='canal'||name==='cover'?'eager':'lazy'} decoding="async"/></button>;
-  return <article className="yan-project" ref={article} aria-label="檐行记 book project">
+  const photo=(name:string,alt:string,cls='')=><Localized><button className={`yan-photo ${cls}`} onClick={()=>setZoom({name,alt})} aria-label={`Enlarge: ${alt}`}><img src={`/assets/roofbook/${name}.jpg`} alt={alt} loading={name==='canal'||name==='cover'?'eager':'lazy'} decoding="async"/></button></Localized>;
+  return <Localized><article className="yan-project" ref={article} aria-label="檐行记 book project">
     <header className="yan-heading">
       <div className="yan-topline"><span>SELECTED PROJECT / 05</span><button onClick={onBack}>Back to work ↗</button></div>
       <h1 lang="zh">檐行记</h1>
@@ -52,7 +54,7 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
     </section>
     <section id="yan-process" className="yan-process" aria-label="Editorial design process">
       <div className="yan-note"><h2>A quiet underlying order.</h2><p>Early pagination sketches map the pace of images, pauses, and writing across both orientations. A four-column grid and an 11 pt baseline establish structure while leaving room for handwritten Chinese notes and more expressive compositions.</p></div>
-      <div className="yan-process-pair"><figure>{photo('flatplan','Early hand-drawn pagination sketches for vertical and horizontal spreads')}<figcaption>Pagination sketches / planning the reading rhythm</figcaption></figure><div className="yan-grid-study"><svg viewBox="0 0 360 480" role="img" aria-label="Four-column layout with baseline grid"><defs><pattern id="yan-baseline" width="360" height="8" patternUnits="userSpaceOnUse"><path d="M0 0H360" stroke="#deded8" strokeWidth=".5"/></pattern></defs><rect width="360" height="480" fill="white"/><rect x="28" y="28" width="304" height="424" fill="url(#yan-baseline)"/>{[28,107,186,265].map(x=><rect key={x} x={x} y="28" width="67" height="424" fill="none" stroke="#b8b4a6" strokeWidth=".7"/>)}{[134,240,346].map(y=><path key={y} d={`M28 ${y}H332`} stroke="#a9b6b2" strokeWidth=".8"/>)}</svg><p className="yan-grid-caption">Four columns · 11 pt baseline<br/>Inside margin 0.5 in · Outer margins 0.35 in</p><div className="yan-type-copy"><h3>Two typographic voices.</h3><p>Handwritten Chinese carries the intimacy of the travel notes. Serif typography supports the bilingual reading, with Sabon and Palatino appearing in the final PDF alongside Chinese text faces.</p></div></div></div>
+      <div className="yan-process-pair"><figure>{photo('flatplan','Early hand-drawn pagination sketches for vertical and horizontal spreads')}<figcaption>Pagination sketches / planning the reading rhythm</figcaption></figure><div className="yan-grid-study"><svg viewBox="0 0 360 480" role="img" aria-label="Four-column layout with baseline grid"><defs><pattern id="yan-baseline" width="360" height="8" patternUnits="userSpaceOnUse"><path d="M0 0H360" stroke="#deded8" strokeWidth=".5"/></pattern></defs><rect width="360" height="480" fill="white"/><rect x="28" y="28" width="304" height="424" fill="url(#yan-baseline)"/>{[28,107,186,265].map(x=><Localized key={x}><rect x={x} y="28" width="67" height="424" fill="none" stroke="#b8b4a6" strokeWidth=".7"/></Localized>)}{[134,240,346].map(y=><Localized key={y}><path d={`M28 ${y}H332`} stroke="#a9b6b2" strokeWidth=".8"/></Localized>)}</svg><p className="yan-grid-caption">Four columns · 11 pt baseline<br/>Inside margin 0.5 in · Outer margins 0.35 in</p><div className="yan-type-copy"><h3>Two typographic voices.</h3><p>Handwritten Chinese carries the intimacy of the travel notes. Serif typography supports the bilingual reading, with Sabon and Palatino appearing in the final PDF alongside Chinese text faces.</p></div></div></div>
     </section>
     <section id="yan-spreads" className="yan-pages" aria-label="Selected book spreads">
       <div className="yan-note"><h2>From structures to impressions.</h2><p>Selected pages follow the journey: the snow and stillness of Lhasa alongside a courtyard in the south. Changes in atmosphere belong to the places encountered along the way.</p></div>
@@ -71,5 +73,5 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
     </section>
     <footer className="yan-end"><span>檐行记 · 2025</span><button onClick={onNext??onBack}>{onNext?`Next / ${nextTitle} ↗`:'Back to work ↗'}</button></footer>
     {zoom&&<div className="yan-lightbox" role="dialog" aria-modal="true" aria-label={zoom.alt} onClick={()=>setZoom(null)}><button className="yan-close" autoFocus onClick={()=>setZoom(null)}>Close ×</button><img src={`/assets/roofbook/${zoom.name}.jpg`} alt={zoom.alt}/></div>}
-  </article>;
+  </article></Localized>;
 }

@@ -1,4 +1,6 @@
 'use client';
+import Localized from './Localized';
+
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -35,5 +37,5 @@ export default function VisibilityVideo({src,poster,label,preferSound=false,cont
     document.addEventListener('visibilitychange',onVisibility);
     return()=>{disposed=true;observer.disconnect();video.pause();document.removeEventListener('visibilitychange',onVisibility);};
   },[src]);
-  return <div className="gf-video-player"><video ref={ref} muted={!preferSound} loop playsInline controls={controls} preload="metadata" poster={poster} aria-label={label} onVolumeChange={()=>{const v=ref.current;if(!v)return;if(programmedMute.current===v.muted){programmedMute.current=null;return;}programmedMute.current=null;sound.current=!v.muted&&v.volume>0;sessionStorage.setItem(`video-sound:${src}`,sound.current?'on':'off');setSoundBlocked(false);}}><source src={src} type="video/mp4"/></video>{soundBlocked&&<button className="gf-enable-sound" onClick={()=>{const v=ref.current;if(v){sound.current=true;sessionStorage.setItem(`video-sound:${src}`,'on');v.muted=false;void v.play();setSoundBlocked(false);}}}>开启声音 / Enable sound</button>}</div>;
+  return <Localized><div className="gf-video-player"><video ref={ref} muted={!preferSound} loop playsInline controls={controls} preload="metadata" poster={poster} aria-label={label} onVolumeChange={()=>{const v=ref.current;if(!v)return;if(programmedMute.current===v.muted){programmedMute.current=null;return;}programmedMute.current=null;sound.current=!v.muted&&v.volume>0;sessionStorage.setItem(`video-sound:${src}`,sound.current?'on':'off');setSoundBlocked(false);}}><source src={src} type="video/mp4"/></video>{soundBlocked&&<button className="gf-enable-sound" onClick={()=>{const v=ref.current;if(v){sound.current=true;sessionStorage.setItem(`video-sound:${src}`,'on');v.muted=false;void v.play();setSoundBlocked(false);}}}>开启声音 / Enable sound</button>}</div></Localized>;
 }

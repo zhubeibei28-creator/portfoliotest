@@ -1,3 +1,4 @@
+import extendedChineseCopy from './chinese-copy.json';
 export type PreviewLanguage = 'en' | 'zh';
 export const chineseCopy:Record<string,string>={
 'RAIN / CHARACTER INSPIRATION':'雨天 / 角色灵感',
@@ -59,4 +60,24 @@ export const chineseCopy:Record<string,string>={
 '述夏 SHUXIA / Memory and scent of summer':'述夏 SHUXIA / 关于夏天的记忆与气味',
 'Back to selected work ↗':'返回精选作品 ↗','Close ×':'关闭 ×'
 };
-export function previewText(text:string,language:PreviewLanguage){return language==='zh'?(chineseCopy[text]??text):text;}
+const allChineseCopy:Record<string,string>={...extendedChineseCopy,...chineseCopy};
+export function previewText(text:string,language:PreviewLanguage):string{
+ if(language!=='zh')return text;
+ const normalized=text.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
+ const direct=allChineseCopy[normalized];
+ if(direct)return text.match(/^\s*/)?.[0]+direct+(text.match(/\s*$/)?.[0]||'');
+ const next=normalized.match(/^Next \/ (.+) ↗$/);if(next)return `下一个项目 / ${next[1]} ↗`;
+ const enlarge=normalized.match(/^Enlarge: (.+)$/);if(enlarge)return `放大：${previewText(enlarge[1],language)}`;
+ const num=normalized.match(/^(\d{2}) (.+)$/);if(num&&allChineseCopy[num[2]])return `${num[1]} ${allChineseCopy[num[2]]}`;
+ const patterns:[RegExp,(match:RegExpMatchArray)=>string][]=[
+  [/^Open (.+)$/,m=>`打开：${previewText(m[1],language)}`],
+  [/^POCKLET app screen (\d+), including its original phone frame$/,m=>`POCKLET 应用界面 ${m[1]}，保留原始手机外框`],
+  [/^POCKLET release package photograph (\d+)$/,m=>`POCKLET 放手套装实物照片 ${m[1]}`],
+  [/^Original short-term experiment conversation, record (\d+)$/,m=>`短期实验原始对话 / 记录 ${m[1]}`],
+  [/^Ongoing longer-term participant conversation, record (\d+)$/,m=>`长期参与者后续对话 / 记录 ${m[1]}`],
+  [/^(.+)’s artifact and ritual documentation$/,m=>`${m[1]} 的物件与仪式记录`],
+  [/^(.+) \/ complete original storyboard sequence, without splitting panels$/,m=>`${previewText(m[1],language)} / 完整原始故事板序列，保留全部画格`],
+ ];
+ for(const [pattern,translate] of patterns){const match=normalized.match(pattern);if(match)return translate(match);}
+ return text;
+}

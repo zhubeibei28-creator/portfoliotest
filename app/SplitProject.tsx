@@ -1,4 +1,6 @@
 'use client';
+import Localized from './Localized';
+
 import {useEffect,useRef,type ReactNode} from 'react';
 import './split-project.css';
 import {previewText,type PreviewLanguage} from './preview-language';
@@ -13,17 +15,17 @@ export default function SplitProject({title,type,onBack,children,language='en',o
  useEffect(()=>{const node=section.current,sidebar=node?.querySelector('aside');if(!node||!sidebar)return;const wheel=(e:WheelEvent)=>{if(e.ctrlKey||window.innerWidth<=760)return;const article=node.querySelector('article');if(!article)return;e.preventDefault();article.scrollTop+=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?window.innerHeight:1);};sidebar.addEventListener('wheel',wheel as EventListener,{passive:false});return()=>sidebar.removeEventListener('wheel',wheel as EventListener);},[title]);
  const t=(text:string)=>previewText(text,language);
  const info=details[title];if(!info)return children;
- return <section ref={section} className="split-detail" data-has-language={!!onLanguageChange} data-theme={title==='GRÆFT'?'dark':'light'} aria-label={`${info.title} project preview`}>
+ return <Localized><section ref={section} className="split-detail" data-has-language={!!onLanguageChange} data-theme={title==='GRÆFT'?'dark':'light'} aria-label={`${info.title} project preview`}>
 
   <div className="split-detail-tools"><button className="split-back" onClick={onBack}>{t('← Work')}</button>{onLanguageChange&&<div className="split-language" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>onLanguageChange('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>onLanguageChange('zh')}>中文</button></div>}</div>
   <aside className="split-detail-sidebar">
    <div className="split-tools-spacer" aria-hidden="true"/>
    <h1>{info.title}</h1>
    <p className="split-summary">{t(info.summary)}</p>
-   <dl><div><dt>{t('YEAR')}</dt><dd>{info.year}</dd></div><div><dt>{t('DISCIPLINE')}</dt><dd>{t(type)}</dd></div><div><dt>{t('MY ROLE')}</dt><dd><ul className="split-role-list">{info.role.map(role=><li key={role}>{t(role)}</li>)}</ul></dd></div></dl>
+   <dl><div><dt>{t('YEAR')}</dt><dd>{info.year}</dd></div><div><dt>{t('DISCIPLINE')}</dt><dd>{t(type)}</dd></div><div><dt>{t('MY ROLE')}</dt><dd><ul className="split-role-list">{info.role.map(role=><Localized key={role}><li>{t(role)}</li></Localized>)}</ul></dd></div></dl>
 
 
   </aside>
   <div className="split-detail-content" key={title}>{children}</div>
- </section>;
+ </section></Localized>;
 }
