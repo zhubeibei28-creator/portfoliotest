@@ -229,7 +229,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
     <main
       className="portfolio-shell"
       lang={language==='zh'?'zh-CN':'en'}
-      data-language-preview={bilingualPreview}
+      data-language-preview={true}
       data-chinese-type={typePreview}
       data-nav-hidden={navHidden}
       data-trail-preview={trailPreview && view==='home' && active===null}
@@ -253,7 +253,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         <p>
           <i /> {t('Available for select projects')}
         </p>
-        {bilingualPreview && <div className="preview-language-switch" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>setLanguage('zh')}>中文</button></div>}
+        {<div className="preview-language-switch" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>setLanguage('zh')}>中文</button></div>}
       </header>}
 
       {view === 'home' && active === null && (
@@ -324,7 +324,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       )}
 
       {view === 'home' && active !== null && (
-        <SplitProjectGate onLanguageChange={bilingualPreview?setLanguage:undefined} language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
+        <SplitProjectGate onLanguageChange={setLanguage} language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
         {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject language={language} onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
