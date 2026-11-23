@@ -3,3 +3,8 @@
 .project-reveal[data-reveal-photo]{transform:translate3d(0,20px,0) scale(.975);transform-origin:center}
 .project-reveal[data-reveal-photo][data-revealed=true]{transform:none;transition-duration:500ms,600ms}
 @media(prefers-reduced-motion:reduce){.project-reveal{opacity:1;transform:none!important;transition:none!important}}
+
+/* Independent translate preserves transforms used by project artwork. */
+.project-reveal.project-reveal-image{transform:none;translate:0 24px}
+.project-reveal.project-reveal-image[data-revealed=true]{translate:0 0;transition:opacity 750ms ease,translate 850ms cubic-bezier(.22,1,.36,1);transition-delay:var(--reveal-delay,0ms)}
+@media(prefers-reduced-motion:reduce){.project-reveal.project-reveal-image{translate:none;transition:none!important}}
