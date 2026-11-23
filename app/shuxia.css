@@ -417,3 +417,12 @@
 .sx-mood-item-courtyard,.sx-mood-item-fan{grid-column:span 3}
 .sx-mood-item figcaption,.sx-rain-item figcaption{margin-top:10px;font-size:11px;line-height:1.5;color:var(--sx-muted)}
 .sx-rain-item{margin:0;min-width:0}
+/* Air around the route without losing its eight stops or visual references. */
+.sx-space-map{margin:32px auto 44px;width:94%;padding:16px 0 24px}
+.sx-space-map-heading{margin-bottom:32px}
+.sx-space-map li{padding:0 12px}
+.sx-space-map li>img{width:76%;height:62px;object-fit:cover;margin:0 auto 26px}
+.sx-space-map li:after{top:98px;background:#c3c8be}
+.sx-route-node{width:21px;height:21px;border-color:#b8beb1;color:#747d6c}
+.sx-space-map li strong{margin-top:16px;font-size:11px;font-weight:400}
+@media(max-width:620px){.sx-space-map{width:100%;margin:24px 0 32px}.sx-space-map ol{min-width:720px}.sx-space-map li{padding:0 10px}.sx-space-map li>img{width:74%;height:58px;margin-bottom:26px}.sx-space-map li:after{top:94px}}
