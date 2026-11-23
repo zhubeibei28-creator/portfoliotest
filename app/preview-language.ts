@@ -1,5 +1,7 @@
 export type PreviewLanguage = 'en' | 'zh';
 export const chineseCopy:Record<string,string>={
+'RAIN / CHARACTER INSPIRATION':'雨天 / 角色灵感',
+'Umbrellas, rain-soaked grass, and droplets resting on leaves shaped the mascot world. The central character holds a leaf; the figure on the left is a tree carrying raindrops, while the one on the right is a fishbowl filled with water. Rainy days also become part of the two characters’ shared stories.':'雨伞、雨后的草地，以及停在叶片上的水滴，成为角色设计的灵感。主角手持叶子；左侧是挂着雨滴的树，右侧则是盛满水的鱼缸。雨天也串起了其中两位角色的故事。',
 'MOODBOARD / SUMMER ATMOSPHERE':'情绪板 / 夏日印象',
 'Courtyards, shade, moving air, and the small pauses of an ordinary summer.':'庭院、树影、流动的风，和日常里乘凉的小片刻。',
 'home':'作品','lab':'小玩意','about':'关于我','contact':'打个招呼',

@@ -9,7 +9,7 @@ export default function useProjectReveal(root:RefObject<HTMLElement|null>){
   if(!node||!('IntersectionObserver' in window))return;
   const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
   if(motion.matches)return;
-  const selector='.sx-section-heading,.sx-overview-copy,.sx-description,.gf-section-heading,.gf-subheading,.gf-overview>div:first-child,.pk-section-head,.pk-overview>div:first-child,.pk-bcam-intro,.pk-bcam-takeaway,.pk-process-intro,.pk-testing-heading,.yan-note,.yan-opening-copy,.yan-film-caption,[data-reveal-photo]';
+  const selector='.sx-section-heading h2,.sx-section-heading>p,.sx-overview-copy p,.sx-description>p,.sx-description>h3,.sx-description>h4,.gf-section-heading,.gf-subheading,.gf-overview>div:first-child,.pk-section-head,.pk-overview>div:first-child,.pk-bcam-intro,.pk-bcam-takeaway,.pk-process-intro,.pk-testing-heading,.yan-note,.yan-opening-copy,.yan-film-caption,[data-reveal-photo]';
   const candidates=Array.from(node.querySelectorAll<HTMLElement>(selector));
   const targets=candidates.filter(el=>!candidates.some(parent=>parent!==el&&parent.contains(el)));
   const observer=new IntersectionObserver(entries=>{
@@ -18,7 +18,7 @@ export default function useProjectReveal(root:RefObject<HTMLElement|null>){
     entry.target.setAttribute('data-revealed','true');
     observer.unobserve(entry.target);
    }
-  },{threshold:0,rootMargin:'0px 0px -5% 0px'});
+  },{threshold:0,rootMargin:'0px 0px -12% 0px'});
   const viewportBottom=Math.min(window.innerHeight,node.getBoundingClientRect().bottom);
   for(const el of targets){
    const rect=el.getBoundingClientRect();
