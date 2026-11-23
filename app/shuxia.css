@@ -445,3 +445,20 @@
  .shuxia-project .sx-overview-copy{column-gap:32px}
  .shuxia-project .sx-packaging-copy{column-gap:32px}
 }
+/* Intrinsic blocks prevent loaded type specimens from compressing their captions. */
+.shuxia-project .sx-type-system{display:block;min-width:0;height:auto}
+.shuxia-project .sx-palette-section{align-items:start}
+.shuxia-project .sx-type-example{display:flow-root;height:auto;min-height:min-content;overflow:visible;margin:0 0 32px}
+.shuxia-project .sx-type-example>img{position:static;display:block;width:100%;height:auto;max-height:none;flex:none;margin:0 0 18px;transform:none;translate:none}
+.shuxia-project .sx-type-example>h4{position:static;display:block;height:auto;overflow:visible;clear:both;padding-top:0;margin:0 0 10px}
+.shuxia-project .sx-identity-panel{overflow:visible}
+.shuxia-project :is(figcaption,.sx-photo-caption,.sx-small-note,.sx-pattern-labels){height:auto;max-height:none;overflow:visible;white-space:normal;overflow-wrap:anywhere}
+/* Larger, rounded journey frames remain on a single, scrollable route. */
+.sx-space-map{width:100%}
+.sx-space-map ol{min-width:1120px;grid-template-columns:repeat(8,minmax(140px,1fr))}
+.sx-space-map li{padding:0 14px}
+.sx-space-map .sx-route-thumb{display:block;flex:none;width:112px;height:84px;padding:0;margin:0 auto 26px;border:1px solid #e0e3dc;border-radius:14px;overflow:hidden;background:transparent;cursor:zoom-in}
+.sx-space-map .sx-route-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.sx-space-map li:after{top:120px}
+.sx-space-map li strong{font-size:12px}
+@media(max-width:620px){.sx-space-map ol{min-width:1120px}.sx-space-map li:after{top:120px}}

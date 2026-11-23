@@ -13,3 +13,6 @@
 .project-reveal.project-reveal-image{translate:none}
 .project-reveal.project-reveal-image[data-revealed=true]{translate:none;transition:opacity 850ms ease;transition-delay:var(--reveal-delay,0ms)}
 .project-reveal[data-reveal-photo]{transform:none}
+/* Caption text always keeps its full intrinsic height, including when it wraps. */
+:is(.shuxia-project,.graft-project,.pk-project,.yan-project) :is(figcaption,.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){position:relative;height:auto;max-height:none;overflow:visible;white-space:normal;overflow-wrap:anywhere;flex-shrink:0}
+.project-reveal:is(figcaption,.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){transform:none;translate:none}
