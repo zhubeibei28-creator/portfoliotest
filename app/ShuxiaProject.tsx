@@ -1,10 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import VisibilityVideo from './VisibilityVideo';
+import useProjectReveal from './useProjectReveal';
 import {previewText,type PreviewLanguage} from './preview-language';
 
 export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {language?:PreviewLanguage;onBack: () => void;onNext?:()=>void;nextTitle?:string}) {
+  const article=useRef<HTMLElement>(null);
+  useProjectReveal(article);
   const t=(text:string)=>previewText(text,language);
   const [zoom, setZoom] = useState<{src:string; alt:string} | null>(null);
   useEffect(() => {
@@ -18,20 +21,27 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
     </button>
   );
   return (
-    <article className="shuxia-project">
+    <article ref={article} className="shuxia-project">
       <header className="sx-heading">
         <div className="sx-topline"><span>{t("SELECTED PROJECT / 01")}</span><button onClick={onBack}>{t("Back to work ↗")}</button></div>
         <h1><span lang="zh">述夏</span>{t(" SHUXIA")}</h1>
         <p>{t("Memory and scent of summer.")}</p>
       </header>
 
-      <div className="sx-hero"><img src="/assets/shuxia/header-interior-lossless.webp" alt="SHUXIA white wordmark over a warm interior photograph" fetchPriority="high" /></div>
+      <div className="sx-hero"><img src="/assets/shuxia/header-interior-lossless.webp" alt="SHUXIA white wordmark over a warm interior photograph" width={1456} height={728} fetchPriority="high" /></div>
 
       <section className="sx-overview" aria-label="Project overview">
         <div className="sx-overview-copy"><h2>{t("OVERVIEW")}</h2><p>{t("SHUXIA is a summer-inspired scent brand that remembers the season through atmosphere, texture, and small sensory moments: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool.")}</p><p>{t("Rather than the bright, energetic image of summer, the identity explores its softer side. A courtyard space brings this atmosphere into an architectural setting; scent, tactile materials, and illustration extend it into everyday objects.")}</p></div>
         <div className="sx-project-meta"><div><h2>{t("YEAR")}</h2><p>2026</p></div>
         <div><h2>{t("PROJECT")}</h2><p>{t("Independent")}<br />{t("Brand concept")}</p></div>
         <div><h2>{t("MY ROLE")}</h2><p>{t("Concept development")}<br />{t("Visual identity")}<br />{t("Illustration & mascot")}<br />{t("Product & packaging")}<br />{t("Website design")}<br />{t("Spatial design & visualization")}</p></div></div>
+      </section>
+
+      <section className="sx-section sx-mood-section" aria-labelledby="sx-mood-title">
+        <div className="sx-section-heading"><h2 id="sx-mood-title">{t('MOODBOARD / SUMMER ATMOSPHERE')}</h2><p>{t('Courtyards, shade, moving air, and the small pauses of an ordinary summer.')}</p></div>
+        <div className="sx-moodboard" aria-label={language==='zh'?'夏日氛围参考情绪板':'Summer atmosphere reference moodboard'}>
+          {[{"name": "courtyard", "width": 2014, "height": 1342, "alt": "A shaded courtyard with washing, plants and dappled sunlight"}, {"name": "fan", "width": 1621, "height": 1080, "alt": "A green fan and a slice of watermelon beside a rice field"}, {"name": "water", "width": 1080, "height": 1618, "alt": "A small bridge beneath trees reflected in green water"}, {"name": "window", "width": 1080, "height": 1440, "alt": "Sunlit trees seen through the dark interior of a bus"}, {"name": "garden", "width": 1080, "height": 1440, "alt": "A garden house surrounded by foliage and hydrangeas"}].map((image,i)=><button key={image.name} className={`sx-image sx-mood-photo sx-mood-${image.name}`} data-reveal-photo="true" style={{'--reveal-delay':`${i*110}ms`} as React.CSSProperties} onClick={()=>setZoom({src:`/assets/shuxia/mood-${image.name}.webp`,alt:image.alt})} aria-label={`${language==='zh'?'放大参考图片':'Enlarge reference image'}: ${image.alt}`}><img src={`/assets/shuxia/mood-${image.name}.webp`} alt={image.alt} width={image.width} height={image.height} loading="lazy" decoding="async" /></button>)}
+        </div>
       </section>
 
       <section className="sx-section" aria-labelledby="sx-identity">

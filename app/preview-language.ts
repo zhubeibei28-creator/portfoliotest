@@ -1,5 +1,7 @@
 export type PreviewLanguage = 'en' | 'zh';
 export const chineseCopy:Record<string,string>={
+'MOODBOARD / SUMMER ATMOSPHERE':'情绪板 / 夏日印象',
+'Courtyards, shade, moving air, and the small pauses of an ordinary summer.':'庭院、树影、流动的风，和日常里乘凉的小片刻。',
 'home':'作品','lab':'小玩意','about':'关于我','contact':'打个招呼',
 'Available for select projects':'接受项目合作',
 'Independent graphic designer':'独立平面设计师，灵感来自日常。',
