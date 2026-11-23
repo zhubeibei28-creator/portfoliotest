@@ -50,3 +50,5 @@
 .portfolio-shell[lang=zh-CN] .sx-overview-copy>p{margin-bottom:14px}
 .portfolio-shell[lang=zh-CN] .split-summary{font-size:13.5px;line-height:1.6;letter-spacing:-.015em}
 @media(max-width:760px){.portfolio-shell[lang=zh-CN] :is(.sx-section-heading>p,.sx-description p,.sx-overview-copy>p){font-size:14px;line-height:1.7;letter-spacing:-.01em}.portfolio-shell[lang=zh-CN] .split-summary{font-size:14px}}
+/* Chinese characters in project names keep the same typeface in either language. */
+.portfolio-shell :is(.split-detail-sidebar h1,.sx-heading h1,.yan-heading h1,.case-hero h1,.work-grid-caption b,.project-cursor b,.project-stage-index button,.waterfall-heading h2,.lab-work-list button,.lab-mouse-title,.sphere-piece-label,.lab-focus-copy h2){font-family:Arial,Helvetica,'Beibei MiSans',sans-serif}
