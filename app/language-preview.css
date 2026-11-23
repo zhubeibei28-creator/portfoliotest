@@ -57,3 +57,9 @@
 .portfolio-shell[lang=zh-CN] .split-detail-sidebar dd{font-size:13px}
 .portfolio-shell[lang=zh-CN] .split-detail-sidebar dt{font-size:10px}
 @media(min-width:761px) and (max-height:620px){.portfolio-shell[lang=zh-CN] .split-detail-sidebar .split-summary{font-size:13.5px}.portfolio-shell[lang=zh-CN] .split-detail-sidebar dd{font-size:12px}}
+/* Centre navigation on the viewport, independently of the wordmark and switch. */
+@media(min-width:641px){
+ .portfolio-shell .persistent-header nav{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;justify-content:center}
+ .portfolio-shell .persistent-header>p{grid-column:3}
+}
+@media(min-width:641px) and (max-width:1100px){.portfolio-shell .persistent-header>p{display:none}.portfolio-shell .persistent-header nav{gap:22px}.portfolio-shell[lang=zh-CN] .persistent-header nav{gap:22px}}
