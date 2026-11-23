@@ -32,7 +32,6 @@ export const chineseCopy:Record<string,string>={
 'Used for English product names and packaging headlines, adding structure alongside the handwritten forms.':'用于英文产品名与包装标题，与手写字形搭配，为整体增添秩序。',
 'BRAND COLOR':'品牌色彩','Paper':'纸白','Summer green':'夏绿','Rain blue':'雨蓝','Umbrella coral':'伞橘',
 'Warm neutral / background':'温暖的中性色 / 背景','Primary illustration color':'插画主色','Secondary color':'辅助色','Illustration accent':'插画点缀色',
-'Representative screen colors sampled from the artwork / HEX values.':'从作品中提取的代表性色彩 / HEX 色值。',
 'PATTERN / FROM REFERENCE TO SYSTEM':'纹样 / 从观察到系统',
 'The repeated strips, joints, and open spaces of woven cooling mats informed the vertical rhythm of the pattern. The designed motif carries this material reference into a graphic repeat and a cut-out surface.':'凉席编织中重复的条带、接点与间隙，成为纹样的纵向节奏。通过图形重复与镂空表面，将材料的触感转化为品牌语言。',
 'INSPIRATION / REFERENCES':'灵感 / 参考',

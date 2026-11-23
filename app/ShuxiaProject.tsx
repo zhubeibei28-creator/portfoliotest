@@ -49,7 +49,7 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
             {name:'Umbrella coral',hex:'#E58469',role:'Illustration accent'},
           ].map(color=><div className="sx-color" key={color.hex} style={{backgroundColor:color.hex}}><div className="sx-color-info"><span>{t(color.name)}</span><span>{color.hex}</span></div><p>{t(color.role)}</p></div>)}
         </div>
-        <p className="sx-small-note">{t("Representative screen colors sampled from the artwork / HEX values.")}</p></div></div>
+        </div></div>
         <div className="sx-section-heading sx-subheading"><h3>{t("PATTERN / FROM REFERENCE TO SYSTEM")}</h3><p>{t("The repeated strips, joints, and open spaces of woven cooling mats informed the vertical rhythm of the pattern. The designed motif carries this material reference into a graphic repeat and a cut-out surface.")}</p></div>
         <div className="sx-inspiration-board"><h4>{t("INSPIRATION / REFERENCES")}</h4><div className="sx-inspiration-row">{[1,2,3,4].map(n=><div key={n}>{photo(`inspiration-mat-${n}`,`Inspiration reference ${n}: bamboo weaving and cooling mat texture`)}</div>)}</div><p className="sx-small-note">{t("Bamboo weaving and cooling mats / reference imagery, not original SHUXIA design.")}</p></div>
         <div className="sx-section-heading sx-subheading"><h3>{t("ORIGINAL PATTERN / GRAPHIC TO MATERIAL")}</h3><p>{t("The repeating motif becomes a cut-out hanging panel, a packaging sleeve, and a storefront curtain. Keeping the same vertical rhythm connects the graphic identity to tactile objects and the spatial concept.")}</p></div>
