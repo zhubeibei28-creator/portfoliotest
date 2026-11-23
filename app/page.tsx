@@ -107,14 +107,16 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
   const [splitPreview,setSplitPreview]=useState(initialPreview);
+  const [fullWidthDetail,setFullWidthDetail]=useState(false);
+  useEffect(()=>{const media=window.matchMedia('(max-width:1100px), (orientation:portrait)');const update=()=>setFullWidthDetail(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
   useEffect(()=>{if(new URLSearchParams(window.location.search).get('intro')==='trail')setSplitPreview(true);},[]);
   const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
 
   useEffect(() => {
     const isDetail=splitPreview&&view==='home'&&active!==null;
-    setNavHidden(isDetail);
-    if(isDetail)return;
+    setNavHidden(isDetail&&!fullWidthDetail);
+    if(isDetail&&!fullWidthDetail)return;
     const changeHeader=(hidden:boolean)=>setNavHidden(hidden);
     let lastTarget: EventTarget | null = null;
     let lastTop = 0;
@@ -146,7 +148,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
 
     window.addEventListener('scroll', onScroll, { capture: true, passive: true });
     return () => window.removeEventListener('scroll', onScroll, true);
-  }, [view, active, splitPreview]);
+  }, [view, active, splitPreview, fullWidthDetail]);
   useEffect(()=>{const preview=new URLSearchParams(window.location.search).get('preview');if(preview==='pocklet'||preview==='yan')setActive(projects.findIndex(p=>p.title===(preview==='yan'?'檐行记':'POCKLET')));},[]);
   const [hovered, setHovered] = useState<number | null>(null);
   const cursor = useRef({x:0,y:0});
@@ -228,11 +230,11 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       lang={language==='zh'?'zh-CN':'en'}
       data-language-preview={bilingualPreview}
       data-chinese-type={typePreview}
-      data-nav-hidden={splitPreview&&view==='home'&&active!==null?true:navHidden}
+      data-nav-hidden={navHidden}
       data-trail-preview={trailPreview && view==='home' && active===null}
       onPointerMove={moveCursor}
     >
-      {!(splitPreview&&view==='home'&&active!==null)&&<header className="persistent-header">
+      {(!(splitPreview&&view==='home'&&active!==null)||fullWidthDetail)&&<header className="persistent-header">
         <button className="wordmark" onClick={() => navigate('home')}>
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>

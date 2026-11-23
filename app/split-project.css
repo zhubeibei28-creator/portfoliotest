@@ -95,7 +95,7 @@
 @media(max-width:760px){.split-detail{inset:0}.split-detail-sidebar{padding-top:24px}}
 
 /* Portrait reading uses each project's original title and banner opening. */
-@media(orientation:portrait),(max-width:760px){
+@media(orientation:portrait),(max-width:1100px){
  .split-detail{display:block;inset:0;padding:0;overflow-y:auto;overflow-x:hidden}
  .split-detail-sidebar{display:none}
  .split-detail-content{position:static;container-type:normal}
@@ -124,7 +124,7 @@
 .split-language button[aria-pressed=true]{color:#292b27;border-color:currentColor}
 .split-detail[data-theme=dark] .split-detail-tools{color:#92998d}
 .split-detail[data-theme=dark] .split-language button[aria-pressed=true]{color:#e9ece4}
-@media(orientation:portrait),(max-width:760px){
+@media(orientation:portrait),(max-width:1100px){
  .split-detail-tools{display:none}
  .split-detail[data-has-language=true] .split-detail-tools{display:flex;top:38px}
  .split-detail[data-has-language=true] :is(.sx-topline,.gf-topline,.pk-topline,.yan-topline){visibility:hidden}
@@ -132,9 +132,18 @@
 @media(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{top:26px;left:18px}}
 /* Back and language controls align to opposite edges of their column. */
 .split-detail-tools{width:max(216px,calc(23% - 16.88px));justify-content:space-between;gap:12px}
-@media(orientation:portrait),(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{right:28px;width:auto}}
+@media(orientation:portrait),(max-width:1100px){.split-detail[data-has-language=true] .split-detail-tools{right:28px;width:auto}}
 @media(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{right:18px}}
 @media(min-width:761px) and (orientation:landscape){
  .split-detail-content :is(.sx-section-heading,.gf-section-heading,.gf-subheading,.yan-note){grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
 }
 .split-detail-content .shuxia-project .sx-section-heading h3{font-size:clamp(20px,2.5cqw,28px)}
+
+/* Switch to the original full-width opening before the reading column gets cramped. */
+@media(orientation:portrait),(max-width:1100px){
+ .split-detail{padding-top:64px}
+ .split-detail-content :is(.sx-overview,.gf-overview,.pk-overview,.yan-opening-copy){display:grid}
+ .split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:102px;left:28px;right:28px;width:auto}
+ .split-detail-content .sx-heading{padding-top:38px}
+}
+@media(max-width:760px){.split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:90px;left:18px;right:18px}}
