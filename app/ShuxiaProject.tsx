@@ -34,22 +34,9 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
         <div><h2>{t("MY ROLE")}</h2><p>{t("Concept development")}<br />{t("Visual identity")}<br />{t("Illustration & mascot")}<br />{t("Product & packaging")}<br />{t("Website design")}<br />{t("Spatial design & visualization")}</p></div></div>
       </section>
 
-      <section className="sx-section sx-spatial" aria-labelledby="sx-store">
-        <div className="sx-section-heading"><h2 id="sx-store">{t("01 / SPATIAL EXPERIENCE")}</h2><p>{t("A journey from the street into a courtyard scent space. Planting, filtered daylight, warm wood, and places to pause bring SHUXIA’s quiet summer atmosphere into a space visitors can move through.")}</p></div>
-        <figure className="sx-courtyard-film">
-          <VisibilityVideo src="/assets/shuxia/courtyard-walkthrough.mp4" poster="/assets/shuxia/courtyard-poster.webp" label="SHUXIA spatial walkthrough, from the street through the courtyard and scent shop" />
-          <figcaption className="sx-small-note">{t("Spatial walkthrough / street, courtyard & interior")}</figcaption>
-        </figure>
-        <div className="sx-section-heading sx-subheading"><h3>{t("STOREFRONT & SIGNAGE STUDIES")}</h3><p>{t("Window illustrations, the patterned curtain, and illuminated signage explore how the graphic identity meets the architecture.")}</p></div>
-        <div className="sx-store-pair">{photo('storefront','SHUXIA storefront concept with illustrated windows and patterned curtain')}{photo('signage','Warm illuminated SHUXIA sign with botanical motifs')}</div>
-        <p className="sx-small-note">{t("Storefront & light-box signage / concept studies")}</p>
-      </section>
-
       <section className="sx-section" aria-labelledby="sx-identity">
-        <div className="sx-section-heading"><h2 id="sx-identity">{t("02 / VISUAL IDENTITY")}</h2><div className="sx-description"><p>{t("The identity combines three elements: a flowing handwritten wordmark, illustrated summer characters, and a repeating pattern inspired by bamboo cooling mats. Together, they connect scent with familiar textures and everyday summer memories.")}</p><p>{t("述夏 (Shùxià) means “telling stories of summer.” In 述, a tree topped with a raindrop reinterprets the original form as 木 (wood) + 水 (water). The same silhouette becomes one of the mascots.")}</p></div></div>
-        <div className="sx-pair sx-identity-pair">{photo('wordmark','Hand-drawn Chinese SHUXIA wordmark')}{photo('mascots','SHUXIA’s two line-drawn summer mascots')}</div>
-        <div className="sx-section-heading sx-subheading"><h3>{t("WORDMARK / CLEAR SPACE")}</h3><p>{t("The spacing diagram defines a consistent area around the wordmark, keeping its loose, organic silhouette legible when placed over photography.")}</p></div>
-        {photo('logo-clearspace','SHUXIA white wordmark with size and clear-space guides on water photography','sx-logo-sizing')}
+        <div className="sx-section-heading"><h2 id="sx-identity">{t("01 / VISUAL IDENTITY")}</h2><div className="sx-description"><p>{t("The identity combines three elements: a flowing handwritten wordmark, illustrated summer characters, and a repeating pattern inspired by bamboo cooling mats. Together, they connect scent with familiar textures and everyday summer memories.")}</p><p>{t("述夏 (Shùxià) means “telling stories of summer.” In 述, a tree topped with a raindrop reinterprets the original form as 木 (wood) + 水 (water). The same silhouette becomes one of the mascots.")}</p></div></div>
+        <div className="sx-pair sx-identity-pair"><button className="sx-image sx-wordmark-guides" onClick={()=>setZoom({src:'/assets/shuxia/wordmark-clearspace.svg',alt:'SHUXIA wordmark with vector clear-space guides'})} aria-label={language==='zh'?'放大述夏字标与安全空间':'Enlarge SHUXIA wordmark and clear-space guides'}><img src="/assets/shuxia/wordmark-clearspace.svg" alt={language==='zh'?'述夏黑色字标及矢量安全空间辅助线':'Black SHUXIA wordmark with vector clear-space guides'} loading="lazy" /></button>{photo('mascots','SHUXIA’s two line-drawn summer mascots')}</div>
         <div className="sx-palette-section"><div className="sx-type-system"><h3>{t("TYPOGRAPHY")}</h3>
           <div className="sx-type-example"><img src="/assets/shuxia/type-expressive-full.webp" alt="述夏 SHUXIA set in 字由点字稻草人" /><h4>{t("字由点字稻草人 / Expressive typeface")}</h4><p>{t("Used for the wordmark and expressive text, bringing a loose, handwritten quality to the identity.")}</p></div>
           <div className="sx-type-example"><img src="/assets/shuxia/type-copperplate-full.webp" alt="Copperplate typeface specimen" /><h4>{t("Copperplate / Supporting typeface")}</h4><p>{t("Used for English product names and packaging headlines, adding structure alongside the handwritten forms.")}</p></div>
@@ -68,6 +55,17 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
         <div className="sx-section-heading sx-subheading"><h3>{t("ORIGINAL PATTERN / GRAPHIC TO MATERIAL")}</h3><p>{t("The repeating motif becomes a cut-out hanging panel, a packaging sleeve, and a storefront curtain. Keeping the same vertical rhythm connects the graphic identity to tactile objects and the spatial concept.")}</p></div>
         {photo('pattern-application','Original SHUXIA cut-out pattern shown together with its hanging panel application','sx-pattern-combined')}
         <div className="sx-pattern-labels"><span>{t("Material application / hanging panel")}</span><span>{t("Original SHUXIA pattern design")}</span></div>
+      </section>
+
+      <section className="sx-section sx-spatial" aria-labelledby="sx-store">
+        <div className="sx-section-heading"><h2 id="sx-store">{t("02 / SPATIAL EXPERIENCE")}</h2><p>{t("A journey from the street into a courtyard scent space. Planting, filtered daylight, warm wood, and places to pause bring SHUXIA’s quiet summer atmosphere into a space visitors can move through.")}</p></div>
+        <figure className="sx-courtyard-film">
+          <VisibilityVideo src="/assets/shuxia/courtyard-walkthrough.mp4" poster="/assets/shuxia/courtyard-poster.webp" label="SHUXIA spatial walkthrough, from the street through the courtyard and scent shop" />
+          <figcaption className="sx-small-note">{t("Spatial walkthrough / street, courtyard & interior")}</figcaption>
+        </figure>
+        <div className="sx-section-heading sx-subheading"><h3>{t("STOREFRONT & SIGNAGE STUDIES")}</h3><p>{t("Window illustrations, the patterned curtain, and illuminated signage explore how the graphic identity meets the architecture.")}</p></div>
+        <div className="sx-store-pair">{photo('storefront','SHUXIA storefront concept with illustrated windows and patterned curtain')}{photo('signage','Warm illuminated SHUXIA sign with botanical motifs')}</div>
+        <p className="sx-small-note">{t("Storefront & light-box signage / concept studies")}</p>
       </section>
 
       <section className="sx-section" aria-labelledby="sx-packaging">
