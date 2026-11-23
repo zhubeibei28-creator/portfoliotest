@@ -319,7 +319,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       )}
 
       {view === 'home' && active !== null && (
-        <SplitProjectGate language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
+        <SplitProjectGate onLanguageChange={bilingualPreview?setLanguage:undefined} language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
         {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject language={language} onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
           project={projects[active]}
           onBack={() => setActive(null)}
@@ -811,4 +811,4 @@ function HomeLoopVideo({className}: {className:string}) {
   return <video ref={clip} className={className} src={loaded ? '/assets/icepact.mp4' : undefined} poster="/assets/icepact-poster.webp" muted loop playsInline preload="none" onLoadedData={()=>{if(visible)clip.current?.play().catch(()=>{});}} />;
 }
 
-function SplitProjectGate({enabled,children,...props}:{enabled:boolean;language?:PreviewLanguage;children:React.ReactNode;title:string;type:string;onBack:()=>void}){return enabled?<SplitProject {...props}>{children}</SplitProject>:children;}
+function SplitProjectGate({enabled,children,...props}:{enabled:boolean;onLanguageChange?:(language:PreviewLanguage)=>void;language?:PreviewLanguage;children:React.ReactNode;title:string;type:string;onBack:()=>void}){return enabled?<SplitProject {...props}>{children}</SplitProject>:children;}

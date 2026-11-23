@@ -114,3 +114,19 @@
  .split-detail .split-detail-content .gf-index{margin-inline:-18px;padding-inline:18px}
 }
 @media(max-width:620px){.split-detail-content .pk-title-line{display:block}}
+
+/* Compact project controls replace the global header. */
+.split-detail-tools{position:absolute;z-index:50;top:24px;left:28px;display:flex;align-items:center;gap:22px;font-size:12px;color:#777}
+.split-detail-tools button{font:inherit;background:none;border:0;padding:0;color:inherit;cursor:pointer;white-space:nowrap}
+.split-tools-spacer{height:24px}
+.split-language{display:flex;align-items:center;gap:7px;font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#aaa}
+.split-language button{padding:2px 0;border-bottom:1px solid transparent}
+.split-language button[aria-pressed=true]{color:#292b27;border-color:currentColor}
+.split-detail[data-theme=dark] .split-detail-tools{color:#92998d}
+.split-detail[data-theme=dark] .split-language button[aria-pressed=true]{color:#e9ece4}
+@media(orientation:portrait),(max-width:760px){
+ .split-detail-tools{display:none}
+ .split-detail[data-has-language=true] .split-detail-tools{display:flex;top:38px}
+ .split-detail[data-has-language=true] :is(.sx-topline,.gf-topline,.pk-topline,.yan-topline){visibility:hidden}
+}
+@media(max-width:760px){.split-detail[data-has-language=true] .split-detail-tools{top:26px;left:18px}}
