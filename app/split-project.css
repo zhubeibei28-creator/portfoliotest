@@ -147,3 +147,10 @@
  .split-detail-content .sx-heading{padding-top:38px}
 }
 @media(max-width:760px){.split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:90px;left:18px;right:18px}}
+
+/* Compact project opening: no global navigation strip or reserved header gap. */
+@media(orientation:portrait),(max-width:1100px){
+ .split-detail{padding-top:0}
+ .split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:38px}
+}
+@media(max-width:760px){.split-detail .split-detail-tools,.split-detail[data-has-language=true] .split-detail-tools{top:26px}}
