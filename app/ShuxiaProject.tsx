@@ -35,7 +35,7 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
       <header className="sx-heading">
         <div className="sx-topline"><span>{t("SELECTED PROJECT / 01")}</span><button onClick={onBack}>{t("Back to work ↗")}</button></div>
         <h1><span lang="zh">述夏</span>{t(" SHUXIA")}</h1>
-        <p>{t("Memory and scent of summer.")}</p>
+        <div className="sx-heading-bottom"><p>{t("Memory and scent of summer.")}</p><span>{language==='zh'?'品牌识别 / 产品包装 / 空间体验':'Brand Identity / Packaging / Spatial Experience'}</span></div>
       </header>
 
       <div className="sx-hero"><img src="/assets/shuxia/summer-banner.webp" alt="SHUXIA handwritten white wordmark over a green field and summer sky" width={1920} height={932} fetchPriority="high" /></div>

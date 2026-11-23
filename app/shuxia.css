@@ -502,3 +502,7 @@
 .shuxia-project .sx-laptop-screen>.gf-video-player{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;padding:0;overflow:hidden}
 .shuxia-project .sx-laptop-screen .gf-video-player>video{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;transform:none;translate:none}
 .shuxia-project .sx-laptop-video>.sx-laptop-frame{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:fill;opacity:1!important;transform:none!important;translate:none!important;transition:none!important;animation:none!important;z-index:1}
+.sx-heading-bottom{display:flex;justify-content:space-between;align-items:baseline;gap:24px}
+.shuxia-project .sx-heading-bottom p{font-size:15px;line-height:1.6;margin:0;color:var(--sx-muted)}
+.sx-heading-bottom>span{font-size:12px;line-height:1.6;color:var(--sx-muted);text-align:right}
+@media(max-width:620px){.sx-heading-bottom{flex-direction:column;align-items:flex-start;gap:16px}.sx-heading-bottom>span{text-align:left}}
