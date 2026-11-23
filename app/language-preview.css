@@ -6,13 +6,13 @@
 .portfolio-shell[lang=zh-CN]{font-family:Arial,Helvetica,'Beibei Jinshu Song',serif}
 .portfolio-shell[lang=zh-CN] .intro p{font-size:clamp(27px,3.1vw,44px);line-height:1.6;letter-spacing:0;font-weight:400}
 .portfolio-shell[lang=zh-CN] .persistent-header nav button{font-size:16px;letter-spacing:.015em}
-.portfolio-shell[lang=zh-CN] .split-summary{line-height:1.7;letter-spacing:0;font-size:clamp(15px,1.1vw,18px)}
+.portfolio-shell[lang=zh-CN] .split-summary{line-height:1.7;letter-spacing:0;font-size:12.5px}
 .portfolio-shell[lang=zh-CN] .split-detail-sidebar dd{line-height:1.65;letter-spacing:0}
 .portfolio-shell[lang=zh-CN] .split-detail-sidebar dt{letter-spacing:.06em}
 .portfolio-shell[lang=zh-CN] .shuxia-project p{letter-spacing:0;line-height:1.8}
 .portfolio-shell[lang=zh-CN] .shuxia-project h2,.portfolio-shell[lang=zh-CN] .shuxia-project h3,.portfolio-shell[lang=zh-CN] .shuxia-project h4{letter-spacing:.035em;font-weight:400}
-.portfolio-shell[lang=zh-CN] .sx-section-heading>p,.portfolio-shell[lang=zh-CN] .sx-description p,.portfolio-shell[lang=zh-CN] .sx-overview-copy>p{font-size:clamp(16px,1.35vw,22px);line-height:1.85}
-@media(max-width:760px){.portfolio-shell[data-language-preview=true] .persistent-header{padding-right:98px}.preview-language-switch{right:18px;gap:6px}.portfolio-shell[lang=zh-CN] .intro p{font-size:26px;line-height:1.6}.portfolio-shell[lang=zh-CN] .split-summary{font-size:16px}}
+.portfolio-shell[lang=zh-CN] .sx-section-heading>p,.portfolio-shell[lang=zh-CN] .sx-description p,.portfolio-shell[lang=zh-CN] .sx-overview-copy>p{font-size:13px;line-height:1.85}
+@media(max-width:760px){.portfolio-shell[data-language-preview=true] .persistent-header{padding-right:98px}.preview-language-switch{right:18px;gap:6px}.portfolio-shell[lang=zh-CN] .intro p{font-size:26px;line-height:1.6}.portfolio-shell[lang=zh-CN] .split-summary{font-size:14px}}
 
 .portfolio-shell[lang=zh-CN] .persistent-header nav{gap:26px}
 .portfolio-shell[lang=zh-CN] .intro p{letter-spacing:.015em}
@@ -26,8 +26,8 @@
 @media(min-width:901px) and (max-width:1200px){.portfolio-shell[data-language-preview=true] .persistent-header>p{display:none}}
 
 /* Match the visual density of the English opening rather than its font size. */
-.portfolio-shell[lang=zh-CN] .intro p{font-size:clamp(23px,2.35vw,34px);line-height:1.5;letter-spacing:0}
-@media(max-width:620px){.portfolio-shell[lang=zh-CN] .intro p{font-size:23px;line-height:1.5}}
+.portfolio-shell[lang=zh-CN] .intro p{font-size:clamp(21px,2.1vw,30px);line-height:1.5;letter-spacing:0}
+@media(max-width:620px){.portfolio-shell[lang=zh-CN] .intro p{font-size:21px;line-height:1.5}}
 @font-face{font-family:'Beibei Xiaolai';src:url('/assets/fonts/xiaolai-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:'Beibei Marker';src:url('/assets/fonts/marker-preview.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 .portfolio-shell[lang=zh-CN][data-chinese-type=xiaolai]{font-family:Arial,Helvetica,'Beibei Xiaolai',serif}
@@ -42,3 +42,6 @@
 /* Chinese preview uses MiSans by Xiaomi. Official webfont, embedded unmodified. */
 @font-face{font-family:'Beibei MiSans';src:url('/assets/fonts/MiSans-Normal.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
 .portfolio-shell[lang=zh-CN][data-chinese-type=mi]{font-family:Arial,Helvetica,'Beibei MiSans',sans-serif}
+
+.portfolio-shell[lang=zh-CN] .sx-overview-copy>p{font-size:12.5px}
+@media(max-width:760px){.portfolio-shell[lang=zh-CN] .sx-section-heading>p,.portfolio-shell[lang=zh-CN] .sx-description p,.portfolio-shell[lang=zh-CN] .sx-overview-copy>p{font-size:14px}}
