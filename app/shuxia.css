@@ -301,12 +301,14 @@
 
 /* Keep the identity artwork substantial and group it with its references. */
 .shuxia-project .sx-identity-pair{padding:0;gap:18px;min-height:0;margin:0 0 32px;align-items:stretch;background:none}
-.sx-identity-panel{margin:0;min-width:0;background:#f3f3ee;padding:20px 20px 8px;overflow:hidden}
+.sx-identity-panel{margin:0;min-width:0;background:none;padding:0;overflow:hidden}
 .sx-identity-panel figcaption{display:flex;justify-content:space-between;gap:12px;font-size:10px;letter-spacing:.025em;color:var(--sx-muted);padding-bottom:14px;border-bottom:1px solid #dcded5}
-.shuxia-project .sx-identity-panel .sx-image{aspect-ratio:1.35;overflow:hidden;display:flex;align-items:center;justify-content:center;mix-blend-mode:multiply}
+.shuxia-project .sx-identity-panel .sx-image{aspect-ratio:1.35;overflow:hidden;display:flex;align-items:center;justify-content:center;mix-blend-mode:normal}
 .shuxia-project .sx-identity-panel .sx-image img{width:122%;max-width:none;height:auto;flex-shrink:0}
 .shuxia-project .sx-rain-board{margin-bottom:20px}
 @media(max-width:620px){.shuxia-project .sx-identity-pair{gap:10px}.sx-identity-panel{padding:12px 8px 4px}.sx-identity-panel figcaption{font-size:9px;gap:6px}.shuxia-project .sx-identity-panel .sx-image{aspect-ratio:1.1}.shuxia-project .sx-identity-panel .sx-image img{width:130%}}
 .shuxia-project .sx-identity-panel .sx-image{aspect-ratio:1.25}
 .shuxia-project .sx-identity-panel .sx-image img{width:100%}
 .shuxia-project .sx-identity-panel .sx-wordmark-guides img{width:110%}
+
+.shuxia-project .sx-identity-panel{padding:0;background:none}
