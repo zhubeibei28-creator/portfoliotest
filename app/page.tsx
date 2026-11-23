@@ -368,7 +368,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
                 ],
                 [
                   'M Moser Associates — Design Intern',
-                  'Environmental graphics & spatial concepts for Fortune Global 500 clients.\nMural proposals selected for bids & client presentations.',
+                  'Environmental graphics & spatial concepts for workplace projects.\nMural proposals selected for bids & client presentations.',
                 ],
               ]}
             />
