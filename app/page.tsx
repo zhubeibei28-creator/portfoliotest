@@ -256,9 +256,8 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         {<section className="home-view">
           <div className="intro">
             <p>
-              {t('Independent graphic designer')}
-              <br />
-              {t('working across identity, image & print.')}
+              <span className="intro-line">{t('Independent graphic designer')}</span>
+              <span className="intro-line">{t('working across identity, image & print.')}</span>
             </p>
             <span>{t('Scroll to explore →')}</span>
           </div>
