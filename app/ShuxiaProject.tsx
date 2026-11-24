@@ -6,7 +6,7 @@ import ProjectOverview from './ProjectOverview';
 import { useEffect, useRef, useState } from 'react';
 import ProjectSectionNav from './ProjectSectionNav';
 import VisibilityVideo from './VisibilityVideo';
-import useProjectReveal from './useProjectReveal';
+import './project-reveal.css';
 import {previewText,type PreviewLanguage} from './preview-language';
 
 const IMAGE_SIZES:Record<string,number[]>={"spatial-entry":[1456,816],"mood-courtyard":[2014,1342],"courtyard-poster":[1600,900],"inspiration-mat-1":[407,795],"pattern-landscape":[1102,628],"spatial-upper":[1456,816],"mascots":[720,540],"signage":[1379,1080],"type-expressive":[447,79],"illustration-rain":[1800,1200],"wordmark":[797,497],"spatial-counter":[1456,816],"cooling-soap-packaging-design":[770,1236],"scent-pack":[998,864],"package-open":[1171,810],"type-copperplate":[489,65],"mood-garden":[1080,1440],"type-expressive-full":[1320,398],"spatial-front":[1456,816],"website-demo-poster":[3024,1714],"pattern-application":[1920,1080],"laptop-frame-video":[3350,1758],"laptop-frame":[3350,1940],"mood-umbrella":[1080,1621],"type-copperplate-full":[1320,328],"header-interior-lossless":[1456,728],"illustration-home":[1800,1200],"inspiration-mat-4":[407,795],"website-product":[3350,1940],"courtyard-tour-v2-poster":[1600,900],"mood-droplets":[1080,1920],"website-home":[3350,1940],"summer-banner":[1920,932],"website-grass":[3000,2000],"pattern-detail":[630,628],"mood-grass":[1080,1440],"postcards-water":[3991,5987],"spatial-lounge":[1456,816],"crossword":[1190,929],"postcards-studio":[3000,2063],"pattern-panel":[1130,1080],"soap-set":[969,885],"spatial-sign":[1456,816],"mood-fan":[1621,1080],"home-postcards-cover":[1800,1800],"inspiration-mat-2":[410,795],"logo-clearspace":[1920,1080],"website-menu":[3350,1940],"storefront":[806,1080],"inspiration-mat-3":[409,795],"mood-window":[1080,1440],"spatial-side":[1456,816],"header-interior":[1456,728],"pattern-artwork":[790,1080],"mood-water":[1080,1618],"spatial-street":[1456,816],"illustration-picnic":[1800,1200]};
@@ -18,7 +18,7 @@ const SPACE_JOURNEY=[["Street & lane", "街道与巷道", "street"], ["Courtyard
 
 export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {language?:PreviewLanguage;onBack: () => void;onNext?:()=>void;nextTitle?:string}) {
   const article=useRef<HTMLElement>(null);
-  useProjectReveal(article);
+  
   const t=(text:string)=>previewText(text,language);
   const [zoom, setZoom] = useState<{src:string; alt:string} | null>(null);
   useEffect(() => {
