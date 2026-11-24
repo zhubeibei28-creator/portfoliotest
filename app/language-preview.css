@@ -81,3 +81,5 @@
 .copy-tail{white-space:nowrap;word-break:keep-all;overflow-wrap:normal}
 .portfolio-shell :is(p,figcaption,li,blockquote,.about-intro-paragraph,.experience-copy-line){text-wrap:pretty}
 .portfolio-shell .copy-tail{display:inline;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-transform:inherit;margin:0;padding:0;border:0;background:none}
+/* Tail spans stay in text flow even where older component rules style spans. */
+.portfolio-shell .copy-tail.copy-tail{position:static;inset:auto;float:none;width:auto;height:auto;max-width:none;transform:none}

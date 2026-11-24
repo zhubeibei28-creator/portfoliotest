@@ -10,7 +10,7 @@
 .persistent-header > p i { background: #111; width: 4px; height: 4px; }
 .intro { left: 28px; top: 36px; }
 .intro p { font-size: clamp(25px, 3.1vw, 46px); line-height: 1.08; font-weight: 400; letter-spacing: -.045em; color: #111; }
-.intro span { left: 28px; bottom: 81px; padding: 0; background: none; border: 0; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: #626262; }
+.intro>span { left: 28px; bottom: 81px; padding: 0; background: none; border: 0; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: #626262; }
 .gallery-viewport { top: 152px; bottom: 112px; }
 .home-view:before, .home-view:after { top: 152px; bottom: 112px; width: 4vw; }
 .gallery-project:after { opacity: .16; box-shadow: none; border: 0; }
@@ -69,7 +69,7 @@ button:focus-visible, a:focus-visible { outline: 1px solid #111; outline-offset:
   .home-view, .about-view, .lab-view, .contact-view, .case-study { top: 88px; }
   .intro { left: 18px; top: 28px; }
   .intro p { font-size: 26px; }
-  .intro span { left: 18px; bottom: 75px; }
+  .intro>span { left: 18px; bottom: 75px; }
   .gallery-viewport, .home-view:before, .home-view:after { top: 126px; bottom: 110px; }
   .home-view footer { padding-inline: 18px; }
   .scroll-rule { left: 18px; right: 18px; }
