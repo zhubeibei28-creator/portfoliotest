@@ -524,3 +524,9 @@
 .shuxia-project .sx-package-story>.sx-captioned-image{min-width:0;margin:0}
 .shuxia-project .sx-package-story img{width:100%;height:auto;object-fit:contain}
 @media(max-width:620px){.shuxia-project .sx-package-story{grid-template-columns:1fr;gap:24px;margin:28px 0}}
+
+.shuxia-project .sx-pattern-forms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
+.shuxia-project .sx-pattern-forms>.sx-image{min-width:0;margin:0;display:block}
+.shuxia-project .sx-pattern-forms img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.shuxia-project .sx-pattern-forms .sx-photo-caption{display:block;position:static;margin:14px 0 0;height:auto;white-space:normal;line-height:1.6}
+@media(max-width:620px){.shuxia-project .sx-pattern-forms{grid-template-columns:1fr;gap:28px}}
