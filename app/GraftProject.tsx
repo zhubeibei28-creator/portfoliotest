@@ -5,10 +5,11 @@ import ProjectOverview from './ProjectOverview';
 
 import { useEffect, useRef, useState } from 'react';
 import VisibilityVideo from './VisibilityVideo';
-import './project-reveal.css';
+import useProjectReveal from './useProjectReveal';
 
 export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () => void;onNext?:()=>void;nextTitle?:string }) {
   const article=useRef<HTMLElement>(null);
+  useProjectReveal(article);
 
   const indexRef = useRef<HTMLElement>(null);
   const [activeSection,setActiveSection] = useState('');

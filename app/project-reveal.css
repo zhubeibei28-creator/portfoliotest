@@ -1,5 +1,6 @@
-/* Project artwork and copy remain visible throughout scrolling. */
-.project-reveal,.project-reveal[data-revealed=true]{opacity:1;transition:none}
+/* One-time opacity reveals never move artwork across captions. */
+.project-reveal{opacity:0}
+.project-reveal[data-revealed=true]{opacity:1;transition:opacity 450ms ease}
 :is(.shuxia-project,.graft-project,.pk-project,.yan-project) :is(figcaption,.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){position:relative;height:auto;max-height:none;overflow:visible;white-space:normal;overflow-wrap:anywhere;flex-shrink:0}
 @media(prefers-reduced-motion:reduce){.project-reveal{opacity:1;transition:none!important}}
 .graft-project .gf-image,.yan-project .yan-photo{overflow:clip}
