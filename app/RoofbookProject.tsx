@@ -55,11 +55,11 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
     </section>
     <section id="yan-spreads" className="yan-pages" aria-label="Selected book spreads">
       <div className="yan-note"><h2>From structures to impressions.</h2><p>Selected pages follow the journey: the snow and stillness of Lhasa alongside a courtyard in the south. Changes in atmosphere belong to the places encountered along the way.</p></div>
-      <div className="yan-essay-pair">{photo('snow','Lhasa: a shepherd, snow, and bilingual travel writing')}{photo('courtyard','Courtyard photographs and handwritten Chinese notes arranged across a spread')}</div>
-    </section>
-    <section className="yan-closing" aria-label="Image credits">
-      {photo('credits','The final image-credits spread acknowledging the referenced photographs')}
-      <p className="yan-credit-note">The travelogue closes with an acknowledgement of its image sources.</p>
+      <div className="yan-spread-sequence" data-reveal-photo="true">
+        <figure>{photo('snow','Lhasa: a shepherd, snow, and bilingual travel writing')}<figcaption>Lhasa / snow and travel writing</figcaption></figure>
+        <figure>{photo('courtyard','Courtyard photographs and handwritten Chinese notes arranged across a spread')}<figcaption>Southern courtyard / photographs and handwritten notes</figcaption></figure>
+        <figure>{photo('credits','The final image-credits spread acknowledging the referenced photographs')}<figcaption>Closing spread / image credits</figcaption></figure>
+      </div>
     </section>
     <section id="yan-film" className="yan-film" aria-label="Reading the book">
       <div className="yan-note"><h2>The book in hand.</h2><div className="yan-film-caption-row">

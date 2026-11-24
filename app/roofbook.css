@@ -135,3 +135,11 @@
 .yan-project .yan-closing .yan-photo img{max-height:340px;aspect-ratio:auto;object-fit:contain;mask-image:none}
 .yan-project .yan-closing .yan-credit-note{text-align:left}
 @media(max-width:620px){.split-detail .split-detail-content .yan-project{--yan-gap:24px;--yan-section-gap:36px}.yan-structure-pair{grid-template-columns:1fr;gap:24px}.yan-structure-pair .yan-photo img{height:auto;max-height:360px}.yan-project .yan-note{gap:14px}}
+
+/* All selected spreads use one uninterrupted, uncropped reading axis. */
+.yan-project .yan-spread-sequence{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;width:min(100%,920px);margin:0 auto}
+.yan-project .yan-spread-sequence figure{margin:0;min-width:0}
+.yan-project .yan-spread-sequence .yan-photo{width:100%;overflow:visible}
+.yan-project .yan-spread-sequence img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:4/3;object-fit:contain;transform:none;mask-image:none;background:transparent}
+.yan-project .yan-spread-sequence figcaption{margin:10px 0 0;overflow:visible}
+@media(max-width:620px){.yan-project .yan-spread-sequence{gap:24px}}
