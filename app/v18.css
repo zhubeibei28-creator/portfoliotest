@@ -221,7 +221,7 @@
 
 .icepact-cover{display:block;object-fit:cover;background:#fff;pointer-events:none;}
 
-.shuxia-cover{display:block;object-fit:cover;object-position:center;pointer-events:none;}
+.shuxia-cover{display:block;object-fit:cover;object-position:58% 50%;pointer-events:none;}
 
 .pocklet-cover{display:block;object-fit:cover;object-position:center;pointer-events:none;}
 
@@ -327,4 +327,4 @@ html,body{overscroll-behavior:none;}
 .portfolio-shell[lang=en] .intro p{font-size:clamp(25px,2.8vw,42px);letter-spacing:-.025em;line-height:1.14;text-wrap:wrap;max-width:none}
 @media(min-width:761px){.portfolio-shell[lang=en] .intro .intro-line{white-space:nowrap}}
 @media(max-width:760px){.portfolio-shell .intro{right:18px}.portfolio-shell[lang=en] .intro p{font-size:26px}}
-.home-view .gallery-project>img.shuxia-cover,.work-grid>button>img.shuxia-cover{object-fit:cover;object-position:center;background:#39291e;padding:0;box-sizing:border-box}
+.home-view .gallery-project>img.shuxia-cover,.work-grid>button>img.shuxia-cover{object-fit:cover;object-position:58% 50%;background:#39291e;padding:0;box-sizing:border-box}
