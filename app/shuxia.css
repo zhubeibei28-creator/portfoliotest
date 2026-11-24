@@ -530,3 +530,6 @@
 .shuxia-project .sx-pattern-forms img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
 .shuxia-project .sx-pattern-forms .sx-photo-caption{display:block;position:static;margin:14px 0 0;height:auto;white-space:normal;line-height:1.6}
 @media(max-width:620px){.shuxia-project .sx-pattern-forms{grid-template-columns:1fr;gap:28px}}
+
+/* System subsections share the site's compact uppercase heading scale. */
+.split-detail .split-detail-content .shuxia-project .sx-product-system .sx-subheading>h3{font-size:clamp(15px,1.4vw,20px);line-height:1.5;font-weight:400;letter-spacing:0;text-transform:uppercase;margin:0}
