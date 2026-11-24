@@ -83,3 +83,7 @@
 .portfolio-shell .copy-tail{display:inline;font:inherit;color:inherit;line-height:inherit;letter-spacing:inherit;text-transform:inherit;margin:0;padding:0;border:0;background:none}
 /* Tail spans stay in text flow even where older component rules style spans. */
 .portfolio-shell .copy-tail.copy-tail{position:static;inset:auto;float:none;width:auto;height:auto;max-width:none;transform:none}
+/* Sidebar introductions use natural ragged lines and a little more breathing room. */
+.portfolio-shell[lang] .split-detail-sidebar .split-summary{max-width:24em;font-size:13px;line-height:1.85;letter-spacing:.005em;text-align:start;text-wrap:wrap}
+.portfolio-shell[lang] .split-detail-sidebar .split-summary>p{font:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;max-width:none;text-align:start;text-wrap:wrap}
+.portfolio-shell[lang] .split-detail-sidebar .split-summary>p+p{margin-top:10px}
