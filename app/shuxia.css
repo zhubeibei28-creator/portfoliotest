@@ -353,9 +353,9 @@
 .shuxia-project .sx-type-system>h3,.shuxia-project .sx-palette-copy>h3{font-size:14px}
 @media(max-width:620px){.shuxia-project .sx-section-heading>#sx-mood-title{font-size:18px}.shuxia-project .sx-section-heading h3{font-size:18px}}
 /* Keep packaging application and flat artwork together as one balanced spread. */
-.shuxia-project .sx-packaging-pair{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;align-items:center}
+.shuxia-project .sx-packaging-pair{grid-template-columns:minmax(0,1.333333fr) minmax(0,.622977fr);gap:32px;align-items:start}
 .shuxia-project .sx-packaging-pair>.sx-image:first-child,.shuxia-project .sx-packaging-pair>.sx-image:last-child{width:100%;max-width:none;padding:0}
-.shuxia-project .sx-packaging-pair>.sx-image:first-child img,.shuxia-project .sx-packaging-pair>.sx-image:last-child img{width:100%;height:auto;max-height:68svh;object-fit:contain}
+.shuxia-project .sx-packaging-pair>.sx-image:first-child img,.shuxia-project .sx-packaging-pair>.sx-image:last-child img{width:100%;height:auto;max-height:none;object-fit:contain}
 @media(max-width:620px){.shuxia-project .sx-packaging-pair{grid-template-columns:1fr;gap:28px}.shuxia-project .sx-packaging-pair>.sx-image:last-child{width:76%}}
 /* One spacing rhythm for the SHUXIA chapters and their image introductions. */
 .shuxia-project .sx-section{padding:20px 0 48px}
