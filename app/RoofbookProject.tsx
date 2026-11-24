@@ -9,7 +9,7 @@ import './project-reveal.css';
 
 export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>void;onNext?:()=>void;nextTitle?:string}) {
   const article=useRef<HTMLElement>(null);
-  
+
   const video=useRef<HTMLVideoElement>(null);
   const [zoom,setZoom]=useState<{name:string;alt:string}|null>(null);
   useEffect(()=>{

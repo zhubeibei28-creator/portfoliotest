@@ -18,7 +18,7 @@ const SPACE_JOURNEY=[["Street & lane", "街道与巷道", "street"], ["Courtyard
 
 export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {language?:PreviewLanguage;onBack: () => void;onNext?:()=>void;nextTitle?:string}) {
   const article=useRef<HTMLElement>(null);
-  
+
   const t=(text:string)=>previewText(text,language);
   const [zoom, setZoom] = useState<{src:string; alt:string} | null>(null);
   useEffect(() => {

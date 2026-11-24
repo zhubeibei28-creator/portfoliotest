@@ -9,7 +9,7 @@ import './project-reveal.css';
 
 export default function GraftProject({ onBack,onNext,nextTitle }: { onBack: () => void;onNext?:()=>void;nextTitle?:string }) {
   const article=useRef<HTMLElement>(null);
-  
+
   const indexRef = useRef<HTMLElement>(null);
   const [activeSection,setActiveSection] = useState('');
   const [logoPaused, setLogoPaused] = useState(false);
