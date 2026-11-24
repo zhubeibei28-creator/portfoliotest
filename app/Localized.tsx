@@ -1,5 +1,5 @@
 'use client';
-import {createContext,useContext,cloneElement,isValidElement,type ReactNode,type ReactElement} from 'react';
+import {Children,Fragment,createContext,useContext,cloneElement,isValidElement,type ReactNode,type ReactElement} from 'react';
 import {previewText,type PreviewLanguage} from './preview-language';
 export const PortfolioLanguage=createContext<PreviewLanguage>('en');
 const chineseWords=new Intl.Segmenter('zh',{granularity:'word'});
@@ -14,7 +14,7 @@ function protectTail(node:ReactNode):ReactNode{
    const match=node.match(/\S+\s+\S+\s*$/);if(match&&match[0].trim().length<=24)start=match.index!;
   }
   if(start<=0)return node;
-  return <>{node.slice(0,start)}<span className="copy-tail">{node.slice(start)}</span></>;
+  return <Fragment key="copy-tail-group">{node.slice(0,start)}<span className="copy-tail">{node.slice(start)}</span></Fragment>;
  }
  if(Array.isArray(node)){const result=[...node];for(let i=result.length-1;i>=0;i--){if(result[i]===null||typeof result[i]==='boolean'||typeof result[i]==='string'&&!String(result[i]).trim())continue;result[i]=protectTail(result[i]);break;}return result;}
  if(isValidElement(node)){
@@ -26,7 +26,7 @@ function protectTail(node:ReactNode):ReactNode{
 }
 function localize(node:ReactNode,language:PreviewLanguage):ReactNode{
  if(typeof node==='string')return previewText(node,language);
- if(Array.isArray(node))return node.map(child=>localize(child,language));
+ if(Array.isArray(node))return Children.map(node,child=>localize(child,language));
  if(!isValidElement(node))return node;
  const element=node as ReactElement<Record<string,unknown>>,props=element.props;
  if(props.className==='copy-tail')return node;

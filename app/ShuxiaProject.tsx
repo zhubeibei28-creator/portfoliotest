@@ -68,7 +68,7 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
             {name:'Summer green',hex:'#9BD3AE',role:'Primary illustration color'},
             {name:'Rain blue',hex:'#728E9B',role:'Secondary color'},
             {name:'Umbrella coral',hex:'#E58469',role:'Illustration accent'},
-          ].map(color=><Localized><div className="sx-color" key={color.hex} style={{backgroundColor:color.hex}}><div className="sx-color-info"><span>{t(color.name)}</span><span>{color.hex}</span></div><p>{t(color.role)}</p></div></Localized>)}
+          ].map(color=><Localized key={color.hex}><div className="sx-color" style={{backgroundColor:color.hex}}><div className="sx-color-info"><span>{t(color.name)}</span><span>{color.hex}</span></div><p>{t(color.role)}</p></div></Localized>)}
         </div>
         </div></div>
         <div className="sx-section-heading sx-subheading"><h3>{t("PATTERN / FROM REFERENCE TO SYSTEM")}</h3><p>{t("The repeated strips, joints, and open spaces of woven cooling mats informed the vertical rhythm of the pattern. The designed motif carries this material reference into a graphic repeat and a cut-out surface.")}</p></div>

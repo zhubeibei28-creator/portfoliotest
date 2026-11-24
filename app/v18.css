@@ -310,19 +310,6 @@ html,body{overscroll-behavior:none;}
   }
 }
 
-@media (hover: hover) {
-  .portfolio-shell[data-nav-hidden="true"] > .persistent-header::after {
-    content: "";
-    position: absolute;
-    inset: 100% 0 auto;
-    height: 10px;
-  }
-
-  .portfolio-shell[data-nav-hidden="true"] > .persistent-header:hover {
-    transform: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .persistent-header, .portfolio-shell .gf-index { transition: none; }
 }

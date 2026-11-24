@@ -115,43 +115,34 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
 
-  useEffect(()=>{const header=document.querySelector<HTMLElement>('.persistent-header');const shell=header?.closest<HTMLElement>('.portfolio-shell');if(!header||!shell)return;const update=()=>shell.style.setProperty('--portfolio-header-height',`${header.getBoundingClientRect().height}px`);const observer=new ResizeObserver(update);observer.observe(header);update();return()=>observer.disconnect();},[view,active,fullWidthDetail,language]);
-  useEffect(() => {
+  useEffect(()=>{
+    const header=document.querySelector<HTMLElement>('.persistent-header');
+    const shell=header?.closest<HTMLElement>('.portfolio-shell');if(!header||!shell)return;
+    let height=0;const update=()=>{const next=header.offsetHeight;if(next!==height){height=next;shell.style.setProperty('--portfolio-header-height',`${next}px`);}};
+    const observer=new ResizeObserver(update);observer.observe(header);update();return()=>observer.disconnect();
+  },[view,active,fullWidthDetail,language]);
+  useEffect(()=>{
     const isDetail=splitPreview&&view==='home'&&active!==null;
-    setNavHidden(isDetail&&!fullWidthDetail);
-    if(isDetail&&!fullWidthDetail)return;
-    const changeHeader=(hidden:boolean)=>setNavHidden(hidden);
-    let lastTarget: EventTarget | null = null;
-    let lastTop = 0;
-    let travel = 0;
-
-    const onScroll = (event: Event) => {
-      const target = event.target;
-      if (!(target instanceof HTMLElement) && target !== document) return;
-      const top = Math.max(0, target instanceof HTMLElement ? target.scrollTop : window.scrollY);
-
-      if (target !== lastTarget) {
-        lastTarget = target;
-        lastTop = 0;
-        travel = 0;
-      }
-
-      const delta = top - lastTop;
-      lastTop = top;
-      if (top <= 8) {
-        travel = 0;
-        if(!isDetail||delta<0)changeHeader(false);
-        return;
-      }
-      if (delta === 0) return;
-      travel = Math.sign(delta) === Math.sign(travel) ? travel + delta : delta;
-      if (travel >= 44) changeHeader(true);
-      if (travel <= -32) changeHeader(false);
+    let hidden=isDetail&&!fullWidthDetail;setNavHidden(hidden);
+    if(hidden)return;
+    const selector=isDetail?'.split-detail':view==='home'?'.home-scroll':view==='about'?'.about-view':view==='lab'?'.sphere-lab':'.contact-view';
+    const scroller=document.querySelector<HTMLElement>(selector);if(!scroller)return;
+    let lastTop=scroller.scrollTop,travel=0,frame=0;
+    const change=(next:boolean)=>{if(next!==hidden){hidden=next;setNavHidden(next);}};
+    const update=()=>{
+      frame=0;
+      const top=Math.max(0,Math.min(scroller.scrollTop,scroller.scrollHeight-scroller.clientHeight));
+      const delta=top-lastTop;lastTop=top;
+      if(top<=8){travel=0;change(false);return;}
+      if(Math.abs(delta)<1)return;
+      travel=Math.sign(delta)===Math.sign(travel)?travel+delta:delta;
+      if(travel>=56)change(true);
+      if(travel<=-40)change(false);
     };
-
-    window.addEventListener('scroll', onScroll, { capture: true, passive: true });
-    return () => window.removeEventListener('scroll', onScroll, true);
-  }, [view, active, splitPreview, fullWidthDetail]);
+    const schedule=()=>{if(!frame)frame=requestAnimationFrame(update);};
+    scroller.addEventListener('scroll',schedule,{passive:true});
+    return()=>{scroller.removeEventListener('scroll',schedule);cancelAnimationFrame(frame);};
+  },[view,active,splitPreview,fullWidthDetail]);
   useEffect(()=>{const preview=new URLSearchParams(window.location.search).get('preview');if(preview==='pocklet'||preview==='yan')setActive(projects.findIndex(p=>p.title===(preview==='yan'?'檐行记':'POCKLET')));},[]);
   const [hovered, setHovered] = useState<number | null>(null);
   const cursor = useRef({x:0,y:0});
@@ -178,10 +169,13 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
     if (view !== 'home' || active !== null || trailPreview) return;
     let frame = 0;
     let previous = performance.now();
+    let segment=0,visible=true;
+    const measure=()=>{const row=galleryRow.current;if(row)segment=row.children.length>5?(row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft:row.scrollWidth/3;};
+    measure();
+    const resize=new ResizeObserver(measure);if(galleryRow.current)resize.observe(galleryRow.current);
     const tick = (now: number) => {
       const row = galleryRow.current;
       if (row) {
-        const segment = row.children.length>5 ? (row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft : row.scrollWidth/3;
         const dt = Math.min(32, now - previous);
         previous = now;
         if (!position.current && segment) position.current = segment;
@@ -198,10 +192,12 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         if (segment && progressBar.current)
           progressBar.current.style.transform = `translateX(${((((position.current % segment) + segment) % segment) / segment) * 733}%)`;
       }
-      frame = requestAnimationFrame(tick);
+      if(visible)frame=requestAnimationFrame(tick);
     };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
+    const visibility=new IntersectionObserver(([entry])=>{const next=entry.isIntersecting;if(next===visible)return;visible=next;cancelAnimationFrame(frame);if(visible){previous=performance.now();frame=requestAnimationFrame(tick);}},{root:document.querySelector('.home-scroll'),threshold:0});
+    const hero=gallery.current?.closest('.home-view');if(hero)visibility.observe(hero);
+    frame=requestAnimationFrame(tick);
+    return()=>{cancelAnimationFrame(frame);resize.disconnect();visibility.disconnect();};
   }, [view, active, trailPreview]);
 
   useEffect(()=>{if(!trailPreview)return;const row=galleryRow.current;if(!row||row.children.length<6)return;const segment=(row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft;position.current=segment;row.style.transform=`translate3d(${-segment}px,0,0)`;},[trailPreview]);
@@ -241,8 +237,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           BEIBEI (ANNA) ZHU<span>®</span>
         </button>
         <nav>
-          {(['home', 'lab', 'about', 'contact'] as View[]).map((item) => (<Localized><button
-              key={item}
+          {(['home', 'lab', 'about', 'contact'] as View[]).map((item) => (<Localized key={item}><button
               className={view === item && active === null ? 'active' : ''}
               onClick={() => navigate(item)}
             >
@@ -271,9 +266,8 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           <div ref={gallery} className="gallery-viewport">
             <div ref={galleryRow} className="gallery-row loop-row">
               {[0, 1, 2].flatMap((loop) =>
-                projects.map((project, index) => (<Localized><button
+                projects.map((project, index) => (<Localized key={`${loop}-p-${index}`}><button
                       className={`gallery-project home-composition-${index}`}
-                      key={`${loop}-p-${index}`}
                       style={
                         {
                           '--cover-position': projects[index].crop,

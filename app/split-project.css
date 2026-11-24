@@ -91,7 +91,6 @@
 .split-detail{inset:0;padding-top:0;transition:none}
 .split-detail-sidebar{padding-top:24px}
 .portfolio-shell:has(.split-detail)[data-nav-hidden=false] .gf-index{top:var(--portfolio-header-height)}
-@media(hover:hover){.portfolio-shell:has(.split-detail):has(.persistent-header:hover) .gf-index{top:var(--portfolio-header-height)}}
 @media(max-width:760px){.split-detail{inset:0}.split-detail-sidebar{padding-top:24px}}
 
 /* Portrait reading uses each project's original title and banner opening. */
