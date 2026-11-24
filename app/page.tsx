@@ -79,14 +79,13 @@ const experiments = [
   ['03', '要！Connect Poster', '', 2],
   ['04', 'Paper In Pattern', '', 3],
   ['05', 'Windows of Perception', '', 4],
-  ['06', 'Make Her Visible', '', 5],
+  ['06', 'Self Checkout', '', 5],
   ['07', 'Objects on Display', '', 6],
   ['08', 'The Making of “Her”', '', 7],
   ['09', '磁带食记 Food on Record', '', 8],
   ['10', 'Amber’s Pulses Zine', '', 9],
   ['11', 'The Orbit', '', 10],
   ['12', 'Lantern Recall', '', 11],
-  ['13', 'Self Checkout', '', 12],
 ] as const;
 
 type View = 'home' | 'lab' | 'about' | 'contact';
@@ -585,7 +584,6 @@ function InfoColumn({ title, items }: { title: string; items: string[][] }) {
 
 // Add real video and full-resolution assets here as each study is supplied.
 const labMedia: Record<string, {video?: string; images?: string[]; pdf?: string; hoverImages?: string[]; cover?: string; detailInterval?: number; animation?: string}> = {
-  '13': {cover:'/assets/lab/self-checkout/cover.webp',images:['/assets/lab/self-checkout/poster.webp'],pdf:'/assets/lab/self-checkout/self-checkout.pdf'},
   '12': {images: ['/assets/lab/lantern-recall/cover.webp'], video: '/assets/lab/lantern-recall/lantern-recall.mp4'},
   '01': {images: ['/assets/lab/reverie-animation.webp'], video: '/assets/lab/reverie-animation.mp4'},
   '02': {images: ['/assets/lab/reverie-model.webp'], video: '/assets/lab/reverie-model.mp4'},
@@ -597,11 +595,10 @@ const labMedia: Record<string, {video?: string; images?: string[]; pdf?: string;
   '09': {cover: '/assets/lab/food-on-record/cover-1.webp', hoverImages: Array.from({length:26},(_,i)=>`/assets/lab/food-on-record/hover-${i+1}.webp`), images: Array.from({length:15},(_,i)=>`/assets/lab/food-on-record/detail-${i+1}.webp`), detailInterval:3000},
   '08': {images: ['/assets/lab/make-her-visible-model-1.webp', '/assets/lab/make-her-visible-model-2.webp']},
   '07': {images: ['/assets/lab/objects-display-cover.webp', '/assets/lab/objects-display-poster.webp', '/assets/lab/objects-display-tickets.webp']},
-  '06': {images: ['/assets/lab/make-her-visible.webp'], video: '/assets/lab/make-her-visible-final.mp4'},
+  '06': {cover:'/assets/lab/self-checkout/cover.webp',images:['/assets/lab/self-checkout/poster.webp'],pdf:'/assets/lab/self-checkout/self-checkout.pdf'},
 };
 
 const labDescriptions: Record<string, {meta: string; description: string}> = {
-  "13": {meta:"Poster Design / Image-making / Typography",description:"A poster combining layered pink and red shopping-cart imagery, oversized floral forms, and repeated self-checkout typography."},
   "12": {meta: "2026 · Creative Coding / Animation", description: "A pixel-based animation of two children hanging lanterns"},
   "01": {
     "meta": "2025 · 2D Motion / Illustration / Editorial",
@@ -623,10 +620,7 @@ const labDescriptions: Record<string, {meta: string; description: string}> = {
     "meta": "2025 · Editorial Design / Photography",
     "description": "A zine exploring how windows, reflections, and blurred surfaces shift the way we see memory and place."
   },
-  "06": {
-    "meta": "2025 · 3D Motion / Social Campaign / Visual Symbol",
-    "description": "A 3D-modeled motion piece using a blooming magnolia as a shareable symbol of feminine strength and visibility."
-  },
+  "06": {meta:"Poster Design / Image-making / Typography",description:"A poster combining layered pink and red shopping-cart imagery, oversized floral forms, and repeated self-checkout typography."},
   "07": {
     "meta": "2025 · Exhibition Identity / Illustration / Editorial Design",
     "description": "A fictional exhibition identity exploring how women have been framed and displayed across art history. The system includes an exhibition poster inspired by historical female figures and a receipt-style admission ticket that turns viewing into a form of cataloging and display."
