@@ -28,7 +28,7 @@ export default function useProjectReveal(root:RefObject<HTMLElement|null>){
    const rect=el.getBoundingClientRect();
    // Leave the initial viewport and hidden layout variants untouched.
    if(el.tagName!=='IMG'&&!rect.height)continue;
-   if(el.hasAttribute('data-revealed')||(rect.height&&rect.top<viewportBottom))continue;
+   if(rect.height&&rect.top<viewportBottom)continue;
    el.classList.add('project-reveal');
    if(el.tagName==='IMG'){
     el.classList.add('project-reveal-image');
@@ -39,6 +39,6 @@ export default function useProjectReveal(root:RefObject<HTMLElement|null>){
   }
   const showAll=()=>{if(motion.matches){targets.forEach(el=>el.setAttribute('data-revealed','true'));observer.disconnect();}};
   motion.addEventListener('change',showAll);
-  return()=>{images.forEach(image=>image.removeEventListener('load',onImageLoad));observer.disconnect();motion.removeEventListener('change',showAll);targets.forEach(el=>{el.classList.remove('project-reveal','project-reveal-image');if(el.tagName==='IMG')el.style.removeProperty('--reveal-delay');});};
+  return()=>{images.forEach(image=>image.removeEventListener('load',onImageLoad));observer.disconnect();motion.removeEventListener('change',showAll);targets.forEach(el=>{el.classList.remove('project-reveal','project-reveal-image');if(el.tagName==='IMG')el.style.removeProperty('--reveal-delay');el.removeAttribute('data-revealed');});};
  },[root]);
 }

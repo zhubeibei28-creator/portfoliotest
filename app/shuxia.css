@@ -516,3 +516,11 @@
  .shuxia-project .sx-type-system>.sx-type-example:last-child{margin-bottom:0}
  .shuxia-project .sx-type-system>.sx-type-example:last-child>p{margin-bottom:0}
 }
+
+/* Packaging detail follows the same two-column grid as section copy. */
+.shuxia-project .sx-package-story{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start;margin:40px 0}
+.shuxia-project .sx-package-story>.sx-description{min-width:0;max-width:none;padding:0;margin:0}
+.shuxia-project .sx-package-story>.sx-description p{max-width:none}
+.shuxia-project .sx-package-story>.sx-captioned-image{min-width:0;margin:0}
+.shuxia-project .sx-package-story img{width:100%;height:auto;object-fit:contain}
+@media(max-width:620px){.shuxia-project .sx-package-story{grid-template-columns:1fr;gap:24px;margin:28px 0}}

@@ -1,6 +1,7 @@
-/* One-time opacity reveals never move artwork across captions. */
+/* Reveal opacity only: animation never moves artwork across adjacent captions. */
 .project-reveal{opacity:0}
-.project-reveal[data-revealed=true]{opacity:1;transition:opacity 450ms ease}
+.project-reveal[data-revealed=true]{opacity:1;transition:opacity 800ms ease;transition-delay:var(--reveal-delay,0ms)}
+.project-reveal[data-reveal-photo][data-revealed=true]{transition-duration:600ms}
 :is(.shuxia-project,.graft-project,.pk-project,.yan-project) :is(figcaption,.gf-caption,.pk-caption,.yan-grid-caption,.yan-film-caption){position:relative;height:auto;max-height:none;overflow:visible;white-space:normal;overflow-wrap:anywhere;flex-shrink:0}
 @media(prefers-reduced-motion:reduce){.project-reveal{opacity:1;transition:none!important}}
 .graft-project .gf-image,.yan-project .yan-photo{overflow:clip}
