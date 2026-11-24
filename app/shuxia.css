@@ -533,3 +533,6 @@
 
 /* System subsections share the site's compact uppercase heading scale. */
 .split-detail .split-detail-content .shuxia-project .sx-product-system .sx-subheading>h3{font-size:clamp(15px,1.4vw,20px);line-height:1.5;font-weight:400;letter-spacing:0;text-transform:uppercase;margin:0}
+
+.shuxia-project .sx-packaging-description{width:100%;max-width:none;margin:40px 0 32px;padding:0}
+.shuxia-project .sx-packaging-description>p{max-width:none}
