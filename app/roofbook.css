@@ -126,7 +126,7 @@
 .split-detail .split-detail-content .yan-project{--yan-gap:32px;--yan-section-gap:48px}
 .split-detail .split-detail-content .yan-project :is(.yan-sequence,.yan-craft,.yan-process,.yan-pages,.yan-film,.yan-closing){width:100%;max-width:none;margin-inline:0}
 .yan-structure-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start}
-.yan-structure-pair .yan-photo img{width:100%;height:clamp(220px,32vw,400px);object-fit:contain;background:#f8f8f6}
+.yan-structure-pair .yan-photo img{width:100%;height:clamp(250px,36vw,460px);object-fit:contain;background:transparent}
 .split-detail .split-detail-content .yan-project .yan-wide{width:100%;max-width:none}
 .split-detail .split-detail-content .yan-project .yan-wide img{max-height:440px;object-fit:contain}
 .yan-project .yan-reading-pair{margin:24px 0 28px}
