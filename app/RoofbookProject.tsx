@@ -33,14 +33,10 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
       <p className="yan-scroll-hint">Scroll to explore <span aria-hidden="true">↓</span></p>
     </header>
     <div className="yan-header-photo">{photo('canal','My travel photograph: rooflines framing a canal')}</div>
-    <div className="yan-opening">
-      {photo('cover','檐行记: a fiber-textured cover wrapped in a cream paper band')}
-
-    </div>
     <ProjectOverview year="2025" project={<>Travelogue / Editorial design<br/>Semester-long project</>} roles={['Editorial design','Typography','Photography','Paper selection','Hand binding']} description={<><p lang="zh">屋檐与天空相接之处，即是故事的开端。</p><p>Developed over a semester, 檐行记 is a travelogue exploring rooflines, climate, and shelter. Following a journey from southern China to the north, Dunhuang, and Lhasa, it connects the experience of shelter with the hands and structures that make it possible.</p></>} />
     <ProjectSectionNav root={article} items={[["yan-structure","Structure"],["yan-craft","Binding"],["yan-process","Process"],["yan-spreads","Spreads"],["yan-film","Film"]]} /><section id="yan-structure" className="yan-sequence" aria-label="Book structure">
       <div className="yan-note"><h2>One book, two entrances.</h2><p>A dos-à-dos–inspired structure brings two independent reading directions together. Turn the book to move from a vertical travelogue to a horizontal accordion: from experiencing a place to looking at how it is made.</p></div>
-      {photo('accordion','The architectural sequence unfolding as a horizontal accordion','yan-wide')}
+      <div className="yan-structure-pair"><figure>{photo('cover','檐行记: a fiber-textured cover wrapped in a cream paper band')}<figcaption>Cover / plant-fibre paper and wraparound band</figcaption></figure><figure>{photo('accordion','The architectural sequence unfolding as a horizontal accordion')}<figcaption>Accordion / continuous architectural sequence</figcaption></figure></div>
       <div className="yan-reading-pair"><div><h3>01 / The journey</h3><p>Individual pages hold bilingual travel writing, photographs, and handwritten reflections. Thinner paper gives this side a lighter, more intimate rhythm.</p></div><div><h3>02 / The making</h3><p>The accordion opens into a continuous sequence of roof forms and craftsmanship. Horizontally textured paper recalls the tactile character of xuan paper, giving this side a distinct material presence.</p></div></div>
       {photo('unfolded','The two reading orientations meeting within the hand-bound book','yan-wide')}
     </section>
@@ -66,7 +62,7 @@ export default function RoofbookProject({onBack,onNext,nextTitle}:{onBack:()=>vo
       <p className="yan-credit-note">The travelogue closes with an acknowledgement of its image sources.</p>
     </section>
     <section id="yan-film" className="yan-film" aria-label="Reading the book">
-      <div className="yan-film-caption"><h2>The book in hand.</h2><div className="yan-film-caption-row">
+      <div className="yan-note"><h2>The book in hand.</h2><div className="yan-film-caption-row">
         <p>Moving between the extended structure and individual pages.</p>
         <a href="/assets/roofbook/the-eaves-of-heaven.pdf" target="_blank" rel="noopener">View book PDF ↗</a>
       </div></div>

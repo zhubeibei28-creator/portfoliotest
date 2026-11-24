@@ -186,10 +186,10 @@
 .split-detail .split-detail-content .shuxia-project .sx-project-meta>div:last-child{grid-column:1/-1}
 @media(max-width:560px){.split-detail .split-detail-content .shuxia-project .sx-overview{grid-template-columns:1fr;gap:28px}}
 /* Book navigation covers the full canvas, including the film's full-bleed background. */
-.split-detail .split-detail-content .yan-project>.project-section-nav{margin-inline:-28px;padding-inline:28px;width:auto}
+.split-detail .split-detail-content article>.project-section-nav{margin-inline:-28px;padding-inline:28px;width:auto}
 .split-detail .split-detail-content .yan-project .yan-opening>.yan-photo{width:min(100%,480px);max-width:480px;margin-inline:auto}
 .split-detail .split-detail-content .yan-project .yan-opening>.yan-photo img{max-height:62svh;object-fit:contain}
 .split-detail .split-detail-content .yan-project .yan-wide{width:min(100%,1000px);max-width:1000px;margin-inline:auto}
 .split-detail .split-detail-content .yan-project .yan-wide img{max-height:70svh;object-fit:contain}
 .split-detail .split-detail-content .yan-project .yan-film{--yan-film-width:min(100%,960px,calc(66svh * 2416 / 1652))}
-@media(max-width:760px){.split-detail .split-detail-content .yan-project>.project-section-nav{margin-inline:-18px;padding-inline:18px}}
+@media(max-width:760px){.split-detail .split-detail-content article>.project-section-nav{margin-inline:-18px;padding-inline:18px}}

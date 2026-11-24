@@ -121,3 +121,17 @@
   .yan-film .yan-reading::before{inset-inline:-18px}
   .yan-project{--yan-section-gap:32px}
 }
+
+/* A consistent editorial grid groups each object with its supporting detail. */
+.split-detail .split-detail-content .yan-project{--yan-gap:32px;--yan-section-gap:48px}
+.split-detail .split-detail-content .yan-project :is(.yan-sequence,.yan-craft,.yan-process,.yan-pages,.yan-film,.yan-closing){width:100%;max-width:none;margin-inline:0}
+.yan-structure-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start}
+.yan-structure-pair .yan-photo img{width:100%;height:clamp(220px,32vw,400px);object-fit:contain;background:#f8f8f6}
+.split-detail .split-detail-content .yan-project .yan-wide{width:100%;max-width:none}
+.split-detail .split-detail-content .yan-project .yan-wide img{max-height:440px;object-fit:contain}
+.yan-project .yan-reading-pair{margin:24px 0 28px}
+.yan-project .yan-reading{max-width:960px;margin:0 auto;background:#fff}
+.yan-project .yan-film .yan-reading::before{content:none}
+.yan-project .yan-closing .yan-photo img{max-height:340px;aspect-ratio:auto;object-fit:contain;mask-image:none}
+.yan-project .yan-closing .yan-credit-note{text-align:left}
+@media(max-width:620px){.split-detail .split-detail-content .yan-project{--yan-gap:24px;--yan-section-gap:36px}.yan-structure-pair{grid-template-columns:1fr;gap:24px}.yan-structure-pair .yan-photo img{height:auto;max-height:360px}.yan-project .yan-note{gap:14px}}
