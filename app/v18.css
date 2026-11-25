@@ -332,3 +332,7 @@ html,body{overscroll-behavior:none;}
 /* One continuous size formula avoids jumps at width or aspect-ratio breakpoints. */
 .home-view .gallery-project{--home-card-size:clamp(220px,min(calc(40vw - 28px),42svh),340px);flex-basis:var(--home-card-size);width:var(--home-card-size);height:var(--home-card-size)}
 @media(max-width:620px){.home-view .gallery-project{--home-card-size:220px}}
+
+/* Size changes ease between measured viewport values; artwork follows its card. */
+.home-view .gallery-project{transition:width 180ms ease-out,height 180ms ease-out,flex-basis 180ms ease-out}
+@media(prefers-reduced-motion:reduce){.home-view .gallery-project{transition:none}}

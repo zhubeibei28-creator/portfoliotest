@@ -169,9 +169,9 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
     let frame = 0;
     let previous = performance.now();
     let segment=0,visible=true;
-    const measure=()=>{const row=galleryRow.current;if(row)segment=row.children.length>5?(row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft:row.scrollWidth/3;};
+    const measure=()=>{const row=galleryRow.current;if(!row)return;const next=row.children.length>5?(row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft:row.scrollWidth/3;if(segment>0&&next>0&&next!==segment){const ratio=next/segment;position.current*=ratio;velocity.current*=ratio;}segment=next;};
     measure();
-    const resize=new ResizeObserver(measure);if(galleryRow.current)resize.observe(galleryRow.current);
+    const resize=new ResizeObserver(measure);if(galleryRow.current){resize.observe(galleryRow.current);if(galleryRow.current.firstElementChild)resize.observe(galleryRow.current.firstElementChild);}
     const tick = (now: number) => {
       const row = galleryRow.current;
       if (row) {
