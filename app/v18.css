@@ -330,4 +330,7 @@ html,body{overscroll-behavior:none;}
 .home-view .gallery-project>img.shuxia-cover,.work-grid>button>img.shuxia-cover{object-fit:cover;object-position:58% 50%;background:#39291e;padding:0;box-sizing:border-box}
 
 /* Reduce the carousel only on wide desktop windows; preserve smaller layouts. */
-@media(min-width:1280px){.home-view .gallery-project{--home-card-size:clamp(200px,min(23vw,42svh),340px);flex-basis:var(--home-card-size);width:var(--home-card-size);height:var(--home-card-size)}}
+@media(min-width:1280px) and (min-aspect-ratio:4/3){.home-view .gallery-project{--home-card-size:clamp(200px,min(23vw,42svh),340px);flex-basis:var(--home-card-size);width:var(--home-card-size);height:var(--home-card-size)}}
+
+/* Taller windows need larger cards relative to their available width. */
+@media(min-width:621px) and (max-aspect-ratio:4/3){.home-view .gallery-project{--home-card-size:clamp(220px,36vw,380px);flex-basis:var(--home-card-size);width:var(--home-card-size);height:var(--home-card-size)}}
