@@ -23,7 +23,7 @@ export default function SplitProject({title,type,onBack,children,language='en',o
    <div className="split-tools-spacer" aria-hidden="true"/>
    <h1>{info.title}</h1>
    <div className="split-summary"><p>{sentences[0].trim()}</p>{sentences.length>1&&<p>{sentences.slice(1).join(language==='zh'?'':' ').trim()}</p>}</div>
-   <dl><div><dt>{t('YEAR')}</dt><dd>{info.year}</dd></div><div><dt>{t('DISCIPLINE')}</dt><dd>{t(type)}</dd></div><div><dt>{t('PROJECT')}</dt><dd>{info.project.map(line=><div key={line}>{t(line)}</div>)}</dd></div><div><dt>{t('MY ROLE')}</dt><dd><ul className="split-role-list">{info.role.map(role=><Localized key={role}><li>{t(role)}</li></Localized>)}</ul></dd></div></dl>
+   <dl><div><dt>{t('YEAR')}</dt><dd>{info.year}</dd></div><div><dt>{t('PROJECT')}</dt><dd>{info.project.map(line=><div key={line}>{t(line)}</div>)}</dd></div><div><dt>{t('MY ROLE')}</dt><dd><ul className="split-role-list">{info.role.map(role=><Localized key={role}><li>{t(role)}</li></Localized>)}</ul></dd></div></dl>
 
 
   </aside>
