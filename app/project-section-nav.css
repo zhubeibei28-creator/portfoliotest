@@ -8,3 +8,6 @@
 /* Match the header's motion instead of snapping between its two offsets. */
 .split-detail .split-detail-content :is(.project-section-nav,.gf-index){transition:top 260ms ease}
 @media(prefers-reduced-motion:reduce){.split-detail .split-detail-content :is(.project-section-nav,.gf-index){transition:none}}
+
+/* A single measured edge keeps both bars flush throughout header motion. */
+.portfolio-shell.portfolio-shell[data-nav-hidden]:has(.persistent-header) .split-detail .split-detail-content :is(.project-section-nav,.gf-index){top:var(--portfolio-header-visible-height,var(--portfolio-header-height,64px));transition:none}

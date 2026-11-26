@@ -120,6 +120,14 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
     let height=0;const update=()=>{const next=header.offsetHeight;if(next!==height){height=next;shell.style.setProperty('--portfolio-header-height',`${next}px`);}};
     const observer=new ResizeObserver(update);observer.observe(header);update();return()=>observer.disconnect();
   },[view,active,fullWidthDetail,language]);
+  // The sticky chapter bar follows the actual moving header edge, not a second animation.
+  useEffect(()=>{
+    const header=document.querySelector<HTMLElement>('.persistent-header');
+    const shell=header?.closest<HTMLElement>('.portfolio-shell');if(!header||!shell)return;
+    let frame=0;const start=performance.now();
+    const follow=()=>{shell.style.setProperty('--portfolio-header-visible-height',`${Math.max(0,header.getBoundingClientRect().bottom)}px`);if(performance.now()-start<360)frame=requestAnimationFrame(follow);};
+    follow();return()=>cancelAnimationFrame(frame);
+  },[navHidden,view,active,fullWidthDetail,language]);
   useEffect(()=>{
     const isDetail=splitPreview&&view==='home'&&active!==null;
     let hidden=isDetail&&!fullWidthDetail;setNavHidden(hidden);
