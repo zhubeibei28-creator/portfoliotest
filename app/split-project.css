@@ -193,3 +193,10 @@
 .split-detail .split-detail-content .yan-project .yan-wide img{max-height:70svh;object-fit:contain}
 .split-detail .split-detail-content .yan-project .yan-film{--yan-film-width:min(100%,960px,calc(66svh * 2416 / 1652))}
 @media(max-width:760px){.split-detail .split-detail-content article>.project-section-nav{margin-inline:-18px;padding-inline:18px}}
+
+/* A visible sidebar owns the introduction and metadata; full-width reading retains its overview. */
+@media(width > 1200px) and (aspect-ratio > 4/3){
+ .split-detail .split-detail-content article .project-overview{display:none}
+ .split-detail .project-section-nav a[href="#sx-overview"]{display:none}
+ .split-detail .split-detail-sidebar{overflow-y:auto;scrollbar-width:thin}
+}
