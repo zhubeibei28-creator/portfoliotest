@@ -536,3 +536,7 @@
 
 .shuxia-project .sx-packaging-description{width:100%;max-width:none;margin:40px 0 32px;padding:0}
 .shuxia-project .sx-packaging-description>p{max-width:none}
+
+/* Hide only the redundant Latin wordmark; preserve every original specimen stroke. */
+.sx-expressive-specimen{position:relative}
+.sx-expressive-specimen::after{content:"";position:absolute;left:14.4%;top:19%;width:21.5%;height:22%;background:#fff;pointer-events:none}
