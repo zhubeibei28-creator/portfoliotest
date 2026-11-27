@@ -42,9 +42,9 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
       <div className="sx-hero"><img src="/assets/shuxia/summer-banner.webp" alt="SHUXIA handwritten white wordmark over a green field and summer sky" width={1920} height={932} fetchPriority="high" /></div>
 
 
-      <ProjectOverview id="sx-overview" labels={[t('OVERVIEW'),t('YEAR'),t('PROJECT'),t('MY ROLE')]} year="2026" project={<>{t('Independent')}<br/>{t('Brand concept')}</>} roles={['Concept development','Visual identity','Illustration & mascot','Product & packaging','Website design','Spatial design & visualization'].map(t)} description={<p>{t("Shu Xia is a soap-led fragrance brand inspired by the scents and everyday rituals of summer. Beginning with a collection of scented soaps, the brand extends its signature fragrances into mists and thoughtfully designed lifestyle objects, bringing the sensory memories of summer into everyday life.")}</p>} />
+      <ProjectOverview id="sx-overview" labels={[t('OVERVIEW'),t('YEAR'),t('PROJECT'),t('MY ROLE')]} year="2026" project={<>{t('Independent')}<br/>{t('Brand concept')}</>} roles={['Concept development','Visual identity','Illustration & mascot','Product & packaging','Spatial design & visualization'].map(t)} description={<p>{t("Shu Xia is a soap-led fragrance brand inspired by the scents and everyday rituals of summer. Beginning with a collection of scented soaps, the brand extends its signature fragrances into mists and thoughtfully designed lifestyle objects, bringing the sensory memories of summer into everyday life.")}</p>} />
 
-      <ProjectSectionNav root={article} items={[["sx-overview",language==='zh'?"概述":"Overview"],["sx-mood-title",language==='zh'?"夏日印象":"Summer"],["sx-identity",language==='zh'?"视觉识别":"Identity"],["sx-store",language==='zh'?"空间":"Space"],["sx-pattern",language==='zh'?"图案与产品":"Pattern & products"],["sx-postcards",language==='zh'?"印刷物件":"Printed objects"],["sx-website",language==='zh'?"网站":"Website"]]} />
+      <ProjectSectionNav root={article} items={[["sx-overview",language==='zh'?"概述":"Overview"],["sx-mood-title",language==='zh'?"夏日印象":"Summer"],["sx-identity",language==='zh'?"视觉识别":"Identity"],["sx-store",language==='zh'?"空间":"Space"],["sx-pattern",language==='zh'?"图案与产品":"Pattern & products"],["sx-postcards",language==='zh'?"印刷物件":"Printed objects"]]} />
 
       <section className="sx-section sx-mood-section" aria-labelledby="sx-mood-title">
         <div className="sx-section-heading"><h2 id="sx-mood-title">{t('MOODBOARD / SUMMER ATMOSPHERE')}</h2><p>{t('Rather than the bright, energetic image of summer, Shu Xia captures its softer, slower side: humid air, after-rain freshness, soft greenery, and the quiet feeling of staying cool. Courtyards, shade, and moving air evoke the small pauses of an ordinary summer.')}</p></div>
@@ -105,16 +105,6 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
         {photo('postcards-studio','Front and back of the SHUXIA postcard collection on a pale background','sx-postcards-studio')}
         <div className="sx-crossword">{photo('crossword','Two promotional crossword slips introducing SHUXIA products and scent notes')}<div className="sx-description"><h4>{t("TAKEAWAY / BRAND CROSSWORD")}</h4><p>{t("A playful crossword introduces products, ingredients, and scent vocabulary. It acts as both a product guide and a small printed takeaway, translating the brand’s everyday summer mood into an interaction.")}</p></div></div>
       </section>
-
-      <section className="sx-section" aria-labelledby="sx-website">
-        <div className="sx-section-heading"><h2 id="sx-website">{t("05 / WEBSITE DESIGN")}</h2><p>{t("The brand’s quiet visual language continues online, from an atmospheric homepage to scent navigation and a product detail view.")}</p></div>
-        <div className="sx-website-pair">{photo('website-grass','SHUXIA website displayed on a laptop in summer grass')}<div className="sx-web-main sx-laptop-video" data-no-reveal="true">
-          <div className="sx-laptop-screen"><VisibilityVideo src="/assets/shuxia/website-demo.mp4" poster="/assets/shuxia/website-demo-poster.webp" label="SHUXIA website demonstration" controls={false} /></div>
-          <img width={3350} height={1758} className="sx-laptop-frame" src="/assets/shuxia/laptop-frame-video.webp" alt="Laptop frame surrounding the SHUXIA website video" />
-        </div></div><p className="sx-small-note">{language==='zh'?'品牌网站 / 页面与交互演示':'Brand website / page and interaction demonstration'}</p>
-      </section>
-
-
 
       <footer className="sx-end"><span>{t("述夏 SHUXIA / Memory and scent of summer")}</span><button onClick={onNext??onBack}>{onNext?`${language==='zh'?'下一个项目':'Next'} / ${nextTitle} ↗`:t('Back to selected work ↗')}</button></footer>
       {zoom && <div className="sx-lightbox" role="dialog" aria-modal="true" aria-label={zoom.alt} onClick={() => setZoom(null)}><button autoFocus className="sx-lightbox-close" onClick={() => setZoom(null)}>{t("Close ×")}</button><img src={zoom.src} alt={zoom.alt} /></div>}

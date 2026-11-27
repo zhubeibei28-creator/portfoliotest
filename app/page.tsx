@@ -40,7 +40,7 @@ const projects = [
   {
     id: '01',
     title: '述夏SHUXIA',
-    type: "Brand Identity / Packaging / Web Design",
+    type: "Brand Identity / Packaging / Spatial Design",
     year: '2025',
     crop: '100% 0%',
     text: "An independently developed summer scent brand spanning identity, products, packaging, digital design, and a storefront concept.",
