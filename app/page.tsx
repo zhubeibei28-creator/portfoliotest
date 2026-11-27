@@ -3,6 +3,7 @@ import Localized, {PortfolioLanguage} from './Localized';
 
 
 import { useEffect, useRef, useState } from 'react';
+import {useRouter} from 'next/navigation';
 import ShuxiaProject from './ShuxiaProject';
 import {previewText,type PreviewLanguage} from './preview-language';
 import './language-preview.css';
@@ -89,21 +90,20 @@ const experiments = [
 ] as const;
 
 type View = 'home' | 'lab' | 'about' | 'contact';
+const workSlugs=['icepact','roofbook','shuxia','graft','pocklet'];
 
-export default function Home({initialPreview=false,bilingualPreview=false}:{initialPreview?:boolean;bilingualPreview?:boolean}={}) {
-  const [language,setLanguage]=useState<PreviewLanguage>(bilingualPreview?'zh':'en');
+export default function Home({initialPreview=false,bilingualPreview=false,initialWorkSlug,initialLanguage}:{initialPreview?:boolean;bilingualPreview?:boolean;initialWorkSlug?:string;initialLanguage?:PreviewLanguage}={}) {
+  const router=useRouter();
+  const [language,setLanguage]=useState<PreviewLanguage>(initialLanguage??(bilingualPreview?'zh':'en'));
   const [typePreview,setTypePreview]=useState('mi');
   useEffect(()=>{if(!bilingualPreview)return;const type=new URLSearchParams(window.location.search).get('type');if(type&&['xiaolai','marker','glow','round','smiley','mi','song'].includes(type))setTypePreview(type);},[bilingualPreview]);
   const t=(text:string)=>previewText(text,language);
   const [view, setView] = useState<View>('home');
-  // Temporarily paused; keep the opening available for restoration.
-  const openingEnabled=false;
-  const [trailPreview,setTrailPreview]=useState(openingEnabled&&initialPreview);
-  useEffect(()=>{setTrailPreview(openingEnabled&&(initialPreview || new URLSearchParams(window.location.search).get('intro')==='trail'));},[initialPreview]);
-  const [active, setActive] = useState<number | null>(null);
+  const [trailPreview,setTrailPreview]=useState(false);
+  const [active, setActive] = useState<number | null>(initialWorkSlug?Math.max(0,workSlugs.indexOf(initialWorkSlug)):null);
   const detailOrder=[2,3,4,1];
   const nextDetail=detailOrder[(detailOrder.indexOf(active??2)+1)%detailOrder.length];
-  const openNextDetail=()=>{setNavHidden(false);setHovered(null);setActive(nextDetail);};
+  const openNextDetail=()=>{setNavHidden(false);setHovered(null);openWork(nextDetail);};
   const [navHidden, setNavHidden] = useState(false);
   const [previewVisited,setPreviewVisited]=useState(false);
   const [previewSelection,setPreviewSelection]=useState<PreviewSelection|null>(null);
@@ -111,6 +111,27 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   const [fullWidthDetail,setFullWidthDetail]=useState(false);
   useEffect(()=>{const media=window.matchMedia('(max-width:1200px), (max-aspect-ratio:4/3)');const update=()=>setFullWidthDetail(media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update);},[]);
   useEffect(()=>{if(new URLSearchParams(window.location.search).get('intro')==='trail')setSplitPreview(true);},[]);
+  const writeLocation=(index:number|null,nextView:View='home')=>{
+    const url=new URL(window.location.href);url.pathname=index===null?(bilingualPreview?'/zh-preview':'/'):`/work/${workSlugs[index]}`;
+    for(const key of ['work','preview','intro','view'])url.searchParams.delete(key);
+    if(nextView!=='home')url.searchParams.set('view',nextView);
+    if(language==='zh')url.searchParams.set('lang','zh');else url.searchParams.delete('lang');
+    const href=url.pathname+url.search;if(href!==window.location.pathname+window.location.search)router.push(href,{scroll:false});
+  };
+  const openWork=(index:number)=>{writeLocation(index);setView('home');setActive(index);setTrailPreview(false);setPreviewSelection(null);setHovered(null);setNavHidden(false);};
+  const closeWork=()=>{writeLocation(null);setActive(null);setView('home');setHovered(null);setNavHidden(false);};
+  const changeLanguage=(next:PreviewLanguage)=>{setLanguage(next);const url=new URL(window.location.href);if(next==='zh')url.searchParams.set('lang','zh');else url.searchParams.delete('lang');router.replace(url.pathname+url.search,{scroll:false});};
+  useEffect(()=>{
+    const restore=(initial=false)=>{
+      const url=new URL(window.location.href);const slug=url.pathname.match(/^\/work\/([^/]+)\/?$/)?.[1]??url.searchParams.get('work')??(url.searchParams.get('preview')==='yan'?'roofbook':url.searchParams.get('preview'));
+      const index=slug?workSlugs.indexOf(slug):-1;const nextView=url.searchParams.get('view');
+      setActive(index>=1?index:null);setView(index>=1?'home':(['lab','about','contact'].includes(nextView??'')?nextView as View:'home'));
+      setLanguage(url.searchParams.get('lang')==='zh'||bilingualPreview?'zh':'en');setHovered(null);setPreviewSelection(null);setNavHidden(false);
+      let seen=false;try{seen=sessionStorage.getItem('portfolio-intro-seen')==='yes';}catch{}
+      setTrailPreview(initial&&index<1&&!nextView&&(url.searchParams.get('intro')==='trail'||(!seen&&url.searchParams.get('intro')!=='off')));
+    };
+    restore(true);const pop=()=>restore(false);window.addEventListener('popstate',pop);return()=>window.removeEventListener('popstate',pop);
+  },[bilingualPreview,initialWorkSlug,initialLanguage]);
   const browsePreview=(project:number,art?:PreviewArt)=>{setPreviewVisited(true);setNavHidden(false);setPreviewSelection({project,art});};
   useEffect(()=>{if(trailPreview&&view==='home'&&active===null)window.scrollTo({top:0,behavior:'instant'});},[active,view,trailPreview]);
 
@@ -150,7 +171,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
     scroller.addEventListener('scroll',schedule,{passive:true});
     return()=>{scroller.removeEventListener('scroll',schedule);cancelAnimationFrame(frame);};
   },[view,active,splitPreview,fullWidthDetail]);
-  useEffect(()=>{const preview=new URLSearchParams(window.location.search).get('preview');if(preview==='pocklet'||preview==='yan')setActive(projects.findIndex(p=>p.title===(preview==='yan'?'檐行记':'POCKLET')));},[]);
+
   const [hovered, setHovered] = useState<number | null>(null);
   const cursor = useRef({x:0,y:0});
   const cursorLabel = useRef<HTMLDivElement>(null);
@@ -210,6 +231,8 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
   useEffect(()=>{if(!trailPreview)return;const row=galleryRow.current;if(!row||row.children.length<6)return;const segment=(row.children[5] as HTMLElement).offsetLeft-(row.children[0] as HTMLElement).offsetLeft;position.current=segment;row.style.transform=`translate3d(${-segment}px,0,0)`;},[trailPreview]);
 
   const navigate = (next: View) => {
+    writeLocation(null,next);
+    setTrailPreview(false);
     setView(next);
     setActive(null);
     setHovered(null);
@@ -255,12 +278,12 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         <p>
           <i /> {t('Available for select projects')}
         </p>
-        {<div className="preview-language-switch" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>setLanguage('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>setLanguage('zh')}>中文</button></div>}
+        {<div className="preview-language-switch" role="group" aria-label="Language / 语言"><button lang="en" aria-pressed={language==='en'} onClick={()=>changeLanguage('en')}>EN</button><span>/</span><button lang="zh-CN" aria-pressed={language==='zh'} onClick={()=>changeLanguage('zh')}>中文</button></div>}
       </header>}
 
       {view === 'home' && active === null && (
         <div className="home-scroll" data-trail={trailPreview}>
-        {trailPreview && <TrailIntro onOriginal={()=>{introRollingStart.current=performance.now();setTrailPreview(false);setPreviewSelection(null);}}/>}
+        {trailPreview && <TrailIntro onOriginal={()=>{try{sessionStorage.setItem('portfolio-intro-seen','yes');}catch{}introRollingStart.current=performance.now();setTrailPreview(false);setPreviewSelection(null);}}/>}
         {<section className="home-view">
           <div className="intro">
             <p>
@@ -288,7 +311,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
                         hoverPaused.current = false;
                       }}
                       aria-disabled={!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)}
-                      onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {setActive(index);setHovered(null);} : undefined}
+                      onClick={['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title) ? () => {openWork(index);} : undefined}
                     >
                       {project.title === 'ICEPACT' ? <HomeLoopVideo className="gallery-cover icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="gallery-cover shuxia-cover" src="/assets/shuxia/home-product-cover-v2.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="gallery-cover roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'100%'}} /> : project.title === 'POCKLET' ? <img className="gallery-cover pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="gallery-cover" src="/assets/graft/cover-promo-v2.webp" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'100%'}} />}
                       <span className="gallery-index">
@@ -311,7 +334,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
         </section>}
         <section className="selected-grid">
           <header><h2>{t('Selected work')}</h2><span>2024—2026</span></header>
-          <div className="work-grid">{selectedWork.map(({ project, index }) => (<Localized key={project.id}><button aria-disabled={!trailPreview&&!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={()=>{if(trailPreview){browsePreview(Number(project.id)-1);}else if(['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)){setActive(index);setHovered(null);}}}>
+          <div className="work-grid">{selectedWork.map(({ project, index }) => (<Localized key={project.id}><button aria-disabled={!trailPreview&&!['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)} onClick={()=>{if(trailPreview){browsePreview(Number(project.id)-1);}else if(['述夏SHUXIA','GRÆFT','POCKLET','檐行记'].includes(project.title)){openWork(index);}}}>
               {project.title === 'ICEPACT' ? <HomeLoopVideo className="work-grid-image icepact-cover" /> : project.title === '述夏SHUXIA' ? <img className="work-grid-image shuxia-cover" src="/assets/shuxia/home-product-cover-v2.webp" alt="述夏SHUXIA" /> : project.title === '檐行记' ? <img className="work-grid-image roofbook-cover" src="/assets/roofbook-cover-two-spreads-v7.png" alt="檐行记" style={{objectFit:'cover',objectPosition:'50% 54%',width:'100%',height:'auto'}} /> : project.title === 'POCKLET' ? <img className="work-grid-image pocklet-cover" src="/assets/pocklet-cover.png" alt="POCKLET" /> : <img className="work-grid-image" src="/assets/graft/cover-promo-v2.webp" alt={project.title} style={{objectFit:'cover',objectPosition:'center',width:'100%',height:'auto'}} />}
               <span className="work-grid-caption"><b>{project.title}</b><span>{t(project.type)}</span></span>
             </button>
@@ -322,16 +345,16 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
       )}
 
       {view === 'home' && active !== null && (
-        <SplitProjectGate onLanguageChange={setLanguage} language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={()=>setActive(null)}>
-        {projects[active].title === '檐行记' ? <RoofbookProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject language={language} onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={() => setActive(null)} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
+        <SplitProjectGate onLanguageChange={changeLanguage} language={language} enabled={splitPreview} title={projects[active].title} type={projects[active].type} onBack={closeWork}>
+        {projects[active].title === '檐行记' ? <RoofbookProject onBack={closeWork} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === '述夏SHUXIA' ? <ShuxiaProject language={language} onBack={closeWork} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'GRÆFT' ? <GraftProject onBack={closeWork} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : projects[active].title === 'POCKLET' ? <PockletProject onBack={closeWork} onNext={openNextDetail} nextTitle={projects[nextDetail].title} /> : <CaseStudy
           project={projects[active]}
-          onBack={() => setActive(null)}
-          onNext={() => setActive((active + 1) % projects.length)}
+          onBack={closeWork}
+          onNext={openNextDetail}
         />}
         </SplitProjectGate>
       )}
 
-      {trailPreview && view==='home' && active===null && previewSelection && <ProjectStage initialProject={previewSelection.project} initialArt={previewSelection.art} onClose={()=>setPreviewSelection(null)} onDetails={index=>{setPreviewSelection(null);setActive(index);setHovered(null);}}/>}
+      {trailPreview && view==='home' && active===null && previewSelection && <ProjectStage initialProject={previewSelection.project} initialArt={previewSelection.art} onClose={()=>setPreviewSelection(null)} onDetails={index=>{setPreviewSelection(null);openWork(index);}}/>}
 
       {view === 'lab' && <SphereLab />}
 
