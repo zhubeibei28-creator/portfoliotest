@@ -265,7 +265,7 @@ export default function Home({initialPreview=false,bilingualPreview=false}:{init
           <div className="intro">
             <p>
               <span className="intro-line">{t('Independent graphic designer')}</span>
-              <span className="intro-line">{t('working across identity, image & print.')}</span>
+              <span className="intro-line">{t('working across branding, packaging & spaces.')}</span>
             </p>
             <span>{t('Scroll to explore →')}</span>
           </div>
