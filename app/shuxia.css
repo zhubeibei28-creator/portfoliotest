@@ -561,14 +561,14 @@
 .shuxia-project .sx-sticker-showcase{margin:40px 0}
 .shuxia-project .sx-sticker-scene{position:relative;isolation:isolate;aspect-ratio:1672/941;overflow:hidden;background:#302d1c}
 .shuxia-project .sx-sticker-scene .sx-sticker-background{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(1.1)}
-.shuxia-project .sx-sticker-characters{position:absolute;left:31%;top:24%;width:38%;height:56%;z-index:2;animation:sx-sticker-character-sway 10s linear infinite}
-.shuxia-project .sx-sticker-expression{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .45s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.shuxia-project .sx-sticker-characters{position:absolute;left:31%;top:24%;width:38%;height:56%;z-index:2;animation:sx-sticker-character-sway 4.8s linear infinite}
+.shuxia-project .sx-sticker-expression{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .9s cubic-bezier(.4,0,.2,1);pointer-events:none}
 .shuxia-project .sx-sticker-expression-0{--story-index:0;--sticker-width:90%}
 .shuxia-project .sx-sticker-expression-1{--story-index:1;--sticker-width:100%}
 .shuxia-project .sx-sticker-expression-2{--story-index:2;--sticker-width:82%}
 .shuxia-project .sx-sticker-expression-3{--story-index:3;--sticker-width:82%}
 .shuxia-project .sx-sticker-scene .sx-sticker-expression img{display:block;width:var(--sticker-width);height:auto;max-height:100%;object-fit:contain;filter:brightness(.96) saturate(.92)}
-.shuxia-project .sx-sticker-botanical{position:absolute;width:11%;height:32%;z-index:1;animation:sx-sticker-sway 6.8s ease-in-out infinite}
+.shuxia-project .sx-sticker-botanical{position:absolute;width:11%;height:32%;z-index:1;animation:sx-sticker-sway 5.2s ease-in-out infinite}
 .shuxia-project .sx-sticker-scene .sx-sticker-botanical img{width:100%;height:100%;object-fit:contain;filter:brightness(.94) saturate(.9)}
 .shuxia-project .sx-sticker-botanical-0{left:10%;top:13%;rotate:-16deg;animation-delay:-2s}
 .shuxia-project .sx-sticker-botanical-1{right:12%;top:10%;rotate:14deg;animation-delay:-4s}
