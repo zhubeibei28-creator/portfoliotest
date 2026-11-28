@@ -554,3 +554,5 @@
 /* Complete the construction frame without crossing the wordmark strokes. */
 .shuxia-project .sx-wordmark-process .sx-image{position:relative}
 .shuxia-project .sx-wordmark-process .sx-image::after{content:"";position:absolute;top:0;bottom:0;left:auto;right:8.13%;width:1px;height:auto;background:#dedede;opacity:1;transform:none;pointer-events:none}
+/* Soften final identity marks to balance the lighter construction study above. */
+.shuxia-project .sx-identity-pair .sx-image img{filter:opacity(.82)}
