@@ -560,21 +560,21 @@
 /* A single sticker scene: rotating character stories with a quiet botanical frame. */
 .shuxia-project .sx-sticker-showcase{margin:40px 0}
 .shuxia-project .sx-sticker-scene{position:relative;isolation:isolate;aspect-ratio:1672/941;overflow:hidden;background:#302d1c}
-.shuxia-project .sx-sticker-scene .sx-sticker-background{display:block;width:100%;height:100%;object-fit:cover}
-.shuxia-project .sx-sticker-characters{position:absolute;left:29%;top:22%;width:42%;height:64%;z-index:2}
+.shuxia-project .sx-sticker-scene .sx-sticker-background{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(1.1)}
+.shuxia-project .sx-sticker-characters{position:absolute;left:31%;top:24%;width:38%;height:56%;z-index:2}
 .shuxia-project .sx-sticker-expression{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:sx-sticker-story 20s infinite;animation-delay:calc(var(--story-index)*5s)}
-.shuxia-project .sx-sticker-expression-0{--story-index:0}
-.shuxia-project .sx-sticker-expression-1{--story-index:1}
-.shuxia-project .sx-sticker-expression-2{--story-index:2}
-.shuxia-project .sx-sticker-expression-3{--story-index:3}
-.shuxia-project .sx-sticker-scene .sx-sticker-expression img{display:block;width:100%;height:100%;object-fit:contain;filter:brightness(.79) saturate(.9) drop-shadow(0 6px 8px #100d0750);animation:sx-sticker-sway 6s ease-in-out infinite}
-.shuxia-project .sx-sticker-botanical{position:absolute;width:12%;height:35%;z-index:1;animation:sx-sticker-sway 7s ease-in-out infinite}
-.shuxia-project .sx-sticker-scene .sx-sticker-botanical img{width:100%;height:100%;object-fit:contain;filter:brightness(.72) saturate(.88) drop-shadow(0 4px 6px #100d0750)}
+.shuxia-project .sx-sticker-expression-0{--story-index:0;--sticker-width:90%}
+.shuxia-project .sx-sticker-expression-1{--story-index:1;--sticker-width:100%}
+.shuxia-project .sx-sticker-expression-2{--story-index:2;--sticker-width:82%}
+.shuxia-project .sx-sticker-expression-3{--story-index:3;--sticker-width:82%}
+.shuxia-project .sx-sticker-scene .sx-sticker-expression img{display:block;width:var(--sticker-width);height:auto;max-height:100%;object-fit:contain;filter:brightness(.96) saturate(.92);animation:sx-sticker-sway 6s ease-in-out infinite}
+.shuxia-project .sx-sticker-botanical{position:absolute;width:11%;height:32%;z-index:1;animation:sx-sticker-sway 7s ease-in-out infinite}
+.shuxia-project .sx-sticker-scene .sx-sticker-botanical img{width:100%;height:100%;object-fit:contain;filter:brightness(.94) saturate(.9)}
 .shuxia-project .sx-sticker-botanical-0{left:10%;top:13%;rotate:-16deg;animation-delay:-2s}
 .shuxia-project .sx-sticker-botanical-1{right:12%;top:10%;rotate:14deg;animation-delay:-4s}
 .shuxia-project .sx-sticker-botanical-2{right:8%;bottom:10%;rotate:20deg;animation-delay:-1s}
 .shuxia-project .sx-sticker-botanical-3{left:12%;bottom:8%;rotate:-12deg;animation-delay:-5s}
 .shuxia-project .sx-sticker-showcase figcaption{margin-top:12px;color:var(--sx-muted);font-size:11px;line-height:1.6}
-@keyframes sx-sticker-story{0%,23%{opacity:1}25%,98%{opacity:0}100%{opacity:1}}
-@keyframes sx-sticker-sway{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-5px) rotate(1.5deg)}}
+@keyframes sx-sticker-story{0%,23.5%{opacity:1}25%,98.5%{opacity:0}100%{opacity:1}}
+@keyframes sx-sticker-sway{0%,100%{transform:rotate(-.45deg)}50%{transform:rotate(.45deg)}}
 @media(prefers-reduced-motion:reduce){.shuxia-project .sx-sticker-expression,.shuxia-project .sx-sticker-botanical,.shuxia-project .sx-sticker-expression img{animation:none}.shuxia-project .sx-sticker-expression-0{opacity:1}}
