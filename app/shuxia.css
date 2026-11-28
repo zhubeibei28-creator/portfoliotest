@@ -561,7 +561,7 @@
 .shuxia-project .sx-sticker-showcase{margin:40px 0}
 .shuxia-project .sx-sticker-scene{position:relative;isolation:isolate;aspect-ratio:1672/941;overflow:hidden;background:#302d1c}
 .shuxia-project .sx-sticker-scene .sx-sticker-background{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(1.1)}
-.shuxia-project .sx-sticker-characters{position:absolute;left:31%;top:24%;width:38%;height:56%;z-index:2;animation:sx-sticker-sway 6.5s ease-in-out infinite}
+.shuxia-project .sx-sticker-characters{position:absolute;left:31%;top:24%;width:38%;height:56%;z-index:2;animation:sx-sticker-character-sway 10s linear infinite}
 .shuxia-project .sx-sticker-expression{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none}
 .shuxia-project .sx-sticker-expression-0{--story-index:0;--sticker-width:90%}
 .shuxia-project .sx-sticker-expression-1{--story-index:1;--sticker-width:100%}
@@ -585,3 +585,6 @@
 .shuxia-project .sx-sticker-collection button:focus-visible{outline:1px solid #777;outline-offset:2px}
 .shuxia-project .sx-sticker-collection img{display:block;width:85%;height:100%;object-fit:contain;filter:brightness(.96) saturate(.92)}
 @media(prefers-reduced-motion:reduce){.shuxia-project .sx-sticker-expression{transition:none}.shuxia-project .sx-sticker-expression-0{opacity:0}.shuxia-project .sx-sticker-expression.is-active{opacity:1}}
+
+/* Change artwork at the moving centre crossing, never at a resting extreme. */
+@keyframes sx-sticker-character-sway{0%,100%{transform:rotate(0deg)}6.25%{transform:rotate(1.91deg)}12.5%{transform:rotate(3.54deg)}18.75%{transform:rotate(4.62deg)}25%{transform:rotate(5deg)}31.25%{transform:rotate(4.62deg)}37.5%{transform:rotate(3.54deg)}43.75%{transform:rotate(1.91deg)}50%{transform:rotate(0deg)}56.25%{transform:rotate(-1.91deg)}62.5%{transform:rotate(-3.54deg)}68.75%{transform:rotate(-4.62deg)}75%{transform:rotate(-5deg)}81.25%{transform:rotate(-4.62deg)}87.5%{transform:rotate(-3.54deg)}93.75%{transform:rotate(-1.91deg)}}
