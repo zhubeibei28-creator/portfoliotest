@@ -21,6 +21,8 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
   useProjectReveal(article);
 
   const t=(text:string)=>previewText(text,language);
+  const [stickerIndex,setStickerIndex]=useState(0);
+  useEffect(()=>{const timer=window.setInterval(()=>setStickerIndex(i=>(i+1)%4),6500);return()=>window.clearInterval(timer)},[stickerIndex]);
   const [zoom, setZoom] = useState<{src:string; alt:string} | null>(null);
   useEffect(() => {
     const close = (event: KeyboardEvent) => { if (event.key === 'Escape') setZoom(null); };
@@ -64,9 +66,10 @@ export default function ShuxiaProject({onBack,onNext,nextTitle,language='en'}: {
         <figure className="sx-sticker-showcase">
           <div className="sx-sticker-scene" role="img" aria-label={language==='zh'?'洗浴场景中的述夏角色表情与植物贴纸':'SHUXIA character expressions surrounded by botanical stickers in a bathing scene'}>
             <img className="sx-sticker-background" src="/assets/shuxia/sticker-bath-background.webp" width={1672} height={941} alt="" loading="lazy" />
-            <div className="sx-sticker-characters">{[4804,4805,4806,4807].map((n,i)=><div className={`sx-sticker-expression sx-sticker-expression-${i}`} key={n}><img src={`/assets/shuxia/sticker-${n}.webp`} alt="" loading="lazy" /></div>)}</div>
+            <div className="sx-sticker-characters">{[4804,4805,4806,4807].map((n,i)=><div className={`sx-sticker-expression sx-sticker-expression-${i}${stickerIndex===i?" is-active":""}`} key={n}><img src={`/assets/shuxia/sticker-${n}.webp`} alt="" loading="lazy" /></div>)}</div>
             {[4808,4809,4810,4811].map((n,i)=><div className={`sx-sticker-botanical sx-sticker-botanical-${i}`} key={n}><img src={`/assets/shuxia/sticker-${n}.webp`} alt="" loading="lazy" /></div>)}
           </div>
+          <div className="sx-sticker-collection" aria-label={language==='zh'?'选择角色贴纸':'Choose a character sticker'}>{[4804,4805,4806,4807].map((n,i)=><button type="button" key={n} onClick={()=>setStickerIndex(i)} aria-pressed={stickerIndex===i} aria-label={(language==='zh'?['洗浴','乘凉','香皂','雨天']:['Bath time','Cooling down','Soap time','Rainy day'])[i]}><img src={`/assets/shuxia/sticker-${n}.webp`} alt="" loading="lazy" /></button>)}</div>
           <figcaption>{language==='zh'?'角色表情与植物贴纸':'Character expressions & botanical stickers'}</figcaption>
         </figure>
 
