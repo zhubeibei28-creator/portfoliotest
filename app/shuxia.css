@@ -540,3 +540,14 @@
 /* Hide only the redundant Latin wordmark; preserve every original specimen stroke. */
 .sx-expressive-specimen{position:relative}
 .sx-expressive-specimen::after{content:"";position:absolute;left:14.4%;top:19%;width:21.5%;height:22%;background:#fff;pointer-events:none}
+
+/* Wordmark process: a short editorial note beside the enlarged vector study. */
+.shuxia-project .sx-wordmark-process{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.65fr);gap:32px;align-items:center;margin:36px 0 48px}
+.shuxia-project .sx-wordmark-process-copy{min-width:0;max-width:none;padding:0}
+.shuxia-project .sx-wordmark-process-copy h3{font-size:clamp(14px,1.2vw,18px);font-weight:400;line-height:1.5;letter-spacing:0;margin:0 0 16px}
+.shuxia-project .sx-wordmark-process-copy p{color:#36786f;max-width:none;margin:0}
+.shuxia-project .sx-wordmark-process figure{min-width:0;margin:0}
+.shuxia-project .sx-wordmark-process .sx-image{display:block;width:100%;padding:0;aspect-ratio:auto;background:#fff;overflow:visible}
+.shuxia-project .sx-wordmark-process img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;transform:none}
+.shuxia-project .sx-wordmark-process figcaption{position:static;margin:12px 0 0;font-size:11px;line-height:1.6;color:var(--sx-muted);overflow:visible}
+@media(max-width:620px){.shuxia-project .sx-wordmark-process{grid-template-columns:1fr;gap:24px;margin:28px 0 36px}}
