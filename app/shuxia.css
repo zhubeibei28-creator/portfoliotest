@@ -547,12 +547,12 @@
 .shuxia-project .sx-wordmark-process-heading h3{font-size:clamp(15px,1.4vw,20px);font-weight:400;line-height:1.5;letter-spacing:0;margin:0}
 .shuxia-project .sx-wordmark-process-heading p{color:var(--sx-muted);max-width:none;margin:0}
 .shuxia-project .sx-wordmark-process figure{width:100%;min-width:0;margin:0}
-.shuxia-project .sx-wordmark-process .sx-image{display:block;width:100%;padding:0;aspect-ratio:auto;background:#fff;overflow:visible}
-.shuxia-project .sx-wordmark-process img{display:block;width:100%;height:auto;aspect-ratio:2.1;max-height:none;object-fit:cover;object-position:center;transform:none}
+.shuxia-project .sx-wordmark-process .sx-image{display:block;width:100%;padding:0;aspect-ratio:auto;background-color:#fff;overflow:visible;background-image:linear-gradient(to bottom,transparent calc(3.45% - .5px),#dedede calc(3.45% - .5px),#dedede calc(3.45% + .5px),transparent calc(3.45% + .5px),transparent calc(28.65% - .5px),#dedede calc(28.65% - .5px),#dedede calc(28.65% + .5px),transparent calc(28.65% + .5px),transparent calc(95.71% - .5px),#dedede calc(95.71% - .5px),#dedede calc(95.71% + .5px),transparent calc(95.71% + .5px))}
+.shuxia-project .sx-wordmark-process img{display:block;width:94%;margin-inline:auto;height:auto;aspect-ratio:2.1;max-height:none;object-fit:cover;object-position:center;transform:none}
 .shuxia-project .sx-wordmark-process figcaption{position:static;margin:12px 0 0;font-size:11px;line-height:1.6;color:var(--sx-muted);overflow:visible}
 @media(max-width:620px){.shuxia-project .sx-wordmark-process{margin:28px 0 32px}.shuxia-project .sx-wordmark-process-heading{grid-template-columns:1fr;gap:12px}}
 /* Complete the construction frame without crossing the wordmark strokes. */
 .shuxia-project .sx-wordmark-process .sx-image{position:relative}
-.shuxia-project .sx-wordmark-process .sx-image::after{content:"";position:absolute;top:0;bottom:0;left:auto;right:8.13%;width:1px;height:auto;background:#dedede;opacity:1;transform:none;pointer-events:none}
+.shuxia-project .sx-wordmark-process .sx-image::after{content:"";position:absolute;top:0;bottom:0;left:auto;right:11.33%;width:1px;height:auto;background:#dedede;opacity:1;transform:none;pointer-events:none}
 /* Soften final identity marks to balance the lighter construction study above. */
 .shuxia-project .sx-identity-pair .sx-image img{filter:opacity(.82)}
